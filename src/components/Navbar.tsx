@@ -61,14 +61,16 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
   return (
     <header
-      className={`sticky top-0 z-40 bg-white transition-all duration-200 ${
-        isScrolled ? 'shadow-md py-3' : 'py-4'
+      className={`sticky top-0 z-40 transition-all duration-300 ${
+        isScrolled
+          ? 'bg-white/95 backdrop-blur-xl shadow-[0_4px_25px_rgba(1,22,51,0.06)] py-3 border-b border-slate-100'
+          : 'bg-white/90 backdrop-blur-md py-4 border-b border-gray-100/70'
       }`}
     >
       <div className="max-w-[1140px] mx-auto px-4 flex items-center justify-between">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center space-x-3 group">
-          <div className="relative h-12 w-48 sm:w-56">
+          <div className="relative h-11 sm:h-12 w-44 sm:w-56 transition-transform group-hover:scale-[1.01]">
             <Image
               src="/images/logo.png"
               alt="Ditya Group Logo"
@@ -80,13 +82,13 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         </Link>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center space-x-8 text-[15px] font-medium">
+        <nav className="hidden lg:flex items-center space-x-1 text-[15px] font-medium">
           <Link
             href="/"
-            className={`transition-colors ${
+            className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/')
-                ? 'text-[#FF5722] font-semibold'
-                : 'text-[#011633] hover:text-[#FF5722]'
+                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
+                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
             }`}
           >
             Home
@@ -94,10 +96,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
           <Link
             href="/about-us"
-            className={`transition-colors ${
+            className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/about-us')
-                ? 'text-[#FF5722] font-semibold'
-                : 'text-[#011633] hover:text-[#FF5722]'
+                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
+                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
             }`}
           >
             About Us
@@ -111,24 +113,29 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           >
             <Link
               href="/services"
-              className={`flex items-center space-x-1 transition-colors ${
+              className={`px-3.5 py-2 rounded-full flex items-center space-x-1.5 transition-all duration-200 ${
                 isActive('/services') || serviceHouses.some((h) => pathname === h.href)
-                  ? 'text-[#FF5722] font-semibold'
-                  : 'text-[#011633] hover:text-[#FF5722]'
+                  ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
+                  : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
               }`}
             >
               <span>Services</span>
-              <ChevronDown className="w-4 h-4 mt-0.5" />
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
             </Link>
 
             {isServicesOpen && (
-              <div className="absolute top-full left-0 w-64 bg-white shadow-xl rounded-b-lg border-t-2 border-[#FF5722] py-2 z-50 animate-in fade-in slide-in-from-top-1 duration-150">
+              <div className="absolute top-full left-0 w-72 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="px-3 py-2 border-b border-gray-100 mb-1">
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">6 Specialized Houses</span>
+                </div>
                 {serviceHouses.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`block px-4 py-2.5 text-sm text-gray-700 hover:bg-[#FFF3E0] hover:text-[#FF5722] transition-colors ${
-                      pathname === item.href ? 'bg-orange-50 text-[#FF5722] font-semibold' : ''
+                    className={`block px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      pathname === item.href
+                        ? 'bg-orange-50 text-[#FF5722] font-bold'
+                        : 'text-gray-700 hover:bg-orange-50/60 hover:text-[#FF5722]'
                     }`}
                   >
                     {item.title}
@@ -140,10 +147,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
           <Link
             href="/blog"
-            className={`transition-colors ${
+            className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/blog')
-                ? 'text-[#FF5722] font-semibold'
-                : 'text-[#011633] hover:text-[#FF5722]'
+                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
+                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
             }`}
           >
             Blog
@@ -151,10 +158,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
           <Link
             href="/contact-us"
-            className={`transition-colors ${
+            className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/contact-us')
-                ? 'text-[#FF5722] font-semibold'
-                : 'text-[#011633] hover:text-[#FF5722]'
+                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
+                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
             }`}
           >
             Contact Us
@@ -165,7 +172,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         <div className="hidden lg:block">
           <button
             onClick={handleOpenConsultation}
-            className="bg-[#FF5722] hover:bg-[#e64a19] text-white px-7 py-3 rounded-asymmetric font-semibold text-sm transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+            className="btn-ditya-orange text-sm shadow-md hover:shadow-orange-500/25 cursor-pointer"
           >
             Free Consultation
           </button>
@@ -175,56 +182,56 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         <div className="lg:hidden flex items-center space-x-3">
           <button
             onClick={handleOpenConsultation}
-            className="bg-[#FF5722] text-white px-4 py-2 text-xs font-semibold rounded-asymmetric"
+            className="btn-ditya-orange py-2 px-4 text-xs shadow-xs"
           >
             Consultation
           </button>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-[#011633] hover:text-[#FF5722] focus:outline-none"
+            className="p-2 text-[#011633] hover:text-[#FF5722] focus:outline-none rounded-xl hover:bg-gray-100 transition-colors"
             aria-label="Toggle Menu"
           >
-            {isMobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl px-5 py-6 space-y-4 animate-in slide-in-from-top duration-200">
+        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-2xl px-5 py-6 space-y-3 animate-in slide-in-from-top-2 duration-200">
           <Link
             href="/"
-            className={`block text-base font-medium ${
-              isActive('/') ? 'text-[#FF5722] font-bold' : 'text-[#011633]'
+            className={`block px-3 py-2 rounded-xl text-base font-medium ${
+              isActive('/') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
             }`}
           >
             Home
           </Link>
           <Link
             href="/about-us"
-            className={`block text-base font-medium ${
-              isActive('/about-us') ? 'text-[#FF5722] font-bold' : 'text-[#011633]'
+            className={`block px-3 py-2 rounded-xl text-base font-medium ${
+              isActive('/about-us') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
             }`}
           >
             About Us
           </Link>
 
-          <div>
+          <div className="px-3 py-2">
             <div
               onClick={() => setIsServicesOpen(!isServicesOpen)}
               className="flex items-center justify-between text-base font-medium text-[#011633] cursor-pointer"
             >
               <span>Services</span>
               <ChevronDown
-                className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180' : ''}`}
+                className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180 text-[#FF5722]' : ''}`}
               />
             </div>
 
             {isServicesOpen && (
-              <div className="pl-4 mt-2 space-y-2 border-l-2 border-[#FF5722] py-1">
+              <div className="pl-3 mt-2 space-y-1.5 border-l-2 border-[#FF5722] py-1">
                 <Link
                   href="/services"
-                  className="block text-sm font-medium text-gray-700 hover:text-[#FF5722]"
+                  className="block px-2 py-1.5 rounded-lg text-sm font-medium text-gray-800 hover:text-[#FF5722]"
                 >
                   All Services Overview
                 </Link>
@@ -232,7 +239,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block text-sm text-gray-600 hover:text-[#FF5722]"
+                    className="block px-2 py-1.5 rounded-lg text-sm text-gray-600 hover:text-[#FF5722]"
                   >
                     {item.title}
                   </Link>
@@ -243,28 +250,28 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
           <Link
             href="/blog"
-            className={`block text-base font-medium ${
-              isActive('/blog') ? 'text-[#FF5722] font-bold' : 'text-[#011633]'
+            className={`block px-3 py-2 rounded-xl text-base font-medium ${
+              isActive('/blog') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
             }`}
           >
             Blog
           </Link>
           <Link
             href="/contact-us"
-            className={`block text-base font-medium ${
-              isActive('/contact-us') ? 'text-[#FF5722] font-bold' : 'text-[#011633]'
+            className={`block px-3 py-2 rounded-xl text-base font-medium ${
+              isActive('/contact-us') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
             }`}
           >
             Contact Us
           </Link>
 
-          <div className="pt-3">
+          <div className="pt-2">
             <button
               onClick={() => {
                 setIsMobileMenuOpen(false);
                 handleOpenConsultation();
               }}
-              className="w-full bg-[#FF5722] text-white py-3 rounded-asymmetric font-semibold text-center"
+              className="w-full btn-ditya-orange py-3 font-semibold text-center shadow-md"
             >
               Free Consultation
             </button>

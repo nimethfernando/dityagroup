@@ -65,19 +65,19 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="relative bg-[#011633] text-white pt-16 pb-8 overflow-hidden">
+    <footer className="relative bg-[#000f24] text-white pt-20 pb-10 overflow-hidden border-t border-white/5">
       {/* Top 3 Floating Contact Cards */}
-      <div className="max-w-[1140px] mx-auto px-4 -mt-28 mb-16 relative z-10">
+      <div className="max-w-[1140px] mx-auto px-4 -mt-32 mb-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1: Phone */}
-          <div className="bg-[#00142f] rounded-asymmetric p-8 flex items-center space-x-5 shadow-2xl border border-white/5 transition-transform hover:-translate-y-1">
-            <div className="w-14 h-14 rounded-full bg-[#FF5722]/10 flex items-center justify-center shrink-0">
+          <div className="bg-[#001738] rounded-3xl p-7 flex items-center space-x-5 shadow-2xl border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-orange-500/10">
+            <div className="w-14 h-14 rounded-2xl bg-[#FF5722]/15 flex items-center justify-center shrink-0 shadow-inner">
               <Phone className="w-6 h-6 text-[#FF5722]" />
             </div>
             <div>
               <a
                 href="tel:+919351090301"
-                className="text-lg font-bold text-white hover:text-[#FF5722] transition-colors block"
+                className="text-lg font-extrabold text-white hover:text-[#FF5722] transition-colors block tracking-tight"
               >
                 +91-93510 90301
               </a>
@@ -86,14 +86,14 @@ export default function Footer() {
           </div>
 
           {/* Card 2: Email (Vibrant Orange Center Highlight) */}
-          <div className="bg-[#FF5722] rounded-asymmetric p-8 flex items-center space-x-5 shadow-2xl transition-transform hover:-translate-y-1">
-            <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center shrink-0">
+          <div className="bg-gradient-to-br from-[#FF5722] to-[#e64a19] rounded-3xl p-7 flex items-center space-x-5 shadow-2xl transition-all duration-300 hover:-translate-y-1.5 shadow-orange-500/30">
+            <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
               <Mail className="w-6 h-6 text-white" />
             </div>
             <div>
               <a
                 href="mailto:groupditya@gmail.com"
-                className="text-lg font-bold text-white hover:text-black/80 transition-colors block break-all"
+                className="text-lg font-extrabold text-white hover:text-black/80 transition-colors block break-all tracking-tight"
               >
                 groupditya@gmail.com
               </a>
@@ -102,12 +102,12 @@ export default function Footer() {
           </div>
 
           {/* Card 3: Location */}
-          <div className="bg-[#00142f] rounded-asymmetric p-8 flex items-center space-x-5 shadow-2xl border border-white/5 transition-transform hover:-translate-y-1">
-            <div className="w-14 h-14 rounded-full bg-[#FF5722]/10 flex items-center justify-center shrink-0">
+          <div className="bg-[#001738] rounded-3xl p-7 flex items-center space-x-5 shadow-2xl border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-orange-500/10">
+            <div className="w-14 h-14 rounded-2xl bg-[#FF5722]/15 flex items-center justify-center shrink-0 shadow-inner">
               <MapPin className="w-6 h-6 text-[#FF5722]" />
             </div>
             <div>
-              <p className="text-sm font-bold text-white leading-snug">
+              <p className="text-xs sm:text-sm font-bold text-white leading-snug">
                 3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004
               </p>
               <span className="text-xs text-gray-400 font-medium tracking-wide">Office Location</span>
@@ -117,10 +117,10 @@ export default function Footer() {
       </div>
 
       {/* Main Footer 4 Columns */}
-      <div className="max-w-[1140px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+      <div className="max-w-[1140px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
         {/* Col 1: Brand & Socials */}
-        <div className="lg:col-span-4 space-y-6">
-          <div className="relative h-14 w-56">
+        <div className="lg:col-span-4 space-y-5">
+          <div className="relative h-12 sm:h-14 w-52 sm:w-56">
             <Image
               src="/images/logo-white.png"
               alt="Ditya Group"
@@ -131,7 +131,7 @@ export default function Footer() {
           <p className="text-gray-300 text-sm font-medium">One Group. Infinite Possibilities!</p>
 
           {/* 13 Circular Social Icons */}
-          <div className="flex flex-wrap gap-2.5 pt-2">
+          <div className="flex flex-wrap gap-2 pt-1">
             {socialLinks.map((s, idx) => {
               const IconComp = s.icon;
               return (
@@ -141,7 +141,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={s.label}
-                  className="w-8 h-8 rounded-full bg-white text-[#011633] hover:bg-[#FF5722] hover:text-white flex items-center justify-center transition-all duration-200 text-xs shadow-sm hover:scale-110"
+                  className="w-8 h-8 rounded-full bg-white/10 text-gray-200 hover:bg-[#FF5722] hover:text-white flex items-center justify-center transition-all duration-200 text-xs shadow-sm hover:scale-110"
                 >
                   <IconComp className="w-3.5 h-3.5" />
                 </a>
@@ -152,7 +152,7 @@ export default function Footer() {
 
         {/* Col 2: Quick Links */}
         <div className="lg:col-span-2 space-y-4">
-          <h4 className="text-white font-bold text-lg border-b-2 border-[#FF5722] pb-2 inline-block">
+          <h4 className="text-white font-extrabold text-base border-b-2 border-[#FF5722] pb-1.5 inline-block tracking-wide">
             Quick Links
           </h4>
           <ul className="space-y-2.5 text-sm text-gray-300">
@@ -181,7 +181,7 @@ export default function Footer() {
 
         {/* Col 3: Useful Links */}
         <div className="lg:col-span-2 space-y-4">
-          <h4 className="text-white font-bold text-lg border-b-2 border-[#FF5722] pb-2 inline-block">
+          <h4 className="text-white font-extrabold text-base border-b-2 border-[#FF5722] pb-1.5 inline-block tracking-wide">
             Useful Links
           </h4>
           <ul className="space-y-2.5 text-sm text-gray-300">
@@ -205,7 +205,7 @@ export default function Footer() {
 
         {/* Col 4: Newsletter */}
         <div className="lg:col-span-4 space-y-4">
-          <h4 className="text-white font-bold text-lg border-b-2 border-[#FF5722] pb-2 inline-block">
+          <h4 className="text-white font-extrabold text-base border-b-2 border-[#FF5722] pb-1.5 inline-block tracking-wide">
             Newsletter
           </h4>
           <p className="text-sm text-gray-300 leading-relaxed">
@@ -213,19 +213,19 @@ export default function Footer() {
           </p>
 
           <form onSubmit={handleNewsletterSubmit} className="pt-2">
-            <div className="flex rounded-asymmetric bg-white p-1 overflow-hidden shadow-inner">
+            <div className="flex rounded-2xl bg-white/10 border border-white/15 p-1.5 overflow-hidden backdrop-blur-md">
               <input
                 type="email"
                 value={newsletterEmail}
                 onChange={(e) => setNewsletterEmail(e.target.value)}
                 placeholder="Your Email Address"
                 required
-                className="w-full px-4 py-3 text-sm text-gray-900 bg-transparent focus:outline-none placeholder-gray-400"
+                className="w-full px-4 py-2.5 text-sm text-white bg-transparent focus:outline-none placeholder-gray-400"
               />
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-[#FF5722] hover:bg-[#e64a19] text-white px-6 py-3 font-semibold text-sm rounded-asymmetric flex items-center space-x-2 transition-colors cursor-pointer shrink-0"
+                className="btn-ditya-orange py-2.5 px-5 text-sm shrink-0 shadow-md"
               >
                 <span>Send</span>
                 <Send className="w-3.5 h-3.5" />
