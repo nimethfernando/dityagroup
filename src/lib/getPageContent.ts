@@ -37,14 +37,15 @@ function deepMerge<T extends Record<string, unknown>>(target: T, source: Record<
   return output as T;
 }
 
-export async function getPageContent<K extends keyof PageContentMap>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function getPageContent<K extends keyof PageContentMap | string>(
   slug: K
-): Promise<PageContentMap[K]> {
-  const fallback = DEFAULT_PAGE_CONTENTS[slug];
+): Promise<any> {
+  const fallback = (DEFAULT_PAGE_CONTENTS as Record<string, unknown>)[slug as string] || null;
 
   try {
     const record = await prisma.pageContent.findUnique({
-      where: { slug },
+      where: { slug: slug as string },
     });
 
     if (!record || !record.data) {
@@ -52,10 +53,12 @@ export async function getPageContent<K extends keyof PageContentMap>(
     }
 
     const parsedData = JSON.parse(record.data) as Record<string, unknown>;
-    return deepMerge(fallback as unknown as Record<string, unknown>, parsedData) as unknown as PageContentMap[K];
+    if (fallback) {
+      return deepMerge(fallback as Record<string, unknown>, parsedData);
+    }
+    return parsedData;
   } catch (error) {
     console.error(`Error fetching page content for slug "${slug}":`, error);
     return fallback;
   }
 }
-

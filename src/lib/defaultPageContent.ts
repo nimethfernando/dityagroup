@@ -131,29 +131,95 @@ export interface HousePageContent {
   };
 }
 
+export interface ServicesPageContent {
+  banner: {
+    badge: string;
+    title: string;
+    subtitle: string;
+  };
+  intro: {
+    heading: string;
+    description: string;
+  };
+}
+
+export interface LegalPageContent {
+  banner: {
+    badge: string;
+    title: string;
+    subtitle: string;
+  };
+  content: {
+    section1Title: string;
+    section1Text: string;
+    section2Title: string;
+    section2Text: string;
+    section3Title: string;
+    section3Text: string;
+    section4Title: string;
+    section4Text: string;
+    section5Title: string;
+    section5Text: string;
+  };
+}
+
+export interface CustomPageContent {
+  isCustomPage: boolean;
+  category: string;
+  banner: {
+    badge: string;
+    title: string;
+    subtitle: string;
+  };
+  details: {
+    division: string;
+    heading: string;
+    description: string;
+    card1Title: string;
+    card1Desc: string;
+    card2Title: string;
+    card2Desc: string;
+    checklistTitle: string;
+    checklists: string[];
+    ctaTitle: string;
+    ctaDesc: string;
+    ctaBtnText: string;
+  };
+  richContent?: string;
+}
+
 export interface PageContentMap {
   home: HomePageContent;
   about: AboutPageContent;
   contact: ContactPageContent;
+  services: ServicesPageContent;
+  'privacy-policy': LegalPageContent;
+  'terms-and-conditions': LegalPageContent;
   'global-business-network': HousePageContent;
   'ditya-astroverse': HousePageContent;
   'ditya-math-house': HousePageContent;
   'ditya-business-house': HousePageContent;
   'ditya-trading-house': HousePageContent;
   'ditya-tech-house': HousePageContent;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [customSlug: string]: any;
 }
 
 export interface PageDefinition {
-  slug: keyof PageContentMap;
+  slug: string;
   title: string;
   path: string;
   category: string;
+  isCustomPage?: boolean;
 }
 
 export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'home', title: 'Home Page', path: '/', category: 'Core Pages' },
   { slug: 'about', title: 'About Us', path: '/about-us', category: 'Core Pages' },
+  { slug: 'services', title: 'Services & Houses Directory', path: '/services', category: 'Core Pages' },
   { slug: 'contact', title: 'Contact Us', path: '/contact-us', category: 'Core Pages' },
+  { slug: 'privacy-policy', title: 'Privacy Policy', path: '/privacy-policy', category: 'Legal & Policy' },
+  { slug: 'terms-and-conditions', title: 'Terms & Conditions', path: '/terms-and-conditions', category: 'Legal & Policy' },
   { slug: 'global-business-network', title: 'Global Business Network', path: '/global-business-network', category: 'Houses' },
   { slug: 'ditya-astroverse', title: 'Ditya Astro Verse', path: '/ditya-astroverse', category: 'Houses' },
   { slug: 'ditya-math-house', title: 'Ditya Math House', path: '/ditya-math-house', category: 'Houses' },
@@ -161,6 +227,39 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'ditya-trading-house', title: 'Ditya Trading House', path: '/ditya-trading-house', category: 'Houses' },
   { slug: 'ditya-tech-house', title: 'Ditya Tech House', path: '/ditya-tech-house', category: 'Houses' },
 ];
+
+export function createDefaultCustomPage(title: string, category = 'Services Sub-Page'): CustomPageContent {
+  return {
+    isCustomPage: true,
+    category,
+    banner: {
+      badge: 'Ditya Group • Specialized Solution',
+      title,
+      subtitle: `Explore personalized consulting, methodologies, and services offered under ${title}.`,
+    },
+    details: {
+      division: 'Ditya Group Ecosystem',
+      heading: `Transform Your Results with ${title}`,
+      description: `We provide specialized, high-impact guidance and execution support tailored to your unique requirements. Discover our curated approaches and expert mentorship.`,
+      card1Title: 'Strategic Clarity',
+      card1Desc: 'Actionable step-by-step frameworks tailored to your specific goals and timeline.',
+      card2Title: 'Dedicated Mentorship',
+      card2Desc: 'Direct support from experienced practitioners and seasoned advisors.',
+      checklistTitle: 'Key Advantages & Offerings:',
+      checklists: [
+        'Personalized diagnostic review & roadmap',
+        'Direct 1-on-1 strategic consultation sessions',
+        'Continuous execution feedback & milestone tracking',
+        'Access to proprietary frameworks & resources',
+        'Priority support & executive access',
+      ],
+      ctaTitle: `Ready to Get Started with ${title}?`,
+      ctaDesc: 'Schedule an initial discovery consultation with our senior advisory team.',
+      ctaBtnText: 'Request Consultation',
+    },
+    richContent: '',
+  };
+}
 
 export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
   home: {
@@ -468,5 +567,67 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       ctaBtnText: 'Discuss Project Scope',
     },
   },
+  services: {
+    banner: {
+      badge: 'Integrated Solutions',
+      title: 'Our Services & Houses',
+      subtitle:
+        'Explore our specialized Houses and bespoke service divisions designed to elevate your personal clarity, educational excellence, and business growth.',
+    },
+    intro: {
+      heading: 'End-to-End Solutions Across Ancient Sciences & Modern Innovation',
+      description:
+        'Ditya Group unifies six core strategic Houses and specialized service sub-divisions. Browse our service lines below or schedule a private consultation.',
+    },
+  },
+  'privacy-policy': {
+    banner: {
+      badge: 'Legal & Compliance',
+      title: 'Privacy Policy',
+      subtitle: 'Last Updated: September 2026 • Ditya Enterprises & Ditya Wealth Management PVT LTD',
+    },
+    content: {
+      section1Title: '1. Introduction',
+      section1Text:
+        'Welcome to Ditya Group. We value your privacy and are committed to safeguarding the personal information you share with us through our website (dityagroup.com), service inquiries, consultation bookings, and communication channels.',
+      section2Title: '2. Information We Collect',
+      section2Text:
+        'We collect personal identifiers including your full name, phone number, email address, city, service preferences, and message content when you request a free consultation, apply for GBN membership, enroll in trading or math programs, or subscribe to our newsletter.',
+      section3Title: '3. How We Use Your Information',
+      section3Text:
+        'The information collected is used solely to provide consultation calls, tailor advisory sessions, deliver course access, process corporate inquiries, send critical security updates, and notify you about upcoming events and publications.',
+      section4Title: '4. Data Protection & Confidentiality',
+      section4Text:
+        'We implement industry-standard encryption, secure HTTP-only cookies, and database access controls. We never sell, rent, or trade your personal information to third parties.',
+      section5Title: '5. Contact Us Regarding Privacy',
+      section5Text:
+        'If you have questions regarding our privacy practices, please contact us at groupditya@gmail.com or visit our corporate headquarters in Jaipur, Rajasthan.',
+    },
+  },
+  'terms-and-conditions': {
+    banner: {
+      badge: 'User Agreement',
+      title: 'Terms & Conditions',
+      subtitle: 'Please review the terms of service governing engagement with Ditya Group.',
+    },
+    content: {
+      section1Title: '1. Acceptance of Terms',
+      section1Text:
+        'By accessing or using this website, submitting an inquiry, or engaging in services provided by Ditya Group and its subsidiaries, you acknowledge and agree to be bound by these Terms and Conditions.',
+      section2Title: '2. Nature of Advisory Services',
+      section2Text:
+        'All consultations, including stock market education, numerology readings, business consulting, and mathematical coaching, are provided for educational, informational, and advisory purposes. Financial market decisions carry inherent risk.',
+      section3Title: '3. Intellectual Property Rights',
+      section3Text:
+        'All curriculum materials, proprietary formulas, logos, branding, website graphics, and published articles are the exclusive intellectual property of Ditya Group. Reproduction without written consent is strictly prohibited.',
+      section4Title: '4. User Conduct & Inquiries',
+      section4Text:
+        'Users agree to provide accurate, truthful contact information when requesting consultations or communicating with our advisory desk. Fraudulent or malicious submissions will result in immediate termination of access.',
+      section5Title: '5. Governing Law & Jurisdiction',
+      section5Text:
+        'These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the courts of Jaipur, Rajasthan.',
+    },
+  },
 };
+
 

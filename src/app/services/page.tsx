@@ -1,145 +1,56 @@
-'use client';
-
 import React from 'react';
-import Link from 'next/link';
-import {
-  Share2,
-  Sparkles,
-  Binary,
-  LineChart,
-  Briefcase,
-  Laptop,
-  ArrowRight,
-  CheckCircle,
-} from 'lucide-react';
-import { useConsultation } from '@/contexts/ConsultationContext';
+import { getPageContent } from '@/lib/getPageContent';
+import { prisma } from '@/lib/prisma';
+import { PAGE_DEFINITIONS, ServicesPageContent } from '@/lib/defaultPageContent';
+import ServicesClient, { ServiceCardItem } from './ServicesClient';
 
-export default function ServicesPage() {
-  const { openModal } = useConsultation();
+export const dynamic = 'force-dynamic';
 
-  const services = [
-    {
-      title: 'Global Business Network',
-      subtitle: 'GBN Circle',
-      desc: 'Exclusive professional networking platform for entrepreneurs, startups, and business owners to expand reach, exchange referrals, and build lasting alliances.',
-      icon: Share2,
-      href: '/global-business-network',
-      highlights: ['Executive networking events', 'Verified referral exchanges', 'Global market expansion'],
-    },
-    {
-      title: 'Ditya Astro Verse',
-      subtitle: 'Ditya Divine Code',
-      desc: 'Ancient numerology, Vedic astrology, tarot readings, and cosmic frequency alignment to make empowered decisions in wealth, business, and personal relationships.',
-      icon: Sparkles,
-      href: '/ditya-astroverse',
-      highlights: ['Name correction & vibration', 'Personal destiny blueprint', 'Timing & business remedies'],
-    },
-    {
-      title: 'Ditya Math House',
-      subtitle: 'Ditya Math Code',
-      desc: 'Structured mathematical conceptual clarity, speed calculations, problem-solving, and personalized academic coaching for students of all levels.',
-      icon: Binary,
-      href: '/ditya-math-house',
-      highlights: ['Concept clarity coaching', 'Competitive exam prep', 'Individual doubt clearing'],
-    },
-    {
-      title: 'Ditya Business House',
-      subtitle: 'Strategic Growth Consultancy',
-      desc: 'Comprehensive business consulting, financial modeling, organizational scaling, operational efficiency, and tactical execution advisory.',
-      icon: Briefcase,
-      href: '/ditya-business-house',
-      highlights: ['Scaling strategy', 'Operational efficiency audits', 'Market positioning & launch'],
-    },
-    {
-      title: 'Ditya Trading House',
-      subtitle: 'Financial Markets & Trading Education',
-      desc: 'Empowering traders and investors with practical stock market education, technical chart mastery, risk management, and live trading room mentorship.',
-      icon: LineChart,
-      href: '/ditya-trading-house',
-      highlights: ['Stock & F&O education', 'Live market support', 'Risk management frameworks'],
-    },
-    {
-      title: 'Ditya Tech House',
-      subtitle: 'Ditya Quantum Code',
-      desc: 'Full-cycle custom software development, modern web & mobile applications, AI workflows, enterprise automation, and secure cloud architectures.',
-      icon: Laptop,
-      href: '/ditya-tech-house',
-      highlights: ['Custom software & web development', 'AI integration & automation', 'Cloud & security solutions'],
-    },
-  ];
+export default async function ServicesPage() {
+  const content = (await getPageContent('services')) as ServicesPageContent;
 
-  return (
-    <div className="pb-36 bg-white">
-      {/* Banner */}
-      <section className="bg-[#011633] text-white py-16 text-center relative overflow-hidden">
-        <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase">
-            Integrated Solutions
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-2">
-            Our Services & Houses
-          </h1>
-          <p className="text-sm text-gray-300 max-w-xl mx-auto mt-3">
-            Explore our 6 specialized Houses designed to elevate your personal clarity, educational
-            excellence, and business growth.
-          </p>
-        </div>
-      </section>
+  let customServices: ServiceCardItem[] = [];
+  try {
+    const builtInSlugs = new Set(PAGE_DEFINITIONS.map((p) => p.slug));
+    const customRecords = await prisma.pageContent.findMany({
+      orderBy: { updatedAt: 'desc' },
+    });
 
-      {/* Services Grid */}
-      <section className="py-20 max-w-[1140px] mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((item, idx) => {
-            const IconComp = item.icon;
-            return (
-              <div
-                key={idx}
-                className="bg-[#F9F9F9] rounded-asymmetric p-8 border border-gray-200/80 shadow-sm card-hover flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#FF5722] text-white flex items-center justify-center mb-6 shadow-md">
-                    <IconComp className="w-7 h-7" />
-                  </div>
-                  <span className="text-xs font-bold text-[#FF5722] uppercase tracking-wider block">
-                    {item.subtitle}
-                  </span>
-                  <h3 className="text-xl font-bold text-[#011633] mt-1 mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6">
-                    {item.desc}
-                  </p>
+    const filtered = customRecords.filter(
+      (r) => !builtInSlugs.has(r.slug) && r.slug !== 'admin_security'
+    );
 
-                  <ul className="space-y-2 mb-8">
-                    {item.highlights.map((h, hIdx) => (
-                      <li key={hIdx} className="flex items-center space-x-2 text-xs text-gray-700">
-                        <CheckCircle className="w-3.5 h-3.5 text-[#FF5722] shrink-0" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+    customServices = filtered.map((page) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      let parsed: any = {};
+      try {
+        parsed = JSON.parse(page.data);
+      } catch {
+        parsed = {};
+      }
 
-                <div className="pt-4 border-t border-gray-200/60 flex items-center justify-between">
-                  <Link
-                    href={item.href}
-                    className="text-xs font-bold text-[#011633] hover:text-[#FF5722] inline-flex items-center space-x-1 uppercase tracking-wider"
-                  >
-                    <span>Learn More</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                  <button
-                    onClick={() => openModal(item.title)}
-                    className="text-xs font-semibold bg-[#FF5722] hover:bg-[#e64a19] text-white px-3.5 py-1.5 rounded-asymmetric transition-colors"
-                  >
-                    Consult
-                  </button>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </section>
-    </div>
-  );
+      const href = page.slug.startsWith('services/')
+        ? `/${page.slug}`
+        : `/services/${page.slug}`;
+
+      return {
+        title: page.title || parsed.banner?.title || 'Custom Service',
+        subtitle: parsed.category || 'Specialized Solution',
+        desc:
+          parsed.banner?.subtitle ||
+          parsed.details?.description ||
+          'Comprehensive enterprise advisory, strategy, and personalized solutions tailored for growth.',
+        href,
+        highlights: parsed.details?.checklists?.slice(0, 3) || [
+          'Tailored client solutions',
+          'Industry expert consultation',
+          'Measurable performance results',
+        ],
+      };
+    });
+  } catch (err) {
+    console.error('Error fetching custom services in /services page:', err);
+  }
+
+  return <ServicesClient content={content} customServices={customServices} />;
 }
