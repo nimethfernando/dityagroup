@@ -750,3 +750,4 @@ export default function HomeClient({ content }: HomeClientProps) {
     </div>
   );
 }
+

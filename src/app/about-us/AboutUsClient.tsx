@@ -144,3 +144,4 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
     </div>
   );
 }
+

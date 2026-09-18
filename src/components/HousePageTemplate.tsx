@@ -116,3 +116,4 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
     </div>
   );
 }
+

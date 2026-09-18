@@ -419,3 +419,4 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
     </div>
   );
 }
+
