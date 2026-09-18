@@ -18,6 +18,8 @@ import {
   Briefcase,
   Laptop,
 } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { AnimatedCounter, AnimatedRadialProgress } from '@/components/AnimatedCounter';
 import { useConsultation } from '@/contexts/ConsultationContext';
 import { HomePageContent } from '@/lib/defaultPageContent';
 
@@ -41,16 +43,25 @@ export default function HomeClient({ content }: HomeClientProps) {
             alt="Ditya Group Ancient Wisdom & Modern Solutions"
             fill
             className="object-cover object-center lg:object-[center_18%]"
+            className="object-cover object-right lg:object-center"
             priority
           />
           {/* Subtle responsive overlay on mobile to ensure text readability */}
           <div className="absolute inset-0 bg-white/40 lg:bg-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent lg:from-white/70 lg:via-white/20 lg:to-transparent" />
         </div>
 
         {/* Hero Left Content Overlay */}
         <div className="relative z-10 max-w-[1140px] mx-auto px-4 w-full pt-16 lg:pt-24 pb-12 flex-1 flex items-center">
           <div className="max-w-xl space-y-6">
             <div className="inline-flex items-center space-x-2 text-[#FF5722] text-xs font-semibold uppercase tracking-widest bg-orange-50/80 px-3 py-1 rounded-full backdrop-blur-sm border border-orange-200/50">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: 'easeOut' }}
+            className="max-w-xl space-y-6"
+          >
+            <div className="inline-flex items-center space-x-2 text-[#FF5722] text-xs font-semibold uppercase tracking-widest bg-orange-50/90 px-3.5 py-1.5 rounded-full backdrop-blur-sm border border-orange-200/60 shadow-sm">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{content.hero.tagline || 'Since 2018'}</span>
             </div>
@@ -88,6 +99,7 @@ export default function HomeClient({ content }: HomeClientProps) {
               </button>
             </div>
           </div>
+          </motion.div>
         </div>
 
         {/* Bottom Hero Ornate Services Banner */}
@@ -236,60 +248,104 @@ export default function HomeClient({ content }: HomeClientProps) {
       <section className="py-10 bg-white">
         <div className="max-w-[1140px] mx-auto px-4">
           <div className="bg-[#F9F9F9] rounded-asymmetric border border-gray-200/80 p-8 sm:p-10 shadow-sm">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6 }}
+            className="bg-[#F9F9F9] rounded-asymmetric border border-gray-200/80 p-8 sm:p-10 shadow-sm"
+          >
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x divide-gray-200/80">
               {/* Stat 1 */}
               <div className="flex flex-col items-center pt-4 lg:pt-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.05 }}
+                className="flex flex-col items-center pt-4 lg:pt-0"
+              >
                 <div className="w-12 h-12 rounded-full bg-orange-100 text-[#FF5722] flex items-center justify-center mb-3">
                   <Users className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
                   {content.stats.stat1Number || '500 +'}
+                  <AnimatedCounter value={content.stats.stat1Number || '500 +'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat1Label || 'Happy Clients'}
                 </span>
               </div>
+              </motion.div>
 
               {/* Stat 2 */}
               <div className="flex flex-col items-center pt-4 lg:pt-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                className="flex flex-col items-center pt-4 lg:pt-0"
+              >
                 <div className="w-12 h-12 rounded-full bg-orange-100 text-[#FF5722] flex items-center justify-center mb-3">
                   <FileCheck className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
                   {content.stats.stat2Number || '3,000 +'}
+                  <AnimatedCounter value={content.stats.stat2Number || '3,000 +'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat2Label || 'Projects & Solutions Delivered'}
                 </span>
               </div>
+              </motion.div>
 
               {/* Stat 3 */}
               <div className="flex flex-col items-center pt-4 lg:pt-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.25 }}
+                className="flex flex-col items-center pt-4 lg:pt-0"
+              >
                 <div className="w-12 h-12 rounded-full bg-orange-100 text-[#FF5722] flex items-center justify-center mb-3">
                   <Award className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
                   {content.stats.stat3Number || '15'}
+                  <AnimatedCounter value={content.stats.stat3Number || '15'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat3Label || 'Years Of Experience'}
                 </span>
               </div>
+              </motion.div>
 
               {/* Stat 4 */}
               <div className="flex flex-col items-center pt-4 lg:pt-0">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.35 }}
+                className="flex flex-col items-center pt-4 lg:pt-0"
+              >
                 <div className="w-12 h-12 rounded-full bg-orange-100 text-[#FF5722] flex items-center justify-center mb-3">
                   <Users className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
                   {content.stats.stat4Number || '72'}
+                  <AnimatedCounter value={content.stats.stat4Number || '72'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat4Label || 'Team Members'}
                 </span>
               </div>
+              </motion.div>
             </div>
           </div>
+          </motion.div>
         </div>
       </section>
 
@@ -514,6 +570,16 @@ export default function HomeClient({ content }: HomeClientProps) {
                       {content.whyChooseUs.metric1Percent || '95%'}
                     </span>
                   </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.1 }}
+                  className="space-y-3 flex flex-col items-start"
+                >
+                  <AnimatedRadialProgress
+                    percentage={content.whyChooseUs.metric1Percent || '95%'}
+                  />
                   <h4 className="text-lg font-bold text-[#011633] leading-snug">
                     {content.whyChooseUs.metric1Title || 'Limited Growth Approach'}
                   </h4>
@@ -522,6 +588,7 @@ export default function HomeClient({ content }: HomeClientProps) {
                       'Managing everything alone or relying on traditional methods can slow down decisions, reduce efficiency, and limit your true potential.'}
                   </p>
                 </div>
+                </motion.div>
 
                 {/* 100% Progress Indicator */}
                 <div className="space-y-3">
@@ -530,6 +597,16 @@ export default function HomeClient({ content }: HomeClientProps) {
                       {content.whyChooseUs.metric2Percent || '100%'}
                     </span>
                   </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.2 }}
+                  className="space-y-3 flex flex-col items-start"
+                >
+                  <AnimatedRadialProgress
+                    percentage={content.whyChooseUs.metric2Percent || '100%'}
+                  />
                   <h4 className="text-lg font-bold text-[#011633] leading-snug">
                     {content.whyChooseUs.metric2Title || 'Ditya Smart System'}
                   </h4>
@@ -538,6 +615,7 @@ export default function HomeClient({ content }: HomeClientProps) {
                       'An integrated system of trading guidance, numerology insights, and essential services designed to give you clarity, speed, and complete growth support.'}
                   </p>
                 </div>
+                </motion.div>
               </div>
 
               {/* Free Consultation Button */}
