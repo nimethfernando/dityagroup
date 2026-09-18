@@ -56,15 +56,6 @@ The ecosystem is structured around six core divisions:
 
 ---
 
-## 🔐 Administrator Executive Portal (`/admin`)
-
-The platform features an executive dashboard secured with enterprise authentication.
-
-### Credentials
-- **Authorized Admin Email**: `groupditya@gmail.com`
-- **Initial Password**: `admin123` *(or `ditya@2026`)*
-- **Portal URL**: [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
-
 ### Key Administrative Features
 - **Gmail Restriction**: Administrative access is strictly restricted to verified `@gmail.com` accounts.
 - **6-Digit Gmail OTP Recovery**:
