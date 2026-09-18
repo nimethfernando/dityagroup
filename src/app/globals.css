@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ditya-navy: #011633;
+  --color-ditya-navy-dark: #001025;
+  --color-ditya-navy-light: #0d274c;
+  --color-ditya-orange: #FF5722;
+  --color-ditya-orange-hover: #e64a19;
+  --color-ditya-orange-light: #FFF3E0;
+  --color-ditya-gray: #7A7A7A;
+  --color-ditya-dark: #252425;
+  --color-ditya-bg-light: #F9F9F9;
+  --color-ditya-border: #EAEAEA;
+
+  --font-inter: var(--font-inter), 'Inter', sans-serif;
+  --font-heebo: var(--font-heebo), 'Heebo', sans-serif;
+}
+
+:root {
+  --color-primary: #011633;
+  --color-secondary: #FF5722;
+  --color-text: #7A7A7A;
+  --color-bg: #FFFFFF;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+}
+
+body {
+  background: #ffffff;
+  color: #252425;
+  font-family: var(--font-heebo), sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  max-width: 100vw;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-inter), sans-serif;
+  color: #011633;
+  font-weight: 700;
+}
+
+/* Ditya Group Asymmetrical Curved Radius (Signature Elementor Kit Style) */
+.rounded-asymmetric {
+  border-radius: 30px 0px 30px 0px;
+}
+
+.rounded-asymmetric-reverse {
+  border-radius: 0px 30px 0px 30px;
+}
+
+/* Signature Button */
+.btn-ditya-orange {
+  background-color: #FF5722;
+  color: #ffffff;
+  border-radius: 30px 0px 30px 0px;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  padding: 14px 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-ditya-orange:hover {
+  background-color: #e64a19;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(255, 87, 34, 0.35);
+}
+
+.btn-ditya-navy {
+  background-color: #011633;
+  color: #ffffff;
+  border-radius: 30px 0px 30px 0px;
+  font-family: var(--font-inter), sans-serif;
+  font-weight: 600;
+  padding: 14px 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.btn-ditya-navy:hover {
+  background-color: #0d274c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -5px rgba(1, 22, 51, 0.35);
+}
+
+/* Card hover animation */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 35px -10px rgba(1, 22, 51, 0.08);
+}
