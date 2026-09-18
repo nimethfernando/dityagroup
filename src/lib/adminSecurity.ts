@@ -5,10 +5,21 @@ export const ADMIN_PRIMARY_EMAIL = 'groupditya@gmail.com';
 const SECURITY_SLUG = 'admin_security';
 
 export interface AdminSecurityData {
+  adminEmail?: string;
   passwordHash?: string;
   otp?: string;
   otpExpiry?: number;
   lastChangedAt?: string;
+}
+
+/**
+ * Validate that an email address is a valid Gmail address
+ */
+export function isValidGmail(email: string): boolean {
+  if (!email) return false;
+  const trimmed = email.trim().toLowerCase();
+  const gmailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|googlemail)\.com$/;
+  return gmailRegex.test(trimmed);
 }
 
 /**
@@ -146,3 +157,24 @@ export async function clearAdminResetOtp(): Promise<void> {
   record.otpExpiry = undefined;
   await saveAdminSecurityRecord(record);
 }
+
+/**
+ * Get current configured admin Gmail address (defaults to groupditya@gmail.com)
+ */
+export async function getAdminEmail(): Promise<string> {
+  const record = await getAdminSecurityRecord();
+  return record.adminEmail || ADMIN_PRIMARY_EMAIL;
+}
+
+/**
+ * Update the admin Gmail address
+ */
+export async function setAdminEmail(email: string): Promise<void> {
+  if (!isValidGmail(email)) {
+    throw new Error('Admin email must be a valid @gmail.com address.');
+  }
+  const record = await getAdminSecurityRecord();
+  record.adminEmail = email.trim().toLowerCase();
+  await saveAdminSecurityRecord(record);
+}
+

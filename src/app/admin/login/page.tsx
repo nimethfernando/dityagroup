@@ -21,15 +21,22 @@ export default function AdminLoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setErrorMsg(null);
     setSuccessMsg(null);
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail.endsWith('@gmail.com') && !cleanEmail.endsWith('@googlemail.com')) {
+      setErrorMsg('Administrator access requires a valid @gmail.com address.');
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: cleanEmail, password }),
       });
 
       const data = await res.json();
@@ -51,14 +58,21 @@ export default function AdminLoginPage() {
 
   const handleRequestOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     setErrorMsg(null);
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (!cleanEmail.endsWith('@gmail.com') && !cleanEmail.endsWith('@googlemail.com')) {
+      setErrorMsg('Please enter an authorized @gmail.com address to receive your OTP.');
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const res = await fetch('/api/admin/forgot-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ email: cleanEmail }),
       });
       const data = await res.json();
       if (res.ok && data.success) {

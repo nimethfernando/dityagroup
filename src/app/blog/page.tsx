@@ -1,11 +1,50 @@
-'use client';
-
 import React from 'react';
 import Link from 'next/link';
+import { prisma } from '@/lib/prisma';
 import { BLOG_POSTS } from '@/lib/blogData';
-import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
+import { ArrowRight, Calendar, Clock } from 'lucide-react';
 
-export default function BlogListingPage() {
+export const dynamic = 'force-dynamic';
+
+export default async function BlogListingPage() {
+  let dbPosts: Array<{
+    id: string;
+    title: string;
+    slug: string;
+    excerpt: string;
+    category: string;
+    readTime: string;
+    authorName: string;
+    createdAt: Date;
+  }> = [];
+
+  try {
+    dbPosts = await prisma.blog.findMany({
+      where: { published: true },
+      orderBy: { createdAt: 'desc' },
+    });
+  } catch (err) {
+    console.error('Error fetching blogs from database:', err);
+  }
+
+  // Combine DB posts and default posts
+  const combinedPosts = [
+    ...dbPosts.map((p) => ({
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      category: p.category,
+      excerpt: p.excerpt,
+      date: p.createdAt.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      }),
+      readTime: p.readTime,
+    })),
+    ...BLOG_POSTS.filter((bp) => !dbPosts.some((dp) => dp.slug === bp.slug)),
+  ];
+
   return (
     <div className="pb-36 bg-[#FBFBFB]">
       {/* Banner */}
@@ -27,7 +66,7 @@ export default function BlogListingPage() {
       {/* Blog Cards Grid */}
       <section className="py-20 max-w-[1140px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {BLOG_POSTS.map((post) => (
+          {combinedPosts.map((post) => (
             <article
               key={post.id}
               className="bg-white rounded-asymmetric border border-gray-200/80 overflow-hidden shadow-sm card-hover flex flex-col justify-between"
@@ -59,7 +98,7 @@ export default function BlogListingPage() {
                 </div>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="text-xs font-bold text-[#FF5722] inline-flex items-center space-x-1 hover:underline"
+                  className="text-xs font-bold text-[#FF5722] hover:underline inline-flex items-center space-x-1"
                 >
                   <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5" />

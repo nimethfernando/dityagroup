@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { prisma } from '@/lib/prisma';
 import { BLOG_POSTS } from '@/lib/blogData';
 import { ArrowLeft, Clock, Calendar, User, Share2 } from 'lucide-react';
 
@@ -10,9 +11,51 @@ interface BlogPostPageProps {
   }>;
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = BLOG_POSTS.find((p) => p.slug === slug);
+
+  let post: {
+    title: string;
+    category: string;
+    author: string;
+    date: string;
+    readTime: string;
+    excerpt: string;
+    content: string[];
+  } | null = null;
+
+  try {
+    const dbPost = await prisma.blog.findUnique({
+      where: { slug },
+    });
+
+    if (dbPost) {
+      post = {
+        title: dbPost.title,
+        category: dbPost.category,
+        author: dbPost.authorName,
+        date: dbPost.createdAt.toLocaleDateString('en-US', {
+          month: 'short',
+          day: 'numeric',
+          year: 'numeric',
+        }),
+        readTime: dbPost.readTime,
+        excerpt: dbPost.excerpt,
+        content: dbPost.content.split('\n\n').filter(Boolean),
+      };
+    }
+  } catch (err) {
+    console.error('Error querying DB blog post:', err);
+  }
+
+  if (!post) {
+    const preset = BLOG_POSTS.find((p) => p.slug === slug);
+    if (preset) {
+      post = preset;
+    }
+  }
 
   if (!post) {
     notFound();
@@ -57,12 +100,14 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
       {/* Article Content */}
       <article className="max-w-[860px] mx-auto px-4 py-16 space-y-6 text-gray-700 leading-relaxed text-base">
-        <p className="text-lg font-medium text-[#011633] bg-[#FFF3E0] p-6 rounded-asymmetric border-l-4 border-[#FF5722]">
-          {post.excerpt}
-        </p>
+        {post.excerpt && (
+          <p className="text-lg font-medium text-[#011633] bg-[#FFF3E0] p-6 rounded-asymmetric border-l-4 border-[#FF5722]">
+            {post.excerpt}
+          </p>
+        )}
 
         {post.content.map((paragraph, idx) => (
-          <p key={idx} className="leading-relaxed">
+          <p key={idx} className="leading-relaxed whitespace-pre-line">
             {paragraph}
           </p>
         ))}
