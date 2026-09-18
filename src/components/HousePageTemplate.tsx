@@ -90,7 +90,10 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
                   {content.details.checklists.map((item, idx) => (
-                    <div key={idx} className="flex items-center space-x-2.5 p-3 rounded-xl bg-white border border-gray-100 shadow-2xs">
+                    <div
+                      key={idx}
+                      className="flex items-center space-x-2.5 p-3 rounded-xl bg-white border border-gray-100 shadow-xs"
+                    >
                       <CheckCircle2 className="w-4 h-4 text-[#FF5722] shrink-0" />
                       <span className="font-medium text-xs sm:text-sm text-gray-700">{item}</span>
                     </div>
@@ -103,7 +106,9 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
             <div className="p-8 sm:p-10 bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] rounded-3xl text-white flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl border border-white/10 relative overflow-hidden">
               <div className="relative z-10">
                 <h4 className="text-lg sm:text-xl font-bold">{content.details.ctaTitle}</h4>
-                <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-md leading-relaxed">{content.details.ctaDesc}</p>
+                <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-md leading-relaxed">
+                  {content.details.ctaDesc}
+                </p>
               </div>
               <button
                 onClick={() => openModal(houseName)}
@@ -118,4 +123,3 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
     </div>
   );
 }
-

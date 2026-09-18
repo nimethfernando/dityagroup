@@ -17,8 +17,6 @@ import {
   LineChart,
   Briefcase,
   Laptop,
-  Compass,
-  CheckCircle2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { AnimatedCounter, AnimatedRadialProgress } from '@/components/AnimatedCounter';
@@ -47,7 +45,7 @@ export default function HomeClient({ content }: HomeClientProps) {
             className="object-cover object-right lg:object-center"
             priority
           />
-          {/* Refined gradient mask for optimal text contrast across all device sizes */}
+          {/* Subtle responsive overlay on mobile to ensure text readability */}
           <div className="absolute inset-0 bg-white/40 lg:bg-transparent" />
           <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent lg:from-white/75 lg:via-white/25 lg:to-transparent" />
         </div>
@@ -718,7 +716,7 @@ export default function HomeClient({ content }: HomeClientProps) {
       </section>
 
       {/* ============================================================ */}
-      {/* 8. LATEST BLOG & ARTICLES PREVIEW */}
+      {/* 8. LATEST BLOG & ARTICLES PREVIEW WITH MODERN IMAGES */}
       {/* ============================================================ */}
       <section className="py-24 bg-[#F8F9FB] border-t border-gray-100 pb-40">
         <div className="max-w-[1140px] mx-auto px-4">
@@ -735,21 +733,33 @@ export default function HomeClient({ content }: HomeClientProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Blog Post 1 */}
             <article className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="p-8 space-y-3">
-                <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold text-[#FF5722] bg-orange-50 uppercase tracking-wider">
-                  Ditya Astroverse
-                </span>
-                <h3 className="text-lg font-bold text-[#011633] group-hover:text-[#FF5722] transition-colors line-clamp-2">
-                  <Link href="/blog/most-powerful-money-attraction-remedy-using-bay-leaf-for-wealth-and-success">
-                    Most Powerful Money Attraction Remedy Using Bay Leaf for Wealth and Success
-                  </Link>
-                </h3>
-                <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
-                  Discover how ancient bay leaf rituals combined with numerical frequency can open
-                  doors to abundance and financial clarity.
-                </p>
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src="/images/blog-bay-leaf.jpg"
+                    alt="Money Attraction Remedy Using Bay Leaf"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#FF5722] bg-white/95 backdrop-blur-md uppercase tracking-wider shadow-sm">
+                      Ditya Astroverse
+                    </span>
+                  </div>
+                </div>
+                <div className="p-7 space-y-3">
+                  <h3 className="text-lg font-bold text-[#011633] group-hover:text-[#FF5722] transition-colors line-clamp-2">
+                    <Link href="/blog/most-powerful-money-attraction-remedy-using-bay-leaf-for-wealth-and-success">
+                      Most Powerful Money Attraction Remedy Using Bay Leaf for Wealth and Success
+                    </Link>
+                  </h3>
+                  <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                    Discover how ancient bay leaf rituals combined with numerical frequency can open
+                    doors to abundance and financial clarity.
+                  </p>
+                </div>
               </div>
-              <div className="px-8 pb-7 pt-3 border-t border-gray-100">
+              <div className="px-7 pb-6 pt-2 border-t border-gray-100">
                 <Link
                   href="/blog/most-powerful-money-attraction-remedy-using-bay-leaf-for-wealth-and-success"
                   className="text-xs font-bold text-[#FF5722] inline-flex items-center space-x-1.5 hover:underline uppercase tracking-wider"
@@ -762,21 +772,33 @@ export default function HomeClient({ content }: HomeClientProps) {
 
             {/* Blog Post 2 */}
             <article className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="p-8 space-y-3">
-                <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold text-[#FF5722] bg-orange-50 uppercase tracking-wider">
-                  Ditya Astroverse
-                </span>
-                <h3 className="text-lg font-bold text-[#011633] group-hover:text-[#FF5722] transition-colors line-clamp-2">
-                  <Link href="/blog/powerful-remedy-to-remove-negative-energy-and-attract-success-in-life">
-                    Powerful Remedy to Remove Negative Energy and Attract Success in Life
-                  </Link>
-                </h3>
-                <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
-                  Salt water energy cleansing rituals and spatial remedies designed to eliminate
-                  blocks, emotional stress, and obstacles.
-                </p>
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src="/images/blog-crystal-salt.jpg"
+                    alt="Remedy to Remove Negative Energy"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#FF5722] bg-white/95 backdrop-blur-md uppercase tracking-wider shadow-sm">
+                      Ditya Astroverse
+                    </span>
+                  </div>
+                </div>
+                <div className="p-7 space-y-3">
+                  <h3 className="text-lg font-bold text-[#011633] group-hover:text-[#FF5722] transition-colors line-clamp-2">
+                    <Link href="/blog/powerful-remedy-to-remove-negative-energy-and-attract-success-in-life">
+                      Powerful Remedy to Remove Negative Energy and Attract Success in Life
+                    </Link>
+                  </h3>
+                  <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                    Salt water energy cleansing rituals and spatial remedies designed to eliminate
+                    blocks, emotional stress, and obstacles.
+                  </p>
+                </div>
               </div>
-              <div className="px-8 pb-7 pt-3 border-t border-gray-100">
+              <div className="px-7 pb-6 pt-2 border-t border-gray-100">
                 <Link
                   href="/blog/powerful-remedy-to-remove-negative-energy-and-attract-success-in-life"
                   className="text-xs font-bold text-[#FF5722] inline-flex items-center space-x-1.5 hover:underline uppercase tracking-wider"
@@ -789,21 +811,33 @@ export default function HomeClient({ content }: HomeClientProps) {
 
             {/* Blog Post 3 */}
             <article className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1">
-              <div className="p-8 space-y-3">
-                <span className="inline-block px-2.5 py-1 rounded-md text-[11px] font-bold text-[#FF5722] bg-orange-50 uppercase tracking-wider">
-                  Ditya Astroverse
-                </span>
-                <h3 className="text-lg font-bold text-[#011633] group-hover:text-[#FF5722] transition-colors line-clamp-2">
-                  <Link href="/blog/simple-morning-remedy-to-attract-money-clarity-and-positive-energy">
-                    Simple Morning Remedy to Attract Money, Clarity and Positive Energy
-                  </Link>
-                </h3>
-                <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
-                  Harness copper water solar charging to boost mental sharpness, metabolic harmony,
-                  and purposeful daily alignment.
-                </p>
+              <div>
+                <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <Image
+                    src="/images/blog-copper-water.jpg"
+                    alt="Simple Morning Remedy to Attract Money"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 left-4 z-10">
+                    <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#FF5722] bg-white/95 backdrop-blur-md uppercase tracking-wider shadow-sm">
+                      Ditya Astroverse
+                    </span>
+                  </div>
+                </div>
+                <div className="p-7 space-y-3">
+                  <h3 className="text-lg font-bold text-[#011633] group-hover:text-[#FF5722] transition-colors line-clamp-2">
+                    <Link href="/blog/simple-morning-remedy-to-attract-money-clarity-and-positive-energy">
+                      Simple Morning Remedy to Attract Money, Clarity and Positive Energy
+                    </Link>
+                  </h3>
+                  <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                    Harness copper water solar charging to boost mental sharpness, metabolic harmony,
+                    and purposeful daily alignment.
+                  </p>
+                </div>
               </div>
-              <div className="px-8 pb-7 pt-3 border-t border-gray-100">
+              <div className="px-7 pb-6 pt-2 border-t border-gray-100">
                 <Link
                   href="/blog/simple-morning-remedy-to-attract-money-clarity-and-positive-energy"
                   className="text-xs font-bold text-[#FF5722] inline-flex items-center space-x-1.5 hover:underline uppercase tracking-wider"

@@ -18,7 +18,6 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
 
-  // If in admin dashboard, don't show public navbar
   if (pathname.startsWith('/admin')) {
     return null;
   }
@@ -120,13 +119,19 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               }`}
             >
               <span>Services</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} />
+              <ChevronDown
+                className={`w-3.5 h-3.5 transition-transform duration-200 ${
+                  isServicesOpen ? 'rotate-180' : ''
+                }`}
+              />
             </Link>
 
             {isServicesOpen && (
               <div className="absolute top-full left-0 w-72 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">6 Specialized Houses</span>
+                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
+                    6 Specialized Houses
+                  </span>
                 </div>
                 {serviceHouses.map((item) => (
                   <Link
@@ -223,7 +228,9 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             >
               <span>Services</span>
               <ChevronDown
-                className={`w-4 h-4 transition-transform ${isServicesOpen ? 'rotate-180 text-[#FF5722]' : ''}`}
+                className={`w-4 h-4 transition-transform ${
+                  isServicesOpen ? 'rotate-180 text-[#FF5722]' : ''
+                }`}
               />
             </div>
 
