@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import AdminHeader from '@/components/admin/AdminHeader';
+import { PAGE_DEFINITIONS } from '@/lib/defaultPageContent';
 import {
   FileEdit,
   ExternalLink,
@@ -28,10 +29,22 @@ interface PageOverview {
   updatedAt: string | null;
 }
 
+const defaultPages: PageOverview[] = PAGE_DEFINITIONS.map((def) => ({
+  slug: def.slug,
+  title: def.title,
+  path: def.path,
+  category: def.category,
+  isCustomPage: false,
+  isCustomized: false,
+  updatedAt: null,
+}));
+
 export default function AdminPagesOverview() {
   const router = useRouter();
   const [pages, setPages] = useState<PageOverview[]>([]);
   const [loading, setLoading] = useState(true);
+  const [pages, setPages] = useState<PageOverview[]>(defaultPages);
+  const [syncing, setSyncing] = useState(true);
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   // Modal State for Creating New Sub-Page
@@ -44,6 +57,7 @@ export default function AdminPagesOverview() {
 
   const fetchPages = async () => {
     setLoading(true);
+    setSyncing(true);
     try {
       const res = await fetch('/api/admin/pages');
       const data = await res.json();
@@ -54,6 +68,7 @@ export default function AdminPagesOverview() {
       console.error('Error fetching pages overview:', err);
     } finally {
       setLoading(false);
+      setSyncing(false);
     }
   };
 
@@ -165,9 +180,14 @@ export default function AdminPagesOverview() {
             <button
               onClick={fetchPages}
               className="p-2.5 rounded-asymmetric bg-white border border-gray-200 hover:bg-gray-50 text-[#011633] transition-colors cursor-pointer text-xs flex items-center space-x-1.5 shadow-sm font-semibold"
+              disabled={syncing}
+              className="p-2.5 rounded-asymmetric bg-white border border-gray-200 hover:bg-gray-50 text-[#011633] transition-colors cursor-pointer text-xs flex items-center space-x-1.5 shadow-sm font-semibold disabled:opacity-80"
+              title="Refresh latest updates from MariaDB"
             >
               <RefreshCw className="w-3.5 h-3.5 text-[#FF5722]" />
               <span>Refresh</span>
+              <RefreshCw className={`w-3.5 h-3.5 text-[#FF5722] ${syncing ? 'animate-spin' : ''}`} />
+              <span>{syncing ? 'Syncing...' : 'Refresh'}</span>
             </button>
 
             <button
@@ -248,6 +268,26 @@ export default function AdminPagesOverview() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-xs text-gray-400 hover:text-[#FF5722] flex items-center space-x-1 mb-4 font-mono"
+        {/* Interactive Pages Grid - Always rendered immediately without blank screen */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredPages.map((page) => (
+            <div
+              key={page.slug}
+              className="bg-white rounded-asymmetric p-6 border border-gray-200/80 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[11px] font-bold text-[#FF5722] uppercase tracking-wider">
+                    {page.category}
+                  </span>
+                  <span
+                    className={`text-[10px] px-2.5 py-0.5 rounded-full font-extrabold uppercase tracking-wider flex items-center space-x-1 ${
+                      page.isCustomPage
+                        ? 'bg-blue-100 text-blue-800'
+                        : page.isCustomized
+                        ? 'bg-green-100 text-green-700'
+                        : 'bg-gray-100 text-gray-500'
+                    }`}
                   >
                     <span>{page.path}</span>
                     <ExternalLink className="w-3 h-3" />
@@ -259,6 +299,20 @@ export default function AdminPagesOverview() {
                       {new Date(page.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                     </p>
                   )}
+                    {page.isCustomPage ? (
+                      <>
+                        <Sparkles className="w-3 h-3 text-blue-600" />
+                        <span>Custom Sub-Page</span>
+                      </>
+                    ) : page.isCustomized ? (
+                      <>
+                        <CheckCircle2 className="w-3 h-3 text-green-600" />
+                        <span>Customized in DB</span>
+                      </>
+                    ) : (
+                      <span>Default Baseline</span>
+                    )}
+                  </span>
                 </div>
 
                 <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
@@ -269,16 +323,58 @@ export default function AdminPagesOverview() {
                     <FileEdit className="w-3.5 h-3.5" />
                     <span>Edit Content</span>
                   </Link>
+                <h3 className="text-lg font-bold text-[#011633] mb-1">{page.title}</h3>
+                <a
+                  href={page.path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs text-gray-400 hover:text-[#FF5722] flex items-center space-x-1 mb-4 font-mono"
+                >
+                  <span>{page.path}</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
 
                   <div className="flex items-center space-x-2">
                     {page.isCustomPage ? (
+                {page.updatedAt && (
+                  <p className="text-[11px] text-gray-400 mb-4">
+                    Last edited: {new Date(page.updatedAt).toLocaleDateString()} at{' '}
+                    {new Date(page.updatedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                  </p>
+                )}
+              </div>
+
+              <div className="pt-4 border-t border-gray-100 flex items-center justify-between">
+                <Link
+                  href={`/admin/pages/${page.slug}`}
+                  className="btn-ditya-orange text-xs py-2 px-4 font-bold inline-flex items-center space-x-1.5 shadow-sm"
+                >
+                  <FileEdit className="w-3.5 h-3.5" />
+                  <span>Edit Content</span>
+                </Link>
+
+                <div className="flex items-center space-x-2">
+                  {page.isCustomPage ? (
+                    <button
+                      onClick={() => handleResetOrDelete(page)}
+                      className="text-xs text-gray-400 hover:text-red-600 flex items-center space-x-1 p-1.5 cursor-pointer"
+                      title="Delete this custom sub-page"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                      <span>Delete</span>
+                    </button>
+                  ) : (
+                    page.isCustomized && (
                       <button
                         onClick={() => handleResetOrDelete(page)}
                         className="text-xs text-gray-400 hover:text-red-600 flex items-center space-x-1 p-1.5 cursor-pointer"
                         title="Delete this custom sub-page"
+                        title="Reset to defaults"
                       >
                         <Trash2 className="w-3.5 h-3.5" />
                         <span>Delete</span>
+                        <RotateCcw className="w-3 h-3" />
+                        <span>Reset</span>
                       </button>
                     ) : (
                       page.isCustomized && (
@@ -293,11 +389,16 @@ export default function AdminPagesOverview() {
                       )
                     )}
                   </div>
+                    )
+                  )}
                 </div>
               </div>
             ))}
           </div>
         )}
+            </div>
+          ))}
+        </div>
       </main>
 
       {/* Create New Sub-Page Modal */}

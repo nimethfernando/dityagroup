@@ -22,6 +22,14 @@ export async function GET() {
     }
 
     const savedRecords = await prisma.pageContent.findMany();
+    const savedRecords = await prisma.pageContent.findMany({
+      select: {
+        slug: true,
+        title: true,
+        updatedAt: true,
+        data: true,
+      },
+    });
     const savedMap = new Map(savedRecords.map((r) => [r.slug, r]));
 
     // Built-in pages

@@ -5,6 +5,7 @@ import HousePageTemplate from '@/components/HousePageTemplate';
 import { HousePageContent } from '@/lib/defaultPageContent';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 interface ServiceSubPageProps {
   params: Promise<{ slug: string }>;

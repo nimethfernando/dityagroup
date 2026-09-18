@@ -3,6 +3,7 @@ import { getPageContent } from '@/lib/getPageContent';
 import ContactUsClient from './ContactUsClient';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function ContactUsPage() {
   const content = await getPageContent('contact');

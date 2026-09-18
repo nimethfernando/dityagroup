@@ -5,6 +5,7 @@ import { PAGE_DEFINITIONS, ServicesPageContent } from '@/lib/defaultPageContent'
 import ServicesClient, { ServiceCardItem } from './ServicesClient';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function ServicesPage() {
   const content = (await getPageContent('services')) as ServicesPageContent;

@@ -3,6 +3,7 @@ import { getPageContent } from '@/lib/getPageContent';
 import HousePageTemplate from '@/components/HousePageTemplate';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function DityaMathHousePage() {
   const content = await getPageContent('ditya-math-house');

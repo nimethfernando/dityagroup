@@ -3,6 +3,7 @@ import { getPageContent } from '@/lib/getPageContent';
 import HousePageTemplate from '@/components/HousePageTemplate';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function DityaAstroversePage() {
   const content = await getPageContent('ditya-astroverse');

@@ -3,6 +3,7 @@ import { getPageContent } from '@/lib/getPageContent';
 import { LegalPageContent } from '@/lib/defaultPageContent';
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 60;
 
 export default async function TermsAndConditionsPage() {
   const pageData = (await getPageContent('terms-and-conditions')) as LegalPageContent;
