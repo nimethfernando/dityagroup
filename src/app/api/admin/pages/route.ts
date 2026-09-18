@@ -21,7 +21,6 @@ export async function GET() {
       );
     }
 
-    const savedRecords = await prisma.pageContent.findMany();
     const savedRecords = await prisma.pageContent.findMany({
       select: {
         slug: true,

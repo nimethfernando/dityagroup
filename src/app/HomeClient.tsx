@@ -42,7 +42,6 @@ export default function HomeClient({ content }: HomeClientProps) {
             src="/images/hero-banner.jpeg"
             alt="Ditya Group Ancient Wisdom & Modern Solutions"
             fill
-            className="object-cover object-center lg:object-[center_18%]"
             className="object-cover object-right lg:object-center"
             priority
           />
@@ -53,8 +52,6 @@ export default function HomeClient({ content }: HomeClientProps) {
 
         {/* Hero Left Content Overlay */}
         <div className="relative z-10 max-w-[1140px] mx-auto px-4 w-full pt-16 lg:pt-24 pb-12 flex-1 flex items-center">
-          <div className="max-w-xl space-y-6">
-            <div className="inline-flex items-center space-x-2 text-[#FF5722] text-xs font-semibold uppercase tracking-widest bg-orange-50/80 px-3 py-1 rounded-full backdrop-blur-sm border border-orange-200/50">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
@@ -98,7 +95,6 @@ export default function HomeClient({ content }: HomeClientProps) {
                 {content.hero.getStartedBtnText || 'Get Started'}
               </button>
             </div>
-          </div>
           </motion.div>
         </div>
 
@@ -247,7 +243,6 @@ export default function HomeClient({ content }: HomeClientProps) {
       {/* ============================================================ */}
       <section className="py-10 bg-white">
         <div className="max-w-[1140px] mx-auto px-4">
-          <div className="bg-[#F9F9F9] rounded-asymmetric border border-gray-200/80 p-8 sm:p-10 shadow-sm">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -257,7 +252,6 @@ export default function HomeClient({ content }: HomeClientProps) {
           >
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x divide-gray-200/80">
               {/* Stat 1 */}
-              <div className="flex flex-col items-center pt-4 lg:pt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -269,17 +263,14 @@ export default function HomeClient({ content }: HomeClientProps) {
                   <Users className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
-                  {content.stats.stat1Number || '500 +'}
                   <AnimatedCounter value={content.stats.stat1Number || '500 +'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat1Label || 'Happy Clients'}
                 </span>
-              </div>
               </motion.div>
 
               {/* Stat 2 */}
-              <div className="flex flex-col items-center pt-4 lg:pt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -291,17 +282,14 @@ export default function HomeClient({ content }: HomeClientProps) {
                   <FileCheck className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
-                  {content.stats.stat2Number || '3,000 +'}
                   <AnimatedCounter value={content.stats.stat2Number || '3,000 +'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat2Label || 'Projects & Solutions Delivered'}
                 </span>
-              </div>
               </motion.div>
 
               {/* Stat 3 */}
-              <div className="flex flex-col items-center pt-4 lg:pt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -313,17 +301,14 @@ export default function HomeClient({ content }: HomeClientProps) {
                   <Award className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
-                  {content.stats.stat3Number || '15'}
                   <AnimatedCounter value={content.stats.stat3Number || '15'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat3Label || 'Years Of Experience'}
                 </span>
-              </div>
               </motion.div>
 
               {/* Stat 4 */}
-              <div className="flex flex-col items-center pt-4 lg:pt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
@@ -335,16 +320,13 @@ export default function HomeClient({ content }: HomeClientProps) {
                   <Users className="w-6 h-6" />
                 </div>
                 <span className="text-3xl sm:text-4xl font-extrabold text-[#011633] tracking-tight">
-                  {content.stats.stat4Number || '72'}
                   <AnimatedCounter value={content.stats.stat4Number || '72'} />
                 </span>
                 <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
                   {content.stats.stat4Label || 'Team Members'}
                 </span>
-              </div>
               </motion.div>
             </div>
-          </div>
           </motion.div>
         </div>
       </section>
@@ -564,12 +546,7 @@ export default function HomeClient({ content }: HomeClientProps) {
               {/* Radial Indicators Side by Side */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-3">
                 {/* 95% Progress Indicator */}
-                <div className="space-y-3">
-                  <div className="w-24 h-24 rounded-full border-4 border-[#FF5722] flex items-center justify-center">
-                    <span className="text-xl font-extrabold text-[#011633]">
-                      {content.whyChooseUs.metric1Percent || '95%'}
-                    </span>
-                  </div>
+                {/* 95% Progress Indicator */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -587,16 +564,9 @@ export default function HomeClient({ content }: HomeClientProps) {
                     {content.whyChooseUs.metric1Desc ||
                       'Managing everything alone or relying on traditional methods can slow down decisions, reduce efficiency, and limit your true potential.'}
                   </p>
-                </div>
                 </motion.div>
 
                 {/* 100% Progress Indicator */}
-                <div className="space-y-3">
-                  <div className="w-24 h-24 rounded-full border-4 border-[#FF5722] flex items-center justify-center">
-                    <span className="text-xl font-extrabold text-[#011633]">
-                      {content.whyChooseUs.metric2Percent || '100%'}
-                    </span>
-                  </div>
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -614,7 +584,6 @@ export default function HomeClient({ content }: HomeClientProps) {
                     {content.whyChooseUs.metric2Desc ||
                       'An integrated system of trading guidance, numerology insights, and essential services designed to give you clarity, speed, and complete growth support.'}
                   </p>
-                </div>
                 </motion.div>
               </div>
 
