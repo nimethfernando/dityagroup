@@ -116,7 +116,7 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#011633] flex items-center justify-center p-4">
+    <div className="min-h-screen bg-[#041614] flex items-center justify-center p-4">
       <div className="w-full max-w-md bg-white rounded-asymmetric p-8 sm:p-10 shadow-2xl border border-white/10">
         <div className="text-center mb-8">
           <div className="relative h-12 w-44 mx-auto mb-4">
@@ -127,7 +127,7 @@ export default function AdminLoginPage() {
               className="object-contain"
             />
           </div>
-          <h2 className="text-2xl font-bold text-[#011633]">Executive Portal</h2>
+          <h2 className="text-2xl font-bold text-[#041614]">Executive Portal</h2>
           <p className="text-xs text-gray-500 mt-1">Authorized Administrator Access Only</p>
         </div>
 
@@ -148,7 +148,7 @@ export default function AdminLoginPage() {
         {!showForgot ? (
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-[#011633] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
                 Admin Email
               </label>
               <div className="relative">
@@ -157,7 +157,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                 />
                 <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
               </div>
@@ -165,7 +165,7 @@ export default function AdminLoginPage() {
 
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label className="block text-xs font-bold text-[#011633] uppercase tracking-wider">
+                <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider">
                   Password
                 </label>
                 <button
@@ -175,7 +175,7 @@ export default function AdminLoginPage() {
                     setErrorMsg(null);
                     setSuccessMsg(null);
                   }}
-                  className="text-xs text-[#FF5722] hover:underline font-semibold cursor-pointer"
+                  className="text-xs text-[#059669] hover:underline font-semibold cursor-pointer"
                 >
                   Forgot Password?
                 </button>
@@ -187,7 +187,7 @@ export default function AdminLoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                 />
                 <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
               </div>
@@ -217,7 +217,7 @@ export default function AdminLoginPage() {
               Enter your admin email to receive a 6-digit one-time verification code via email.
             </p>
             <div>
-              <label className="block text-xs font-bold text-[#011633] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
                 Admin Email
               </label>
               <input
@@ -225,7 +225,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                className="w-full px-4 py-3 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
               />
             </div>
 
@@ -240,7 +240,7 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setShowForgot(false)}
-                className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-[#011633]"
+                className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-[#041614]"
               >
                 Cancel
               </button>
@@ -249,7 +249,7 @@ export default function AdminLoginPage() {
         ) : (
           <form onSubmit={handleResetPassword} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-[#011633] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
                 Enter 6-Digit OTP
               </label>
               <input
@@ -259,12 +259,12 @@ export default function AdminLoginPage() {
                 placeholder="123456"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
-                className="w-full px-4 py-3 text-center tracking-widest text-lg font-bold border border-gray-300 rounded-asymmetric focus:outline-none focus:border-[#FF5722]"
+                className="w-full px-4 py-3 text-center tracking-widest text-lg font-bold border border-gray-300 rounded-asymmetric focus:outline-none focus:border-[#059669]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#011633] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
                 Set New Password
               </label>
               <input
@@ -274,7 +274,7 @@ export default function AdminLoginPage() {
                 placeholder="Min 6 characters"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                className="w-full px-4 py-3 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
               />
             </div>
 
@@ -289,7 +289,7 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setOtpSent(false)}
-                className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-[#011633]"
+                className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-[#041614]"
               >
                 Back
               </button>

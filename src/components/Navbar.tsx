@@ -86,8 +86,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             href="/"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/')
-                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
-                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
+                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
+                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
             }`}
           >
             Home
@@ -97,8 +97,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             href="/about-us"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/about-us')
-                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
-                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
+                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
+                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
             }`}
           >
             About Us
@@ -114,8 +114,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               href="/services"
               className={`px-3.5 py-2 rounded-full flex items-center space-x-1.5 transition-all duration-200 ${
                 isActive('/services') || serviceHouses.some((h) => pathname === h.href)
-                  ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
-                  : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
+                  ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
+                  : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
               }`}
             >
               <span>Services</span>
@@ -139,8 +139,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                     href={item.href}
                     className={`block px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
                       pathname === item.href
-                        ? 'bg-orange-50 text-[#FF5722] font-bold'
-                        : 'text-gray-700 hover:bg-orange-50/60 hover:text-[#FF5722]'
+                        ? 'bg-emerald-50 text-[#059669] font-bold'
+                        : 'text-gray-700 hover:bg-emerald-50/60 hover:text-[#059669]'
                     }`}
                   >
                     {item.title}
@@ -154,8 +154,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             href="/blog"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/blog')
-                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
-                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
+                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
+                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
             }`}
           >
             Blog
@@ -165,8 +165,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             href="/contact-us"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/contact-us')
-                ? 'text-[#FF5722] font-bold bg-orange-50/80 shadow-xs'
-                : 'text-[#011633] hover:text-[#FF5722] hover:bg-gray-50'
+                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
+                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
             }`}
           >
             Contact Us
@@ -177,7 +177,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         <div className="hidden lg:block">
           <button
             onClick={handleOpenConsultation}
-            className="btn-ditya-orange text-sm shadow-md hover:shadow-orange-500/25 cursor-pointer"
+            className="btn-ditya-orange text-sm shadow-md hover:shadow-emerald-500/25 cursor-pointer"
           >
             Free Consultation
           </button>
@@ -193,7 +193,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           </button>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-[#011633] hover:text-[#FF5722] focus:outline-none rounded-xl hover:bg-gray-100 transition-colors"
+            className="p-2 text-[#041614] hover:text-[#059669] focus:outline-none rounded-xl hover:bg-gray-100 transition-colors"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -207,7 +207,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           <Link
             href="/"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
+              isActive('/') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
             }`}
           >
             Home
@@ -215,7 +215,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           <Link
             href="/about-us"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/about-us') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
+              isActive('/about-us') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
             }`}
           >
             About Us
@@ -224,21 +224,21 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           <div className="px-3 py-2">
             <div
               onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className="flex items-center justify-between text-base font-medium text-[#011633] cursor-pointer"
+              className="flex items-center justify-between text-base font-medium text-[#041614] cursor-pointer"
             >
               <span>Services</span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
-                  isServicesOpen ? 'rotate-180 text-[#FF5722]' : ''
+                  isServicesOpen ? 'rotate-180 text-[#059669]' : ''
                 }`}
               />
             </div>
 
             {isServicesOpen && (
-              <div className="pl-3 mt-2 space-y-1.5 border-l-2 border-[#FF5722] py-1">
+              <div className="pl-3 mt-2 space-y-1.5 border-l-2 border-[#059669] py-1">
                 <Link
                   href="/services"
-                  className="block px-2 py-1.5 rounded-lg text-sm font-medium text-gray-800 hover:text-[#FF5722]"
+                  className="block px-2 py-1.5 rounded-lg text-sm font-medium text-gray-800 hover:text-[#059669]"
                 >
                   All Services Overview
                 </Link>
@@ -246,7 +246,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-2 py-1.5 rounded-lg text-sm text-gray-600 hover:text-[#FF5722]"
+                    className="block px-2 py-1.5 rounded-lg text-sm text-gray-600 hover:text-[#059669]"
                   >
                     {item.title}
                   </Link>
@@ -258,7 +258,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           <Link
             href="/blog"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/blog') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
+              isActive('/blog') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
             }`}
           >
             Blog
@@ -266,7 +266,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           <Link
             href="/contact-us"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/contact-us') ? 'text-[#FF5722] bg-orange-50 font-bold' : 'text-[#011633]'
+              isActive('/contact-us') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
             }`}
           >
             Contact Us

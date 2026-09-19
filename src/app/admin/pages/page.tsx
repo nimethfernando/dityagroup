@@ -159,11 +159,11 @@ export default function AdminPagesOverview() {
         {/* Title & Action Bar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center space-x-2 text-[#FF5722] text-xs font-bold uppercase tracking-wider mb-1">
+            <div className="inline-flex items-center space-x-2 text-[#059669] text-xs font-bold uppercase tracking-wider mb-1">
               <Layers className="w-4 h-4" />
               <span>Full CMS & Sub-Page Architect</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#011633]">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#041614]">
               Pages & Sub-Pages CMS
             </h1>
             <p className="text-xs text-gray-500 mt-1">
@@ -176,10 +176,10 @@ export default function AdminPagesOverview() {
             <button
               onClick={fetchPages}
               disabled={syncing}
-              className="p-2.5 rounded-asymmetric bg-white border border-gray-200 hover:bg-gray-50 text-[#011633] transition-colors cursor-pointer text-xs flex items-center space-x-1.5 shadow-sm font-semibold disabled:opacity-80"
+              className="p-2.5 rounded-asymmetric bg-white border border-gray-200 hover:bg-gray-50 text-[#041614] transition-colors cursor-pointer text-xs flex items-center space-x-1.5 shadow-sm font-semibold disabled:opacity-80"
               title="Refresh latest updates from MariaDB"
             >
-              <RefreshCw className={`w-3.5 h-3.5 text-[#FF5722] ${syncing ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-3.5 h-3.5 text-[#059669] ${syncing ? 'animate-spin' : ''}`} />
               <span>{syncing ? 'Syncing...' : 'Refresh'}</span>
             </button>
 
@@ -204,7 +204,7 @@ export default function AdminPagesOverview() {
               onClick={() => setActiveCategory(cat)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-colors cursor-pointer whitespace-nowrap ${
                 activeCategory === cat
-                  ? 'bg-[#011633] text-white shadow-sm'
+                  ? 'bg-[#041614] text-white shadow-sm'
                   : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-100'
               }`}
             >
@@ -222,7 +222,7 @@ export default function AdminPagesOverview() {
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[11px] font-bold text-[#FF5722] uppercase tracking-wider">
+                  <span className="text-[11px] font-bold text-[#059669] uppercase tracking-wider">
                     {page.category}
                   </span>
                   <span
@@ -250,12 +250,12 @@ export default function AdminPagesOverview() {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-[#011633] mb-1">{page.title}</h3>
+                <h3 className="text-lg font-bold text-[#041614] mb-1">{page.title}</h3>
                 <a
                   href={page.path}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs text-gray-400 hover:text-[#FF5722] flex items-center space-x-1 mb-4 font-mono"
+                  className="text-xs text-gray-400 hover:text-[#059669] flex items-center space-x-1 mb-4 font-mono"
                 >
                   <span>{page.path}</span>
                   <ExternalLink className="w-3 h-3" />
@@ -319,11 +319,11 @@ export default function AdminPagesOverview() {
             </button>
 
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-[#FF5722]">
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-[#059669]">
                 <Plus className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-[#011633]">Add New Sub-Page / Service</h2>
+                <h2 className="text-lg font-bold text-[#041614]">Add New Sub-Page / Service</h2>
                 <p className="text-xs text-gray-500">Live instantly with dedicated URL and styling</p>
               </div>
             </div>
@@ -344,7 +344,7 @@ export default function AdminPagesOverview() {
                   placeholder="e.g. Vedic Healthcare & Wellness"
                   value={newTitle}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                 />
               </div>
 
@@ -356,11 +356,11 @@ export default function AdminPagesOverview() {
                   placeholder="e.g. services/healthcare or ditya-health-house"
                   value={newSlug}
                   onChange={(e) => setNewSlug(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs font-mono focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs font-mono focus:outline-none focus:border-[#059669]"
                 />
                 <p className="text-[11px] text-gray-400 mt-1">
                   Public URL will be:{' '}
-                  <span className="font-mono text-[#011633] font-semibold">
+                  <span className="font-mono text-[#041614] font-semibold">
                     /{newSlug.replace(/^\//, '')}
                   </span>
                 </p>
@@ -371,7 +371,7 @@ export default function AdminPagesOverview() {
                 <select
                   value={newCategory}
                   onChange={(e) => setNewCategory(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                 >
                   <option value="Services Sub-Page">Services Sub-Page</option>
                   <option value="Houses">New House / Division</option>

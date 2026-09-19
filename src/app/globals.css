@@ -1,25 +1,31 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ditya-navy: #011633;
-  --color-ditya-navy-dark: #001025;
-  --color-ditya-navy-light: #0d274c;
-  --color-ditya-orange: #FF5722;
-  --color-ditya-orange-hover: #e64a19;
-  --color-ditya-orange-light: #FFF3E0;
-  --color-ditya-gray: #7A7A7A;
-  --color-ditya-dark: #252425;
-  --color-ditya-bg-light: #F9F9F9;
-  --color-ditya-border: #EAEAEA;
+  --color-ditya-navy: #041614;
+  --color-ditya-navy-dark: #020D0C;
+  --color-ditya-navy-light: #0D2622;
+  --color-ditya-emerald: #059669;
+  --color-ditya-emerald-hover: #047857;
+  --color-ditya-emerald-light: #ECFDF5;
+  --color-ditya-gold: #D4AF37;
+  --color-ditya-gold-light: #FEF3C7;
+  --color-ditya-orange: #059669;
+  --color-ditya-orange-hover: #047857;
+  --color-ditya-orange-light: #ECFDF5;
+  --color-ditya-gray: #64748B;
+  --color-ditya-dark: #0F172A;
+  --color-ditya-bg-light: #F8FAFC;
+  --color-ditya-border: #E2E8F0;
 
   --font-inter: var(--font-inter), 'Inter', sans-serif;
   --font-heebo: var(--font-heebo), 'Heebo', sans-serif;
 }
 
 :root {
-  --color-primary: #011633;
-  --color-secondary: #FF5722;
-  --color-text: #7A7A7A;
+  --color-primary: #041614;
+  --color-secondary: #059669;
+  --color-accent-gold: #D4AF37;
+  --color-text: #64748B;
   --color-bg: #FFFFFF;
 }
 
@@ -32,7 +38,7 @@ html {
 
 body {
   background: #ffffff;
-  color: #252425;
+  color: #1E293B;
   font-family: var(--font-heebo), sans-serif;
   margin: 0;
   padding: 0;
@@ -44,19 +50,16 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-inter), sans-serif;
-  color: #011633;
+  color: #041614;
   font-weight: 700;
 }
 
-/* Ditya Group Asymmetrical Curved Radius (Signature Elementor Kit Style) */
 /* Modern Ditya Asymmetrical & Organic Curved Radii */
 .rounded-asymmetric {
-  border-radius: 30px 0px 30px 0px;
   border-radius: 24px 8px 24px 8px;
 }
 
 .rounded-asymmetric-reverse {
-  border-radius: 0px 30px 0px 30px;
   border-radius: 8px 24px 8px 24px;
 }
 
@@ -67,14 +70,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Glassmorphic Surfaces */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.7);
 }
 
 .glass-panel-dark {
-  background: rgba(1, 22, 51, 0.88);
+  background: rgba(4, 22, 20, 0.9);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -83,94 +86,87 @@ h1, h2, h3, h4, h5, h6 {
 .glass-card {
   background: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 4px 20px -2px rgba(1, 22, 51, 0.04), 0 2px 6px -1px rgba(1, 22, 51, 0.02);
+  box-shadow: 0 4px 20px -2px rgba(4, 22, 20, 0.04), 0 2px 6px -1px rgba(4, 22, 20, 0.02);
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255, 87, 34, 0.4);
-  box-shadow: 0 20px 35px -8px rgba(1, 22, 51, 0.08), 0 0 20px -5px rgba(255, 87, 34, 0.12);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 20px 35px -8px rgba(4, 22, 20, 0.08), 0 0 20px -5px rgba(16, 185, 129, 0.15);
 }
 
-/* Premium Signature Buttons */
-.btn-ditya-orange {
-  background-color: #FF5722;
-  background: linear-gradient(135deg, #FF5722 0%, #F4511E 100%);
+/* Premium Signature Buttons - Imperial Emerald Gradient */
+.btn-ditya-orange,
+.btn-ditya-primary {
+  background-color: #059669;
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
   color: #ffffff;
-  border-radius: 30px 0px 30px 0px;
   border-radius: 20px 6px 20px 6px;
   font-family: var(--font-inter), sans-serif;
   font-weight: 600;
-  padding: 14px 34px;
   padding: 13px 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
   gap: 8px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px 0 rgba(255, 87, 34, 0.28);
+  box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.3);
 }
 
-.btn-ditya-orange:hover {
-  background-color: #e64a19;
-  background: linear-gradient(135deg, #FF6E40 0%, #E64A19 100%);
+.btn-ditya-orange:hover,
+.btn-ditya-primary:hover {
+  background-color: #047857;
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(255, 87, 34, 0.35);
-  box-shadow: 0 8px 25px -3px rgba(255, 87, 34, 0.42);
+  box-shadow: 0 8px 25px -3px rgba(5, 150, 105, 0.45);
 }
 
 .btn-ditya-navy {
-  background-color: #011633;
-  background: linear-gradient(135deg, #011633 0%, #0d274c 100%);
+  background-color: #041614;
+  background: linear-gradient(135deg, #041614 0%, #0D2622 100%);
   color: #ffffff;
-  border-radius: 30px 0px 30px 0px;
   border-radius: 20px 6px 20px 6px;
   font-family: var(--font-inter), sans-serif;
   font-weight: 600;
-  padding: 14px 34px;
   padding: 13px 30px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
   gap: 8px;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 4px 14px 0 rgba(1, 22, 51, 0.25);
+  box-shadow: 0 4px 14px 0 rgba(4, 22, 20, 0.25);
 }
 
 .btn-ditya-navy:hover {
-  background-color: #0d274c;
-  background: linear-gradient(135deg, #0d274c 0%, #173868 100%);
+  background-color: #0D2622;
+  background: linear-gradient(135deg, #0D2622 0%, #153A35 100%);
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px -5px rgba(1, 22, 51, 0.35);
-  box-shadow: 0 8px 25px -3px rgba(1, 22, 51, 0.35);
+  box-shadow: 0 8px 25px -3px rgba(4, 22, 20, 0.35);
 }
 
 /* Luxury Accent Glows */
-.ambient-glow-orange {
+.ambient-glow-orange,
+.ambient-glow-emerald {
   position: absolute;
   filter: blur(80px);
-  background: radial-gradient(circle, rgba(255, 87, 34, 0.15) 0%, rgba(255, 87, 34, 0) 70%);
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.18) 0%, rgba(16, 185, 129, 0) 70%);
   pointer-events: none;
 }
 
 .ambient-glow-gold {
   position: absolute;
   filter: blur(80px);
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.12) 0%, rgba(212, 175, 55, 0) 70%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.14) 0%, rgba(212, 175, 55, 0) 70%);
   pointer-events: none;
 }
 
 /* Card hover animation */
 .card-hover {
-  transition: all 0.3s ease;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-hover:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 35px -10px rgba(1, 22, 51, 0.08);
-  box-shadow: 0 20px 35px -10px rgba(1, 22, 51, 0.09);
+  box-shadow: 0 20px 35px -10px rgba(4, 22, 20, 0.09);
 }

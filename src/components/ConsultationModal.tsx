@@ -64,7 +64,7 @@ export default function ConsultationModal({
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-gray-100 hover:bg-[#FF5722] hover:text-white flex items-center justify-center text-gray-500 transition-colors"
+          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-gray-100 hover:bg-[#059669] hover:text-white flex items-center justify-center text-gray-500 transition-colors"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
@@ -72,10 +72,10 @@ export default function ConsultationModal({
 
         {success ? (
           <div className="text-center py-8 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-green-100 text-green-600 mx-auto flex items-center justify-center">
+            <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 mx-auto flex items-center justify-center">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-bold text-[#011633]">Consultation Booked!</h3>
+            <h3 className="text-2xl font-bold text-[#041614]">Consultation Booked!</h3>
             <p className="text-sm text-gray-600 max-w-sm mx-auto">
               Thank you for reaching out to Ditya Group. Our executive team will review your
               details and connect with you shortly.
@@ -85,7 +85,7 @@ export default function ConsultationModal({
                 setSuccess(false);
                 onClose();
               }}
-              className="mt-4 bg-[#FF5722] hover:bg-[#e64a19] text-white px-8 py-3 rounded-asymmetric font-semibold text-sm transition-colors"
+              className="mt-4 bg-[#059669] hover:bg-[#047857] text-white px-8 py-3 rounded-asymmetric font-semibold text-sm transition-colors"
             >
               Done
             </button>
@@ -93,10 +93,10 @@ export default function ConsultationModal({
         ) : (
           <div>
             <div className="text-center mb-6">
-              <span className="text-xs font-semibold uppercase tracking-wider text-[#FF5722]">
+              <span className="text-xs font-semibold uppercase tracking-wider text-[#059669]">
                 Ditya Group
               </span>
-              <h3 className="text-2xl font-bold text-[#011633] mt-1">Free Consultation</h3>
+              <h3 className="text-2xl font-bold text-[#041614] mt-1">Free Consultation</h3>
               <p className="text-xs text-gray-500 mt-1">
                 {serviceTitle
                   ? `Inquiring about: ${serviceTitle}`
@@ -118,7 +118,7 @@ export default function ConsultationModal({
                   placeholder="Name"
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722] text-gray-900 placeholder-gray-400 transition-colors"
+                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669] text-gray-900 placeholder-gray-400 transition-colors"
                 />
               </div>
 
@@ -129,7 +129,7 @@ export default function ConsultationModal({
                   placeholder="Phone Number *"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722] text-gray-900 placeholder-gray-400 transition-colors"
+                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669] text-gray-900 placeholder-gray-400 transition-colors"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export default function ConsultationModal({
                   placeholder="Email *"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722] text-gray-900 placeholder-gray-400 transition-colors"
+                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669] text-gray-900 placeholder-gray-400 transition-colors"
                 />
               </div>
 
@@ -150,14 +150,14 @@ export default function ConsultationModal({
                   placeholder="Message"
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722] text-gray-900 placeholder-gray-400 transition-colors resize-none"
+                  className="w-full px-5 py-3.5 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669] text-gray-900 placeholder-gray-400 transition-colors resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#FF5722] hover:bg-[#e64a19] text-white py-4 rounded-asymmetric font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg cursor-pointer"
+                className="w-full bg-[#059669] hover:bg-[#047857] text-white py-4 rounded-asymmetric font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 shadow-md hover:shadow-lg cursor-pointer"
               >
                 {loading ? (
                   <>

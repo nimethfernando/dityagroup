@@ -19,11 +19,11 @@ export default async function TermsAndConditionsPage() {
   ].filter((s) => s.title && s.text);
 
   return (
-    <div className="pb-36 bg-white">
+    <div className="pb-16 bg-white">
       {/* Banner */}
       <section className="bg-[#011633] text-white py-16 text-center">
         <div className="max-w-[1140px] mx-auto px-4">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase">
+          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase">
             {banner?.badge || 'User Agreement'}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-2">
@@ -39,7 +39,7 @@ export default async function TermsAndConditionsPage() {
       <div className="max-w-[900px] mx-auto px-4 py-16 space-y-8 text-gray-700 leading-relaxed text-sm">
         {sections.map((section, idx) => (
           <div key={idx} className="space-y-3">
-            <h2 className="text-xl font-bold text-[#011633]">{section.title}</h2>
+            <h2 className="text-xl font-bold text-[#041614]">{section.title}</h2>
             <p className="whitespace-pre-line">{section.text}</p>
           </div>
         ))}

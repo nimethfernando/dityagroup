@@ -60,8 +60,8 @@ export function AnimatedRadialProgress({
   percentage,
   size = 96,
   strokeWidth = 6,
-  strokeColor = '#FF5722',
-  trackColor = '#FFECE5',
+  strokeColor = '#059669',
+  trackColor = '#ECFDF5',
 }: AnimatedRadialProgressProps) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: '-30px' });
@@ -123,7 +123,7 @@ export function AnimatedRadialProgress({
         />
       </svg>
       {/* Percentage Center Text */}
-      <span className="absolute text-xl font-extrabold text-[#011633] tracking-tight">
+      <span className="absolute text-xl font-extrabold text-[#041614] tracking-tight">
         {currentPercent}%
       </span>
     </div>

@@ -165,7 +165,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-md bg-[#011633] border border-white/15 rounded-asymmetric p-6 sm:p-8 shadow-2xl text-white">
+      <div className="relative w-full max-w-md bg-[#041614] border border-white/15 rounded-asymmetric p-6 sm:p-8 shadow-2xl text-white">
         <button
           onClick={handleClose}
           disabled={loading}
@@ -175,7 +175,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
         </button>
 
         <div className="flex items-center space-x-3 mb-6">
-          <div className="w-10 h-10 rounded-xl bg-[#FF5722]/20 border border-[#FF5722]/40 flex items-center justify-center text-[#FF5722]">
+          <div className="w-10 h-10 rounded-xl bg-[#059669]/20 border border-[#059669]/40 flex items-center justify-center text-[#059669]">
             <KeyRound className="w-5 h-5" />
           </div>
           <div>
@@ -194,7 +194,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
             }}
             className={`pb-2.5 px-3 text-xs font-bold transition-colors cursor-pointer border-b-2 whitespace-nowrap ${
               activeTab === 'current'
-                ? 'border-[#FF5722] text-[#FF5722]'
+                ? 'border-[#059669] text-[#059669]'
                 : 'border-transparent text-gray-400 hover:text-white'
             }`}
           >
@@ -208,7 +208,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
             }}
             className={`pb-2.5 px-3 text-xs font-bold transition-colors cursor-pointer border-b-2 whitespace-nowrap ${
               activeTab === 'otp'
-                ? 'border-[#FF5722] text-[#FF5722]'
+                ? 'border-[#059669] text-[#059669]'
                 : 'border-transparent text-gray-400 hover:text-white'
             }`}
           >
@@ -222,7 +222,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
             }}
             className={`pb-2.5 px-3 text-xs font-bold transition-colors cursor-pointer border-b-2 whitespace-nowrap ${
               activeTab === 'email'
-                ? 'border-[#FF5722] text-[#FF5722]'
+                ? 'border-[#059669] text-[#059669]'
                 : 'border-transparent text-gray-400 hover:text-white'
             }`}
           >
@@ -251,8 +251,8 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
           <form onSubmit={handleEmailSubmit} className="space-y-4 text-xs">
             <div>
               <label className="block text-gray-300 font-semibold mb-1">Current Admin Gmail</label>
-              <div className="p-3 bg-[#001025] rounded-asymmetric border border-white/10 text-gray-400 flex items-center space-x-2">
-                <Mail className="w-4 h-4 text-[#FF5722]" />
+              <div className="p-3 bg-[#020D0C] rounded-asymmetric border border-white/10 text-gray-400 flex items-center space-x-2">
+                <Mail className="w-4 h-4 text-[#059669]" />
                 <span>{adminEmail}</span>
               </div>
             </div>
@@ -265,7 +265,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                 value={newAdminEmail}
                 onChange={(e) => setNewAdminEmail(e.target.value)}
                 placeholder="newadmin@gmail.com"
-                className="w-full bg-[#001025] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#FF5722] outline-none text-xs"
+                className="w-full bg-[#020D0C] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#059669] outline-none text-xs"
               />
               <p className="text-[11px] text-gray-400 mt-1">Must be a valid @gmail.com address.</p>
             </div>
@@ -278,7 +278,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                 value={emailUpdatePassword}
                 onChange={(e) => setEmailUpdatePassword(e.target.value)}
                 placeholder="Enter password to authorize change"
-                className="w-full bg-[#001025] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#FF5722] outline-none text-xs"
+                className="w-full bg-[#020D0C] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#059669] outline-none text-xs"
               />
             </div>
 
@@ -318,7 +318,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter current password"
-                  className="w-full bg-[#001025] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#FF5722] outline-none text-xs"
+                  className="w-full bg-[#020D0C] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#059669] outline-none text-xs"
                 />
               </div>
             ) : (
@@ -331,7 +331,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                     type="button"
                     onClick={handleSendOtp}
                     disabled={sendingOtp}
-                    className="text-[11px] text-[#FF5722] hover:underline font-bold cursor-pointer"
+                    className="text-[11px] text-[#059669] hover:underline font-bold cursor-pointer"
                   >
                     {sendingOtp ? 'Sending...' : otpSent ? 'Resend OTP' : 'Send Code to Gmail'}
                   </button>
@@ -343,7 +343,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                   value={otp}
                   onChange={(e) => setOtp(e.target.value)}
                   placeholder={`Code sent to ${adminEmail}`}
-                  className="w-full bg-[#001025] border border-white/20 rounded-asymmetric p-3 text-center tracking-widest text-base font-bold text-white placeholder-gray-500 focus:border-[#FF5722] outline-none"
+                  className="w-full bg-[#020D0C] border border-white/20 rounded-asymmetric p-3 text-center tracking-widest text-base font-bold text-white placeholder-gray-500 focus:border-[#059669] outline-none"
                 />
                 {otpSent && (
                   <p className="text-[11px] text-green-400 mt-1 flex items-center space-x-1">
@@ -362,7 +362,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="At least 6 characters"
-                className="w-full bg-[#001025] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#FF5722] outline-none text-xs"
+                className="w-full bg-[#020D0C] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#059669] outline-none text-xs"
               />
             </div>
 
@@ -374,7 +374,7 @@ export default function ChangePasswordModal({ isOpen, onClose }: ChangePasswordM
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Re-enter new password"
-                className="w-full bg-[#001025] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#FF5722] outline-none text-xs"
+                className="w-full bg-[#020D0C] border border-white/20 rounded-asymmetric p-3 text-white placeholder-gray-500 focus:border-[#059669] outline-none text-xs"
               />
             </div>
 

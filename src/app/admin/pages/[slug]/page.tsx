@@ -103,7 +103,7 @@ export default function PageEditor({ params }: PageEditorProps) {
       <div className="min-h-screen bg-[#F8F9FA]">
         <AdminHeader />
         <div className="text-center py-24">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FF5722] mx-auto mb-3" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#059669] mx-auto mb-3" />
           <p className="text-sm text-gray-500 font-semibold">Loading page editor...</p>
         </div>
       </div>
@@ -140,14 +140,14 @@ export default function PageEditor({ params }: PageEditorProps) {
               <ArrowLeft className="w-4 h-4" />
             </Link>
             <div>
-              <h1 className="text-2xl font-extrabold text-[#011633]">
+              <h1 className="text-2xl font-extrabold text-[#041614]">
                 Edit {pageMeta?.title}
               </h1>
               <a
                 href={pageMeta?.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-gray-400 hover:text-[#FF5722] inline-flex items-center space-x-1 mt-0.5"
+                className="text-xs text-gray-400 hover:text-[#059669] inline-flex items-center space-x-1 mt-0.5"
               >
                 <span>Live URL: {pageMeta?.path}</span>
                 <ExternalLink className="w-3 h-3" />
@@ -212,7 +212,7 @@ export default function PageEditor({ params }: PageEditorProps) {
             <>
               {/* Hero Section Card */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-                <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   1. Hero Section Content
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -229,7 +229,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, tagline: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
@@ -245,7 +245,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, superHeading: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
@@ -264,7 +264,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, title: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
@@ -280,7 +280,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, subTitle: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
@@ -298,14 +298,14 @@ export default function PageEditor({ params }: PageEditorProps) {
                         hero: { ...content.hero, description: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   ></textarea>
                 </div>
               </div>
 
               {/* Core Values & Vision */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-                <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   2. Welcome & Core Values Section
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -322,7 +322,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           coreValues: { ...content.coreValues, subtitle: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
@@ -338,7 +338,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           coreValues: { ...content.coreValues, heading: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
@@ -356,7 +356,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                         coreValues: { ...content.coreValues, para1: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   ></textarea>
                 </div>
 
@@ -373,7 +373,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                         coreValues: { ...content.coreValues, para2: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   ></textarea>
                 </div>
 
@@ -398,7 +398,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                               },
                             })
                           }
-                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                         />
                       </div>
                     );
@@ -420,7 +420,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           coreValues: { ...content.coreValues, founderName: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
@@ -436,7 +436,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           coreValues: { ...content.coreValues, founderRole: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
@@ -444,7 +444,7 @@ export default function PageEditor({ params }: PageEditorProps) {
 
               {/* Stats Bar */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-                <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   3. Key Statistics Numbers
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -489,7 +489,7 @@ export default function PageEditor({ params }: PageEditorProps) {
 
               {/* Why Choose Us & Metrics */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-                <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   4. Why Choose Us & Radial Progress Metrics
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -625,7 +625,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {slug === 'about' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 About Us Content
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -704,7 +704,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {slug === 'contact' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 Contact Information & Office Details
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -766,7 +766,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {slug !== 'home' && slug !== 'about' && slug !== 'contact' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 House Overview & Offerings
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

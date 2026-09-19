@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Phone, Mail, MapPin, Send } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, ArrowUp } from 'lucide-react';
 import {
   FaFacebookF,
   FaInstagram,
@@ -17,8 +17,8 @@ import {
   FaThreads,
   FaFlipboard,
   FaTelegram,
+  FaXTwitter,
 } from 'react-icons/fa6';
-import { FaXTwitter } from 'react-icons/fa6';
 
 export default function Footer() {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -48,6 +48,12 @@ export default function Footer() {
     }
   };
 
+  const scrollToTop = () => {
+    if (typeof window !== 'undefined') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
   const socialLinks = [
     { icon: FaFacebookF, href: 'https://www.facebook.com/profile.php?id=61579723378713', label: 'Facebook' },
     { icon: FaInstagram, href: 'https://www.instagram.com/dityagroup/', label: 'Instagram' },
@@ -64,200 +70,256 @@ export default function Footer() {
     { icon: FaTelegram, href: '#', label: 'Telegram' },
   ];
 
+  const houseLinks = [
+    { name: 'House of Finance', href: '/services#finance' },
+    { name: 'House of Business', href: '/services#business' },
+    { name: 'House of Law & Tax', href: '/services#law' },
+    { name: 'House of Astro', href: '/services#astro' },
+    { name: 'House of Architecture', href: '/services#architecture' },
+    { name: 'House of Wellness', href: '/services#wellness' },
+  ];
+
   return (
-    <footer className="relative bg-[#000f24] text-white pt-20 pb-10 overflow-hidden border-t border-white/5">
-      {/* Background Graphic */}
+    <footer className="relative bg-gradient-to-b from-[#031513] via-[#020e0d] to-[#010706] text-white pt-16 pb-12 overflow-hidden border-t border-emerald-500/20">
+      {/* Top Luminous Accent Hairline */}
+      <div className="absolute top-0 inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#10B981]/50 to-transparent" />
+
+      {/* Ambient Top Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[280px] bg-[#10B981]/[0.08] blur-[120px] pointer-events-none" />
+
+      {/* Background Graphic Texture */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <Image
           src="/images/inner-banner-bg.jpg"
           alt="Footer background pattern"
           fill
-          className="object-cover object-bottom opacity-15 mix-blend-screen"
+          className="object-cover object-bottom opacity-10 mix-blend-screen"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000f24] via-[#000f24]/90 to-[#000f24]/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#010706] via-[#020e0d]/95 to-[#031513]/90" />
       </div>
 
-      {/* Top 3 Floating Contact Cards */}
-      <div className="max-w-[1140px] mx-auto px-4 -mt-32 mb-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="max-w-[1140px] mx-auto px-4 relative z-10">
+        {/* ============================================================ */}
+        {/* TOP: 3 LUXURY EXECUTIVE CONTACT CARDS (NATURAL FLOW, NO CLIPPING) */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {/* Card 1: Phone */}
-          <div className="bg-[#001738] rounded-3xl p-7 flex items-center space-x-5 shadow-2xl border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-orange-500/10">
-            <div className="w-14 h-14 rounded-2xl bg-[#FF5722]/15 flex items-center justify-center shrink-0 shadow-inner">
-              <Phone className="w-6 h-6 text-[#FF5722]" />
+          <div className="bg-white/[0.04] backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#10B981]/50 transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)] flex items-start space-x-5 group">
+            <div className="w-13 h-13 rounded-2xl bg-[#059669]/15 border border-[#10B981]/30 flex items-center justify-center shrink-0 group-hover:bg-[#059669] group-hover:text-white transition-all duration-300 shadow-inner">
+              <Phone className="w-5 h-5 text-[#10B981] group-hover:text-white transition-colors" />
             </div>
             <div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-1">
+                Give Us A Call
+              </span>
               <a
                 href="tel:+919351090301"
-                className="text-lg font-extrabold text-white hover:text-[#FF5722] transition-colors block tracking-tight"
+                className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#10B981] transition-colors block tracking-tight"
               >
                 +91-93510 90301
               </a>
-              <span className="text-xs text-gray-400 font-medium tracking-wide">Give Us A Call</span>
+              <span className="text-xs text-gray-400 mt-1 block">Mon – Sat, 9:00 AM – 7:00 PM IST</span>
             </div>
           </div>
 
-          {/* Card 2: Email (Vibrant Orange Center Highlight) */}
-          <div className="bg-gradient-to-br from-[#FF5722] to-[#e64a19] rounded-3xl p-7 flex items-center space-x-5 shadow-2xl transition-all duration-300 hover:-translate-y-1.5 shadow-orange-500/30">
-            <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center shrink-0 shadow-inner">
-              <Mail className="w-6 h-6 text-white" />
+          {/* Card 2: Email (Focal Centerpiece Card) */}
+          <div className="bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-[#D4AF37]/35 hover:border-[#D4AF37] transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)] flex items-start space-x-5 group relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
+            <div className="w-13 h-13 rounded-2xl bg-[#D4AF37]/15 border border-[#D4AF37]/30 flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300 shadow-inner">
+              <Mail className="w-5 h-5 text-[#D4AF37] group-hover:text-black transition-colors" />
             </div>
             <div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300/90 block mb-1">
+                Drop Us A Line
+              </span>
               <a
                 href="mailto:groupditya@gmail.com"
-                className="text-lg font-extrabold text-white hover:text-black/80 transition-colors block break-all tracking-tight"
+                className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#D4AF37] transition-colors block break-all tracking-tight"
               >
                 groupditya@gmail.com
               </a>
-              <span className="text-xs text-white/90 font-medium tracking-wide">Drop Us a Line</span>
+              <span className="text-xs text-gray-400 mt-1 block">Direct Executive Response</span>
             </div>
           </div>
 
           {/* Card 3: Location */}
-          <div className="bg-[#001738] rounded-3xl p-7 flex items-center space-x-5 shadow-2xl border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-orange-500/10">
-            <div className="w-14 h-14 rounded-2xl bg-[#FF5722]/15 flex items-center justify-center shrink-0 shadow-inner">
-              <MapPin className="w-6 h-6 text-[#FF5722]" />
+          <div className="bg-white/[0.04] backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/10 hover:border-[#10B981]/50 transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-[0_15px_35px_rgba(0,0,0,0.4)] flex items-start space-x-5 group">
+            <div className="w-13 h-13 rounded-2xl bg-[#059669]/15 border border-[#10B981]/30 flex items-center justify-center shrink-0 group-hover:bg-[#059669] group-hover:text-white transition-all duration-300 shadow-inner">
+              <MapPin className="w-5 h-5 text-[#10B981] group-hover:text-white transition-colors" />
             </div>
             <div>
-              <p className="text-xs sm:text-sm font-bold text-white leading-snug">
-                3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004
-              </p>
-              <span className="text-xs text-gray-400 font-medium tracking-wide">Office Location</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Footer 4 Columns */}
-      <div className="max-w-[1140px] mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
-        {/* Col 1: Brand & Socials */}
-        <div className="lg:col-span-4 space-y-5">
-          <div className="relative h-12 sm:h-14 w-52 sm:w-56">
-            <Image
-              src="/images/logo-white.png"
-              alt="Ditya Group"
-              fill
-              className="object-contain object-left"
-            />
-          </div>
-          <p className="text-gray-300 text-sm font-medium">One Group. Infinite Possibilities!</p>
-
-          {/* 13 Circular Social Icons */}
-          <div className="flex flex-wrap gap-2 pt-1">
-            {socialLinks.map((s, idx) => {
-              const IconComp = s.icon;
-              return (
-                <a
-                  key={idx}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-8 h-8 rounded-full bg-white/10 text-gray-200 hover:bg-[#FF5722] hover:text-white flex items-center justify-center transition-all duration-200 text-xs shadow-sm hover:scale-110"
-                >
-                  <IconComp className="w-3.5 h-3.5" />
-                </a>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Col 2: Quick Links */}
-        <div className="lg:col-span-2 space-y-4">
-          <h4 className="text-white font-extrabold text-base border-b-2 border-[#FF5722] pb-1.5 inline-block tracking-wide">
-            Quick Links
-          </h4>
-          <ul className="space-y-2.5 text-sm text-gray-300">
-            <li>
-              <Link href="/about-us" className="hover:text-[#FF5722] transition-colors">
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link href="/services" className="hover:text-[#FF5722] transition-colors">
-                Services
-              </Link>
-            </li>
-            <li>
-              <Link href="/contact-us" className="hover:text-[#FF5722] transition-colors">
-                Contact Us
-              </Link>
-            </li>
-            <li>
-              <Link href="/blog" className="hover:text-[#FF5722] transition-colors">
-                Blog & Insights
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Col 3: Useful Links */}
-        <div className="lg:col-span-2 space-y-4">
-          <h4 className="text-white font-extrabold text-base border-b-2 border-[#FF5722] pb-1.5 inline-block tracking-wide">
-            Useful Links
-          </h4>
-          <ul className="space-y-2.5 text-sm text-gray-300">
-            <li>
-              <Link href="/privacy-policy" className="hover:text-[#FF5722] transition-colors">
-                Privacy Policy
-              </Link>
-            </li>
-            <li>
-              <Link href="/terms-and-conditions" className="hover:text-[#FF5722] transition-colors">
-                Terms and Conditions
-              </Link>
-            </li>
-            <li>
-              <Link href="/admin/login" className="hover:text-[#FF5722] transition-colors opacity-80">
-                Admin Portal
-              </Link>
-            </li>
-          </ul>
-        </div>
-
-        {/* Col 4: Newsletter */}
-        <div className="lg:col-span-4 space-y-4">
-          <h4 className="text-white font-extrabold text-base border-b-2 border-[#FF5722] pb-1.5 inline-block tracking-wide">
-            Newsletter
-          </h4>
-          <p className="text-sm text-gray-300 leading-relaxed">
-            Subscribe to receive our exclusive newsletter with the latest news and trends
-          </p>
-
-          <form onSubmit={handleNewsletterSubmit} className="pt-2">
-            <div className="flex rounded-2xl bg-white/10 border border-white/15 p-1.5 overflow-hidden backdrop-blur-md">
-              <input
-                type="email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                placeholder="Your Email Address"
-                required
-                className="w-full px-4 py-2.5 text-sm text-white bg-transparent focus:outline-none placeholder-gray-400"
-              />
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="btn-ditya-orange py-2.5 px-5 text-sm shrink-0 shadow-md"
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-1">
+                Office Location
+              </span>
+              <a
+                href="https://maps.google.com/?q=3rd+floor+261+Sewa+Sadan+Marg+Adarsh+Nagar+Jaipur+Rajasthan+302004"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs sm:text-sm font-bold text-white leading-snug group-hover:text-[#10B981] transition-colors block"
               >
-                <span>Send</span>
-                <Send className="w-3.5 h-3.5" />
-              </button>
+                3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004
+              </a>
+              <span className="text-xs text-gray-400 mt-1 block">Jaipur, Rajasthan, India</span>
             </div>
-            {newsletterStatus && (
-              <p className="text-xs mt-2 text-[#FF5722] font-medium">{newsletterStatus}</p>
-            )}
-          </form>
+          </div>
         </div>
-      </div>
 
-      {/* Bottom Copyright Bar */}
-      <div className="max-w-[1140px] mx-auto px-4 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 text-center gap-3">
-        <p>
-          A Unit of Ditya Enterprises & Ditya Wealth Management PVT LTD © Copyright Ditya Group{' '}
-          {new Date().getFullYear()}. All Rights Reserved.
-        </p>
-        <p className="text-gray-500">
-          Designed with Ancient Wisdom & Modern Solutions
-        </p>
+        {/* Ambient Subtle Hairline Divider */}
+        <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/15 to-transparent mb-16" />
+
+        {/* ============================================================ */}
+        {/* MIDDLE: 4 BALANCED COLUMNS */}
+        {/* ============================================================ */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
+          {/* Col 1: Brand & Socials (Span 4) */}
+          <div className="lg:col-span-4 space-y-5">
+            <div className="relative h-12 sm:h-14 w-52 sm:w-56">
+              <Image
+                src="/images/logo-white.png"
+                alt="Ditya Group"
+                fill
+                className="object-contain object-left"
+              />
+            </div>
+            <p className="text-[#D4AF37] font-semibold text-sm tracking-wide">
+              One Group. Infinite Possibilities!
+            </p>
+            <p className="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-sm">
+              Empowering wealth creation, business growth, and spiritual alignment by seamlessly bridging ancient Vedic wisdom with cutting-edge modern solutions.
+            </p>
+
+            {/* 13 Circular Social Icons with high contrast */}
+            <div className="flex flex-wrap gap-2 pt-2">
+              {socialLinks.map((s, idx) => {
+                const IconComp = s.icon;
+                return (
+                  <a
+                    key={idx}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={s.label}
+                    className="w-8 h-8 rounded-xl bg-white/10 border border-white/15 text-gray-200 hover:bg-[#059669] hover:border-[#10B981] hover:text-white flex items-center justify-center transition-all duration-200 text-xs shadow-xs hover:scale-110"
+                  >
+                    <IconComp className="w-3.5 h-3.5" />
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Col 2: Quick Links (Span 2) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
+              Quick Links
+            </h4>
+            <ul className="space-y-3 text-xs sm:text-sm text-gray-300">
+              <li>
+                <Link href="/" className="hover:text-[#10B981] transition-colors flex items-center group">
+                  <span className="group-hover:translate-x-1 transition-transform">Home</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/about-us" className="hover:text-[#10B981] transition-colors flex items-center group">
+                  <span className="group-hover:translate-x-1 transition-transform">About Us</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="hover:text-[#10B981] transition-colors flex items-center group">
+                  <span className="group-hover:translate-x-1 transition-transform">Services</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact-us" className="hover:text-[#10B981] transition-colors flex items-center group">
+                  <span className="group-hover:translate-x-1 transition-transform">Contact Us</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/blog" className="hover:text-[#10B981] transition-colors flex items-center group">
+                  <span className="group-hover:translate-x-1 transition-transform">Blog & Insights</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Specialized Houses (Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-white font-extrabold text-base border-b-2 border-[#D4AF37] pb-1.5 inline-block tracking-wide">
+              Our 6 Houses
+            </h4>
+            <ul className="grid grid-cols-1 gap-2.5 text-xs sm:text-sm text-gray-300">
+              {houseLinks.map((h, idx) => (
+                <li key={idx}>
+                  <Link href={h.href} className="hover:text-[#D4AF37] transition-colors flex items-center group">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#D4AF37]/60 mr-2 group-hover:bg-[#D4AF37] transition-colors" />
+                    <span className="group-hover:translate-x-1 transition-transform">{h.name}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <div className="pt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-400 border-t border-white/10 mt-3">
+              <Link href="/privacy-policy" className="hover:text-[#10B981] transition-colors">Privacy Policy</Link>
+              <Link href="/terms-and-conditions" className="hover:text-[#10B981] transition-colors">Terms</Link>
+              <Link href="/admin/login" className="hover:text-[#10B981] transition-colors">Admin</Link>
+            </div>
+          </div>
+
+          {/* Col 4: Newsletter (Span 3) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
+              Newsletter
+            </h4>
+            <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+              Subscribe to receive our exclusive executive briefings on wealth, market trends, and Vedic lifestyle strategy.
+            </p>
+
+            <form onSubmit={handleNewsletterSubmit} className="pt-2">
+              <div className="flex rounded-2xl bg-white/10 border border-white/15 p-1.5 overflow-hidden backdrop-blur-md focus-within:border-[#10B981] transition-colors">
+                <input
+                  type="email"
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Your Email Address"
+                  required
+                  className="w-full px-4 py-2.5 text-sm text-white bg-transparent focus:outline-none placeholder-gray-400"
+                />
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="btn-ditya-orange py-2.5 px-4 text-xs font-bold shrink-0 shadow-md cursor-pointer"
+                >
+                  <span>Send</span>
+                  <Send className="w-3.5 h-3.5" />
+                </button>
+              </div>
+              {newsletterStatus && (
+                <p className="text-xs mt-2 text-[#10B981] font-medium">{newsletterStatus}</p>
+              )}
+            </form>
+          </div>
+        </div>
+
+        {/* ============================================================ */}
+        {/* BOTTOM: COPYRIGHT, CREDO & BACK TO TOP */}
+        {/* ============================================================ */}
+        <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 text-center gap-4">
+          <p>
+            A Unit of Ditya Enterprises & Ditya Wealth Management PVT LTD © Copyright Ditya Group{' '}
+            {new Date().getFullYear()}. All Rights Reserved.
+          </p>
+          <div className="flex items-center space-x-4">
+            <span className="text-gray-300 font-medium">
+              Ancient Wisdom & Modern Solutions
+            </span>
+            <button
+              onClick={scrollToTop}
+              aria-label="Back to top"
+              className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#059669] hover:text-white border border-white/15 flex items-center justify-center transition-all duration-200 cursor-pointer text-gray-300"
+            >
+              <ArrowUp className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
       </div>
     </footer>
   );

@@ -101,7 +101,7 @@ export default function AdminInquiriesPage() {
         {/* Title & Stats */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#011633]">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#041614]">
               Consultation Inquiries & Leads
             </h1>
             <p className="text-xs text-gray-500 mt-1">
@@ -111,12 +111,12 @@ export default function AdminInquiriesPage() {
           <div className="flex items-center space-x-3">
             <button
               onClick={fetchInquiries}
-              className="p-2 rounded-asymmetric bg-white border border-gray-200 hover:bg-gray-50 text-[#011633] transition-colors cursor-pointer text-xs flex items-center space-x-1.5 shadow-sm font-semibold"
+              className="p-2 rounded-asymmetric bg-white border border-gray-200 hover:bg-gray-50 text-[#041614] transition-colors cursor-pointer text-xs flex items-center space-x-1.5 shadow-sm font-semibold"
             >
-              <RefreshCw className="w-3.5 h-3.5 text-[#FF5722]" />
+              <RefreshCw className="w-3.5 h-3.5 text-[#059669]" />
               <span>Refresh</span>
             </button>
-            <span className="bg-white border border-gray-200 px-4 py-2 rounded-asymmetric text-xs font-bold text-[#011633] shadow-sm">
+            <span className="bg-white border border-gray-200 px-4 py-2 rounded-asymmetric text-xs font-bold text-[#041614] shadow-sm">
               Total Leads: {inquiries.length}
             </span>
           </div>
@@ -130,7 +130,7 @@ export default function AdminInquiriesPage() {
               placeholder="Search by name, phone, email, service..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+              className="w-full pl-9 pr-4 py-2 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
             />
             <Search className="w-4 h-4 text-gray-400 absolute left-3 top-2.5" />
           </div>
@@ -144,7 +144,7 @@ export default function AdminInquiriesPage() {
                 onClick={() => setFilterStatus(st)}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-colors cursor-pointer ${
                   filterStatus === st
-                    ? 'bg-[#011633] text-white shadow-sm'
+                    ? 'bg-[#041614] text-white shadow-sm'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -157,12 +157,12 @@ export default function AdminInquiriesPage() {
         {/* Inquiries Table / Cards */}
         {loading ? (
           <div className="text-center py-20 bg-white rounded-asymmetric border border-gray-200">
-            <RefreshCw className="w-8 h-8 animate-spin text-[#FF5722] mx-auto mb-3" />
+            <RefreshCw className="w-8 h-8 animate-spin text-[#059669] mx-auto mb-3" />
             <p className="text-sm text-gray-500 font-medium">Loading inquiries from MariaDB...</p>
           </div>
         ) : filtered.length === 0 ? (
           <div className="text-center py-20 bg-white rounded-asymmetric border border-gray-200 shadow-sm">
-            <p className="text-base font-bold text-[#011633]">No inquiries found</p>
+            <p className="text-base font-bold text-[#041614]">No inquiries found</p>
             <p className="text-xs text-gray-400 mt-1">
               New submissions from the Consultation Popup or Contact page will appear here.
             </p>
@@ -176,11 +176,11 @@ export default function AdminInquiriesPage() {
               >
                 <div className="space-y-2 flex-1">
                   <div className="flex flex-wrap items-center gap-3">
-                    <h3 className="text-base font-bold text-[#011633]">{item.name}</h3>
+                    <h3 className="text-base font-bold text-[#041614]">{item.name}</h3>
                     <span
                       className={`text-[10px] px-2.5 py-0.5 rounded-full font-extrabold uppercase tracking-wider ${
                         item.status === 'NEW'
-                          ? 'bg-orange-100 text-[#FF5722]'
+                          ? 'bg-emerald-100 text-[#059669]'
                           : item.status === 'CONTACTED'
                           ? 'bg-blue-100 text-blue-700'
                           : item.status === 'RESOLVED'
@@ -198,14 +198,14 @@ export default function AdminInquiriesPage() {
                   <div className="flex flex-wrap items-center gap-4 text-xs text-gray-600">
                     <a
                       href={`tel:${item.phone}`}
-                      className="flex items-center space-x-1.5 text-[#011633] hover:text-[#FF5722] font-semibold"
+                      className="flex items-center space-x-1.5 text-[#041614] hover:text-[#059669] font-semibold"
                     >
-                      <Phone className="w-3.5 h-3.5 text-[#FF5722]" />
+                      <Phone className="w-3.5 h-3.5 text-[#059669]" />
                       <span>{item.phone}</span>
                     </a>
                     <a
                       href={`mailto:${item.email}`}
-                      className="flex items-center space-x-1.5 hover:text-[#FF5722]"
+                      className="flex items-center space-x-1.5 hover:text-[#059669]"
                     >
                       <Mail className="w-3.5 h-3.5 text-gray-400" />
                       <span>{item.email}</span>
@@ -217,8 +217,8 @@ export default function AdminInquiriesPage() {
                   </div>
 
                   {item.service && (
-                    <p className="text-xs text-[#011633] font-semibold">
-                      Service Interest: <span className="text-[#FF5722]">{item.service}</span>
+                    <p className="text-xs text-[#041614] font-semibold">
+                      Service Interest: <span className="text-[#059669]">{item.service}</span>
                     </p>
                   )}
 
@@ -234,7 +234,7 @@ export default function AdminInquiriesPage() {
                   <select
                     value={item.status}
                     onChange={(e) => handleUpdateStatus(item.id, e.target.value)}
-                    className="text-xs font-semibold px-3 py-1.5 border border-gray-300 rounded-asymmetric bg-white focus:outline-none focus:border-[#FF5722]"
+                    className="text-xs font-semibold px-3 py-1.5 border border-gray-300 rounded-asymmetric bg-white focus:outline-none focus:border-[#059669]"
                   >
                     <option value="NEW">Set NEW</option>
                     <option value="CONTACTED">Set CONTACTED</option>

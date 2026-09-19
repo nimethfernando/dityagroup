@@ -47,9 +47,9 @@ export default async function BlogListingPage() {
   ];
 
   return (
-    <div className="pb-36 bg-[#FBFBFB]">
+    <div className="pb-16 bg-[#FBFBFB]">
       {/* Banner */}
-      <section className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
+      <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -58,13 +58,13 @@ export default async function BlogListingPage() {
             fill
             className="object-cover object-center opacity-30 mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/90 via-[#011633]/80 to-[#0d274c]/85" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
         </div>
 
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
+          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             Knowledge & Insights
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
@@ -87,7 +87,7 @@ export default async function BlogListingPage() {
             >
               <div className="p-8 space-y-4">
                 <div className="flex items-center justify-between text-xs text-gray-400">
-                  <span className="font-bold text-[#FF5722] uppercase tracking-wider">
+                  <span className="font-bold text-[#059669] uppercase tracking-wider">
                     {post.category}
                   </span>
                   <span className="flex items-center space-x-1">
@@ -96,7 +96,7 @@ export default async function BlogListingPage() {
                   </span>
                 </div>
 
-                <h3 className="text-xl font-bold text-[#011633] leading-snug hover:text-[#FF5722] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] leading-snug hover:text-[#059669] transition-colors">
                   <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                 </h3>
 
@@ -112,7 +112,7 @@ export default async function BlogListingPage() {
                 </div>
                 <Link
                   href={`/blog/${post.slug}`}
-                  className="text-xs font-bold text-[#FF5722] hover:underline inline-flex items-center space-x-1"
+                  className="text-xs font-bold text-[#059669] hover:underline inline-flex items-center space-x-1"
                 >
                   <span>Read Article</span>
                   <ArrowRight className="w-3.5 h-3.5" />

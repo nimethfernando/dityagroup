@@ -14,9 +14,9 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
   const { openModal } = useConsultation();
 
   return (
-    <div className="pb-36 bg-white">
+    <div className="pb-16 bg-white">
       {/* Page Title Banner */}
-      <section className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
+      <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -25,13 +25,13 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
             fill
             className="object-cover object-center opacity-30 mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/90 via-[#011633]/80 to-[#0d274c]/85" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
         </div>
 
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
+          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             {content.banner.badge || 'Get To Know Us'}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
@@ -56,7 +56,7 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
                 className="object-cover object-center"
               />
             </div>
-            <div className="absolute -bottom-6 left-6 right-6 bg-[#FF5722] text-white p-6 rounded-asymmetric shadow-xl">
+            <div className="absolute -bottom-6 left-6 right-6 bg-[#059669] text-white p-6 rounded-asymmetric shadow-xl">
               <span className="text-xs uppercase font-bold tracking-wider opacity-90">Our Mission</span>
               <p className="text-sm font-semibold mt-1">
                 {content.story.missionQuote ||
@@ -66,11 +66,11 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
           </div>
 
           <div className="lg:col-span-6 space-y-6 pt-6 lg:pt-0">
-            <span className="text-xs font-bold text-[#FF5722] tracking-wider uppercase flex items-center space-x-2">
-              <span className="w-6 h-[2px] bg-[#FF5722]"></span>
+            <span className="text-xs font-bold text-[#059669] tracking-wider uppercase flex items-center space-x-2">
+              <span className="w-6 h-[2px] bg-[#059669]"></span>
               <span>{content.story.subtitle || 'Our Story'}</span>
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#011633] leading-tight">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#041614] leading-tight">
               {content.story.heading ||
                 'An Integrated Ecosystem For Modern Growth & Timeless Wisdom'}
             </h2>
@@ -88,10 +88,10 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
             {/* Feature Bullets */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div className="p-4 border border-gray-200 rounded-asymmetric bg-[#F9F9F9]">
-                <div className="w-10 h-10 rounded-lg bg-[#FF5722] text-white flex items-center justify-center mb-2">
+                <div className="w-10 h-10 rounded-lg bg-[#059669] text-white flex items-center justify-center mb-2">
                   <TrendingUp className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-sm text-[#011633]">
+                <h4 className="font-bold text-sm text-[#041614]">
                   {content.story.prodCardTitle || 'Increase Productivity'}
                 </h4>
                 <p className="text-xs text-gray-500 mt-1">
@@ -101,10 +101,10 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
               </div>
 
               <div className="p-4 border border-gray-200 rounded-asymmetric bg-[#F9F9F9]">
-                <div className="w-10 h-10 rounded-lg bg-[#FF5722] text-white flex items-center justify-center mb-2">
+                <div className="w-10 h-10 rounded-lg bg-[#059669] text-white flex items-center justify-center mb-2">
                   <Clock className="w-5 h-5" />
                 </div>
-                <h4 className="font-bold text-sm text-[#011633]">
+                <h4 className="font-bold text-sm text-[#041614]">
                   {content.story.timeCardTitle || 'Save Valuable Time'}
                 </h4>
                 <p className="text-xs text-gray-500 mt-1">
@@ -129,15 +129,15 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
       {/* Founder Message Section */}
       <section className="py-16 bg-[#F9F9F9] border-t border-b border-gray-200/60">
         <div className="max-w-[800px] mx-auto px-4 text-center space-y-6">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase">
+          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase">
             {content.founder.badge || 'Founder Message'}
           </span>
-          <blockquote className="text-lg sm:text-xl font-medium text-[#011633] italic leading-relaxed">
+          <blockquote className="text-lg sm:text-xl font-medium text-[#041614] italic leading-relaxed">
             “{content.founder.quote ||
               'Our vision is simple — create systems, services, and solutions that make growth easier for individuals and businesses while continuously expanding opportunities under one ecosystem.'}”
           </blockquote>
           <div>
-            <h4 className="text-lg font-bold text-[#011633]">
+            <h4 className="text-lg font-bold text-[#041614]">
               {content.founder.name || 'Aamitt Batra'}
             </h4>
             <p className="text-xs text-gray-500">

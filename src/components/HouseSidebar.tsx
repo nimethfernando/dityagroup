@@ -24,8 +24,8 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
   return (
     <aside className="space-y-8">
       {/* House Navigation Box */}
-      <div className="bg-[#F9F9F9] rounded-asymmetric p-6 border border-gray-200/70 shadow-sm">
-        <h3 className="text-xl font-bold text-[#011633] mb-5 border-b border-gray-200 pb-3">
+      <div className="bg-[#F8FAFC] rounded-asymmetric p-6 border border-gray-200/70 shadow-sm">
+        <h3 className="text-xl font-bold text-[#041614] mb-5 border-b border-gray-200 pb-3">
           Our Houses
         </h3>
         <ul className="space-y-2">
@@ -37,8 +37,8 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
                   href={item.href}
                   className={`flex items-center justify-between px-4 py-3 rounded-asymmetric text-sm font-semibold transition-all ${
                     active
-                      ? 'bg-[#FF5722] text-white shadow-md translate-x-1'
-                      : 'bg-white text-[#011633] hover:bg-[#FFF3E0] hover:text-[#FF5722] border border-gray-100'
+                      ? 'bg-[#059669] text-white shadow-md translate-x-1'
+                      : 'bg-white text-[#041614] hover:bg-[#ECFDF5] hover:text-[#059669] border border-gray-100'
                   }`}
                 >
                   <span>{item.name}</span>
@@ -51,8 +51,8 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
       </div>
 
       {/* 24/7 Callout Card */}
-      <div className="bg-[#011633] text-white rounded-asymmetric p-8 text-center space-y-5 shadow-xl relative overflow-hidden">
-        <div className="w-16 h-16 rounded-full bg-[#FF5722] text-white flex items-center justify-center mx-auto shadow-lg">
+      <div className="bg-[#041614] text-white rounded-asymmetric p-8 text-center space-y-5 shadow-xl relative overflow-hidden">
+        <div className="w-16 h-16 rounded-full bg-[#059669] text-white flex items-center justify-center mx-auto shadow-lg">
           <Phone className="w-7 h-7" />
         </div>
         <div>
@@ -63,13 +63,13 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
         </div>
         <a
           href="tel:+919351090301"
-          className="block text-xl font-extrabold text-[#FF5722] hover:text-white transition-colors"
+          className="block text-xl font-extrabold text-[#10B981] hover:text-white transition-colors"
         >
           +91-93510 90301
         </a>
         <button
           onClick={onOpenConsultation}
-          className="w-full bg-[#FF5722] hover:bg-[#e64a19] text-white py-3 rounded-asymmetric text-sm font-semibold transition-colors cursor-pointer"
+          className="w-full bg-[#059669] hover:bg-[#047857] text-white py-3 rounded-asymmetric text-sm font-semibold transition-colors cursor-pointer"
         >
           Get Started
         </button>

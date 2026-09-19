@@ -53,9 +53,9 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
   };
 
   return (
-    <div className="pb-36 bg-white">
+    <div className="pb-16 bg-white">
       {/* Banner */}
-      <section className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
+      <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -64,13 +64,13 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
             fill
             className="object-cover object-center opacity-30 mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/90 via-[#011633]/80 to-[#0d274c]/85" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
         </div>
 
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
+          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             {content.banner.badge || 'We Are Available 24/7'}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
@@ -88,10 +88,10 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Left Column: Contact Cards */}
           <div className="lg:col-span-5 space-y-6">
-            <span className="text-xs font-bold text-[#FF5722] uppercase tracking-wider block">
+            <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
               {content.info.subtitle || 'Reach Out Directly'}
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#011633]">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#041614]">
               {content.info.heading || 'Let’s Start a Conversation Today'}
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed">
@@ -101,14 +101,14 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
 
             <div className="space-y-4 pt-4">
               <div className="flex items-start space-x-4 p-5 bg-[#F9F9F9] rounded-asymmetric border border-gray-200">
-                <div className="w-12 h-12 rounded-full bg-[#FF5722] text-white flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#059669] text-white flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#011633]">Direct Call</h4>
+                  <h4 className="text-sm font-bold text-[#041614]">Direct Call</h4>
                   <a
                     href={`tel:${content.info.phone || '+919351090301'}`}
-                    className="text-sm font-semibold text-[#FF5722] hover:underline"
+                    className="text-sm font-semibold text-[#059669] hover:underline"
                   >
                     {content.info.phone || '+91-93510 90301'}
                   </a>
@@ -119,14 +119,14 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
               </div>
 
               <div className="flex items-start space-x-4 p-5 bg-[#F9F9F9] rounded-asymmetric border border-gray-200">
-                <div className="w-12 h-12 rounded-full bg-[#FF5722] text-white flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#059669] text-white flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#011633]">Email Support</h4>
+                  <h4 className="text-sm font-bold text-[#041614]">Email Support</h4>
                   <a
                     href={`mailto:${content.info.email || 'groupditya@gmail.com'}`}
-                    className="text-sm font-semibold text-[#FF5722] hover:underline"
+                    className="text-sm font-semibold text-[#059669] hover:underline"
                   >
                     {content.info.email || 'groupditya@gmail.com'}
                   </a>
@@ -137,11 +137,11 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
               </div>
 
               <div className="flex items-start space-x-4 p-5 bg-[#F9F9F9] rounded-asymmetric border border-gray-200">
-                <div className="w-12 h-12 rounded-full bg-[#FF5722] text-white flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-full bg-[#059669] text-white flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#011633]">Corporate Headquarters</h4>
+                  <h4 className="text-sm font-bold text-[#041614]">Corporate Headquarters</h4>
                   <p className="text-xs text-gray-700 font-medium leading-snug mt-0.5">
                     {content.info.address ||
                       '3rd floor, 261, Sewa Sadan Marg, Frontier Colony, Adarsh Nagar, Jaipur, Rajasthan 302004'}
@@ -153,7 +153,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
 
           {/* Right Column: Interactive Form */}
           <div className="lg:col-span-7 bg-[#F9F9F9] p-8 sm:p-10 rounded-asymmetric border border-gray-200/80 shadow-sm">
-            <h3 className="text-2xl font-bold text-[#011633] mb-2">Send Us a Message</h3>
+            <h3 className="text-2xl font-bold text-[#041614] mb-2">Send Us a Message</h3>
             <p className="text-xs text-gray-500 mb-6">
               Fill out the form below and an assigned specialist will get in touch with you.
             </p>
@@ -163,7 +163,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                 <div className="w-14 h-14 rounded-full bg-green-100 text-green-600 mx-auto flex items-center justify-center">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h4 className="text-xl font-bold text-[#011633]">Message Dispatched!</h4>
+                <h4 className="text-xl font-bold text-[#041614]">Message Dispatched!</h4>
                 <p className="text-sm text-gray-600 max-w-md mx-auto">
                   Thank you! Your message has been safely received. Our executive desk will reach
                   out to your contact information shortly.
@@ -186,7 +186,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#011633] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
                       Full Name *
                     </label>
                     <input
@@ -195,11 +195,11 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       placeholder="e.g. Ramesh Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#011633] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
                       Phone Number *
                     </label>
                     <input
@@ -208,14 +208,14 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       placeholder="e.g. +91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#011633] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
                       Email Address *
                     </label>
                     <input
@@ -224,17 +224,17 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       placeholder="e.g. name@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#011633] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
                       Service of Interest
                     </label>
                     <select
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                     >
                       <option value="General Inquiry">General Inquiry</option>
                       <option value="Global Business Network">Global Business Network (GBN)</option>
@@ -248,7 +248,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                 </div>
 
                 <div>
-                  <label className="block text-[#011633] font-bold uppercase tracking-wider mb-1.5">
+                  <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
                     How Can We Assist You? *
                   </label>
                   <textarea
@@ -257,7 +257,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                     placeholder="Tell us about your goals, current challenges, or specific needs..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-4 py-3 bg-white border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                   />
                 </div>
 

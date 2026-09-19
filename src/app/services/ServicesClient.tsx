@@ -88,9 +88,9 @@ export default function ServicesClient({ content, customServices }: ServicesClie
   const allServices = [...defaultServices, ...customServices];
 
   return (
-    <div className="pb-36 bg-white">
+    <div className="pb-16 bg-white">
       {/* Banner */}
-      <section className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
+      <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
@@ -99,13 +99,13 @@ export default function ServicesClient({ content, customServices }: ServicesClie
             fill
             className="object-cover object-center opacity-30 mix-blend-overlay"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/90 via-[#011633]/80 to-[#0d274c]/85" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
         </div>
 
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none z-0" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
+          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             {content.banner?.badge || 'Integrated Solutions'}
           </span>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
@@ -122,7 +122,7 @@ export default function ServicesClient({ content, customServices }: ServicesClie
       <section className="py-20 max-w-[1140px] mx-auto px-4">
         {content.intro && (
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#011633]">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#041614]">
               {content.intro.heading}
             </h2>
             <p className="text-sm text-gray-600 leading-relaxed">
@@ -140,13 +140,13 @@ export default function ServicesClient({ content, customServices }: ServicesClie
                 className="bg-[#F9F9F9] rounded-asymmetric p-8 border border-gray-200/80 shadow-sm card-hover flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#FF5722] text-white flex items-center justify-center mb-6 shadow-md">
+                  <div className="w-14 h-14 rounded-2xl bg-[#059669] text-white flex items-center justify-center mb-6 shadow-md">
                     <IconComp className="w-7 h-7" />
                   </div>
-                  <span className="text-xs font-bold text-[#FF5722] uppercase tracking-wider block">
+                  <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
                     {item.subtitle}
                   </span>
-                  <h3 className="text-xl font-bold text-[#011633] mt-1 mb-3">
+                  <h3 className="text-xl font-bold text-[#041614] mt-1 mb-3">
                     {item.title}
                   </h3>
                   <p className="text-xs sm:text-sm text-gray-600 leading-relaxed mb-6 line-clamp-3">
@@ -156,7 +156,7 @@ export default function ServicesClient({ content, customServices }: ServicesClie
                   <ul className="space-y-2 mb-8">
                     {item.highlights.slice(0, 3).map((h, hIdx) => (
                       <li key={hIdx} className="flex items-center space-x-2 text-xs text-gray-700">
-                        <CheckCircle className="w-3.5 h-3.5 text-[#FF5722] shrink-0" />
+                        <CheckCircle className="w-3.5 h-3.5 text-[#059669] shrink-0" />
                         <span className="line-clamp-1">{h}</span>
                       </li>
                     ))}
@@ -166,14 +166,14 @@ export default function ServicesClient({ content, customServices }: ServicesClie
                 <div className="pt-4 border-t border-gray-200/60 flex items-center justify-between">
                   <Link
                     href={item.href}
-                    className="text-xs font-bold text-[#011633] hover:text-[#FF5722] inline-flex items-center space-x-1 uppercase tracking-wider"
+                    className="text-xs font-bold text-[#041614] hover:text-[#059669] inline-flex items-center space-x-1 uppercase tracking-wider"
                   >
                     <span>Learn More</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </Link>
                   <button
                     onClick={() => openModal(item.title)}
-                    className="text-xs font-semibold bg-[#FF5722] hover:bg-[#e64a19] text-white px-3.5 py-1.5 rounded-asymmetric transition-colors cursor-pointer"
+                    className="text-xs font-semibold bg-[#059669] hover:bg-[#e64a19] text-white px-3.5 py-1.5 rounded-asymmetric transition-colors cursor-pointer"
                   >
                     Consult
                   </button>

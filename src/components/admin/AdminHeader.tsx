@@ -32,7 +32,7 @@ export default function AdminHeader() {
 
   return (
     <>
-      <header className="bg-[#011633] text-white py-3.5 px-6 shadow-md border-b border-white/10 sticky top-0 z-30">
+      <header className="bg-[#041614] text-white py-3.5 px-6 shadow-md border-b border-white/10 sticky top-0 z-30">
         <div className="max-w-[1240px] mx-auto flex flex-wrap items-center justify-between gap-4">
           {/* Brand & Badge */}
           <div className="flex items-center space-x-4">
@@ -44,7 +44,7 @@ export default function AdminHeader() {
                 className="object-contain object-left"
               />
             </div>
-            <span className="text-[10px] bg-[#FF5722] text-white px-2 py-0.5 rounded font-extrabold uppercase tracking-wider">
+            <span className="text-[10px] bg-[#059669] text-white px-2 py-0.5 rounded font-extrabold uppercase tracking-wider">
               Admin Portal
             </span>
           </div>
@@ -60,7 +60,7 @@ export default function AdminHeader() {
                   href={link.href}
                   className={`flex items-center space-x-1.5 px-3 py-1.5 rounded-asymmetric text-xs font-bold transition-colors ${
                     active
-                      ? 'bg-[#FF5722] text-white shadow-sm'
+                      ? 'bg-[#059669] text-white shadow-sm'
                       : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`}
                 >
@@ -78,7 +78,7 @@ export default function AdminHeader() {
               className="p-2 rounded-asymmetric bg-white/10 hover:bg-white/20 text-white transition-colors cursor-pointer text-xs flex items-center space-x-1.5 font-medium"
               title="Change Password with OTP or Current Password"
             >
-              <KeyRound className="w-3.5 h-3.5 text-[#FF5722]" />
+              <KeyRound className="w-3.5 h-3.5 text-[#059669]" />
               <span className="hidden md:inline">Change Password</span>
             </button>
 
@@ -95,7 +95,7 @@ export default function AdminHeader() {
 
             <button
               onClick={handleLogout}
-              className="p-2 rounded-asymmetric bg-[#FF5722] hover:bg-[#e64a19] text-white transition-colors cursor-pointer text-xs flex items-center space-x-1.5 font-bold"
+              className="p-2 rounded-asymmetric bg-[#059669] hover:bg-[#047857] text-white transition-colors cursor-pointer text-xs flex items-center space-x-1.5 font-bold"
               title="Sign Out"
             >
               <LogOut className="w-3.5 h-3.5" />

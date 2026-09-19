@@ -150,11 +150,11 @@ export default function AdminBlogsPage() {
       <main className="max-w-[1140px] mx-auto px-4 sm:px-6 py-10">
         <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
           <div>
-            <div className="inline-flex items-center space-x-2 text-[#FF5722] text-xs font-bold uppercase tracking-wider mb-1">
+            <div className="inline-flex items-center space-x-2 text-[#059669] text-xs font-bold uppercase tracking-wider mb-1">
               <BookOpen className="w-4 h-4" />
               <span>Publications & Insights</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#011633]">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-[#041614]">
               Articles & Blog Manager
             </h1>
             <p className="text-xs text-gray-500 mt-1">
@@ -192,7 +192,7 @@ export default function AdminBlogsPage() {
         <div className="bg-white rounded-asymmetric border border-gray-200 shadow-sm overflow-hidden">
           {loading ? (
             <div className="py-20 text-center">
-              <Loader2 className="w-8 h-8 animate-spin text-[#FF5722] mx-auto mb-3" />
+              <Loader2 className="w-8 h-8 animate-spin text-[#059669] mx-auto mb-3" />
               <p className="text-xs text-gray-500 font-semibold">Loading blog articles...</p>
             </div>
           ) : blogs.length === 0 ? (
@@ -215,7 +215,7 @@ export default function AdminBlogsPage() {
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="bg-[#011633] text-white text-[11px] uppercase tracking-wider font-bold">
+                  <tr className="bg-[#041614] text-white text-[11px] uppercase tracking-wider font-bold">
                     <th className="py-3.5 px-4">Article Title & Category</th>
                     <th className="py-3.5 px-4">Slug / URL</th>
                     <th className="py-3.5 px-4">Author</th>
@@ -226,9 +226,9 @@ export default function AdminBlogsPage() {
                 <tbody className="divide-y divide-gray-100 text-xs text-gray-700">
                   {blogs.map((b) => (
                     <tr key={b.id} className="hover:bg-gray-50/70 transition-colors">
-                      <td className="py-4 px-4 font-semibold text-[#011633]">
+                      <td className="py-4 px-4 font-semibold text-[#041614]">
                         <div className="font-bold text-sm">{b.title}</div>
-                        <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider text-[#FF5722] bg-orange-50 px-2 py-0.5 rounded border border-orange-200">
+                        <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider text-[#059669] bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                           {b.category}
                         </span>
                       </td>
@@ -249,7 +249,7 @@ export default function AdminBlogsPage() {
                         <Link
                           href={`/blog/${b.slug}`}
                           target="_blank"
-                          className="inline-flex items-center space-x-1 px-3 py-1.5 bg-gray-100 hover:bg-[#011633] text-gray-700 hover:text-white rounded text-xs font-semibold transition-colors cursor-pointer"
+                          className="inline-flex items-center space-x-1 px-3 py-1.5 bg-gray-100 hover:bg-[#041614] text-gray-700 hover:text-white rounded text-xs font-semibold transition-colors cursor-pointer"
                         >
                           <Eye className="w-3.5 h-3.5" />
                           <span>View</span>
@@ -288,11 +288,11 @@ export default function AdminBlogsPage() {
             </button>
 
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-orange-100 flex items-center justify-center text-[#FF5722]">
+              <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center text-[#059669]">
                 <BookOpen className="w-5 h-5" />
               </div>
               <div>
-                <h2 className="text-lg font-bold text-[#011633]">Publish New Blog Article</h2>
+                <h2 className="text-lg font-bold text-[#041614]">Publish New Blog Article</h2>
                 <p className="text-xs text-gray-500">Live instantly across the website</p>
               </div>
             </div>
@@ -306,7 +306,7 @@ export default function AdminBlogsPage() {
                   placeholder="e.g. Unlocking Prosperity: The Sacred Geometry of Ancient Astronomy"
                   value={title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                 />
               </div>
 
@@ -318,7 +318,7 @@ export default function AdminBlogsPage() {
                     required
                     value={slug}
                     onChange={(e) => setSlug(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs font-mono focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs font-mono focus:outline-none focus:border-[#059669]"
                   />
                 </div>
                 <div>
@@ -326,7 +326,7 @@ export default function AdminBlogsPage() {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                   >
                     <option value="Ancient Wisdom & Science">Ancient Wisdom & Science</option>
                     <option value="Ditya Astroverse">Ditya Astroverse</option>
@@ -345,7 +345,7 @@ export default function AdminBlogsPage() {
                     value={readTime}
                     onChange={(e) => setReadTime(e.target.value)}
                     placeholder="e.g. 5 min read"
-                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                   />
                 </div>
                 <div>
@@ -354,7 +354,7 @@ export default function AdminBlogsPage() {
                     type="text"
                     value={authorName}
                     onChange={(e) => setAuthorName(e.target.value)}
-                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                   />
                 </div>
               </div>
@@ -366,7 +366,7 @@ export default function AdminBlogsPage() {
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   placeholder="/images/hero-banner.jpeg or https://..."
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                 />
               </div>
 
@@ -377,7 +377,7 @@ export default function AdminBlogsPage() {
                   value={excerpt}
                   onChange={(e) => setExcerpt(e.target.value)}
                   placeholder="Brief summary appearing on blog cards and search results..."
-                  className="w-full px-3.5 py-2 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722]"
+                  className="w-full px-3.5 py-2 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
                 />
               </div>
 
@@ -389,7 +389,7 @@ export default function AdminBlogsPage() {
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Full article content. Paragraphs and formatting supported..."
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#FF5722] font-sans"
+                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669] font-sans"
                 />
               </div>
 

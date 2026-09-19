@@ -151,7 +151,7 @@ export default function PageEditor({ params }: PageEditorProps) {
       <div className="min-h-screen bg-[#F8F9FA]">
         <AdminHeader />
         <div className="text-center py-24">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FF5722] mx-auto mb-3" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#059669] mx-auto mb-3" />
           <p className="text-sm text-gray-500 font-semibold">Loading page editor...</p>
         </div>
       </div>
@@ -191,7 +191,7 @@ export default function PageEditor({ params }: PageEditorProps) {
             </Link>
             <div>
               <div className="flex items-center space-x-2">
-                <h1 className="text-2xl font-extrabold text-[#011633]">
+                <h1 className="text-2xl font-extrabold text-[#041614]">
                   Edit {pageMeta?.title}
                 </h1>
                 {pageMeta?.isCustomPage && (
@@ -204,7 +204,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 href={pageMeta?.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-gray-400 hover:text-[#FF5722] inline-flex items-center space-x-1 mt-0.5"
+                className="text-xs text-gray-400 hover:text-[#059669] inline-flex items-center space-x-1 mt-0.5"
               >
                 <span>Live URL: {pageMeta?.path}</span>
                 <ExternalLink className="w-3 h-3" />
@@ -274,7 +274,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* Custom Sub-Page Meta Editor */}
           {pageMeta?.isCustomPage && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 Sub-Page Settings & Category
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -287,7 +287,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                     required
                     value={pageMeta.title}
                     onChange={(e) => setPageMeta({ ...pageMeta, title: e.target.value })}
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   />
                 </div>
                 <div>
@@ -298,7 +298,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                     type="text"
                     value={pageMeta.category || 'Services Sub-Page'}
                     onChange={(e) => setPageMeta({ ...pageMeta, category: e.target.value })}
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   />
                 </div>
               </div>
@@ -312,7 +312,7 @@ export default function PageEditor({ params }: PageEditorProps) {
             <>
               {/* Hero Section */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-                <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   1. Hero Section Content
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -329,7 +329,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, tagline: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
@@ -345,7 +345,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, superHeading: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
@@ -364,7 +364,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, title: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                   <div>
@@ -380,7 +380,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                           hero: { ...content.hero, subTitle: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
                 </div>
@@ -398,14 +398,14 @@ export default function PageEditor({ params }: PageEditorProps) {
                         hero: { ...content.hero, description: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#FF5722]"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   />
                 </div>
               </div>
 
               {/* Stats Bar */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-                <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   2. Performance Stats Counter Bar
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
@@ -519,7 +519,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {slug === 'about' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 About Us Content
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -581,7 +581,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {slug === 'contact' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 Contact Information & Office Details
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -643,7 +643,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {slug === 'services' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 Services Directory Header & Intro
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -704,7 +704,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {(slug === 'privacy-policy' || slug === 'terms-and-conditions') && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 Legal Document Content
               </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -744,7 +744,7 @@ export default function PageEditor({ params }: PageEditorProps) {
 
               {[1, 2, 3, 4, 5].map((num) => (
                 <div key={num} className="p-4 bg-[#F9F9F9] rounded-lg border border-gray-200 space-y-2">
-                  <label className="block text-xs font-bold text-[#011633] uppercase">
+                  <label className="block text-xs font-bold text-[#041614] uppercase">
                     Section {num} Title
                   </label>
                   <input
@@ -788,7 +788,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {isHouseOrCustom && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
-              <h3 className="text-lg font-bold text-[#011633] border-b border-gray-100 pb-2">
+              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 {pageMeta?.isCustomPage ? 'Sub-Page Content & Structure' : 'House Overview & Offerings'}
               </h3>
 
@@ -901,7 +901,7 @@ export default function PageEditor({ params }: PageEditorProps) {
               {/* Dual Feature Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-[#F9F9F9] rounded-asymmetric border border-gray-200">
                 <div>
-                  <h4 className="text-xs font-bold text-[#FF5722] uppercase mb-2">Feature Card 1</h4>
+                  <h4 className="text-xs font-bold text-[#059669] uppercase mb-2">Feature Card 1</h4>
                   <input
                     type="text"
                     placeholder="Card 1 Title"
@@ -929,7 +929,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 </div>
 
                 <div>
-                  <h4 className="text-xs font-bold text-[#FF5722] uppercase mb-2">Feature Card 2</h4>
+                  <h4 className="text-xs font-bold text-[#059669] uppercase mb-2">Feature Card 2</h4>
                   <input
                     type="text"
                     placeholder="Card 2 Title"
@@ -966,7 +966,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                   <button
                     type="button"
                     onClick={addChecklistItem}
-                    className="text-xs font-bold text-[#FF5722] hover:underline flex items-center space-x-1 cursor-pointer"
+                    className="text-xs font-bold text-[#059669] hover:underline flex items-center space-x-1 cursor-pointer"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>Add Item</span>
@@ -1002,8 +1002,8 @@ export default function PageEditor({ params }: PageEditorProps) {
               </div>
 
               {/* CTA Box */}
-              <div className="p-4 bg-[#011633] text-white rounded-asymmetric space-y-3">
-                <h4 className="text-xs font-bold text-[#FF5722] uppercase">Consultation CTA Banner</h4>
+              <div className="p-4 bg-[#041614] text-white rounded-asymmetric space-y-3">
+                <h4 className="text-xs font-bold text-[#059669] uppercase">Consultation CTA Banner</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <div>
                     <label className="block text-[11px] text-gray-300 mb-1">Heading</label>
