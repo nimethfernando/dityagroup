@@ -341,8 +341,19 @@ export default function HomeClient({ content }: HomeClientProps) {
       {/* ============================================================ */}
       {/* 4. OUR BUSINESS 6-HOUSE BENTO GRID */}
       {/* ============================================================ */}
-      <section id="services-section" className="py-24 bg-[#F8F9FB]">
-        <div className="max-w-[1140px] mx-auto px-4">
+      <section id="services-section" className="py-24 bg-[#F8F9FB] relative overflow-hidden">
+        {/* Subtle Sacred Geometry / Modern Luxury Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/images/services-bg.jpg"
+            alt="Services background pattern"
+            fill
+            className="object-cover object-center opacity-30 mix-blend-multiply"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB] via-transparent to-[#F8F9FB]" />
+        </div>
+
+        <div className="max-w-[1140px] mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
             <div>
               <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#FF5722] tracking-wider uppercase bg-orange-50 px-3 py-1 rounded-full border border-orange-100">
@@ -613,8 +624,19 @@ export default function HomeClient({ content }: HomeClientProps) {
       {/* ============================================================ */}
       {/* 6. HOW IT WORKS SECTION */}
       {/* ============================================================ */}
-      <section className="py-24 bg-[#F8F9FB] border-t border-gray-100">
-        <div className="max-w-[1140px] mx-auto px-4 text-center">
+      <section className="py-24 bg-[#F8F9FB] border-t border-gray-100 relative overflow-hidden">
+        {/* Roadmap Subtle Network Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/images/roadmap-bg.jpg"
+            alt="Roadmap background pattern"
+            fill
+            className="object-cover object-center opacity-35 mix-blend-multiply"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB]/90 via-transparent to-[#F8F9FB]/90" />
+        </div>
+
+        <div className="max-w-[1140px] mx-auto px-4 text-center relative z-10">
           <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#FF5722] tracking-wider uppercase bg-orange-50 px-3.5 py-1.5 rounded-full border border-orange-100 mb-3">
             <span className="w-2 h-2 rounded-full bg-[#FF5722]"></span>
             <span>{content.howItWorks.subtitle || 'How It Works'}</span>
@@ -688,8 +710,19 @@ export default function HomeClient({ content }: HomeClientProps) {
       <section className="py-20 bg-white">
         <div className="max-w-[1140px] mx-auto px-4">
           <div className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
+            {/* Background Sacred Geometry Graphic */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <Image
+                src="/images/consultation-banner-bg.jpg"
+                alt="Consultation Background Pattern"
+                fill
+                className="object-cover object-center opacity-40 mix-blend-luminosity"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/85 via-[#011633]/75 to-[#0d274c]/85" />
+            </div>
+
             {/* Ambient Accent Light */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/15 rounded-full blur-3xl pointer-events-none z-0" />
 
             <div className="max-w-2xl space-y-3 relative z-10">
               <span className="text-xs font-bold tracking-widest uppercase text-[#FF5722] inline-flex items-center space-x-2">

@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   Share2,
@@ -89,15 +90,28 @@ export default function ServicesClient({ content, customServices }: ServicesClie
   return (
     <div className="pb-36 bg-white">
       {/* Banner */}
-      <section className="bg-[#011633] text-white py-16 text-center relative overflow-hidden">
+      <section className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
+        {/* Sacred Geometry Silk Banner Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/images/inner-banner-bg.jpg"
+            alt="Services Banner Background"
+            fill
+            className="object-cover object-center opacity-30 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/90 via-[#011633]/80 to-[#0d274c]/85" />
+        </div>
+
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none z-0" />
+
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase">
+          <span className="text-xs font-bold text-[#FF5722] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             {content.banner?.badge || 'Integrated Solutions'}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-2">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
             {content.banner?.title || 'Our Services & Houses'}
           </h1>
-          <p className="text-sm text-gray-300 max-w-xl mx-auto mt-3">
+          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto mt-3 font-normal leading-relaxed">
             {content.banner?.subtitle ||
               'Explore our specialized Houses and bespoke service divisions designed to elevate your personal clarity, educational excellence, and business growth.'}
           </p>

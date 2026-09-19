@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
@@ -64,8 +65,21 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   return (
     <div className="pb-36 bg-white">
       {/* Header */}
-      <section className="bg-[#011633] text-white py-16">
-        <div className="max-w-[860px] mx-auto px-4">
+      <section className="bg-gradient-to-r from-[#001025] via-[#011633] to-[#0d274c] text-white py-16 relative overflow-hidden border-b border-white/5">
+        {/* Sacred Geometry Silk Banner Background */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <Image
+            src="/images/inner-banner-bg.jpg"
+            alt="Blog Post Background"
+            fill
+            className="object-cover object-center opacity-30 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/90 via-[#011633]/80 to-[#0d274c]/85" />
+        </div>
+
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#FF5722]/10 rounded-full blur-3xl pointer-events-none z-0" />
+
+        <div className="max-w-[860px] mx-auto px-4 relative z-10">
           <Link
             href="/blog"
             className="inline-flex items-center space-x-2 text-xs text-[#FF5722] font-semibold hover:underline mb-6"

@@ -66,6 +66,17 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-[#000f24] text-white pt-20 pb-10 overflow-hidden border-t border-white/5">
+      {/* Background Graphic */}
+      <div className="absolute inset-0 z-0 pointer-events-none">
+        <Image
+          src="/images/inner-banner-bg.jpg"
+          alt="Footer background pattern"
+          fill
+          className="object-cover object-bottom opacity-15 mix-blend-screen"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#000f24] via-[#000f24]/90 to-[#000f24]/80" />
+      </div>
+
       {/* Top 3 Floating Contact Cards */}
       <div className="max-w-[1140px] mx-auto px-4 -mt-32 mb-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
