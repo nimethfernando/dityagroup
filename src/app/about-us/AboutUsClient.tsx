@@ -12,7 +12,6 @@ import {
   ArrowRight,
   Quote,
   Star,
-  Sparkles,
   Calendar,
   Layers,
 } from 'lucide-react';
@@ -135,8 +134,7 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
         <div className="absolute -bottom-24 left-1/4 w-96 h-96 bg-[#D4AF37]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15 mb-4 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
+          <div className="inline-flex items-center bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/15 mb-4 shadow-sm">
             <span className="text-xs font-bold text-[#10B981] tracking-widest uppercase">
               {banner.badge || 'About Us'}
             </span>
