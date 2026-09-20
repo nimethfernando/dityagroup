@@ -624,77 +624,666 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* 2. ABOUT PAGE EDITOR */}
           {/* ============================================================ */}
           {slug === 'about' && (
-            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                About Us Content
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="space-y-8">
+              {/* 1. Banner */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  1. Page Banner
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Badge Pill
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 2. Welcome & Core Values */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  2. Welcome & Core Values
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Core Values Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Welcome Badge
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.welcomeBadge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, welcomeBadge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Main Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Paragraph 1
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.para1 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, para1: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Paragraph 2
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.para2 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, para2: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Paragraph 3
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.para3 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, para3: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                {/* 4 Core Value Bullets */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {[1, 2, 3, 4].map((num) => {
+                    const key = `bullet${num}` as keyof typeof content.coreValues;
+                    return (
+                      <div key={num}>
+                        <label className="block text-[11px] font-bold text-gray-600 uppercase mb-1">
+                          Core Value Bullet {num}
+                        </label>
+                        <input
+                          type="text"
+                          value={content.coreValues?.[key] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              coreValues: {
+                                ...content.coreValues,
+                                [key]: e.target.value,
+                              },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Feature Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 1 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.prodCardTitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, prodCardTitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 1 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.prodCardDesc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, prodCardDesc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 2 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.timeCardTitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, timeCardTitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 2 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.timeCardDesc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, timeCardDesc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Founder Message */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  3. Founder Message Section
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Badge Text (e.g. CEO & Founder BMC Genie)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Tag Text (e.g. Founder Message)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.tag || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, tag: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Title
+                    Founder Quote
                   </label>
-                  <input
-                    type="text"
-                    value={content.banner?.title || ''}
+                  <textarea
+                    rows={3}
+                    value={content.founder?.quote || ''}
                     onChange={(e) =>
                       setContent({
                         ...content,
-                        banner: { ...content.banner, title: e.target.value },
+                        founder: { ...content.founder, quote: e.target.value },
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                   />
                 </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Founder Name
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.name || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, name: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Founder Role
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.role || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, role: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Stats Dock */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  4. Key Statistics Dock
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map((n) => {
+                    const numKey = `stat${n}Number` as keyof typeof content.stats;
+                    const labelKey = `stat${n}Label` as keyof typeof content.stats;
+                    return (
+                      <div key={n} className="p-3 bg-[#F9F9F9] rounded-lg border border-gray-200">
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Stat {n} Number
+                        </label>
+                        <input
+                          type="text"
+                          value={content.stats?.[numKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              stats: { ...content.stats, [numKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded mb-2 bg-white"
+                        />
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Stat {n} Label
+                        </label>
+                        <input
+                          type="text"
+                          value={content.stats?.[labelKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              stats: { ...content.stats, [labelKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 5. How It Works */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  5. How It Works Section & Testimonial
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.howItWorks?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.howItWorks?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Subtitle
+                    Description
                   </label>
-                  <input
-                    type="text"
-                    value={content.banner?.subtitle || ''}
+                  <textarea
+                    rows={2}
+                    value={content.howItWorks?.description || ''}
                     onChange={(e) =>
                       setContent({
                         ...content,
-                        banner: { ...content.banner, subtitle: e.target.value },
+                        howItWorks: { ...content.howItWorks, description: e.target.value },
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                   />
                 </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                  {[1, 2, 3].map((s) => {
+                    const descKey = `step${s}Desc` as keyof typeof content.howItWorks;
+                    return (
+                      <div key={s} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Step 0{s} Description
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={content.howItWorks?.[descKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              howItWorks: { ...content.howItWorks, [descKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="pt-2 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Testimonial Quote
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.howItWorks?.testimonialQuote || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, testimonialQuote: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Testimonial Author
+                    </label>
+                    <input
+                      type="text"
+                      value={content.howItWorks?.testimonialAuthor || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, testimonialAuthor: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Story Paragraph 1
-                </label>
-                <textarea
-                  rows={3}
-                  value={content.story?.para1 || ''}
-                  onChange={(e) =>
-                    setContent({
-                      ...content,
-                      story: { ...content.story, para1: e.target.value },
-                    })
-                  }
-                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                ></textarea>
-              </div>
+              {/* 6. Why Choose Us */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  6. Why Choose Us & Metrics
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
 
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Founder Message Quote
-                </label>
-                <textarea
-                  rows={3}
-                  value={content.founder?.quote || ''}
-                  onChange={(e) =>
-                    setContent({
-                      ...content,
-                      founder: { ...content.founder, quote: e.target.value },
-                    })
-                  }
-                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                ></textarea>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.whyChooseUs?.description || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        whyChooseUs: { ...content.whyChooseUs, description: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Percentage (e.g. 35%)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric1Percent || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric1Percent: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric1Title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric1Title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.whyChooseUs?.metric1Desc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric1Desc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 Percentage (e.g. 100%)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric2Percent || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric2Percent: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric2Title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric2Title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.whyChooseUs?.metric2Desc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric2Desc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           )}

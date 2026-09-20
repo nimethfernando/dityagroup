@@ -72,7 +72,23 @@ export interface AboutPageContent {
     title: string;
     subtitle: string;
   };
-  story: {
+  coreValues?: {
+    subtitle: string;
+    heading: string;
+    welcomeBadge: string;
+    para1: string;
+    para2: string;
+    para3: string;
+    bullet1: string;
+    bullet2: string;
+    bullet3: string;
+    bullet4: string;
+    prodCardTitle: string;
+    prodCardDesc: string;
+    timeCardTitle: string;
+    timeCardDesc: string;
+  };
+  story?: {
     subtitle: string;
     heading: string;
     para1: string;
@@ -85,9 +101,47 @@ export interface AboutPageContent {
   };
   founder: {
     badge: string;
+    tag?: string;
     quote: string;
     name: string;
     role: string;
+  };
+  stats?: {
+    stat1Number: string;
+    stat1Label: string;
+    stat2Number: string;
+    stat2Label: string;
+    stat3Number: string;
+    stat3Label: string;
+    stat4Number: string;
+    stat4Label: string;
+  };
+  howItWorks?: {
+    subtitle: string;
+    heading: string;
+    description: string;
+    step1Num?: string;
+    step1Desc: string;
+    step2Num?: string;
+    step2Desc: string;
+    step3Num?: string;
+    step3Desc: string;
+    testimonialQuote: string;
+    testimonialAuthor: string;
+  };
+  whyChooseUs?: {
+    subtitle: string;
+    heading: string;
+    description: string;
+    metric1Percent: string;
+    metric1Title: string;
+    metric1Desc: string;
+    metric2Percent: string;
+    metric2Title: string;
+    metric2Desc: string;
+  };
+  cta?: {
+    btnText: string;
   };
 }
 
@@ -342,13 +396,34 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
   },
   about: {
     banner: {
-      badge: 'Get To Know Us',
+      badge: 'About Us',
       title: 'About Us',
-      subtitle: 'Building Solutions That Simplify Growth, Learning, and Financial Success',
+      subtitle: 'Building Solutions That Simplify Growth',
+    },
+    coreValues: {
+      subtitle: 'Our Core Value',
+      heading: 'Our Business Is Making Your Life Easier',
+      welcomeBadge: 'Welcome To DITYA GROUP',
+      para1:
+        'At DITYA Group, we believe growth becomes easier when people have access to the right support systems, structured solutions, and clear guidance. Our mission is to create an ecosystem where individuals, students, professionals, businesses, and organizations can access multiple solutions under one platform.',
+      para2:
+        'DITYA Group was built with the vision of creating practical solutions that support learning, technology, business growth, digital transformation, financial understanding, and personal development. Rather than focusing on a single industry, we aim to create a connected ecosystem where different services work together to support long-term growth.',
+      para3:
+        'Whether you are seeking educational support, digital services, financial learning, business solutions, technology support, or structured guidance — DITYA Group is designed to simplify the journey.',
+      bullet1: 'Simplicity Creates Growth',
+      bullet2: 'Growth Through Better Systems',
+      bullet3: 'Customer-Focused Approach',
+      bullet4: 'Continuous Learning & Improvement',
+      prodCardTitle: 'Increase Productivity',
+      prodCardDesc:
+        'Partnering with Ditya Group leads to smarter decisions, higher productivity, and faster business success',
+      timeCardTitle: 'Save Time',
+      timeCardDesc:
+        'With Ditya Group, you can streamline tasks and focus on growth while we handle the support systems',
     },
     story: {
-      subtitle: 'Our Story',
-      heading: 'An Integrated Ecosystem For Modern Growth & Timeless Wisdom',
+      subtitle: 'Our Core Value',
+      heading: 'Our Business Is Making Your Life Easier',
       para1:
         'At DITYA Group, we believe growth becomes easier when people have access to the right support systems, structured solutions, and clear guidance. Our mission is to create an ecosystem where individuals, students, professionals, businesses, and organizations can access multiple solutions under one platform.',
       para2:
@@ -356,16 +431,61 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       missionQuote:
         'Creating an integrated ecosystem where individuals and enterprises grow with clarity and confidence.',
       prodCardTitle: 'Increase Productivity',
-      prodCardDesc: 'Streamlined execution and smarter decisions across every domain.',
-      timeCardTitle: 'Save Valuable Time',
-      timeCardDesc: 'Let dedicated systems handle complexity while you expand horizons.',
+      prodCardDesc:
+        'Partnering with Ditya Group leads to smarter decisions, higher productivity, and faster business success',
+      timeCardTitle: 'Save Time',
+      timeCardDesc:
+        'With Ditya Group, you can streamline tasks and focus on growth while we handle the support systems',
     },
     founder: {
-      badge: 'Founder Message',
+      badge: 'CEO & Founder BMC Genie',
+      tag: 'Founder Message',
       quote:
         '“Our vision is simple — create systems, services, and solutions that make growth easier for individuals and businesses while continuously expanding opportunities under one ecosystem.”',
       name: 'Aamitt Batra',
-      role: 'Founder & CEO, DITYA GROUP',
+      role: 'Founder, DITYA GROUP',
+    },
+    stats: {
+      stat1Number: '500 +',
+      stat1Label: 'Happy Clients',
+      stat2Number: '3,000 +',
+      stat2Label: 'Projects & Solutions Delivered',
+      stat3Number: '15',
+      stat3Label: 'Years Of Experience',
+      stat4Number: '22',
+      stat4Label: 'Team Members',
+    },
+    howItWorks: {
+      subtitle: 'How It Works',
+      heading: 'How Ditya Group Personalized Approach Works',
+      description:
+        'Ditya Group provides integrated solutions across finance, numerology, and all other essential services. Our personalized approach helps you make better decisions, simplify tasks, and grow faster with clarity.',
+      step1Num: '01',
+      step1Desc: 'Book a session with our expert team for guidance and planning.',
+      step2Num: '02',
+      step2Desc: 'Choose the service that best fits your personal or business needs.',
+      step3Num: '03',
+      step3Desc: 'Start your journey with structured support and see results quickly',
+      testimonialQuote:
+        '“Working with Ditya Group has been a game changer. Their guidance in trading, numerology, and business support made decision-making easier and more effective. Everything is well-managed and results are clearly visible. Truly worth the investment and their other services.”',
+      testimonialAuthor: 'Aditya Malhotra',
+    },
+    whyChooseUs: {
+      subtitle: 'Why Choose Us',
+      heading: 'Why Choose US',
+      description:
+        'Ditya Group handles everything that slows down your growth journey. From financial guidance to essential services, we simplify your path so you can focus on achieving bigger goals. Let us manage what supports your success while you move ahead with clarity.',
+      metric1Percent: '35%',
+      metric1Title: 'Limited Growth Approach',
+      metric1Desc:
+        'Managing everything alone or relying on traditional methods can slow down decisions, reduce efficiency, and limit your true potential.',
+      metric2Percent: '100%',
+      metric2Title: 'Ditya Smart System',
+      metric2Desc:
+        'An integrated system of trading guidance, numerology insights, and essential services designed to give you clarity, speed, and complete growth support',
+    },
+    cta: {
+      btnText: 'Free Consultation',
     },
   },
   contact: {
