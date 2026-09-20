@@ -1,9 +1,7 @@
 import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
 import { BLOG_POSTS } from '@/lib/blogData';
-import { ArrowRight, Calendar, Clock } from 'lucide-react';
+import BlogListingClient, { BlogPostItem } from './BlogListingClient';
 
 export const dynamic = 'force-dynamic';
 
@@ -16,6 +14,7 @@ export default async function BlogListingPage() {
     category: string;
     readTime: string;
     authorName: string;
+    image: string;
     createdAt: Date;
   }> = [];
 
@@ -29,7 +28,7 @@ export default async function BlogListingPage() {
   }
 
   // Combine DB posts and default posts
-  const combinedPosts = [
+  const combinedPosts: BlogPostItem[] = [
     ...dbPosts.map((p) => ({
       id: p.id,
       title: p.title,
@@ -42,86 +41,19 @@ export default async function BlogListingPage() {
         year: 'numeric',
       }),
       readTime: p.readTime,
+      image: p.image || '/images/hero-banner.jpeg',
     })),
-    ...BLOG_POSTS.filter((bp) => !dbPosts.some((dp) => dp.slug === bp.slug)),
+    ...BLOG_POSTS.filter((bp) => !dbPosts.some((dp) => dp.slug === bp.slug)).map((p) => ({
+      id: p.id,
+      title: p.title,
+      slug: p.slug,
+      category: p.category,
+      excerpt: p.excerpt,
+      date: p.date,
+      readTime: p.readTime,
+      image: p.image || '/images/hero-banner.jpeg',
+    })),
   ];
 
-  return (
-    <div className="pb-16 bg-[#FBFBFB]">
-      {/* Banner */}
-      <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
-        {/* Sacred Geometry Silk Banner Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <Image
-            src="/images/inner-banner-bg.jpg"
-            alt="Blog Banner Background"
-            fill
-            className="object-cover object-center opacity-30 mix-blend-overlay"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
-        </div>
-
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
-
-        <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
-            Knowledge & Insights
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
-            Blog & Articles
-          </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto mt-3 font-normal leading-relaxed">
-            Practical insights on numerology, remedies, business systems, trading mindset, and
-            personal transformation.
-          </p>
-        </div>
-      </section>
-
-      {/* Blog Cards Grid */}
-      <section className="py-20 max-w-[1140px] mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {combinedPosts.map((post) => (
-            <article
-              key={post.id}
-              className="bg-white rounded-asymmetric border border-gray-200/80 overflow-hidden shadow-sm card-hover flex flex-col justify-between"
-            >
-              <div className="p-8 space-y-4">
-                <div className="flex items-center justify-between text-xs text-gray-400">
-                  <span className="font-bold text-[#059669] uppercase tracking-wider">
-                    {post.category}
-                  </span>
-                  <span className="flex items-center space-x-1">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>{post.readTime}</span>
-                  </span>
-                </div>
-
-                <h3 className="text-xl font-bold text-[#041614] leading-snug hover:text-[#059669] transition-colors">
-                  <Link href={`/blog/${post.slug}`}>{post.title}</Link>
-                </h3>
-
-                <p className="text-xs sm:text-sm text-gray-500 leading-relaxed line-clamp-3">
-                  {post.excerpt}
-                </p>
-              </div>
-
-              <div className="px-8 pb-7 pt-4 border-t border-gray-100 flex items-center justify-between">
-                <div className="flex items-center space-x-2 text-xs text-gray-400">
-                  <Calendar className="w-3.5 h-3.5" />
-                  <span>{post.date}</span>
-                </div>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="text-xs font-bold text-[#059669] hover:underline inline-flex items-center space-x-1"
-                >
-                  <span>Read Article</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-    </div>
-  );
+  return <BlogListingClient initialPosts={combinedPosts} />;
 }
