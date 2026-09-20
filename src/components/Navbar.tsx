@@ -44,8 +44,8 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   }, [pathname]);
 
   const serviceHouses = [
-    { title: 'Global Business Network', href: '/global-business-network' },
-    { title: 'Ditya Astro Verse', href: '/ditya-astroverse' },
+    { title: 'Ditya Wealth House', href: '/ditya-wealth-house' },
+    { title: 'Ditya Astroverse', href: '/ditya-astroverse' },
     { title: 'Ditya Math House', href: '/ditya-math-house' },
     { title: 'Ditya Business House', href: '/ditya-business-house' },
     { title: 'Ditya Trading House', href: '/ditya-trading-house' },

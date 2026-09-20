@@ -71,12 +71,12 @@ export default function Footer() {
   ];
 
   const houseLinks = [
-    { name: 'House of Finance', href: '/services#finance' },
-    { name: 'House of Business', href: '/services#business' },
-    { name: 'House of Law & Tax', href: '/services#law' },
-    { name: 'House of Astro', href: '/services#astro' },
-    { name: 'House of Architecture', href: '/services#architecture' },
-    { name: 'House of Wellness', href: '/services#wellness' },
+    { name: 'Ditya Wealth House', href: '/ditya-wealth-house' },
+    { name: 'Ditya Astroverse', href: '/ditya-astroverse' },
+    { name: 'Ditya Math House', href: '/ditya-math-house' },
+    { name: 'Ditya Business House', href: '/ditya-business-house' },
+    { name: 'Ditya Trading House', href: '/ditya-trading-house' },
+    { name: 'Ditya Tech House', href: '/ditya-tech-house' },
   ];
 
   return (

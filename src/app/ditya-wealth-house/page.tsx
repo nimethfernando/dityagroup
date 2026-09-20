@@ -5,7 +5,8 @@ import HousePageTemplate from '@/components/HousePageTemplate';
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
 
-export default async function DityaAstroversePage() {
-  const content = await getPageContent('ditya-astroverse');
-  return <HousePageTemplate content={content} houseName="Ditya Astroverse" />;
+export default async function DityaWealthHousePage() {
+  const content = await getPageContent('ditya-wealth-house');
+  return <HousePageTemplate content={content} houseName="Ditya Wealth House" />;
 }
+

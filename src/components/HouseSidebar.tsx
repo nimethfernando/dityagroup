@@ -13,8 +13,8 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
   const pathname = usePathname();
 
   const services = [
-    { name: 'Global Business Network', href: '/global-business-network' },
-    { name: 'Ditya Astro Verse', href: '/ditya-astroverse' },
+    { name: 'Ditya Wealth House', href: '/ditya-wealth-house' },
+    { name: 'Ditya Astroverse', href: '/ditya-astroverse' },
     { name: 'Ditya Math House', href: '/ditya-math-house' },
     { name: 'Ditya Business House', href: '/ditya-business-house' },
     { name: 'Ditya Trading House', href: '/ditya-trading-house' },
@@ -30,7 +30,9 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
         </h3>
         <ul className="space-y-2">
           {services.map((item) => {
-            const active = pathname === item.href;
+            const active =
+              pathname === item.href ||
+              (item.href === '/ditya-wealth-house' && pathname === '/global-business-network');
             return (
               <li key={item.href}>
                 <Link
@@ -56,9 +58,9 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
           <Phone className="w-7 h-7" />
         </div>
         <div>
-          <h4 className="text-xl font-bold">Not Enough Time In The Day?</h4>
-          <p className="text-xs text-gray-300 mt-2">
-            Give Us A Call 24/7 for dedicated support and personalized planning.
+          <h4 className="text-xl font-bold">Not Enough Time In The Day? Give Us A Call</h4>
+          <p className="text-xs text-gray-300 mt-2 leading-relaxed">
+            We are available 24/7 to help you with any questions or concerns that you have about our products or services. You can contact us anytime and we will be happy to assist you.
           </p>
         </div>
         <a

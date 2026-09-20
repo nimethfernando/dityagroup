@@ -67,6 +67,18 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
               </p>
             </div>
 
+            {/* Overview Services Box */}
+            {content.details.overviewDescription && (
+              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-2.5">
+                <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+                  {content.details.overviewHeading || 'Overview Services'}
+                </span>
+                <p className="text-sm text-gray-600 leading-relaxed">
+                  {content.details.overviewDescription}
+                </p>
+              </div>
+            )}
+
             {/* Dual Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="p-6 border border-gray-200/80 rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">

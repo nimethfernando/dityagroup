@@ -1,8 +1,8 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
 import HousePageTemplate from '@/components/HousePageTemplate';
 import { HousePageContent } from '@/lib/defaultPageContent';
+import { getPageContent } from '@/lib/getPageContent';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
@@ -19,26 +19,19 @@ export default async function DynamicSubPage({ params }: DynamicSubPageProps) {
     notFound();
   }
 
-  const record = await prisma.pageContent.findUnique({
-    where: { slug },
-  });
+  // Support backwards-compatible alias from /global-business-network to ditya-wealth-house
+  const resolvedSlug = slug === 'global-business-network' ? 'ditya-wealth-house' : slug;
 
-  if (!record || !record.data) {
-    notFound();
-  }
+  const content = (await getPageContent(resolvedSlug)) as HousePageContent;
 
-  let content: HousePageContent;
-  try {
-    content = JSON.parse(record.data);
-  } catch {
+  if (!content || !content.details || !content.banner) {
     notFound();
   }
 
   return (
     <HousePageTemplate
       content={content}
-      houseName={record.title}
+      houseName={content.banner.title || 'Ditya Group House'}
     />
   );
 }
-

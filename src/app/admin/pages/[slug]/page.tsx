@@ -13,6 +13,7 @@ import {
   AlertCircle,
   Loader2,
   Sparkles,
+  Trash2,
 } from 'lucide-react';
 
 interface PageEditorProps {
@@ -1398,7 +1399,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                   Description Paragraph
                 </label>
                 <textarea
-                  rows={3}
+                  rows={4}
                   value={content.details?.description || ''}
                   onChange={(e) =>
                     setContent({
@@ -1410,28 +1411,224 @@ export default function PageEditor({ params }: PageEditorProps) {
                 ></textarea>
               </div>
 
+              {/* Overview Services Box */}
+              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  Overview Services Section
+                </h4>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    Overview Heading
+                  </label>
+                  <input
+                    type="text"
+                    value={content.details?.overviewHeading || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, overviewHeading: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    Overview Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.details?.overviewDescription || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, overviewDescription: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
+                </div>
+              </div>
+
+              {/* Dual Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100 space-y-2">
+                  <span className="text-xs font-bold text-emerald-800 uppercase block">Card 1 (Growth)</span>
+                  <input
+                    type="text"
+                    placeholder="Card 1 Title"
+                    value={content.details?.card1Title || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, card1Title: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  />
+                  <textarea
+                    rows={2}
+                    placeholder="Card 1 Description"
+                    value={content.details?.card1Desc || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, card1Desc: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
+                </div>
+
+                <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100 space-y-2">
+                  <span className="text-xs font-bold text-emerald-800 uppercase block">Card 2 (Time)</span>
+                  <input
+                    type="text"
+                    placeholder="Card 2 Title"
+                    value={content.details?.card2Title || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, card2Title: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  />
+                  <textarea
+                    rows={2}
+                    placeholder="Card 2 Description"
+                    value={content.details?.card2Desc || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, card2Desc: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
+                </div>
+              </div>
+
               {/* Checklist Items */}
-              <div className="pt-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  {content.details?.checklistTitle || 'Checklist Items'}
-                </label>
+              <div className="pt-2 space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="block text-xs font-bold text-gray-700 uppercase">
+                    Checklist Title
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const updated = [...(content.details?.checklists || []), ''];
+                      setContent({
+                        ...content,
+                        details: { ...content.details, checklists: updated },
+                      });
+                    }}
+                    className="text-xs text-[#059669] font-semibold hover:underline cursor-pointer"
+                  >
+                    + Add Item
+                  </button>
+                </div>
+                <input
+                  type="text"
+                  value={content.details?.checklistTitle || ''}
+                  onChange={(e) =>
+                    setContent({
+                      ...content,
+                      details: { ...content.details, checklistTitle: e.target.value },
+                    })
+                  }
+                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg mb-2"
+                />
                 <div className="space-y-2">
                   {content.details?.checklists?.map((item: string, idx: number) => (
+                    <div key={idx} className="flex items-center space-x-2">
+                      <input
+                        type="text"
+                        value={item}
+                        onChange={(e) => {
+                          const updated = [...content.details.checklists];
+                          updated[idx] = e.target.value;
+                          setContent({
+                            ...content,
+                            details: { ...content.details, checklists: updated },
+                          });
+                        }}
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const updated = content.details.checklists.filter((_: string, i: number) => i !== idx);
+                          setContent({
+                            ...content,
+                            details: { ...content.details, checklists: updated },
+                          });
+                        }}
+                        className="p-1.5 text-gray-400 hover:text-red-500 rounded"
+                        title="Remove Item"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Call to Action Box */}
+              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  Bottom Call to Action
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                      CTA Title
+                    </label>
                     <input
-                      key={idx}
                       type="text"
-                      value={item}
-                      onChange={(e) => {
-                        const updated = [...content.details.checklists];
-                        updated[idx] = e.target.value;
+                      value={content.details?.ctaTitle || ''}
+                      onChange={(e) =>
                         setContent({
                           ...content,
-                          details: { ...content.details, checklists: updated },
-                        });
-                      }}
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg"
+                          details: { ...content.details, ctaTitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
                     />
-                  ))}
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                      Button Text
+                    </label>
+                    <input
+                      type="text"
+                      value={content.details?.ctaBtnText || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          details: { ...content.details, ctaBtnText: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    CTA Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.details?.ctaDesc || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, ctaDesc: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
                 </div>
               </div>
             </div>
