@@ -6,6 +6,9 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER || 'gnbmailsender@gmail.com',
     pass: process.env.EMAIL_PASS || 'akkjqlnhkgbudmxe',
   },
+  connectionTimeout: 5000, // 5s timeout
+  greetingTimeout: 5000,   // 5s timeout
+  socketTimeout: 7000,     // 7s timeout
 });
 
 export const NOTIFICATION_RECIPIENT = 'groupditya@gmail.com';
@@ -24,11 +27,9 @@ export async function sendInquiryNotification(inquiry: {
   try {
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
-        <div style="background-color: #011633; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
         <div style="background-color: #041614; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
           <h2 style="color: #ffffff; margin: 0;">New Consultation Inquiry</h2>
-          <p style="color: #FF5722; margin: 5px 0 0 0; font-size: 14px;">Ditya Group Website Lead</p>
-          <p style="color: #059669; margin: 5px 0 0 0; font-size: 14px;">Ditya Group Website Lead</p>
+          <p style="color: #059669; margin: 5px 0 0 0; font-size: 14px; font-weight: bold;">Ditya Group Website Lead</p>
         </div>
         <div style="padding: 20px; background-color: #ffffff;">
           <p><strong>Source:</strong> ${inquiry.source || 'Website'}</p>
@@ -36,7 +37,6 @@ export async function sendInquiryNotification(inquiry: {
           <p><strong>Phone:</strong> <a href="tel:${inquiry.phone}">${inquiry.phone}</a></p>
           <p><strong>Email:</strong> <a href="mailto:${inquiry.email}">${inquiry.email}</a></p>
           ${inquiry.service ? `<p><strong>Service Interest:</strong> ${inquiry.service}</p>` : ''}
-          ${inquiry.message ? `<div style="margin-top: 15px; padding: 12px; background-color: #f9f9f9; border-left: 4px solid #FF5722;"><p style="margin: 0; font-style: italic;">"${inquiry.message}"</p></div>` : ''}
           ${inquiry.message ? `<div style="margin-top: 15px; padding: 12px; background-color: #f9f9f9; border-left: 4px solid #059669;"><p style="margin: 0; font-style: italic;">"${inquiry.message}"</p></div>` : ''}
         </div>
         <div style="background-color: #f4f4f4; padding: 12px; text-align: center; font-size: 12px; color: #777;">
@@ -66,17 +66,13 @@ export async function sendAdminResetOtpEmail(toEmail: string, otp: string) {
   try {
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
-        <div style="background-color: #011633; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
         <div style="background-color: #041614; padding: 20px; text-align: center; border-radius: 6px 6px 0 0;">
           <h2 style="color: #ffffff; margin: 0;">Admin Security Verification</h2>
-          <p style="color: #FF5722; margin: 5px 0 0 0; font-size: 14px;">Ditya Group Portal</p>
-          <p style="color: #059669; margin: 5px 0 0 0; font-size: 14px;">Ditya Group Portal</p>
+          <p style="color: #059669; margin: 5px 0 0 0; font-size: 14px; font-weight: bold;">Ditya Group Executive Portal</p>
         </div>
         <div style="padding: 25px; text-align: center; background-color: #ffffff;">
-          <p style="color: #555; font-size: 16px;">You requested a password reset for your Ditya Group administrator account.</p>
-          <div style="margin: 25px 0; padding: 15px; background: #FFF3E0; border: 2px dashed #FF5722; border-radius: 8px; display: inline-block;">
-            <span style="font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #011633;">${otp}</span>
-          <div style="margin: 25px 0; padding: 15px; background: #ECFDF5; border: 2px dashed #059669; border-radius: 8px; display: inline-block;">
+          <p style="color: #555; font-size: 15px;">You requested a password reset for your Ditya Group administrator account.</p>
+          <div style="margin: 25px 0; padding: 15px 25px; background: #ECFDF5; border: 2px dashed #059669; border-radius: 8px; display: inline-block;">
             <span style="font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #041614;">${otp}</span>
           </div>
           <p style="color: #888; font-size: 13px;">This 6-digit code will expire in 10 minutes. If you did not request this, please disregard this email.</p>

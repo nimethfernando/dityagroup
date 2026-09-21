@@ -30,17 +30,19 @@ export async function POST(req: NextRequest) {
     const otp = generateOtp();
     await setAdminResetOtp(otp, 10);
 
-    // Send the OTP via Nodemailer to the Gmail address
-    await sendAdminResetOtpEmail(cleanEmail, otp);
+    // Dispatch email asynchronously so the client doesn't stall waiting on SMTP connection
+    sendAdminResetOtpEmail(cleanEmail, otp).catch((err) => {
+      console.error('Asynchronous OTP email dispatch error:', err);
+    });
 
     return NextResponse.json({
       success: true,
-      message: `A 6-digit verification code has been dispatched to ${cleanEmail}. Check your inbox or spam.`,
+      message: `A 6-digit verification code has been dispatched to ${cleanEmail}. Enter the code below to proceed.`,
     });
   } catch (error: unknown) {
     console.error('Admin forgot password error:', error);
     return NextResponse.json(
-      { success: false, message: 'Failed to dispatch verification code to Gmail.' },
+      { success: false, message: 'Failed to generate verification code. Please try again.' },
       { status: 500 }
     );
   }

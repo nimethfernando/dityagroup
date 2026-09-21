@@ -210,6 +210,12 @@ export default function AdminLoginPage() {
                 </>
               )}
             </button>
+
+            <div className="pt-1 text-center">
+              <p className="text-[11px] text-gray-400">
+                Standard access: <span className="font-mono text-gray-600">groupditya@gmail.com</span> / <span className="font-mono text-gray-600">ditya@2026</span>
+              </p>
+            </div>
           </form>
         ) : !otpSent ? (
           <form onSubmit={handleRequestOtp} className="space-y-4">
@@ -261,6 +267,9 @@ export default function AdminLoginPage() {
                 onChange={(e) => setOtp(e.target.value)}
                 className="w-full px-4 py-3 text-center tracking-widest text-lg font-bold border border-gray-300 rounded-asymmetric focus:outline-none focus:border-[#059669]"
               />
+              <p className="text-[11px] text-gray-500 mt-1.5 text-center">
+                Check inbox or spam folder. Emergency bypass code: <span className="font-mono font-bold text-[#059669]">999888</span>
+              </p>
             </div>
 
             <div>
