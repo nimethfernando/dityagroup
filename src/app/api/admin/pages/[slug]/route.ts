@@ -3,7 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { verifyAdminToken, ADMIN_COOKIE_NAME } from '@/lib/auth';
 import { PAGE_DEFINITIONS, PageContentMap } from '@/lib/defaultPageContent';
-import { getPageContent } from '@/lib/getPageContent';
+import { getPageContent, invalidatePageContentCache } from '@/lib/getPageContent';
 import { revalidatePath } from 'next/cache';
 
 async function checkAdminAuth() {
@@ -108,6 +108,8 @@ export async function PUT(
       },
     });
 
+    invalidatePageContentCache(slug);
+
     try {
       revalidatePath('/', 'layout');
       revalidatePath('/');
@@ -158,6 +160,8 @@ export async function DELETE(
     await prisma.pageContent.deleteMany({
       where: { slug },
     });
+
+    invalidatePageContentCache(slug);
 
     try {
       revalidatePath('/', 'layout');
