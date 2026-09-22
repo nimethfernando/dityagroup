@@ -172,7 +172,7 @@ export default function PageEditor({ params }: PageEditorProps) {
     );
   }
 
-  const isHouseOrCustom = slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'services' && slug !== 'privacy-policy' && slug !== 'terms-and-conditions' && slug !== 'global-business-network';
+  const isHouseOrCustom = slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'services' && slug !== 'privacy-policy' && slug !== 'terms-and-conditions' && slug !== 'global-business-network' && slug !== 'footer';
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-gray-800 pb-28">

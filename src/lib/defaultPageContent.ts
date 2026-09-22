@@ -293,6 +293,50 @@ export interface GBNPageContent {
   };
 }
 
+export interface SocialLinkItem {
+  id: string;
+  label: string;
+  href: string;
+  enabled: boolean;
+  icon?: string;
+}
+
+export interface FooterPageContent {
+  branding: {
+    tagline: string;
+    description: string;
+    paragraphs: string[];
+  };
+  socialLinks: SocialLinkItem[];
+  contactCards: {
+    phoneIndiaTitle: string;
+    phoneIndia: string;
+    phoneIndiaHref: string;
+    phoneGeorgiaTitle: string;
+    phoneGeorgia: string;
+    phoneGeorgiaHref: string;
+    phoneHours: string;
+    emailCorporateTitle: string;
+    emailCorporate: string;
+    emailSupportTitle: string;
+    emailSupport: string;
+    emailHours: string;
+    officeIndiaTitle: string;
+    officeIndiaAddress: string;
+    officeGeorgiaTitle: string;
+    officeGeorgiaAddress: string;
+  };
+  newsletter: {
+    heading: string;
+    description: string;
+    buttonText: string;
+  };
+  copyright: {
+    text: string;
+    subText?: string;
+  };
+}
+
 export interface PageContentMap {
   home: HomePageContent;
   about: AboutPageContent;
@@ -307,6 +351,7 @@ export interface PageContentMap {
   'ditya-business-house': HousePageContent;
   'ditya-trading-house': HousePageContent;
   'ditya-tech-house': HousePageContent;
+  footer: FooterPageContent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [customSlug: string]: any;
 }
@@ -333,7 +378,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'ditya-business-house', title: 'Ditya Business House', path: '/ditya-business-house', category: 'Houses' },
   { slug: 'ditya-trading-house', title: 'Ditya Trading House', path: '/ditya-trading-house', category: 'Houses' },
   { slug: 'ditya-tech-house', title: 'Ditya Tech House', path: '/ditya-tech-house', category: 'Houses' },
-  { slug: 'global-business-network', title: 'Global Business Network', path: '/global-business-network', category: 'Houses' },
+  { slug: 'footer', title: 'Footer & Social Media Links', path: '/#footer', category: 'Site Settings & Brand' },
 ];
 
 export function createDefaultCustomPage(title: string, category = 'Services Sub-Page'): CustomPageContent {
@@ -925,6 +970,57 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       section5Title: '5. Governing Law & Jurisdiction',
       section5Text:
         'These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising hereunder shall be subject to the exclusive jurisdiction of the courts of Jaipur, Rajasthan.',
+    },
+  },
+  footer: {
+    branding: {
+      tagline: 'One Group. Infinite Possibilities!',
+      description:
+        'Empowering wealth creation, business growth, and spiritual alignment by seamlessly bridging ancient Vedic wisdom with cutting-edge modern solutions.',
+      paragraphs: [],
+    },
+    socialLinks: [
+      { id: 'facebook', label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61579723378713', enabled: true, icon: 'FaFacebookF' },
+      { id: 'instagram', label: 'Instagram', href: 'https://www.instagram.com/dityagroup/', enabled: true, icon: 'FaInstagram' },
+      { id: 'youtube', label: 'YouTube', href: 'https://www.youtube.com/@DityaGroup', enabled: true, icon: 'FaYoutube' },
+      { id: 'quora', label: 'Quora', href: 'https://www.quora.com/profile/Ditya-Group', enabled: true, icon: 'FaQuora' },
+      { id: 'tumblr', label: 'Tumblr', href: 'https://www.tumblr.com/dityagroup', enabled: true, icon: 'FaTumblr' },
+      { id: 'medium', label: 'Medium', href: 'https://medium.com/@groupditya', enabled: true, icon: 'FaMedium' },
+      { id: 'x', label: 'X (Twitter)', href: 'https://x.com/dityadivinecode', enabled: true, icon: 'FaXTwitter' },
+      { id: 'blogger', label: 'Blogger', href: 'https://ditvyadivinecode.blogspot.com/', enabled: true, icon: 'FaBloggerB' },
+      { id: 'whatsapp', label: 'WhatsApp', href: 'https://whatsapp.com/channel/0029Vb5Jj3I545v124zIG313', enabled: true, icon: 'FaWhatsapp' },
+      { id: 'pinterest', label: 'Pinterest', href: 'https://pin.it/37yZewWEA', enabled: true, icon: 'FaPinterestP' },
+      { id: 'threads', label: 'Threads', href: 'https://www.threads.com/@dityagroup', enabled: true, icon: 'FaThreads' },
+      { id: 'flipboard', label: 'Flipboard', href: 'https://flipboard.com/@DityaGroup', enabled: true, icon: 'FaFlipboard' },
+      { id: 'telegram', label: 'Telegram', href: 'https://t.me/dityagroup', enabled: true, icon: 'FaTelegram' },
+    ],
+    contactCards: {
+      phoneIndiaTitle: 'India (HQ)',
+      phoneIndia: '+91-93510 90301',
+      phoneIndiaHref: 'tel:+919351090301',
+      phoneGeorgiaTitle: 'Georgia (Secondary)',
+      phoneGeorgia: '+995 555433091',
+      phoneGeorgiaHref: 'tel:+995555433091',
+      phoneHours: 'Mon – Sat, 9:00 AM – 7:00 PM IST',
+      emailCorporateTitle: 'Corporate Inquiries',
+      emailCorporate: 'groupditya@gmail.com',
+      emailSupportTitle: 'Advisory & Support Desk',
+      emailSupport: 'info@dityagroup.com',
+      emailHours: 'Responses within 4 business hours',
+      officeIndiaTitle: 'Corporate Headquarters',
+      officeIndiaAddress: '3rd Floor, 261, Adarsh Nagar, Jaipur, Rajasthan, India 302004',
+      officeGeorgiaTitle: 'International Operations',
+      officeGeorgiaAddress: 'Tbilisi, Georgia',
+    },
+    newsletter: {
+      heading: 'Newsletter',
+      description:
+        'Subscribe to receive our exclusive executive briefings on wealth, market trends, and Vedic lifestyle strategy.',
+      buttonText: 'Subscribe',
+    },
+    copyright: {
+      text: '© 2026 Ditya Group. All rights reserved.',
+      subText: 'One Group. Infinite Possibilities.',
     },
   },
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Phone, Mail, MapPin, Send, ArrowUp } from 'lucide-react';
@@ -18,12 +18,83 @@ import {
   FaFlipboard,
   FaTelegram,
   FaXTwitter,
+  FaLinkedinIn,
+  FaGlobe,
+  FaLink,
 } from 'react-icons/fa6';
+import { IconType } from 'react-icons';
+import {
+  DEFAULT_PAGE_CONTENTS,
+  FooterPageContent,
+  SocialLinkItem,
+} from '@/lib/defaultPageContent';
+
+const ICON_MAP: Record<string, IconType> = {
+  facebook: FaFacebookF,
+  FaFacebookF: FaFacebookF,
+  instagram: FaInstagram,
+  FaInstagram: FaInstagram,
+  youtube: FaYoutube,
+  FaYoutube: FaYoutube,
+  quora: FaQuora,
+  FaQuora: FaQuora,
+  tumblr: FaTumblr,
+  FaTumblr: FaTumblr,
+  medium: FaMedium,
+  FaMedium: FaMedium,
+  x: FaXTwitter,
+  twitter: FaXTwitter,
+  FaXTwitter: FaXTwitter,
+  blogger: FaBloggerB,
+  FaBloggerB: FaBloggerB,
+  whatsapp: FaWhatsapp,
+  FaWhatsapp: FaWhatsapp,
+  pinterest: FaPinterestP,
+  FaPinterestP: FaPinterestP,
+  threads: FaThreads,
+  FaThreads: FaThreads,
+  flipboard: FaFlipboard,
+  FaFlipboard: FaFlipboard,
+  telegram: FaTelegram,
+  FaTelegram: FaTelegram,
+  linkedin: FaLinkedinIn,
+  FaLinkedinIn: FaLinkedinIn,
+  globe: FaGlobe,
+  FaGlobe: FaGlobe,
+};
+
+function getSocialIcon(item: { id?: string; icon?: string }): IconType {
+  if (item.icon && ICON_MAP[item.icon]) return ICON_MAP[item.icon];
+  if (item.id && ICON_MAP[item.id.toLowerCase()]) return ICON_MAP[item.id.toLowerCase()];
+  return FaLink;
+}
 
 export default function Footer() {
+  const [content, setContent] = useState<FooterPageContent>(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (DEFAULT_PAGE_CONTENTS as any).footer
+  );
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/footer')
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data && data.success && data.data) {
+          setContent(data.data);
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch live footer content:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,22 +125,6 @@ export default function Footer() {
     }
   };
 
-  const socialLinks = [
-    { icon: FaFacebookF, href: 'https://www.facebook.com/profile.php?id=61579723378713', label: 'Facebook' },
-    { icon: FaInstagram, href: 'https://www.instagram.com/dityagroup/', label: 'Instagram' },
-    { icon: FaYoutube, href: 'https://www.youtube.com/@DityaGroup', label: 'YouTube' },
-    { icon: FaQuora, href: 'https://www.quora.com/profile/Ditya-Group', label: 'Quora' },
-    { icon: FaTumblr, href: 'https://www.tumblr.com/dityagroup', label: 'Tumblr' },
-    { icon: FaMedium, href: 'https://medium.com/@groupditya', label: 'Medium' },
-    { icon: FaXTwitter, href: 'https://x.com/dityadivinecode', label: 'X (Twitter)' },
-    { icon: FaBloggerB, href: 'https://ditvyadivinecode.blogspot.com/', label: 'Blogger' },
-    { icon: FaWhatsapp, href: 'https://whatsapp.com/channel/0029Vb5Jj3I545v124zIG313', label: 'WhatsApp' },
-    { icon: FaPinterestP, href: 'https://pin.it/37yZewWEA', label: 'Pinterest' },
-    { icon: FaThreads, href: 'https://www.threads.com/@dityagroup', label: 'Threads' },
-    { icon: FaFlipboard, href: 'https://flipboard.com/@DityaGroup', label: 'Flipboard' },
-    { icon: FaTelegram, href: '#', label: 'Telegram' },
-  ];
-
   const houseLinks = [
     { name: 'Ditya Wealth House', href: '/ditya-wealth-house' },
     { name: 'Ditya Astroverse', href: '/ditya-astroverse' },
@@ -79,6 +134,19 @@ export default function Footer() {
     { name: 'Ditya Tech House', href: '/ditya-tech-house' },
     { name: 'Global Business Network', href: '/global-business-network' },
   ];
+
+  // Active unhidden social links
+  const activeSocialLinks = (content.socialLinks || []).filter(
+    (s: SocialLinkItem) => s.enabled !== false && s.href && s.href.trim() !== ''
+  );
+
+  const phoneIndiaHref =
+    content.contactCards?.phoneIndiaHref ||
+    `tel:${(content.contactCards?.phoneIndia || '+919351090301').replace(/[^0-9+]/g, '')}`;
+
+  const phoneGeorgiaHref =
+    content.contactCards?.phoneGeorgiaHref ||
+    `tel:${(content.contactCards?.phoneGeorgia || '+995555433091').replace(/[^0-9+]/g, '')}`;
 
   return (
     <footer className="relative bg-gradient-to-b from-[#031513] via-[#020e0d] to-[#010706] text-white pt-16 pb-12 overflow-hidden border-t border-emerald-500/20">
@@ -101,7 +169,7 @@ export default function Footer() {
 
       <div className="max-w-[1140px] mx-auto px-4 relative z-10">
         {/* ============================================================ */}
-        {/* TOP: 3 LUXURY EXECUTIVE CONTACT CARDS (NATURAL FLOW, NO CLIPPING) */}
+        {/* TOP: 3 LUXURY EXECUTIVE CONTACT CARDS */}
         {/* ============================================================ */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {/* Card 1: Phone */}
@@ -115,31 +183,33 @@ export default function Footer() {
               </span>
               <div>
                 <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">
-                  India (HQ)
+                  {content.contactCards?.phoneIndiaTitle || 'India (HQ)'}
                 </span>
                 <a
-                  href="tel:+919351090301"
+                  href={phoneIndiaHref}
                   className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#10B981] transition-colors block tracking-tight"
                 >
-                  +91-93510 90301
+                  {content.contactCards?.phoneIndia || '+91-93510 90301'}
                 </a>
               </div>
               <div className="pt-1.5 border-t border-white/10">
                 <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">
-                  Georgia (Secondary)
+                  {content.contactCards?.phoneGeorgiaTitle || 'Georgia (Secondary)'}
                 </span>
                 <a
-                  href="tel:+995555433091"
+                  href={phoneGeorgiaHref}
                   className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#10B981] transition-colors block tracking-tight"
                 >
-                  +995 555433091
+                  {content.contactCards?.phoneGeorgia || '+995 555433091'}
                 </a>
               </div>
-              <span className="text-xs text-gray-400 mt-1 block">Mon – Sat, 9:00 AM – 7:00 PM IST</span>
+              <span className="text-xs text-gray-400 mt-1 block">
+                {content.contactCards?.phoneHours || 'Mon – Sat, 9:00 AM – 7:00 PM IST'}
+              </span>
             </div>
           </div>
 
-          {/* Card 2: Email (Focal Centerpiece Card) */}
+          {/* Card 2: Email (Centerpiece Card) */}
           <div className="bg-gradient-to-br from-white/[0.06] to-white/[0.02] backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-[#D4AF37]/35 hover:border-[#D4AF37] transition-all duration-300 hover:-translate-y-1 shadow-xl hover:shadow-[0_15px_35px_rgba(212,175,55,0.15)] flex items-start space-x-5 group relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
             <div className="w-13 h-13 rounded-2xl bg-[#D4AF37]/15 border border-[#D4AF37]/30 flex items-center justify-center shrink-0 group-hover:bg-[#D4AF37] group-hover:text-black transition-all duration-300 shadow-inner">
@@ -150,12 +220,14 @@ export default function Footer() {
                 Drop Us A Line
               </span>
               <a
-                href="mailto:groupditya@gmail.com"
+                href={`mailto:${content.contactCards?.emailCorporate || 'groupditya@gmail.com'}`}
                 className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#D4AF37] transition-colors block break-all tracking-tight"
               >
-                groupditya@gmail.com
+                {content.contactCards?.emailCorporate || 'groupditya@gmail.com'}
               </a>
-              <span className="text-xs text-gray-400 mt-1 block">Direct Executive Response</span>
+              <span className="text-xs text-gray-400 mt-1 block">
+                {content.contactCards?.emailHours || 'Direct Executive Response'}
+              </span>
             </div>
           </div>
 
@@ -174,14 +246,15 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-xs sm:text-sm font-bold text-white leading-snug group-hover:text-[#10B981] transition-colors block"
               >
-                3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004
+                {content.contactCards?.officeIndiaAddress ||
+                  '3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004'}
               </a>
               <span className="text-xs text-gray-400 mt-1 block">Jaipur, Rajasthan, India</span>
             </div>
           </div>
         </div>
 
-        {/* Ambient Subtle Hairline Divider */}
+        {/* Ambient Hairline Divider */}
         <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/15 to-transparent mb-16" />
 
         {/* ============================================================ */}
@@ -198,31 +271,54 @@ export default function Footer() {
                 className="object-contain object-left"
               />
             </div>
+
+            {/* Customizable Tagline */}
             <p className="text-[#D4AF37] font-semibold text-sm tracking-wide">
-              One Group. Infinite Possibilities!
-            </p>
-            <p className="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-sm">
-              Empowering wealth creation, business growth, and spiritual alignment by seamlessly bridging ancient Vedic wisdom with cutting-edge modern solutions.
+              {content.branding?.tagline || 'One Group. Infinite Possibilities!'}
             </p>
 
-            {/* 13 Circular Social Icons with high contrast */}
-            <div className="flex flex-wrap gap-2 pt-2">
-              {socialLinks.map((s, idx) => {
-                const IconComp = s.icon;
-                return (
-                  <a
-                    key={idx}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={s.label}
-                    className="w-8 h-8 rounded-xl bg-white/10 border border-white/15 text-gray-200 hover:bg-[#059669] hover:border-[#10B981] hover:text-white flex items-center justify-center transition-all duration-200 text-xs shadow-xs hover:scale-110"
-                  >
-                    <IconComp className="w-3.5 h-3.5" />
-                  </a>
-                );
-              })}
-            </div>
+            {/* Customizable Main Description */}
+            <p className="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-sm">
+              {content.branding?.description ||
+                'Empowering wealth creation, business growth, and spiritual alignment by seamlessly bridging ancient Vedic wisdom with cutting-edge modern solutions.'}
+            </p>
+
+            {/* Customizable Additional Paragraphs */}
+            {content.branding?.paragraphs && content.branding.paragraphs.length > 0 && (
+              <div className="space-y-2.5 max-w-sm">
+                {content.branding.paragraphs.map(
+                  (p: string, idx: number) =>
+                    p &&
+                    p.trim() !== '' && (
+                      <p key={idx} className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                        {p}
+                      </p>
+                    )
+                )}
+              </div>
+            )}
+
+            {/* Fully Customizable Social Media Buttons (Filtered to enabled only) */}
+            {activeSocialLinks.length > 0 && (
+              <div className="flex flex-wrap gap-2 pt-2">
+                {activeSocialLinks.map((s: SocialLinkItem, idx: number) => {
+                  const IconComp = getSocialIcon(s);
+                  return (
+                    <a
+                      key={s.id || idx}
+                      href={s.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={s.label}
+                      title={s.label}
+                      className="w-8 h-8 rounded-xl bg-white/10 border border-white/15 text-gray-200 hover:bg-[#059669] hover:border-[#10B981] hover:text-white flex items-center justify-center transition-all duration-200 text-xs shadow-xs hover:scale-110"
+                    >
+                      <IconComp className="w-3.5 h-3.5" />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* Col 2: Quick Links (Span 2) */}
@@ -292,10 +388,11 @@ export default function Footer() {
           {/* Col 4: Newsletter (Span 3) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
-              Newsletter
+              {content.newsletter?.heading || 'Newsletter'}
             </h4>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-              Subscribe to receive our exclusive executive briefings on wealth, market trends, and Vedic lifestyle strategy.
+              {content.newsletter?.description ||
+                'Subscribe to receive our exclusive executive briefings on wealth, market trends, and Vedic lifestyle strategy.'}
             </p>
 
             <form onSubmit={handleNewsletterSubmit} className="pt-2">
@@ -313,7 +410,7 @@ export default function Footer() {
                   disabled={isSubmitting}
                   className="btn-ditya-orange py-2.5 px-4 text-xs font-bold shrink-0 shadow-md cursor-pointer"
                 >
-                  <span>Send</span>
+                  <span>{content.newsletter?.buttonText || 'Send'}</span>
                   <Send className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -329,12 +426,12 @@ export default function Footer() {
         {/* ============================================================ */}
         <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 text-center gap-4">
           <p>
-            A Unit of Ditya Enterprises & Ditya Wealth Management PVT LTD © Copyright Ditya Group{' '}
-            {new Date().getFullYear()}. All Rights Reserved.
+            {content.copyright?.text ||
+              `A Unit of Ditya Enterprises & Ditya Wealth Management PVT LTD © Copyright Ditya Group ${new Date().getFullYear()}. All Rights Reserved.`}
           </p>
           <div className="flex items-center space-x-4">
             <span className="text-gray-300 font-medium">
-              Ancient Wisdom & Modern Solutions
+              {content.copyright?.subText || 'Ancient Wisdom & Modern Solutions'}
             </span>
             <button
               onClick={scrollToTop}

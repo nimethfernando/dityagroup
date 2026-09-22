@@ -14,7 +14,73 @@ import {
   Loader2,
   Sparkles,
   Trash2,
+  Eye,
+  EyeOff,
+  Plus,
+  Share2,
+  Globe,
+  MessageSquare,
+  Phone,
+  Mail,
+  MapPin,
 } from 'lucide-react';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaQuora,
+  FaTumblr,
+  FaMedium,
+  FaBloggerB,
+  FaWhatsapp,
+  FaPinterestP,
+  FaThreads,
+  FaFlipboard,
+  FaTelegram,
+  FaXTwitter,
+  FaLinkedinIn,
+  FaLink,
+} from 'react-icons/fa6';
+import { IconType } from 'react-icons';
+import { SocialLinkItem } from '@/lib/defaultPageContent';
+
+const ADMIN_ICON_MAP: Record<string, IconType> = {
+  facebook: FaFacebookF,
+  FaFacebookF: FaFacebookF,
+  instagram: FaInstagram,
+  FaInstagram: FaInstagram,
+  youtube: FaYoutube,
+  FaYoutube: FaYoutube,
+  quora: FaQuora,
+  FaQuora: FaQuora,
+  tumblr: FaTumblr,
+  FaTumblr: FaTumblr,
+  medium: FaMedium,
+  FaMedium: FaMedium,
+  x: FaXTwitter,
+  twitter: FaXTwitter,
+  FaXTwitter: FaXTwitter,
+  blogger: FaBloggerB,
+  FaBloggerB: FaBloggerB,
+  whatsapp: FaWhatsapp,
+  FaWhatsapp: FaWhatsapp,
+  pinterest: FaPinterestP,
+  FaPinterestP: FaPinterestP,
+  threads: FaThreads,
+  FaThreads: FaThreads,
+  flipboard: FaFlipboard,
+  FaFlipboard: FaFlipboard,
+  telegram: FaTelegram,
+  FaTelegram: FaTelegram,
+  linkedin: FaLinkedinIn,
+  FaLinkedinIn: FaLinkedinIn,
+};
+
+function getAdminSocialIcon(item: { id?: string; icon?: string }): IconType {
+  if (item.icon && ADMIN_ICON_MAP[item.icon]) return ADMIN_ICON_MAP[item.icon];
+  if (item.id && ADMIN_ICON_MAP[item.id.toLowerCase()]) return ADMIN_ICON_MAP[item.id.toLowerCase()];
+  return FaLink;
+}
 
 interface PageEditorProps {
   params: Promise<{ slug: string }>;
@@ -1413,7 +1479,7 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* ============================================================ */}
           {/* 4. HOUSE DETAIL PAGES EDITOR */}
           {/* ============================================================ */}
-          {slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'global-business-network' && (
+          {slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'global-business-network' && slug !== 'footer' && (
             <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
               <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 House Overview & Offerings
@@ -2372,6 +2438,480 @@ export default function PageEditor({ params }: PageEditorProps) {
                         setContent({
                           ...content,
                           cta: { ...content.cta, buttonText: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================================ */}
+          {/* 6. FOOTER & SOCIAL MEDIA COMMAND CENTER */}
+          {/* ============================================================ */}
+          {slug === 'footer' && (
+            <div className="space-y-8">
+              {/* Section A: Banner Info */}
+              <div className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white p-6 sm:p-8 rounded-asymmetric border border-emerald-500/20 shadow-md">
+                <div className="flex items-center space-x-2 text-[#10B981] text-xs font-bold uppercase tracking-wider mb-2">
+                  <Share2 className="w-4 h-4" />
+                  <span>Global Footer & Social Hub</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-white">
+                  Footer & Social Media Management
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-2xl">
+                  Customize the brand words and paragraphs displayed in the footer, manage each social media platform button (toggle to hide or unhide on the site, update links), and configure contact info and newsletter copy.
+                </p>
+              </div>
+
+              {/* Section B: Social Media Buttons (Show / Hide & Update Links) */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <Share2 className="w-5 h-5 text-[#059669]" />
+                      <h3 className="text-lg font-bold text-[#041614]">
+                        Social Media Buttons (Hide/Unhide & Change Links)
+                      </h3>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Toggle the visibility of any button with 1 click to show or hide it from the public website, or update its destination URL.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (content.socialLinks || []).map((s: SocialLinkItem) => ({ ...s, enabled: true }));
+                        setContent({ ...content, socialLinks: updated });
+                      }}
+                      className="px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-bold rounded-lg transition-colors border border-emerald-200 cursor-pointer flex items-center space-x-1"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Unhide All</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (content.socialLinks || []).map((s: SocialLinkItem) => ({ ...s, enabled: false }));
+                        setContent({ ...content, socialLinks: updated });
+                      }}
+                      className="px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 text-xs font-bold rounded-lg transition-colors border border-red-200 cursor-pointer flex items-center space-x-1"
+                    >
+                      <EyeOff className="w-3.5 h-3.5" />
+                      <span>Hide All</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newLink: SocialLinkItem = {
+                          id: 'custom-' + Date.now(),
+                          label: 'New Platform',
+                          href: 'https://',
+                          enabled: true,
+                          icon: 'FaGlobe',
+                        };
+                        setContent({
+                          ...content,
+                          socialLinks: [...(content.socialLinks || []), newLink],
+                        });
+                      }}
+                      className="btn-ditya-orange text-xs py-1.5 px-3 font-bold flex items-center space-x-1 shadow-sm cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add Custom Button</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Social Buttons Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(content.socialLinks || []).map((link: SocialLinkItem, idx: number) => {
+                    const IconComp = getAdminSocialIcon(link);
+                    const isEnabled = link.enabled !== false;
+
+                    return (
+                      <div
+                        key={link.id || idx}
+                        className={`p-4 rounded-xl border transition-all ${
+                          isEnabled
+                            ? 'bg-white border-gray-200 shadow-xs hover:border-[#10B981]'
+                            : 'bg-gray-50/80 border-dashed border-gray-300 opacity-75'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-3 mb-3">
+                          <div className="flex items-center space-x-3">
+                            <div
+                              className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm shadow-xs transition-colors ${
+                                isEnabled
+                                  ? 'bg-[#041614] text-white'
+                                  : 'bg-gray-200 text-gray-500'
+                              }`}
+                            >
+                              <IconComp className="w-4 h-4" />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                value={link.label}
+                                onChange={(e) => {
+                                  const updated = [...(content.socialLinks || [])];
+                                  updated[idx] = { ...updated[idx], label: e.target.value };
+                                  setContent({ ...content, socialLinks: updated });
+                                }}
+                                className="font-bold text-xs text-[#041614] bg-transparent border-b border-transparent hover:border-gray-300 focus:border-[#059669] focus:outline-none px-1"
+                                placeholder="Platform Name"
+                              />
+                              <span className="block text-[10px] text-gray-400 font-mono px-1">
+                                id: {link.id}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Toggle Visibility Switch */}
+                          <div className="flex items-center space-x-2">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = [...(content.socialLinks || [])];
+                                updated[idx] = { ...updated[idx], enabled: !isEnabled };
+                                setContent({ ...content, socialLinks: updated });
+                              }}
+                              className={`px-3 py-1 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                                isEnabled
+                                  ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                              }`}
+                              title={isEnabled ? 'Click to hide this button from site' : 'Click to show this button on site'}
+                            >
+                              {isEnabled ? (
+                                <>
+                                  <Eye className="w-3.5 h-3.5 text-emerald-700" />
+                                  <span>Visible</span>
+                                </>
+                              ) : (
+                                <>
+                                  <EyeOff className="w-3.5 h-3.5 text-gray-500" />
+                                  <span>Hidden</span>
+                                </>
+                              )}
+                            </button>
+
+                            {link.id?.startsWith('custom-') && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const updated = (content.socialLinks || []).filter((_: unknown, i: number) => i !== idx);
+                                  setContent({ ...content, socialLinks: updated });
+                                }}
+                                className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                                title="Delete custom button"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* URL input field */}
+                        <div className="flex items-center space-x-2">
+                          <div className="relative flex-1">
+                            <input
+                              type="text"
+                              value={link.href}
+                              onChange={(e) => {
+                                const updated = [...(content.socialLinks || [])];
+                                updated[idx] = { ...updated[idx], href: e.target.value };
+                                setContent({ ...content, socialLinks: updated });
+                              }}
+                              placeholder="https://..."
+                              className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669] font-mono"
+                            />
+                          </div>
+                          {link.href && link.href.startsWith('http') && (
+                            <a
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 bg-gray-100 hover:bg-[#059669] hover:text-white text-gray-600 rounded-lg text-xs transition-colors shrink-0"
+                              title="Test link in new tab"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Section C: Words & Paragraphs */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <div className="border-b border-gray-100 pb-3 flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <MessageSquare className="w-5 h-5 text-[#059669]" />
+                      <h3 className="text-lg font-bold text-[#041614]">
+                        Brand Words & Paragraphs
+                      </h3>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Customize the brand tagline, primary paragraph, and add as many additional paragraphs or notes as needed.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {/* Tagline */}
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Brand Tagline / Super-heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.branding?.tagline || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          branding: { ...content.branding, tagline: e.target.value },
+                        })
+                      }
+                      placeholder="e.g. One Group. Infinite Possibilities!"
+                      className="w-full px-3 py-2.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669] font-semibold text-[#D4AF37]"
+                    />
+                  </div>
+
+                  {/* Primary Description Paragraph */}
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Primary Description Paragraph
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={content.branding?.description || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          branding: { ...content.branding, description: e.target.value },
+                        })
+                      }
+                      placeholder="Empowering wealth creation, business growth..."
+                      className="w-full px-3 py-2.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669] leading-relaxed"
+                    />
+                  </div>
+
+                  {/* Additional Paragraphs */}
+                  <div className="pt-4 border-t border-gray-100 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-xs font-bold text-gray-700 uppercase">
+                        Additional Words & Paragraphs ({content.branding?.paragraphs?.length || 0})
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const existing = content.branding?.paragraphs || [];
+                          setContent({
+                            ...content,
+                            branding: {
+                              ...content.branding,
+                              paragraphs: [...existing, ''],
+                            },
+                          });
+                        }}
+                        className="px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-bold rounded-lg transition-colors border border-emerald-200 cursor-pointer flex items-center space-x-1"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Add Another Paragraph</span>
+                      </button>
+                    </div>
+
+                    {(content.branding?.paragraphs || []).map((p: string, pIdx: number) => (
+                      <div key={pIdx} className="flex items-start space-x-2 bg-gray-50 p-3 rounded-xl border border-gray-200">
+                        <span className="text-[11px] font-bold text-gray-400 mt-2">#{pIdx + 1}</span>
+                        <textarea
+                          rows={2}
+                          value={p}
+                          onChange={(e) => {
+                            const updated = [...(content.branding?.paragraphs || [])];
+                            updated[pIdx] = e.target.value;
+                            setContent({
+                              ...content,
+                              branding: {
+                                ...content.branding,
+                                paragraphs: updated,
+                              },
+                            });
+                          }}
+                          placeholder={`Enter additional paragraph or custom text #${pIdx + 1}...`}
+                          className="flex-1 px-3 py-2 text-xs border border-gray-300 bg-white rounded-lg focus:outline-none focus:border-[#059669] leading-relaxed"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = (content.branding?.paragraphs || []).filter((_: unknown, i: number) => i !== pIdx);
+                            setContent({
+                              ...content,
+                              branding: {
+                                ...content.branding,
+                                paragraphs: updated,
+                              },
+                            });
+                          }}
+                          className="p-2 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
+                          title="Delete paragraph"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Section D: Live Preview */}
+              <div className="bg-gradient-to-b from-[#031513] via-[#020e0d] to-[#010706] text-white p-6 sm:p-8 rounded-asymmetric border border-emerald-500/30 shadow-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="w-4 h-4 text-[#10B981]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                      Live Public Footer Preview
+                    </span>
+                  </div>
+                  <span className="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded font-mono">
+                    {(content.socialLinks || []).filter((s: SocialLinkItem) => s.enabled !== false && s.href).length} Active Buttons Visible
+                  </span>
+                </div>
+
+                <div className="space-y-3 max-w-lg">
+                  <p className="text-[#D4AF37] font-semibold text-sm tracking-wide">
+                    {content.branding?.tagline || 'One Group. Infinite Possibilities!'}
+                  </p>
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    {content.branding?.description || 'Empowering wealth creation...'}
+                  </p>
+                  {(content.branding?.paragraphs || []).map((p: string, idx: number) =>
+                    p ? (
+                      <p key={idx} className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                        {p}
+                      </p>
+                    ) : null
+                  )}
+
+                  {/* Active Buttons Preview */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {(content.socialLinks || [])
+                      .filter((s: SocialLinkItem) => s.enabled !== false && s.href)
+                      .map((s: SocialLinkItem, idx: number) => {
+                        const IconComp = getAdminSocialIcon(s);
+                        return (
+                          <div
+                            key={idx}
+                            title={`${s.label}: ${s.href}`}
+                            className="w-8 h-8 rounded-xl bg-white/10 border border-white/15 text-gray-200 flex items-center justify-center text-xs shadow-xs"
+                          >
+                            <IconComp className="w-3.5 h-3.5" />
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Section E: Executive Contact Cards */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <div className="border-b border-gray-100 pb-3">
+                  <div className="flex items-center space-x-2">
+                    <Phone className="w-5 h-5 text-[#059669]" />
+                    <h3 className="text-lg font-bold text-[#041614]">
+                      Contact Cards & Office Addresses
+                    </h3>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Manage the phones, emails, and address locations shown in the top contact docks of the footer.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Phone 1 (India HQ)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.phoneIndia || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, phoneIndia: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Phone 2 (Georgia)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.phoneGeorgia || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, phoneGeorgia: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Phone Working Hours
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.phoneHours || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, phoneHours: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Corporate Email
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.emailCorporate || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, emailCorporate: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      India Office Address
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.officeIndiaAddress || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, officeIndiaAddress: e.target.value },
                         })
                       }
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
