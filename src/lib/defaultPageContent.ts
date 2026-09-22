@@ -246,6 +246,53 @@ export interface CustomPageContent {
   richContent?: string;
 }
 
+export interface GBNPageContent {
+  banner: {
+    badge: string;
+    title: string;
+    subtitle: string;
+  };
+  intro: {
+    tagline: string;
+    heading: string;
+    description: string;
+  };
+  features: {
+    card1Title: string;
+    card1Desc: string;
+    card2Title: string;
+    card2Desc: string;
+    card3Title: string;
+    card3Desc: string;
+  };
+  tiers?: {
+    heading: string;
+    subtitle: string;
+    tier1Title: string;
+    tier1Criteria: string;
+    tier1Desc: string;
+    tier1Features: string[];
+    tier2Title: string;
+    tier2Criteria: string;
+    tier2Desc: string;
+    tier2Features: string[];
+  };
+  stats?: {
+    stat1Number: string;
+    stat1Label: string;
+    stat2Number: string;
+    stat2Label: string;
+    stat3Number: string;
+    stat3Label: string;
+  };
+  cta: {
+    heading: string;
+    description: string;
+    btnText: string;
+    btnLink: string;
+  };
+}
+
 export interface PageContentMap {
   home: HomePageContent;
   about: AboutPageContent;
@@ -254,7 +301,7 @@ export interface PageContentMap {
   'privacy-policy': LegalPageContent;
   'terms-and-conditions': LegalPageContent;
   'ditya-wealth-house': HousePageContent;
-  'global-business-network': HousePageContent;
+  'global-business-network': GBNPageContent;
   'ditya-astroverse': HousePageContent;
   'ditya-math-house': HousePageContent;
   'ditya-business-house': HousePageContent;
@@ -277,6 +324,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'about', title: 'About Us', path: '/about-us', category: 'Core Pages' },
   { slug: 'services', title: 'Services & Houses Directory', path: '/services', category: 'Core Pages' },
   { slug: 'contact', title: 'Contact Us', path: '/contact-us', category: 'Core Pages' },
+  { slug: 'global-business-network', title: 'Global Business Network (GBN)', path: '/global-business-network', category: 'Ecosystem & Networks' },
   { slug: 'privacy-policy', title: 'Privacy Policy', path: '/privacy-policy', category: 'Legal & Policy' },
   { slug: 'terms-and-conditions', title: 'Terms & Conditions', path: '/terms-and-conditions', category: 'Legal & Policy' },
   { slug: 'ditya-wealth-house', title: 'Ditya Wealth House', path: '/ditya-wealth-house', category: 'Houses' },
@@ -285,7 +333,6 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'ditya-business-house', title: 'Ditya Business House', path: '/ditya-business-house', category: 'Houses' },
   { slug: 'ditya-trading-house', title: 'Ditya Trading House', path: '/ditya-trading-house', category: 'Houses' },
   { slug: 'ditya-tech-house', title: 'Ditya Tech House', path: '/ditya-tech-house', category: 'Houses' },
-  { slug: 'global-business-network', title: 'Global Business Network', path: '/global-business-network', category: 'Houses' },
 ];
 
 export function createDefaultCustomPage(title: string, category = 'Services Sub-Page'): CustomPageContent {
@@ -559,44 +606,67 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
   },
   'global-business-network': {
     banner: {
-      badge: 'Stock Market • F&O • Forex • Live Trading Support',
-      title: 'Ditya Wealth House',
-      subtitle:
-        'What you do in trading matters deeply. How you enter and exit the market can have a strong impact on your profits and losses.',
+      badge: 'Premier International Community',
+      title: 'Global Business Network (GBN)',
+      subtitle: 'Expand Your Reach. Connect with Industry Leaders Worldwide.',
     },
-    details: {
-      division: 'Ditya Trade Code',
-      heading: 'What You Do In Trading Matters Deeply',
+    intro: {
+      tagline: 'Connect • Collaborate • Grow',
+      heading: 'A Business Network Built Around Meaningful Relationships',
       description:
-        'What you do in trading matters deeply. How you enter and exit the market can have a strong impact on your profits and losses. With the right guidance through Ditya Trade Code and numerology-based timing, you can understand trends, behavior, and opportunities while maintaining control in your decisions. The more aligned your strategy is, the more likely you are to achieve consistency and growth. When your approach is clear, it improves your overall trading journey.\n\nThis entire segment covers stock market, F&O, and forex where we provide live trading support, help in stuck trades, and complete guidance for better decisions.',
-      overviewHeading: 'Overview Services',
-      overviewDescription:
-        'We are a multi-service company providing a variety of solutions including stock market guidance, numerology, software, and essential services. We support clients across different needs, whether it is a one-time consultation or long-term guidance based on their goals.',
-      card1Title: 'Increase Growth',
-      card1Desc: 'Working with Ditya Group leads to better clarity, stronger decisions, and overall business and personal success.',
-      card2Title: 'Save Time',
-      card2Desc: 'With Ditya Group, you can rely on structured support systems that reduce your workload and help you focus on growth.',
-      checklistTitle: 'We can support you with a variety of services, such as:',
-      checklists: [
-        'Stock market and live trading guidance',
-        'F&O and forex trading support',
-        'Trade analysis and risk management',
-        'Numerology and name correction',
-        'Tarot card and astrology guidance',
-        'Face reading and palm reading',
-        'Vedic astrology insights',
-        'Business and decision alignment',
-        'Software and digital solutions',
-        'Online doctor consultation access',
-        'Math learning and academic support',
-        'Coworking and productivity spaces',
-        'Customer and client support',
-        'Business consulting and strategy',
-        'Financial and growth planning',
+        'The Global Business Network is a premier community designed for ambitious entrepreneurs, executives, and business owners. We bridge the gap between local expertise and global opportunities by fostering powerful collaborations, sharing actionable market insights, and providing a trusted ecosystem for sustainable business growth.',
+    },
+    features: {
+      card1Title: 'Strategic Networking',
+      card1Desc:
+        'Connect with high-net-worth individuals, investors, and elite professionals across international markets to build partnerships that matter.',
+      card2Title: 'Global Market Insights',
+      card2Desc:
+        'Gain access to exclusive resources, trends, and strategies to help your business scale across borders seamlessly.',
+      card3Title: 'Exclusive Events & Cohorts',
+      card3Desc:
+        'Participate in private networking events, mastermind sessions, and specialized cohorts (like the Elite Council) designed to accelerate your growth.',
+    },
+    tiers: {
+      heading: 'Tailored Membership Tiers',
+      subtitle: 'Select the networking circle aligned with your business scale and strategic ambitions.',
+      tier1Title: 'GBN Circle',
+      tier1Criteria: 'For businesses with ₹20 Lakh+ annual turnover',
+      tier1Desc:
+        'A structured business networking experience for entrepreneurs, professionals, and rising business leaders.',
+      tier1Features: [
+        'Curated online & physical networking sessions',
+        'Official member business showcase presentations',
+        'Direct business introductions & referral exchange',
+        'Cross-industry collaboration opportunities',
+        'Global business community connections',
       ],
-      ctaTitle: 'Not Enough Time In The Day? Give Us A Call',
-      ctaDesc: 'We are available 24/7 to help you with any questions or concerns that you have about our products or services. You can contact us anytime and we will be happy to assist you.',
-      ctaBtnText: 'Get Started',
+      tier2Title: 'GBN Elite Council',
+      tier2Criteria: 'For businesses with ₹5 Crore+ annual turnover',
+      tier2Desc:
+        'An exclusive, invite-only mastermind council for established enterprise leaders and visionary founders.',
+      tier2Features: [
+        'Private executive morning roundtables',
+        'High-value strategic partnership introductions',
+        'Confidential mastermind & scaling advisory',
+        'Direct leadership-level peer networking',
+        'Cross-border expansion and investment facilitation',
+      ],
+    },
+    stats: {
+      stat1Number: '500+',
+      stat1Label: 'Vetted Business Leaders',
+      stat2Number: '12+',
+      stat2Label: 'Global Chapters & Hubs',
+      stat3Number: '₹150Cr+',
+      stat3Label: 'Closed Business Collaborations',
+    },
+    cta: {
+      heading: 'Ready to Accelerate Your Global Reach?',
+      description:
+        'Join an elite circle of entrepreneurs and industry leaders creating cross-border impact. Apply for GBN Circle membership today.',
+      btnText: 'Join the Network / Become a Member',
+      btnLink: '/contact-us?service=GBN%20Circle',
     },
   },
   'ditya-astroverse': {

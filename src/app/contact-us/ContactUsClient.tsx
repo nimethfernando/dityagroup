@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import {
   Phone,
@@ -49,6 +50,9 @@ const contactFaqs: FaqItem[] = [
 ];
 
 export default function ContactUsClient({ content }: ContactUsClientProps) {
+  const searchParams = useSearchParams();
+  const serviceParam = searchParams ? searchParams.get('service') : null;
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -56,6 +60,19 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
     service: 'General Inquiry',
     message: '',
   });
+
+  useEffect(() => {
+    if (serviceParam) {
+      const lower = serviceParam.toLowerCase();
+      if (lower.includes('gbn elite')) {
+        setFormData((prev) => ({ ...prev, service: 'GBN Elite Council' }));
+      } else if (lower.includes('gbn') || lower.includes('network') || lower.includes('circle')) {
+        setFormData((prev) => ({ ...prev, service: 'GBN Circle' }));
+      } else {
+        setFormData((prev) => ({ ...prev, service: serviceParam }));
+      }
+    }
+  }, [serviceParam]);
 
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -380,6 +397,8 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       className="w-full px-4 py-3 bg-[#F9F9FB] border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition-all font-medium text-gray-800"
                     >
                       <option value="General Inquiry">General Inquiry</option>
+                      <option value="GBN Circle">GBN Circle (Global Business Network)</option>
+                      <option value="GBN Elite Council">GBN Elite Council (High-Turnover Network)</option>
                       <option value="Ditya Wealth House">Ditya Wealth House (Trading, F&O & Forex)</option>
                       <option value="Ditya Astroverse">Ditya Astroverse (Numerology, Tarot & Astrology)</option>
                       <option value="Ditya Math House">Ditya Math House (Math Learning & Concept Clarity)</option>

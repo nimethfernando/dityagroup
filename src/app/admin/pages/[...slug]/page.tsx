@@ -172,7 +172,7 @@ export default function PageEditor({ params }: PageEditorProps) {
     );
   }
 
-  const isHouseOrCustom = slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'services' && slug !== 'privacy-policy' && slug !== 'terms-and-conditions';
+  const isHouseOrCustom = slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'services' && slug !== 'privacy-policy' && slug !== 'terms-and-conditions' && slug !== 'global-business-network';
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-gray-800 pb-28">
@@ -1104,6 +1104,695 @@ export default function PageEditor({ params }: PageEditorProps) {
                         })
                       }
                       className="w-full px-3 py-1.5 text-xs bg-white/10 border border-white/20 rounded text-white"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================================ */}
+          {/* 7. GLOBAL BUSINESS NETWORK (GBN) CMS EDITOR */}
+          {/* ============================================================ */}
+          {slug === 'global-business-network' && (
+            <div className="space-y-6">
+              {/* Banner Section */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2 flex items-center justify-between">
+                  <span>1. Hero Banner Header</span>
+                  <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
+                    Royal Navy & Gold
+                  </span>
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Hero Badge / Pill
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Hero Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Hero Subtitle
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.banner?.subtitle || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        banner: { ...content.banner, subtitle: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+              </div>
+
+              {/* Intro / Core Vision */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  2. Core Description & Strategic Vision
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Intro Badge
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Intro Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Core Description
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={content.intro?.description || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        intro: { ...content.intro, description: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Pillar 1
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.bullet1 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, bullet1: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Pillar 2
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.bullet2 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, bullet2: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Pillar 3
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.bullet3 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, bullet3: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Signature Slogan / Quote
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.quote || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, quote: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Quote Attribution / Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.intro?.quoteAuthor || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          intro: { ...content.intro, quoteAuthor: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 3 Signature Feature Cards */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  3. Key Features (3-Card Signature Layout)
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {/* Card 1 */}
+                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
+                    <span className="text-xs font-bold text-[#041614] uppercase block">
+                      Card 1: Strategic Networking
+                    </span>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Title</label>
+                      <input
+                        type="text"
+                        value={content.features?.feature1Title || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature1Title: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Tag / Pill</label>
+                      <input
+                        type="text"
+                        value={content.features?.feature1Tag || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature1Tag: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Description</label>
+                      <textarea
+                        rows={3}
+                        value={content.features?.feature1Desc || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature1Desc: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Card 2 */}
+                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
+                    <span className="text-xs font-bold text-[#041614] uppercase block">
+                      Card 2: Global Market Insights
+                    </span>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Title</label>
+                      <input
+                        type="text"
+                        value={content.features?.feature2Title || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature2Title: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Tag / Pill</label>
+                      <input
+                        type="text"
+                        value={content.features?.feature2Tag || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature2Tag: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Description</label>
+                      <textarea
+                        rows={3}
+                        value={content.features?.feature2Desc || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature2Desc: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Card 3 */}
+                  <div className="p-4 bg-gray-50 rounded-xl border border-gray-200 space-y-3">
+                    <span className="text-xs font-bold text-[#041614] uppercase block">
+                      Card 3: Exclusive Events & Cohorts
+                    </span>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Title</label>
+                      <input
+                        type="text"
+                        value={content.features?.feature3Title || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature3Title: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Tag / Pill</label>
+                      <input
+                        type="text"
+                        value={content.features?.feature3Tag || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature3Tag: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Description</label>
+                      <textarea
+                        rows={3}
+                        value={content.features?.feature3Desc || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            features: { ...content.features, feature3Desc: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Membership Tiers (GBN Circle & GBN Elite Council) */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  4. Membership Tiers & Qualification Criteria
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {/* Tier 1 */}
+                  <div className="p-5 bg-blue-50/40 rounded-2xl border border-blue-100 space-y-3">
+                    <span className="text-xs font-bold text-[#070B19] uppercase block">
+                      Tier 1: GBN Circle
+                    </span>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-600 mb-1">Badge</label>
+                        <input
+                          type="text"
+                          value={content.tiers?.tier1Badge || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              tiers: { ...content.tiers, tier1Badge: e.target.value },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-600 mb-1">Turnover Req</label>
+                        <input
+                          type="text"
+                          value={content.tiers?.tier1Turnover || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              tiers: { ...content.tiers, tier1Turnover: e.target.value },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Title</label>
+                      <input
+                        type="text"
+                        value={content.tiers?.tier1Title || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            tiers: { ...content.tiers, tier1Title: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Description</label>
+                      <textarea
+                        rows={2}
+                        value={content.tiers?.tier1Desc || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            tiers: { ...content.tiers, tier1Desc: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">
+                        Benefits / Features (one per line)
+                      </label>
+                      <textarea
+                        rows={4}
+                        value={(content.tiers?.tier1Points || []).join('\n')}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            tiers: {
+                              ...content.tiers,
+                              tier1Points: e.target.value.split('\n').filter((l: string) => l.trim() !== ''),
+                            },
+                          })
+                        }
+                        placeholder="One bullet point per line..."
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white font-mono"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Tier 2 */}
+                  <div className="p-5 bg-amber-50/40 rounded-2xl border border-amber-200 space-y-3">
+                    <span className="text-xs font-bold text-[#B8860B] uppercase block">
+                      Tier 2: GBN Elite Council
+                    </span>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-600 mb-1">Badge</label>
+                        <input
+                          type="text"
+                          value={content.tiers?.tier2Badge || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              tiers: { ...content.tiers, tier2Badge: e.target.value },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-[11px] font-semibold text-gray-600 mb-1">Turnover Req</label>
+                        <input
+                          type="text"
+                          value={content.tiers?.tier2Turnover || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              tiers: { ...content.tiers, tier2Turnover: e.target.value },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Title</label>
+                      <input
+                        type="text"
+                        value={content.tiers?.tier2Title || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            tiers: { ...content.tiers, tier2Title: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">Description</label>
+                      <textarea
+                        rows={2}
+                        value={content.tiers?.tier2Desc || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            tiers: { ...content.tiers, tier2Desc: e.target.value },
+                          })
+                        }
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-[11px] font-semibold text-gray-600 mb-1">
+                        Benefits / Features (one per line)
+                      </label>
+                      <textarea
+                        rows={4}
+                        value={(content.tiers?.tier2Points || []).join('\n')}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            tiers: {
+                              ...content.tiers,
+                              tier2Points: e.target.value.split('\n').filter((l: string) => l.trim() !== ''),
+                            },
+                          })
+                        }
+                        placeholder="One bullet point per line..."
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded bg-white font-mono"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Stats & Call to Action */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  5. Impact Metrics & Bottom CTA
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  <div>
+                    <label className="block text-[11px] font-semibold text-gray-600 mb-1">Stat 1 Value</label>
+                    <input
+                      type="text"
+                      value={content.stats?.stat1Value || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat1Value: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded"
+                    />
+                    <input
+                      type="text"
+                      value={content.stats?.stat1Label || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat1Label: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mt-1.5 text-gray-500"
+                      placeholder="Label"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-gray-600 mb-1">Stat 2 Value</label>
+                    <input
+                      type="text"
+                      value={content.stats?.stat2Value || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat2Value: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded"
+                    />
+                    <input
+                      type="text"
+                      value={content.stats?.stat2Label || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat2Label: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mt-1.5 text-gray-500"
+                      placeholder="Label"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-gray-600 mb-1">Stat 3 Value</label>
+                    <input
+                      type="text"
+                      value={content.stats?.stat3Value || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat3Value: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded"
+                    />
+                    <input
+                      type="text"
+                      value={content.stats?.stat3Label || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat3Label: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mt-1.5 text-gray-500"
+                      placeholder="Label"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-semibold text-gray-600 mb-1">Stat 4 Value</label>
+                    <input
+                      type="text"
+                      value={content.stats?.stat4Value || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat4Value: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded"
+                    />
+                    <input
+                      type="text"
+                      value={content.stats?.stat4Label || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          stats: { ...content.stats, stat4Label: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mt-1.5 text-gray-500"
+                      placeholder="Label"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-4 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Bottom CTA Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.cta?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          cta: { ...content.cta, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Bottom CTA Button Text
+                    </label>
+                    <input
+                      type="text"
+                      value={content.cta?.buttonText || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          cta: { ...content.cta, buttonText: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
                   </div>
                 </div>
