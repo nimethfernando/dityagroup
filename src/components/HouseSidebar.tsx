@@ -58,11 +58,17 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
           <Phone className="w-7 h-7" />
         </div>
         <div>
-          <h4 className="text-xl font-bold">Not Enough Time In The Day? Give Us A Call</h4>
-          <p className="text-xs text-gray-300 mt-2 leading-relaxed">
+          <h4 className="text-xl font-bold !text-white drop-shadow-sm">Not Enough Time In The Day? Give Us A Call</h4>
+          <p className="text-xs text-gray-200 mt-2 leading-relaxed">
             We are available 24/7 to help you with any questions or concerns that you have about our products or services. You can contact us anytime and we will be happy to assist you.
           </p>
         </div>
+        <a
+          href="tel:+919351090301"
+          className="block text-xl font-extrabold text-[#10B981] hover:text-white transition-colors"
+        >
+          +91-93510 90301
+        </a>
         <div className="space-y-2.5 pt-1">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400/90 block">

@@ -21,15 +21,15 @@ export default async function TermsAndConditionsPage() {
   return (
     <div className="pb-16 bg-white">
       {/* Banner */}
-      <section className="bg-[#011633] text-white py-16 text-center">
-        <div className="max-w-[1140px] mx-auto px-4">
-          <span className="text-xs font-bold text-[#059669] tracking-widest uppercase">
+      <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
+        <div className="max-w-[1140px] mx-auto px-4 relative z-10">
+          <span className="text-xs font-bold text-[#10B981] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             {banner?.badge || 'User Agreement'}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-2">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {banner?.title || 'Terms & Conditions'}
           </h1>
-          <p className="text-xs sm:text-sm text-gray-300 max-w-xl mx-auto mt-2">
+          <p className="text-xs sm:text-sm text-gray-200 max-w-xl mx-auto mt-3 drop-shadow-sm">
             {banner?.subtitle || 'Please review the terms of service governing engagement with Ditya Group.'}
           </p>
         </div>

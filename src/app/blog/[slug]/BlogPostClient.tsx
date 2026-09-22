@@ -79,7 +79,7 @@ export default function BlogPostClient({
             {post.category}
           </span>
 
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-tight max-w-4xl tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold !text-white leading-tight max-w-4xl tracking-tight drop-shadow-md">
             {post.title}
           </h1>
 
@@ -221,6 +221,7 @@ export default function BlogPostClient({
                     <div className="w-8 h-8 rounded-lg bg-[#D4AF37] flex items-center justify-center shrink-0">
                       <Mail className="w-4 h-4 text-[#041614]" />
                     </div>
+                    <span className="truncate">bmcgenie@gmail.com</span>
                     <span className="truncate">groupditya@gmail.com</span>
                   </a>
                 </div>

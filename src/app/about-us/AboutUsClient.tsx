@@ -140,11 +140,11 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white tracking-tight drop-shadow-md">
             {banner.title || 'About Us'}
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-2xl mx-auto mt-4 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-200 max-w-2xl mx-auto mt-4 font-normal leading-relaxed drop-shadow-sm">
             {banner.subtitle || 'Building Solutions That Simplify Growth'}
           </p>
         </div>

@@ -36,10 +36,10 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
             <span className="w-2 h-2 rounded-full bg-[#10B981]"></span>
             <span>{content.banner.badge}</span>
           </span>
-          <h1 className="text-3xl sm:text-5xl font-extrabold text-white mt-1 tracking-tight">
+          <h1 className="text-3xl sm:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {content.banner.title}
           </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mt-3 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-200 max-w-xl mt-3 font-normal leading-relaxed drop-shadow-sm">
             {content.banner.subtitle}
           </p>
         </div>

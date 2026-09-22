@@ -587,6 +587,7 @@ export default function PageEditor({ params }: PageEditorProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Phone Number
                     Primary Phone Number (India HQ)
                   </label>
                   <input
@@ -604,6 +605,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Email Address
                     Secondary Phone Number (Georgia Desk)
                   </label>
                   <input

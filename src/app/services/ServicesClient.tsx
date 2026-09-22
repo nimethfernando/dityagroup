@@ -109,10 +109,10 @@ export default function ServicesClient({ content, customServices }: ServicesClie
           <span className="text-xs font-bold text-[#059669] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
             {content.banner?.badge || 'Integrated Solutions'}
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {content.banner?.title || 'Our Services & Houses'}
           </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto mt-3 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-200 max-w-xl mx-auto mt-3 font-normal leading-relaxed drop-shadow-sm">
             {content.banner?.subtitle ||
               'Explore our specialized Houses and bespoke service divisions designed to elevate your personal clarity, educational excellence, and business growth.'}
           </p>

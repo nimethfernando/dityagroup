@@ -91,11 +91,11 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
             </span>
           </div>
 
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white tracking-tight drop-shadow-md">
             Blog
           </h1>
 
-          <p className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-xl mx-auto mt-3 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-200 max-w-xl mx-auto mt-3 font-normal leading-relaxed drop-shadow-sm">
             Dive into our blog and explore its captivating content!
           </p>
         </div>

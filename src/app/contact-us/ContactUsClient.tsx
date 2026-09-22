@@ -122,10 +122,10 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
             <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
             <span>{content.banner.badge || 'We Are Available 24/7'}</span>
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-1 tracking-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {content.banner.title || 'Contact Us'}
           </h1>
-          <p className="text-sm sm:text-base text-gray-300 max-w-xl mx-auto mt-3 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-gray-200 max-w-xl mx-auto mt-3 font-normal leading-relaxed drop-shadow-sm">
             {content.banner.subtitle ||
               'Have questions about our Houses or guidance programs? Connect directly with our team.'}
           </p>
