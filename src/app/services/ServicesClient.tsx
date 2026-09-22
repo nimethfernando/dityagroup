@@ -14,6 +14,7 @@ import {
   ArrowRight,
   CheckCircle,
   Layers,
+  Globe2,
 } from 'lucide-react';
 import { useConsultation } from '@/contexts/ConsultationContext';
 import { ServicesPageContent } from '@/lib/defaultPageContent';
@@ -83,6 +84,18 @@ export default function ServicesClient({ content, customServices }: ServicesClie
       icon: Laptop,
       href: '/ditya-tech-house',
       highlights: ['Software development & system building', 'Automation and technical support', 'Website and application solutions'],
+    },
+    {
+      title: 'Global Business Network',
+      subtitle: 'International Leadership & Networking Circle',
+      desc: 'Expand Your Reach. Connect with high-net-worth investors, elite entrepreneurs, and international leaders through trusted cohorts and mastermind councils to scale across borders.',
+      icon: Globe2,
+      href: '/global-business-network',
+      highlights: [
+        'High-trust cross-border collaborations',
+        'Global market insights and expansion resources',
+        'Private executive events & mastermind cohorts',
+      ],
     },
   ];
 

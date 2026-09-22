@@ -77,7 +77,7 @@ export default function Footer() {
     { name: 'Ditya Business House', href: '/ditya-business-house' },
     { name: 'Ditya Trading House', href: '/ditya-trading-house' },
     { name: 'Ditya Tech House', href: '/ditya-tech-house' },
-    { name: 'Global Business Network (GBN)', href: '/global-business-network', isGbn: true },
+    { name: 'Global Business Network', href: '/global-business-network' },
   ];
 
   return (
@@ -257,8 +257,8 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/global-business-network" className="hover:text-[#D4AF37] text-[#D4AF37] font-semibold transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">GBN Network</span>
+                <Link href="/global-business-network" className="hover:text-[#10B981] transition-colors flex items-center group">
+                  <span className="group-hover:translate-x-1 transition-transform">Global Business Network</span>
                 </Link>
               </li>
             </ul>
@@ -266,23 +266,17 @@ export default function Footer() {
 
           {/* Col 3: Specialized Houses (Span 3) */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-white font-extrabold text-base border-b-2 border-[#D4AF37] pb-1.5 inline-block tracking-wide">
-              Houses & Ecosystem
+            <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
+              Houses & Network
             </h4>
             <ul className="grid grid-cols-1 gap-2.5 text-xs sm:text-sm text-gray-300">
               {houseLinks.map((h, idx) => (
                 <li key={idx}>
                   <Link
                     href={h.href}
-                    className={`transition-colors flex items-center group ${
-                      h.isGbn ? 'text-[#D4AF37] font-semibold hover:text-[#F3E5AB]' : 'hover:text-[#D4AF37]'
-                    }`}
+                    className="hover:text-[#10B981] transition-colors flex items-center group"
                   >
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full mr-2 transition-colors ${
-                        h.isGbn ? 'bg-[#D4AF37]' : 'bg-[#D4AF37]/60 group-hover:bg-[#D4AF37]'
-                      }`}
-                    />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]/60 mr-2 group-hover:bg-[#10B981] transition-colors" />
                     <span className="group-hover:translate-x-1 transition-transform">{h.name}</span>
                   </Link>
                 </li>

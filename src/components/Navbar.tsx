@@ -50,6 +50,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
     { title: 'Ditya Business House', href: '/ditya-business-house' },
     { title: 'Ditya Trading House', href: '/ditya-trading-house' },
     { title: 'Ditya Tech House', href: '/ditya-tech-house' },
+    { title: 'Global Business Network', href: '/global-business-network' },
   ];
 
   const isActive = (href: string) => {
@@ -130,7 +131,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               <div className="absolute top-full left-0 w-72 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
                 <div className="px-3 py-2 border-b border-gray-100 mb-1">
                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                    6 Specialized Houses
+                    Our Houses & Network
                   </span>
                 </div>
                 {serviceHouses.map((item) => (
@@ -146,38 +147,9 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                     {item.title}
                   </Link>
                 ))}
-                <div className="pt-1 mt-1 border-t border-gray-100">
-                  <Link
-                    href="/global-business-network"
-                    className={`flex items-center justify-between px-3.5 py-2 rounded-xl text-sm font-semibold transition-all ${
-                      pathname === '/global-business-network'
-                        ? 'bg-amber-50 text-[#B8860B]'
-                        : 'text-gray-800 hover:bg-amber-50/60 hover:text-[#B8860B]'
-                    }`}
-                  >
-                    <span>Global Business Network</span>
-                    <span className="text-[9px] font-extrabold uppercase bg-[#D4AF37] text-white px-1.5 py-0.5 rounded">
-                      GBN
-                    </span>
-                  </Link>
-                </div>
               </div>
             )}
           </div>
-
-          <Link
-            href="/global-business-network"
-            className={`px-3.5 py-2 rounded-full transition-all duration-200 flex items-center space-x-1.5 ${
-              isActive('/global-business-network')
-                ? 'text-[#B8860B] font-bold bg-amber-50/90 shadow-xs'
-                : 'text-[#041614] hover:text-[#B8860B] hover:bg-amber-50/40'
-            }`}
-          >
-            <span>GBN</span>
-            <span className="text-[10px] font-black uppercase tracking-wider bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-white px-1.5 py-0.5 rounded-md shadow-xs">
-              Global
-            </span>
-          </Link>
 
           <Link
             href="/blog"
@@ -280,32 +252,9 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                     {item.title}
                   </Link>
                 ))}
-                <Link
-                  href="/global-business-network"
-                  className="flex items-center justify-between px-2 py-1.5 rounded-lg text-sm font-semibold text-[#B8860B] hover:text-[#996515]"
-                >
-                  <span>Global Business Network</span>
-                  <span className="text-[9px] font-bold uppercase bg-[#D4AF37] text-white px-1.5 py-0.5 rounded">
-                    GBN
-                  </span>
-                </Link>
               </div>
             )}
           </div>
-
-          <Link
-            href="/global-business-network"
-            className={`flex items-center justify-between px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/global-business-network')
-                ? 'text-[#B8860B] bg-amber-50 font-bold'
-                : 'text-[#041614]'
-            }`}
-          >
-            <span>Global Business Network</span>
-            <span className="text-[10px] font-bold uppercase bg-gradient-to-r from-[#D4AF37] to-[#AA771C] text-white px-2 py-0.5 rounded-md">
-              GBN
-            </span>
-          </Link>
 
           <Link
             href="/blog"

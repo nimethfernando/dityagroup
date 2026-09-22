@@ -333,6 +333,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'ditya-business-house', title: 'Ditya Business House', path: '/ditya-business-house', category: 'Houses' },
   { slug: 'ditya-trading-house', title: 'Ditya Trading House', path: '/ditya-trading-house', category: 'Houses' },
   { slug: 'ditya-tech-house', title: 'Ditya Tech House', path: '/ditya-tech-house', category: 'Houses' },
+  { slug: 'global-business-network', title: 'Global Business Network', path: '/global-business-network', category: 'Houses' },
 ];
 
 export function createDefaultCustomPage(title: string, category = 'Services Sub-Page'): CustomPageContent {

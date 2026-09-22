@@ -2,7 +2,6 @@ import React from 'react';
 import { Metadata } from 'next';
 import { getPageContent } from '@/lib/getPageContent';
 import GBNClient from './GBNClient';
-
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
 

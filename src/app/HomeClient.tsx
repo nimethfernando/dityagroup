@@ -520,31 +520,30 @@ export default function HomeClient({ content }: HomeClientProps) {
       </section>
 
       {/* ============================================================ */}
-      {/* 4.5. GLOBAL BUSINESS NETWORK (GBN) SHOWCASE */}
+      {/* 4.5. GLOBAL BUSINESS NETWORK SHOWCASE */}
       {/* ============================================================ */}
-      <section className="py-24 bg-[#070B19] text-white relative overflow-hidden border-y border-[#C5A059]/20">
-        {/* Subtle Navy / Gold Background Radial Glows */}
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#132A52]/40 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(197,160,89,0.15),rgba(255,255,255,0))] pointer-events-none" />
+      <section className="py-24 bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white relative overflow-hidden border-y border-white/10">
+        {/* Subtle Ambient Emerald Glows */}
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#059669]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#10B981]/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
           {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-            <div className="inline-flex items-center space-x-2 bg-[#C5A059]/15 border border-[#C5A059]/35 px-4 py-1.5 rounded-full">
-              <Crown className="w-3.5 h-3.5 text-[#D4AF37]" />
-              <span className="text-xs font-bold text-[#D4AF37] uppercase tracking-widest">
-                Global Business Network (GBN)
+            <div className="inline-flex items-center space-x-2 bg-white/10 border border-white/15 px-4 py-1.5 rounded-full shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              <span className="text-xs font-bold text-[#059669] uppercase tracking-widest">
+                Global Business Network
               </span>
             </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white tracking-tight leading-tight drop-shadow-md">
               Expand Your Reach.{' '}
-              <span className="bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] bg-clip-text text-transparent">
+              <span className="text-[#10B981]">
                 Connect with Industry Leaders
               </span>{' '}
               Worldwide.
             </h2>
-            <p className="text-sm sm:text-base text-gray-300 leading-relaxed font-normal">
+            <p className="text-sm sm:text-base text-gray-200 leading-relaxed font-normal max-w-2xl mx-auto">
               The Global Business Network is a premier community designed for ambitious
               entrepreneurs, executives, and business owners. We bridge the gap between local
               expertise and global opportunities by fostering powerful collaborations, sharing
@@ -556,12 +555,12 @@ export default function HomeClient({ content }: HomeClientProps) {
           {/* 3-Card Signature Feature Layout */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7 mb-14">
             {/* Card 1: Strategic Networking */}
-            <div className="p-8 rounded-3xl bg-gradient-to-b from-[#0B162C] to-[#081021] border border-[#C5A059]/25 hover:border-[#C5A059] shadow-xl hover:shadow-[0_15px_40px_rgba(197,160,89,0.15)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+            <div className="p-8 rounded-3xl bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:border-[#059669]/60 shadow-xl hover:shadow-[0_15px_35px_rgba(5,150,105,0.2)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#D4AF37] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#C5A059] group-hover:text-[#070B19] transition-all">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#059669] group-hover:text-white transition-all shadow-sm">
                   <Globe2 className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold !text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
+                <h3 className="text-xl font-bold !text-white mb-3 group-hover:text-emerald-400 transition-colors">
                   Strategic Networking
                 </h3>
                 <p className="text-sm text-gray-300 leading-relaxed font-normal">
@@ -569,18 +568,18 @@ export default function HomeClient({ content }: HomeClientProps) {
                   international markets to build partnerships that matter.
                 </p>
               </div>
-              <div className="pt-6 border-t border-white/5 flex items-center text-xs font-bold text-[#D4AF37] tracking-wider uppercase">
+              <div className="pt-6 border-t border-white/10 flex items-center text-xs font-bold text-emerald-400 tracking-wider uppercase">
                 <span>International Cohorts</span>
               </div>
             </div>
 
             {/* Card 2: Global Market Insights */}
-            <div className="p-8 rounded-3xl bg-gradient-to-b from-[#0B162C] to-[#081021] border border-[#C5A059]/25 hover:border-[#C5A059] shadow-xl hover:shadow-[0_15px_40px_rgba(197,160,89,0.15)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+            <div className="p-8 rounded-3xl bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:border-[#059669]/60 shadow-xl hover:shadow-[0_15px_35px_rgba(5,150,105,0.2)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#D4AF37] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#C5A059] group-hover:text-[#070B19] transition-all">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#059669] group-hover:text-white transition-all shadow-sm">
                   <TrendingUp className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold !text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
+                <h3 className="text-xl font-bold !text-white mb-3 group-hover:text-emerald-400 transition-colors">
                   Global Market Insights
                 </h3>
                 <p className="text-sm text-gray-300 leading-relaxed font-normal">
@@ -588,18 +587,18 @@ export default function HomeClient({ content }: HomeClientProps) {
                   scale across borders seamlessly.
                 </p>
               </div>
-              <div className="pt-6 border-t border-white/5 flex items-center text-xs font-bold text-[#D4AF37] tracking-wider uppercase">
+              <div className="pt-6 border-t border-white/10 flex items-center text-xs font-bold text-emerald-400 tracking-wider uppercase">
                 <span>Cross-Border Scaling</span>
               </div>
             </div>
 
             {/* Card 3: Exclusive Events & Cohorts */}
-            <div className="p-8 rounded-3xl bg-gradient-to-b from-[#0B162C] to-[#081021] border border-[#C5A059]/25 hover:border-[#C5A059] shadow-xl hover:shadow-[0_15px_40px_rgba(197,160,89,0.15)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
+            <div className="p-8 rounded-3xl bg-white/[0.04] backdrop-blur-xl border border-white/10 hover:border-[#059669]/60 shadow-xl hover:shadow-[0_15px_35px_rgba(5,150,105,0.2)] transition-all duration-300 group hover:-translate-y-2 flex flex-col justify-between">
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-[#C5A059]/15 border border-[#C5A059]/30 text-[#D4AF37] flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#C5A059] group-hover:text-[#070B19] transition-all">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:bg-[#059669] group-hover:text-white transition-all shadow-sm">
                   <Crown className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold !text-white mb-3 group-hover:text-[#D4AF37] transition-colors">
+                <h3 className="text-xl font-bold !text-white mb-3 group-hover:text-emerald-400 transition-colors">
                   Exclusive Events & Cohorts
                 </h3>
                 <p className="text-sm text-gray-300 leading-relaxed font-normal">
@@ -607,20 +606,20 @@ export default function HomeClient({ content }: HomeClientProps) {
                   cohorts (like the Elite Council) designed to accelerate your growth.
                 </p>
               </div>
-              <div className="pt-6 border-t border-white/5 flex items-center text-xs font-bold text-[#D4AF37] tracking-wider uppercase">
+              <div className="pt-6 border-t border-white/10 flex items-center text-xs font-bold text-emerald-400 tracking-wider uppercase">
                 <span>Elite Council & Masterminds</span>
               </div>
             </div>
           </div>
 
           {/* Membership Tiers Quick Banner & Action CTA */}
-          <div className="p-8 sm:p-10 rounded-3xl bg-gradient-to-r from-[#0B162C] via-[#0E1E3B] to-[#0B162C] border border-[#C5A059]/40 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="p-8 sm:p-10 rounded-3xl bg-white/[0.05] backdrop-blur-xl border border-white/15 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="space-y-2 max-w-xl text-center lg:text-left">
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2">
-                <span className="text-xs font-bold bg-[#C5A059]/20 text-[#D4AF37] px-3 py-1 rounded-full border border-[#C5A059]/30">
+                <span className="text-xs font-bold bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full border border-emerald-500/30">
                   GBN Circle (₹20L+ Turnover)
                 </span>
-                <span className="text-xs font-bold bg-[#D4AF37]/25 text-[#FFF] px-3 py-1 rounded-full border border-[#D4AF37]/40">
+                <span className="text-xs font-bold bg-white/15 text-white px-3 py-1 rounded-full border border-white/20">
                   GBN Elite Council (₹5Cr+ Turnover)
                 </span>
               </div>
@@ -635,16 +634,16 @@ export default function HomeClient({ content }: HomeClientProps) {
             <div className="flex flex-col sm:flex-row items-center gap-4 w-full lg:w-auto shrink-0">
               <Link
                 href="/contact-us?service=GBN%20Circle"
-                className="w-full sm:w-auto text-center px-8 py-4 rounded-xl font-extrabold text-sm text-[#070B19] bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#C5A059] hover:from-[#F3E5AB] hover:to-[#D4AF37] shadow-xl hover:shadow-[0_0_25px_rgba(212,175,55,0.4)] transition-all cursor-pointer transform hover:-translate-y-0.5"
+                className="w-full sm:w-auto btn-ditya-orange text-xs sm:text-sm uppercase tracking-wider py-4 px-8 font-bold shadow-lg hover:shadow-xl cursor-pointer text-center"
               >
                 Join the Network / Become a Member
               </Link>
               <Link
                 href="/global-business-network"
-                className="w-full sm:w-auto text-center px-6 py-4 rounded-xl font-bold text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-[#C5A059] transition-all flex items-center justify-center space-x-2 cursor-pointer"
+                className="w-full sm:w-auto text-center px-6 py-4 rounded-xl font-bold text-xs sm:text-sm text-white bg-white/10 hover:bg-white/20 border border-white/20 hover:border-emerald-400 transition-all flex items-center justify-center space-x-2 cursor-pointer"
               >
-                <span>Explore GBN Page</span>
-                <ArrowRight className="w-4 h-4" />
+                <span>Explore Global Business Network</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
           </div>

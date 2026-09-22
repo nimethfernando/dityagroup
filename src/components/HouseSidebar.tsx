@@ -19,6 +19,7 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
     { name: 'Ditya Business House', href: '/ditya-business-house' },
     { name: 'Ditya Trading House', href: '/ditya-trading-house' },
     { name: 'Ditya Tech House', href: '/ditya-tech-house' },
+    { name: 'Global Business Network', href: '/global-business-network' },
   ];
 
   return (
@@ -26,13 +27,11 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
       {/* House Navigation Box */}
       <div className="bg-[#F8FAFC] rounded-asymmetric p-6 border border-gray-200/70 shadow-sm">
         <h3 className="text-xl font-bold text-[#041614] mb-5 border-b border-gray-200 pb-3">
-          Our Houses
+          Our Houses & Network
         </h3>
         <ul className="space-y-2">
           {services.map((item) => {
-            const active =
-              pathname === item.href ||
-              (item.href === '/ditya-wealth-house' && pathname === '/global-business-network');
+            const active = pathname === item.href;
             return (
               <li key={item.href}>
                 <Link
