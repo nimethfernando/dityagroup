@@ -6,6 +6,10 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import { useConsultation } from '@/contexts/ConsultationContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useLanguage } from '@/contexts/LanguageContext';
+import LanguageToggle from './LanguageToggle';
+import ThemeToggle from './ThemeToggle';
 
 interface NavbarProps {
   onOpenConsultation?: () => void;
@@ -14,6 +18,8 @@ interface NavbarProps {
 export default function Navbar({ onOpenConsultation }: NavbarProps) {
   const pathname = usePathname();
   const { openModal } = useConsultation();
+  const { theme } = useTheme();
+  const { t } = useLanguage();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
@@ -44,13 +50,13 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   }, [pathname]);
 
   const serviceHouses = [
-    { title: 'Ditya Wealth House', href: '/ditya-wealth-house' },
-    { title: 'Ditya Astroverse', href: '/ditya-astroverse' },
-    { title: 'Ditya Math House', href: '/ditya-math-house' },
-    { title: 'Ditya Business House', href: '/ditya-business-house' },
-    { title: 'Ditya Trading House', href: '/ditya-trading-house' },
-    { title: 'Ditya Tech House', href: '/ditya-tech-house' },
-    { title: 'Global Business Network', href: '/global-business-network' },
+    { title: t('house.wealth'), href: '/ditya-wealth-house' },
+    { title: t('house.astroverse'), href: '/ditya-astroverse' },
+    { title: t('house.math'), href: '/ditya-math-house' },
+    { title: t('house.business'), href: '/ditya-business-house' },
+    { title: t('house.trading'), href: '/ditya-trading-house' },
+    { title: t('house.tech'), href: '/ditya-tech-house' },
+    { title: t('house.gbn'), href: '/global-business-network' },
   ];
 
   const isActive = (href: string) => {
@@ -59,20 +65,22 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
     return false;
   };
 
+  const isDark = theme === 'dark';
+
   return (
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 backdrop-blur-xl shadow-[0_4px_25px_rgba(1,22,51,0.06)] py-3 border-b border-slate-100'
-          : 'bg-white/90 backdrop-blur-md py-4 border-b border-gray-100/70'
+          ? 'bg-white/95 dark:bg-[#020D0C]/95 backdrop-blur-xl shadow-[0_4px_25px_rgba(1,22,51,0.06)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.5)] py-3 border-b border-slate-100 dark:border-white/10'
+          : 'bg-white/90 dark:bg-[#020D0C]/90 backdrop-blur-md py-4 border-b border-gray-100/70 dark:border-white/5'
       }`}
     >
       <div className="max-w-[1140px] mx-auto px-4 flex items-center justify-between">
-        {/* Brand Logo */}
+        {/* Brand Logo - Switches to crisp white in Dark Mode */}
         <Link href="/" className="flex items-center space-x-3 group">
           <div className="relative h-11 sm:h-12 w-44 sm:w-56 transition-transform group-hover:scale-[1.01]">
             <Image
-              src="/images/logo.png"
+              src={isDark ? '/images/logo-white.png' : '/images/logo.png'}
               alt="Ditya Group Logo"
               fill
               className="object-contain object-left"
@@ -87,22 +95,22 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             href="/"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/')
-                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
-                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
+                ? 'text-[#059669] dark:text-[#10B981] font-bold bg-emerald-50/90 dark:bg-emerald-950/40 shadow-xs'
+                : 'text-[#041614] dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
             }`}
           >
-            Home
+            {t('nav.home')}
           </Link>
 
           <Link
             href="/about-us"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/about-us')
-                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
-                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
+                ? 'text-[#059669] dark:text-[#10B981] font-bold bg-emerald-50/90 dark:bg-emerald-950/40 shadow-xs'
+                : 'text-[#041614] dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
             }`}
           >
-            About Us
+            {t('nav.about')}
           </Link>
 
           {/* Services Dropdown */}
@@ -115,11 +123,11 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               href="/services"
               className={`px-3.5 py-2 rounded-full flex items-center space-x-1.5 transition-all duration-200 ${
                 isActive('/services') || serviceHouses.some((h) => pathname === h.href)
-                  ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
-                  : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
+                  ? 'text-[#059669] dark:text-[#10B981] font-bold bg-emerald-50/90 dark:bg-emerald-950/40 shadow-xs'
+                  : 'text-[#041614] dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
               }`}
             >
-              <span>Services</span>
+              <span>{t('nav.services')}</span>
               <ChevronDown
                 className={`w-3.5 h-3.5 transition-transform duration-200 ${
                   isServicesOpen ? 'rotate-180' : ''
@@ -128,20 +136,20 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             </Link>
 
             {isServicesOpen && (
-              <div className="absolute top-full left-0 w-72 bg-white/95 backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-                <div className="px-3 py-2 border-b border-gray-100 mb-1">
-                  <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
-                    Our Houses & Network
+              <div className="absolute top-full left-0 w-72 bg-white/95 dark:bg-[#041614] backdrop-blur-xl shadow-2xl rounded-2xl border border-gray-100 dark:border-white/10 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+                <div className="px-3 py-2 border-b border-gray-100 dark:border-white/10 mb-1">
+                  <span className="text-[10px] font-bold text-gray-400 dark:text-gray-400 uppercase tracking-wider">
+                    {t('nav.houses_header')}
                   </span>
                 </div>
                 {serviceHouses.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`block px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                    className={`block px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
                       pathname === item.href
-                        ? 'bg-emerald-50 text-[#059669] font-bold'
-                        : 'text-gray-700 hover:bg-emerald-50/60 hover:text-[#059669]'
+                        ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
+                        : 'text-gray-700 dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
                     }`}
                   >
                     {item.title}
@@ -155,79 +163,88 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             href="/blog"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/blog')
-                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
-                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
+                ? 'text-[#059669] dark:text-[#10B981] font-bold bg-emerald-50/90 dark:bg-emerald-950/40 shadow-xs'
+                : 'text-[#041614] dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
             }`}
           >
-            Blog
+            {t('nav.blog')}
           </Link>
 
           <Link
             href="/contact-us"
             className={`px-3.5 py-2 rounded-full transition-all duration-200 ${
               isActive('/contact-us')
-                ? 'text-[#059669] font-bold bg-emerald-50/90 shadow-xs'
-                : 'text-[#041614] hover:text-[#059669] hover:bg-gray-50'
+                ? 'text-[#059669] dark:text-[#10B981] font-bold bg-emerald-50/90 dark:bg-emerald-950/40 shadow-xs'
+                : 'text-[#041614] dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
             }`}
           >
-            Contact Us
+            {t('nav.contact')}
           </Link>
         </nav>
 
-        {/* Free Consultation CTA Button */}
-        <div className="hidden lg:block">
+        {/* Desktop Controls (Language + Theme + Consultation CTA) */}
+        <div className="hidden lg:flex items-center space-x-2.5">
+          <LanguageToggle />
+          <ThemeToggle />
           <button
             onClick={handleOpenConsultation}
-            className="btn-ditya-orange text-sm shadow-md hover:shadow-emerald-500/25 cursor-pointer"
+            className="btn-ditya-orange text-sm shadow-md hover:shadow-emerald-500/25 cursor-pointer ml-1"
           >
-            Free Consultation
+            {t('nav.free_consultation')}
           </button>
         </div>
 
-        {/* Mobile Hamburger Button */}
-        <div className="lg:hidden flex items-center space-x-3">
+        {/* Mobile Action Controls */}
+        <div className="lg:hidden flex items-center space-x-2">
+          <ThemeToggle variant="compact" />
+          <LanguageToggle variant="compact" />
           <button
             onClick={handleOpenConsultation}
-            className="btn-ditya-orange py-2 px-4 text-xs shadow-xs"
+            className="btn-ditya-orange py-1.5 px-3 text-xs shadow-xs"
           >
-            Consultation
+            {t('nav.consultation')}
           </button>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-[#041614] hover:text-[#059669] focus:outline-none rounded-xl hover:bg-gray-100 transition-colors"
+            className="p-2 text-[#041614] dark:text-white hover:text-[#059669] focus:outline-none rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
             aria-label="Toggle Menu"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white/95 backdrop-blur-xl border-t border-gray-100 shadow-2xl px-5 py-6 space-y-3 animate-in slide-in-from-top-2 duration-200">
+        <div className="lg:hidden bg-white/98 dark:bg-[#020D0C]/98 backdrop-blur-xl border-t border-gray-100 dark:border-white/10 shadow-2xl px-5 py-6 space-y-3 animate-in slide-in-from-top-2 duration-200 text-[#041614] dark:text-white">
           <Link
             href="/"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
+              isActive('/')
+                ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
+                : 'text-[#041614] dark:text-gray-200'
             }`}
           >
-            Home
+            {t('nav.home')}
           </Link>
+
           <Link
             href="/about-us"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/about-us') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
+              isActive('/about-us')
+                ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
+                : 'text-[#041614] dark:text-gray-200'
             }`}
           >
-            About Us
+            {t('nav.about')}
           </Link>
 
           <div className="px-3 py-2">
             <div
               onClick={() => setIsServicesOpen(!isServicesOpen)}
-              className="flex items-center justify-between text-base font-medium text-[#041614] cursor-pointer"
+              className="flex items-center justify-between text-base font-medium text-[#041614] dark:text-gray-200 cursor-pointer"
             >
-              <span>Services</span>
+              <span>{t('nav.services')}</span>
               <ChevronDown
                 className={`w-4 h-4 transition-transform ${
                   isServicesOpen ? 'rotate-180 text-[#059669]' : ''
@@ -239,15 +256,15 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
               <div className="pl-3 mt-2 space-y-1.5 border-l-2 border-[#059669] py-1">
                 <Link
                   href="/services"
-                  className="block px-2 py-1.5 rounded-lg text-sm font-medium text-gray-800 hover:text-[#059669]"
+                  className="block px-2 py-1.5 rounded-lg text-sm font-medium text-gray-800 dark:text-gray-200 hover:text-[#059669]"
                 >
-                  All Services Overview
+                  {t('nav.services')} Overview
                 </Link>
                 {serviceHouses.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="block px-2 py-1.5 rounded-lg text-sm text-gray-600 hover:text-[#059669]"
+                    className="block px-2 py-1.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-[#059669]"
                   >
                     {item.title}
                   </Link>
@@ -259,19 +276,33 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
           <Link
             href="/blog"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/blog') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
+              isActive('/blog')
+                ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
+                : 'text-[#041614] dark:text-gray-200'
             }`}
           >
-            Blog
+            {t('nav.blog')}
           </Link>
+
           <Link
             href="/contact-us"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
-              isActive('/contact-us') ? 'text-[#059669] bg-emerald-50 font-bold' : 'text-[#041614]'
+              isActive('/contact-us')
+                ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
+                : 'text-[#041614] dark:text-gray-200'
             }`}
           >
-            Contact Us
+            {t('nav.contact')}
           </Link>
+
+          {/* Switchers in Mobile Menu */}
+          <div className="pt-3 pb-1 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
+            <span className="text-xs font-bold text-gray-500 uppercase tracking-wider">Preferences</span>
+            <div className="flex items-center space-x-2">
+              <LanguageToggle variant="pill" />
+              <ThemeToggle />
+            </div>
+          </div>
 
           <div className="pt-2">
             <button
@@ -279,9 +310,9 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 setIsMobileMenuOpen(false);
                 handleOpenConsultation();
               }}
-              className="w-full btn-ditya-orange py-3 font-semibold text-center shadow-md"
+              className="w-full btn-ditya-orange py-3 font-semibold text-center shadow-md cursor-pointer"
             >
-              Free Consultation
+              {t('nav.free_consultation')}
             </button>
           </div>
         </div>

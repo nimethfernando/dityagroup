@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-ditya-navy: #041614;
   --color-ditya-navy-dark: #020D0C;
@@ -17,8 +19,8 @@
   --color-ditya-bg-light: #F8FAFC;
   --color-ditya-border: #E2E8F0;
 
-  --font-inter: var(--font-inter), 'Inter', sans-serif;
-  --font-heebo: var(--font-heebo), 'Heebo', sans-serif;
+  --font-inter: var(--font-inter), 'Inter', 'Noto Sans Georgian', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-heebo: var(--font-heebo), 'Heebo', 'Noto Sans Georgian', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 :root {
@@ -27,6 +29,14 @@
   --color-accent-gold: #D4AF37;
   --color-text: #64748B;
   --color-bg: #FFFFFF;
+}
+
+.dark {
+  --color-primary: #FAFAFC;
+  --color-secondary: #10B981;
+  --color-accent-gold: #FCD34D;
+  --color-text: #94A3B8;
+  --color-bg: #030F0E;
 }
 
 html {
@@ -46,6 +56,28 @@ body {
   max-width: 100vw;
   width: 100%;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: #030F0E;
+  color: #E2E8F0;
+}
+
+.dark .glass-card {
+  background: #041614;
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 25px -2px rgba(0, 0, 0, 0.4);
+}
+
+.dark .glass-card:hover {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 20px 35px -8px rgba(0, 0, 0, 0.6), 0 0 25px -5px rgba(16, 185, 129, 0.2);
+}
+
+.dark .glass-panel {
+  background: rgba(4, 22, 20, 0.92);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 @layer base {

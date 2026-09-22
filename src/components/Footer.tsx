@@ -28,6 +28,7 @@ import {
   FooterPageContent,
   SocialLinkItem,
 } from '@/lib/defaultPageContent';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ICON_MAP: Record<string, IconType> = {
   facebook: FaFacebookF,
@@ -70,6 +71,7 @@ function getSocialIcon(item: { id?: string; icon?: string }): IconType {
 }
 
 export default function Footer() {
+  const { t } = useLanguage();
   const [content, setContent] = useState<FooterPageContent>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (DEFAULT_PAGE_CONTENTS as any).footer
@@ -126,13 +128,13 @@ export default function Footer() {
   };
 
   const houseLinks = [
-    { name: 'Ditya Wealth House', href: '/ditya-wealth-house' },
-    { name: 'Ditya Astroverse', href: '/ditya-astroverse' },
-    { name: 'Ditya Math House', href: '/ditya-math-house' },
-    { name: 'Ditya Business House', href: '/ditya-business-house' },
-    { name: 'Ditya Trading House', href: '/ditya-trading-house' },
-    { name: 'Ditya Tech House', href: '/ditya-tech-house' },
-    { name: 'Global Business Network', href: '/global-business-network' },
+    { name: t('house.wealth'), href: '/ditya-wealth-house' },
+    { name: t('house.astroverse'), href: '/ditya-astroverse' },
+    { name: t('house.math'), href: '/ditya-math-house' },
+    { name: t('house.business'), href: '/ditya-business-house' },
+    { name: t('house.trading'), href: '/ditya-trading-house' },
+    { name: t('house.tech'), href: '/ditya-tech-house' },
+    { name: t('house.gbn'), href: '/global-business-network' },
   ];
 
   // Active unhidden social links
@@ -179,11 +181,11 @@ export default function Footer() {
             </div>
             <div className="space-y-2 flex-1">
               <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block">
-                Give Us A Call
+                {t('footer.call_title')}
               </span>
               <div>
                 <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">
-                  {content.contactCards?.phoneIndiaTitle || 'India (HQ)'}
+                  {content.contactCards?.phoneIndiaTitle || t('footer.india_hq')}
                 </span>
                 <a
                   href={phoneIndiaHref}
@@ -194,7 +196,7 @@ export default function Footer() {
               </div>
               <div className="pt-1.5 border-t border-white/10">
                 <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">
-                  {content.contactCards?.phoneGeorgiaTitle || 'Georgia (Secondary)'}
+                  {content.contactCards?.phoneGeorgiaTitle || t('footer.georgia_office')}
                 </span>
                 <a
                   href={phoneGeorgiaHref}
@@ -204,7 +206,7 @@ export default function Footer() {
                 </a>
               </div>
               <span className="text-xs text-gray-400 mt-1 block">
-                {content.contactCards?.phoneHours || 'Mon – Sat, 9:00 AM – 7:00 PM IST'}
+                {content.contactCards?.phoneHours || t('footer.hours')}
               </span>
             </div>
           </div>
@@ -217,7 +219,7 @@ export default function Footer() {
             </div>
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-amber-300/90 block mb-1">
-                Drop Us A Line
+                {t('footer.email_title')}
               </span>
               <a
                 href={`mailto:${content.contactCards?.emailCorporate || 'groupditya@gmail.com'}`}
@@ -226,7 +228,7 @@ export default function Footer() {
                 {content.contactCards?.emailCorporate || 'groupditya@gmail.com'}
               </a>
               <span className="text-xs text-gray-400 mt-1 block">
-                {content.contactCards?.emailHours || 'Direct Executive Response'}
+                {content.contactCards?.emailHours || t('footer.email_response')}
               </span>
             </div>
           </div>
@@ -238,7 +240,7 @@ export default function Footer() {
             </div>
             <div>
               <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-1">
-                Office Location
+                {t('footer.location_title')}
               </span>
               <a
                 href="https://maps.google.com/?q=3rd+floor+261+Sewa+Sadan+Marg+Adarsh+Nagar+Jaipur+Rajasthan+302004"
@@ -249,7 +251,9 @@ export default function Footer() {
                 {content.contactCards?.officeIndiaAddress ||
                   '3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004'}
               </a>
-              <span className="text-xs text-gray-400 mt-1 block">Jaipur, Rajasthan, India</span>
+              <span className="text-xs text-gray-400 mt-1 block">
+                {t('footer.location_city')}
+              </span>
             </div>
           </div>
         </div>
@@ -324,37 +328,37 @@ export default function Footer() {
           {/* Col 2: Quick Links (Span 2) */}
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
-              Quick Links
+              {t('footer.quick_links')}
             </h4>
             <ul className="space-y-3 text-xs sm:text-sm text-gray-300">
               <li>
                 <Link href="/" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Home</span>
+                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.home')}</span>
                 </Link>
               </li>
               <li>
                 <Link href="/about-us" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">About Us</span>
+                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.about')}</span>
                 </Link>
               </li>
               <li>
                 <Link href="/services" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Services</span>
+                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.services')}</span>
                 </Link>
               </li>
               <li>
                 <Link href="/contact-us" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Contact Us</span>
+                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.contact')}</span>
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Blog & Insights</span>
+                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.blog')}</span>
                 </Link>
               </li>
               <li>
                 <Link href="/global-business-network" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">Global Business Network</span>
+                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.gbn')}</span>
                 </Link>
               </li>
             </ul>
@@ -363,7 +367,7 @@ export default function Footer() {
           {/* Col 3: Specialized Houses (Span 3) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
-              Houses & Network
+              {t('footer.houses_network')}
             </h4>
             <ul className="grid grid-cols-1 gap-2.5 text-xs sm:text-sm text-gray-300">
               {houseLinks.map((h, idx) => (
@@ -379,16 +383,16 @@ export default function Footer() {
               ))}
             </ul>
             <div className="pt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-400 border-t border-white/10 mt-3">
-              <Link href="/privacy-policy" className="hover:text-[#10B981] transition-colors">Privacy Policy</Link>
-              <Link href="/terms-and-conditions" className="hover:text-[#10B981] transition-colors">Terms</Link>
-              <Link href="/admin/login" className="hover:text-[#10B981] transition-colors">Admin</Link>
+              <Link href="/privacy-policy" className="hover:text-[#10B981] transition-colors">{t('footer.privacy_policy')}</Link>
+              <Link href="/terms-and-conditions" className="hover:text-[#10B981] transition-colors">{t('footer.terms')}</Link>
+              <Link href="/admin/login" className="hover:text-[#10B981] transition-colors">{t('footer.admin')}</Link>
             </div>
           </div>
 
           {/* Col 4: Newsletter (Span 3) */}
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
-              {content.newsletter?.heading || 'Newsletter'}
+              {content.newsletter?.heading || t('footer.newsletter')}
             </h4>
             <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
               {content.newsletter?.description ||
@@ -401,7 +405,7 @@ export default function Footer() {
                   type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Your Email Address"
+                  placeholder={t('footer.newsletter_placeholder')}
                   required
                   className="w-full px-4 py-2.5 text-sm text-white bg-transparent focus:outline-none placeholder-gray-400"
                 />
@@ -410,7 +414,7 @@ export default function Footer() {
                   disabled={isSubmitting}
                   className="btn-ditya-orange py-2.5 px-4 text-xs font-bold shrink-0 shadow-md cursor-pointer"
                 >
-                  <span>{content.newsletter?.buttonText || 'Send'}</span>
+                  <span>{content.newsletter?.buttonText || t('action.send')}</span>
                   <Send className="w-3.5 h-3.5" />
                 </button>
               </div>
@@ -431,11 +435,11 @@ export default function Footer() {
           </p>
           <div className="flex items-center space-x-4">
             <span className="text-gray-300 font-medium">
-              {content.copyright?.subText || 'Ancient Wisdom & Modern Solutions'}
+              {content.copyright?.subText || t('footer.credo')}
             </span>
             <button
               onClick={scrollToTop}
-              aria-label="Back to top"
+              aria-label={t('action.back_to_top')}
               className="w-8 h-8 rounded-full bg-white/10 hover:bg-[#059669] hover:text-white border border-white/15 flex items-center justify-center transition-all duration-200 cursor-pointer text-gray-300"
             >
               <ArrowUp className="w-4 h-4" />
