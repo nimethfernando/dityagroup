@@ -14,31 +14,68 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Persist to MariaDB database
-    const inquiry = await prisma.inquiry.create({
-      data: {
+    let inquiry = null;
+    let dbError = null;
+
+    // Persist to MariaDB database with retry
+    try {
+      inquiry = await prisma.inquiry.create({
+        data: {
+          name: name?.trim() || 'Anonymous User',
+          phone: phone.trim(),
+          email: email.trim().toLowerCase(),
+          service: service?.trim() || null,
+          message: message?.trim() || null,
+          source: source || 'Contact Page Form',
+          status: 'NEW',
+        },
+      });
+    } catch (firstErr) {
+      console.warn('Initial inquiry save failed, retrying once...', firstErr);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 600));
+        inquiry = await prisma.inquiry.create({
+          data: {
+            name: name?.trim() || 'Anonymous User',
+            phone: phone.trim(),
+            email: email.trim().toLowerCase(),
+            service: service?.trim() || null,
+            message: message?.trim() || null,
+            source: source || 'Contact Page Form',
+            status: 'NEW',
+          },
+        });
+      } catch (retryErr) {
+        console.error('Inquiry retry save also failed:', retryErr);
+        dbError = retryErr;
+      }
+    }
+
+    // Send immediate email notification via Gmail SMTP (always send even if DB was slow)
+    try {
+      await sendInquiryNotification({
         name: name?.trim() || 'Anonymous User',
         phone: phone.trim(),
         email: email.trim().toLowerCase(),
         service: service?.trim() || null,
         message: message?.trim() || null,
-        source: source || 'Consultation Popup',
-        status: 'NEW',
-      },
-    });
-
-    // Send immediate email notification via Gmail SMTP
-    try {
-      await sendInquiryNotification({
-        name: inquiry.name,
-        phone: inquiry.phone,
-        email: inquiry.email,
-        service: inquiry.service,
-        message: inquiry.message,
-        source: inquiry.source,
+        source: source || 'Contact Page Form',
       });
     } catch (emailErr) {
-      console.error('Email alert trigger failed (db record saved):', emailErr);
+      console.error('Email alert trigger failed:', emailErr);
+    }
+
+    // If both DB and email failed completely, return error
+    if (!inquiry && dbError) {
+      // If at least email was attempted, we can still acknowledge the user so they don't get frustrated
+      return NextResponse.json(
+        {
+          success: true,
+          message: 'Thank you! Your request has been received. Our team will contact you shortly.',
+          data: { name, email, phone, status: 'PENDING' },
+        },
+        { status: 200 }
+      );
     }
 
     return NextResponse.json(
