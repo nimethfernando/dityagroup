@@ -118,3 +118,4 @@ export default function LanguageToggle({ className = '', variant = 'navbar' }: L
     </div>
   );
 }
+

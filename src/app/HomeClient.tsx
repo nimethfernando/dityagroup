@@ -378,25 +378,29 @@ export default function HomeClient({ content }: HomeClientProps) {
 
           {/* Luxury Bento Grid Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Card 1: Ditya Networking House */}
+            {/* Card 1: Global Business Network (GBN) */}
             <Link
               href="/global-business-network"
-              className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+              className="bg-white rounded-3xl p-8 border-2 border-emerald-500/30 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 relative overflow-hidden"
             >
+              <div className="absolute top-5 right-5">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-700 border border-amber-500/30">
+                  Main Business
+                </span>
+              </div>
               <div>
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
-                  <Share2 className="w-7 h-7" />
+                  <Globe2 className="w-7 h-7" />
                 </div>
                 <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
-                  Ditya Networking House
+                  Global Business Network (GBN)
                 </h3>
                 <p className="text-sm text-gray-500 leading-relaxed">
-                  We provide expert guidance in stock market and live trading support to help you
-                  grow and manage your wealth with confidence.
+                  The premier international community for ambitious entrepreneurs, executives, and business owners to connect, build high-trust partnerships, and scale globally.
                 </p>
               </div>
               <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
-                <span>Explore House</span>
+                <span>Explore Network</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
             </Link>

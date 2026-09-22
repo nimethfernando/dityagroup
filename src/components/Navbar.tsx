@@ -50,13 +50,13 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   }, [pathname]);
 
   const serviceHouses = [
+    { title: t('house.gbn'), href: '/global-business-network' },
     { title: t('house.wealth'), href: '/ditya-wealth-house' },
     { title: t('house.astroverse'), href: '/ditya-astroverse' },
     { title: t('house.math'), href: '/ditya-math-house' },
     { title: t('house.business'), href: '/ditya-business-house' },
     { title: t('house.trading'), href: '/ditya-trading-house' },
     { title: t('house.tech'), href: '/ditya-tech-house' },
-    { title: t('house.gbn'), href: '/global-business-network' },
   ];
 
   const isActive = (href: string) => {
@@ -142,19 +142,29 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                     {t('nav.houses_header')}
                   </span>
                 </div>
-                {serviceHouses.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`block px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
-                      pathname === item.href
-                        ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
-                        : 'text-gray-700 dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
-                    }`}
-                  >
-                    {item.title}
-                  </Link>
-                ))}
+                {serviceHouses.map((item) => {
+                  const isGBN = item.href === '/global-business-network';
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center justify-between px-3 py-2 rounded-xl text-sm font-medium transition-colors ${
+                        pathname === item.href
+                          ? 'text-[#059669] dark:text-[#10B981] bg-emerald-50 dark:bg-emerald-950/40 font-bold'
+                          : isGBN
+                          ? 'text-[#041614] dark:text-white font-semibold hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-emerald-50/50 dark:hover:bg-emerald-950/30'
+                          : 'text-gray-700 dark:text-gray-200 hover:text-[#059669] dark:hover:text-[#10B981] hover:bg-gray-50 dark:hover:bg-white/5'
+                      }`}
+                    >
+                      <span>{item.title}</span>
+                      {isGBN && (
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25">
+                          Premier
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>
@@ -260,15 +270,29 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
                 >
                   {t('nav.services')} Overview
                 </Link>
-                {serviceHouses.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block px-2 py-1.5 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:text-[#059669]"
-                  >
-                    {item.title}
-                  </Link>
-                ))}
+                {serviceHouses.map((item) => {
+                  const isGBN = item.href === '/global-business-network';
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center justify-between px-2 py-1.5 rounded-lg text-sm transition-colors ${
+                        pathname === item.href
+                          ? 'text-[#059669] dark:text-[#10B981] font-bold'
+                          : isGBN
+                          ? 'text-[#041614] dark:text-white font-semibold'
+                          : 'text-gray-600 dark:text-gray-400 hover:text-[#059669]'
+                      }`}
+                    >
+                      <span>{item.title}</span>
+                      {isGBN && (
+                        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/25">
+                          Premier
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
               </div>
             )}
           </div>

@@ -13,13 +13,13 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
   const pathname = usePathname();
 
   const services = [
+    { name: 'Global Business Network', href: '/global-business-network' },
     { name: 'Ditya Wealth House', href: '/ditya-wealth-house' },
     { name: 'Ditya Astroverse', href: '/ditya-astroverse' },
     { name: 'Ditya Math House', href: '/ditya-math-house' },
     { name: 'Ditya Business House', href: '/ditya-business-house' },
     { name: 'Ditya Trading House', href: '/ditya-trading-house' },
     { name: 'Ditya Tech House', href: '/ditya-tech-house' },
-    { name: 'Global Business Network', href: '/global-business-network' },
   ];
 
   return (
@@ -30,24 +30,38 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
           Our Houses & Network
         </h3>
         <ul className="space-y-2">
-          {services.map((item) => {
-            const active = pathname === item.href;
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className={`flex items-center justify-between px-4 py-3 rounded-asymmetric text-sm font-semibold transition-all ${
-                    active
-                      ? 'bg-[#059669] text-white shadow-md translate-x-1'
-                      : 'bg-white text-[#041614] hover:bg-[#ECFDF5] hover:text-[#059669] border border-gray-100'
-                  }`}
-                >
-                  <span>{item.name}</span>
-                  <ChevronRight className={`w-4 h-4 ${active ? 'text-white' : 'text-gray-400'}`} />
-                </Link>
-              </li>
-            );
-          })}
+            {services.map((item) => {
+              const active = pathname === item.href;
+              const isGBN = item.href === '/global-business-network';
+              return (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={`flex items-center justify-between px-4 py-3 rounded-asymmetric text-sm font-semibold transition-all ${
+                      active
+                        ? 'bg-[#059669] text-white shadow-md translate-x-1'
+                        : isGBN
+                        ? 'bg-emerald-50/70 text-[#041614] hover:bg-[#ECFDF5] hover:text-[#059669] border border-emerald-200/80 font-bold'
+                        : 'bg-white text-[#041614] hover:bg-[#ECFDF5] hover:text-[#059669] border border-gray-100'
+                    }`}
+                  >
+                    <span className="flex items-center space-x-2">
+                      <span>{item.name}</span>
+                      {isGBN && (
+                        <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded border ${
+                          active
+                            ? 'bg-white/20 text-white border-white/30'
+                            : 'bg-amber-500/15 text-amber-700 border-amber-500/30'
+                        }`}>
+                          Main
+                        </span>
+                      )}
+                    </span>
+                    <ChevronRight className={`w-4 h-4 ${active ? 'text-white' : 'text-gray-400'}`} />
+                  </Link>
+                </li>
+              );
+            })}
         </ul>
       </div>
 

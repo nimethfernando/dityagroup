@@ -128,13 +128,13 @@ export default function Footer() {
   };
 
   const houseLinks = [
+    { name: t('house.gbn'), href: '/global-business-network', isGBN: true },
     { name: t('house.wealth'), href: '/ditya-wealth-house' },
     { name: t('house.astroverse'), href: '/ditya-astroverse' },
     { name: t('house.math'), href: '/ditya-math-house' },
     { name: t('house.business'), href: '/ditya-business-house' },
     { name: t('house.trading'), href: '/ditya-trading-house' },
     { name: t('house.tech'), href: '/ditya-tech-house' },
-    { name: t('house.gbn'), href: '/global-business-network' },
   ];
 
   // Active unhidden social links
@@ -332,6 +332,20 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-xs sm:text-sm text-gray-300">
               <li>
+                <Link
+                  href="/global-business-network"
+                  className="hover:text-[#10B981] transition-colors flex items-center group text-white font-semibold"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mr-2" />
+                  <span className="group-hover:translate-x-1 transition-transform flex items-center">
+                    <span>{t('nav.gbn')}</span>
+                    <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 ml-2">
+                      Main
+                    </span>
+                  </span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/" className="hover:text-[#10B981] transition-colors flex items-center group">
                   <span className="group-hover:translate-x-1 transition-transform">{t('nav.home')}</span>
                 </Link>
@@ -356,11 +370,6 @@ export default function Footer() {
                   <span className="group-hover:translate-x-1 transition-transform">{t('nav.blog')}</span>
                 </Link>
               </li>
-              <li>
-                <Link href="/global-business-network" className="hover:text-[#10B981] transition-colors flex items-center group">
-                  <span className="group-hover:translate-x-1 transition-transform">{t('nav.gbn')}</span>
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -374,10 +383,25 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={h.href}
-                    className="hover:text-[#10B981] transition-colors flex items-center group"
+                    className={`hover:text-[#10B981] transition-colors flex items-center group ${
+                      h.isGBN ? 'text-white font-semibold' : ''
+                    }`}
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#10B981]/60 mr-2 group-hover:bg-[#10B981] transition-colors" />
-                    <span className="group-hover:translate-x-1 transition-transform">{h.name}</span>
+                    <span
+                      className={`w-1.5 h-1.5 rounded-full mr-2 transition-colors ${
+                        h.isGBN
+                          ? 'bg-amber-400'
+                          : 'bg-[#10B981]/60 group-hover:bg-[#10B981]'
+                      }`}
+                    />
+                    <span className="group-hover:translate-x-1 transition-transform flex items-center">
+                      <span>{h.name}</span>
+                      {h.isGBN && (
+                        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 ml-2">
+                          Main Business
+                        </span>
+                      )}
+                    </span>
                   </Link>
                 </li>
               ))}

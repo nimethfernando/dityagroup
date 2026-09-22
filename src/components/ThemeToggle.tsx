@@ -57,3 +57,4 @@ export default function ThemeToggle({ className = '', variant = 'navbar' }: Them
     </button>
   );
 }
+

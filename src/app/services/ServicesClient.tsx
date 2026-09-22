@@ -38,6 +38,18 @@ export default function ServicesClient({ content, customServices }: ServicesClie
 
   const defaultServices: ServiceCardItem[] = [
     {
+      title: 'Global Business Network',
+      subtitle: 'International Leadership & Networking Circle',
+      desc: 'The Global Business Network is a premier community designed for ambitious entrepreneurs, executives, and business owners. We bridge the gap between local expertise and global opportunities by fostering powerful collaborations, sharing actionable market insights, and providing a trusted ecosystem for sustainable business growth.',
+      icon: Globe2,
+      href: '/global-business-network',
+      highlights: [
+        'Strategic Networking & High-Trust Cohorts',
+        'Global Market Insights & Cross-Border Scaling',
+        'Private Executive Events & Mastermind Cohorts',
+      ],
+    },
+    {
       title: 'Ditya Wealth House',
       subtitle: 'Ditya Trade Code',
       desc: 'What you do in trading matters deeply. How you enter and exit the market can have a strong impact on your profits and losses. With the right guidance through Ditya Trade Code and numerology-based timing, achieve consistency and growth.',
@@ -84,18 +96,6 @@ export default function ServicesClient({ content, customServices }: ServicesClie
       icon: Laptop,
       href: '/ditya-tech-house',
       highlights: ['Software development & system building', 'Automation and technical support', 'Website and application solutions'],
-    },
-    {
-      title: 'Global Business Network',
-      subtitle: 'International Leadership & Networking Circle',
-      desc: 'Expand Your Reach. Connect with high-net-worth investors, elite entrepreneurs, and international leaders through trusted cohorts and mastermind councils to scale across borders.',
-      icon: Globe2,
-      href: '/global-business-network',
-      highlights: [
-        'High-trust cross-border collaborations',
-        'Global market insights and expansion resources',
-        'Private executive events & mastermind cohorts',
-      ],
     },
   ];
 
@@ -148,14 +148,26 @@ export default function ServicesClient({ content, customServices }: ServicesClie
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {allServices.map((item, idx) => {
             const IconComp = item.icon || Layers;
+            const isGBN = item.href === '/global-business-network';
             return (
               <div
                 key={idx}
-                className="bg-[#F9F9F9] rounded-asymmetric p-8 border border-gray-200/80 shadow-sm card-hover flex flex-col justify-between"
+                className={`rounded-asymmetric p-8 shadow-sm card-hover flex flex-col justify-between transition-all ${
+                  isGBN
+                    ? 'bg-white border-2 border-emerald-500/40 shadow-md ring-1 ring-emerald-500/10'
+                    : 'bg-[#F9F9F9] border border-gray-200/80'
+                }`}
               >
                 <div>
-                  <div className="w-14 h-14 rounded-2xl bg-[#059669] text-white flex items-center justify-center mb-6 shadow-md">
-                    <IconComp className="w-7 h-7" />
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="w-14 h-14 rounded-2xl bg-[#059669] text-white flex items-center justify-center shadow-md">
+                      <IconComp className="w-7 h-7" />
+                    </div>
+                    {isGBN && (
+                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-700 border border-amber-500/30">
+                        Main Business
+                      </span>
+                    )}
                   </div>
                   <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
                     {item.subtitle}
