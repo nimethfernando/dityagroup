@@ -97,6 +97,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
   };
 
   const cleanPhone = (content.info.phone || '+91-93510 90301').replace(/[^0-9]/g, '');
+  const cleanSecondaryPhone = (content.info.secondaryPhone || '+995 555433091').replace(/[^0-9]/g, '');
 
   return (
     <div className="pb-24 bg-[#FAFAFC]">
@@ -149,45 +150,85 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
               </p>
             </div>
 
-            {/* Quick WhatsApp Connect Banner */}
-            <a
-              href={`https://wa.me/${cleanPhone}?text=Hello%20Ditya%20Group,%20I%20would%20like%20to%20inquire%20about%20your%20services`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-5 bg-gradient-to-r from-[#075E54] to-[#128C7E] text-white rounded-2xl shadow-md hover:shadow-xl hover:scale-[1.01] transition-all group cursor-pointer"
-            >
+            {/* Quick WhatsApp Connect Banner (Dual Desk) */}
+            <div className="p-5 bg-gradient-to-r from-[#075E54] to-[#128C7E] text-white rounded-2xl shadow-md space-y-3">
               <div className="flex items-center space-x-3.5">
                 <div className="w-11 h-11 rounded-xl bg-white/20 flex items-center justify-center text-white shrink-0">
                   <FaWhatsapp className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold leading-tight">Direct WhatsApp Desk</h4>
-                  <p className="text-xs text-white/80 mt-0.5">Instant chat & fast advisory response</p>
+                  <h4 className="text-sm font-bold leading-tight">Direct WhatsApp Desks</h4>
+                  <p className="text-xs text-white/80 mt-0.5">Instant chat & advisory response</p>
                 </div>
               </div>
-              <span className="text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full text-white flex items-center space-x-1 shrink-0">
-                <span>Chat Now</span>
-                <ExternalLink className="w-3 h-3 ml-1" />
-              </span>
-            </a>
+              <div className="flex flex-wrap gap-2 pt-1">
+                <a
+                  href={`https://wa.me/${cleanPhone}?text=Hello%20Ditya%20Group,%20I%20would%20like%20to%20inquire%20about%20your%20services`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 min-w-[140px] text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-2 rounded-xl text-white flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+                >
+                  <span>🇮🇳 India Desk</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href={`https://wa.me/${cleanSecondaryPhone}?text=Hello%20Ditya%20Group,%20I%20would%20like%20to%20inquire%20about%20your%20services`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 min-w-[140px] text-xs font-semibold bg-white/20 hover:bg-white/30 px-3 py-2 rounded-xl text-white flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+                >
+                  <span>🇬🇪 Georgia Desk</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
 
             {/* Contact Information Cards */}
             <div className="space-y-3.5">
-              {/* Phone Card */}
+              {/* Phone Card with Primary (India) and Secondary (Georgia) */}
               <div className="flex items-start space-x-4 p-5 bg-white rounded-2xl border border-gray-200/80 shadow-xs hover:shadow-md transition-shadow">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] text-white flex items-center justify-center shrink-0 shadow-sm">
                   <Phone className="w-5 h-5" />
                 </div>
-                <div className="flex-1">
-                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Direct Call</h4>
-                  <a
-                    href={`tel:${content.info.phone || '+919351090301'}`}
-                    className="text-base font-bold text-[#041614] hover:text-[#059669] transition-colors block mt-0.5"
-                  >
-                    {content.info.phone || '+91-93510 90301'}
-                  </a>
-                  <p className="text-xs text-gray-500 mt-1 flex items-center space-x-1">
-                    <Clock className="w-3 h-3 text-[#059669]" />
+                <div className="flex-1 space-y-3">
+                  {/* Primary Phone (India) */}
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        Primary Call (India HQ)
+                      </h4>
+                      <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md border border-emerald-200">
+                        🇮🇳 India
+                      </span>
+                    </div>
+                    <a
+                      href={`tel:${(content.info.phone || '+919351090301').replace(/[^0-9+]/g, '')}`}
+                      className="text-base font-bold text-[#041614] hover:text-[#059669] transition-colors block mt-0.5"
+                    >
+                      {content.info.phone || '+91-93510 90301'}
+                    </a>
+                  </div>
+
+                  {/* Secondary Phone (Georgia) */}
+                  <div className="pt-2.5 border-t border-gray-100">
+                    <div className="flex items-center justify-between">
+                      <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                        {content.info.secondaryPhoneLabel || 'Secondary Phone (Georgia)'}
+                      </h4>
+                      <span className="text-[10px] font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-200">
+                        🇬🇪 Georgia
+                      </span>
+                    </div>
+                    <a
+                      href={`tel:${(content.info.secondaryPhone || '+995555433091').replace(/[^0-9+]/g, '')}`}
+                      className="text-base font-bold text-[#041614] hover:text-[#059669] transition-colors block mt-0.5"
+                    >
+                      {content.info.secondaryPhone || '+995 555433091'}
+                    </a>
+                  </div>
+
+                  <p className="text-xs text-gray-500 pt-1 flex items-center space-x-1">
+                    <Clock className="w-3 h-3 text-[#059669] shrink-0" />
                     <span>{content.info.phoneHours || 'Mon–Sat 9:00 AM – 7:00 PM IST'}</span>
                   </p>
                 </div>

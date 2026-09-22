@@ -156,6 +156,8 @@ export interface ContactPageContent {
     heading: string;
     description: string;
     phone: string;
+    secondaryPhone?: string;
+    secondaryPhoneLabel?: string;
     phoneHours: string;
     email: string;
     emailDesc: string;
@@ -504,6 +506,8 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       description:
         'Whether you are looking for stock market mentorship, business growth advisory, numerology solutions, or software engineering, our executive team is ready to assist.',
       phone: '+91-93510 90301',
+      secondaryPhone: '+995 555433091',
+      secondaryPhoneLabel: 'Georgia Number',
       phoneHours: 'Mon–Sat 9:00 AM – 7:00 PM IST',
       email: 'groupditya@gmail.com',
       emailDesc: 'Prompt response within 24 hours',

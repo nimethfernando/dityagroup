@@ -280,23 +280,39 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                 {/* Direct Contacts */}
                 <div className="space-y-2.5 pt-1">
                   <a
-                    href="tel:+6581598627"
+                    href="tel:+919351090301"
                     className="flex items-center space-x-3 p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-colors text-xs font-semibold text-white"
                   >
                     <div className="w-8 h-8 rounded-lg bg-[#059669] flex items-center justify-center shrink-0">
                       <Phone className="w-4 h-4 text-white" />
                     </div>
-                    <span>+65-81598627</span>
+                    <div>
+                      <span className="text-[10px] text-emerald-300 block uppercase font-bold">India HQ</span>
+                      <span>+91-93510 90301</span>
+                    </div>
                   </a>
 
                   <a
-                    href="mailto:bmcgenie@gmail.com"
+                    href="tel:+995555433091"
+                    className="flex items-center space-x-3 p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-colors text-xs font-semibold text-white"
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-[#059669] flex items-center justify-center shrink-0">
+                      <Phone className="w-4 h-4 text-white" />
+                    </div>
+                    <div>
+                      <span className="text-[10px] text-blue-300 block uppercase font-bold">Georgia Desk</span>
+                      <span>+995 555433091</span>
+                    </div>
+                  </a>
+
+                  <a
+                    href="mailto:groupditya@gmail.com"
                     className="flex items-center space-x-3 p-2.5 rounded-xl bg-white/10 hover:bg-white/20 border border-white/10 transition-colors text-xs font-semibold text-white"
                   >
                     <div className="w-8 h-8 rounded-lg bg-[#D4AF37] flex items-center justify-center shrink-0">
                       <Mail className="w-4 h-4 text-[#041614]" />
                     </div>
-                    <span className="truncate">bmcgenie@gmail.com</span>
+                    <span className="truncate">groupditya@gmail.com</span>
                   </a>
                 </div>
 

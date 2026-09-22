@@ -63,12 +63,30 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
             We are available 24/7 to help you with any questions or concerns that you have about our products or services. You can contact us anytime and we will be happy to assist you.
           </p>
         </div>
-        <a
-          href="tel:+919351090301"
-          className="block text-xl font-extrabold text-[#10B981] hover:text-white transition-colors"
-        >
-          +91-93510 90301
-        </a>
+        <div className="space-y-2.5 pt-1">
+          <div>
+            <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400/90 block">
+              India Headquarters
+            </span>
+            <a
+              href="tel:+919351090301"
+              className="block text-lg font-extrabold text-[#10B981] hover:text-white transition-colors"
+            >
+              +91-93510 90301
+            </a>
+          </div>
+          <div className="pt-2 border-t border-white/10">
+            <span className="text-[10px] font-bold uppercase tracking-wider text-blue-300/90 block">
+              Georgia International Desk
+            </span>
+            <a
+              href="tel:+995555433091"
+              className="block text-base font-extrabold text-[#10B981] hover:text-white transition-colors"
+            >
+              +995 555433091
+            </a>
+          </div>
+        </div>
         <button
           onClick={onOpenConsultation}
           className="w-full bg-[#059669] hover:bg-[#047857] text-white py-3 rounded-asymmetric text-sm font-semibold transition-colors cursor-pointer"

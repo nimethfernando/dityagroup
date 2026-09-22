@@ -108,16 +108,32 @@ export default function Footer() {
             <div className="w-13 h-13 rounded-2xl bg-[#059669]/15 border border-[#10B981]/30 flex items-center justify-center shrink-0 group-hover:bg-[#059669] group-hover:text-white transition-all duration-300 shadow-inner">
               <Phone className="w-5 h-5 text-[#10B981] group-hover:text-white transition-colors" />
             </div>
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block mb-1">
+            <div className="space-y-2 flex-1">
+              <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-300/80 block">
                 Give Us A Call
               </span>
-              <a
-                href="tel:+919351090301"
-                className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#10B981] transition-colors block tracking-tight"
-              >
-                +91-93510 90301
-              </a>
+              <div>
+                <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">
+                  India (HQ)
+                </span>
+                <a
+                  href="tel:+919351090301"
+                  className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#10B981] transition-colors block tracking-tight"
+                >
+                  +91-93510 90301
+                </a>
+              </div>
+              <div className="pt-1.5 border-t border-white/10">
+                <span className="text-[10px] font-bold text-gray-400 block uppercase tracking-wider">
+                  Georgia (Secondary)
+                </span>
+                <a
+                  href="tel:+995555433091"
+                  className="text-base sm:text-lg font-extrabold text-white group-hover:text-[#10B981] transition-colors block tracking-tight"
+                >
+                  +995 555433091
+                </a>
+              </div>
               <span className="text-xs text-gray-400 mt-1 block">Mon – Sat, 9:00 AM – 7:00 PM IST</span>
             </div>
           </div>

@@ -587,7 +587,7 @@ export default function PageEditor({ params }: PageEditorProps) {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Phone Number
+                    Primary Phone Number (India HQ)
                   </label>
                   <input
                     type="text"
@@ -599,11 +599,49 @@ export default function PageEditor({ params }: PageEditorProps) {
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    placeholder="+91-93510 90301"
                   />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Email Address
+                    Secondary Phone Number (Georgia Desk)
+                  </label>
+                  <input
+                    type="text"
+                    value={content.info?.secondaryPhone || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        info: { ...content.info, secondaryPhone: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    placeholder="+995 555433091"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Secondary Phone Label
+                  </label>
+                  <input
+                    type="text"
+                    value={content.info?.secondaryPhoneLabel || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        info: { ...content.info, secondaryPhoneLabel: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    placeholder="Georgia Number"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Direct Email Address
                   </label>
                   <input
                     type="email"
@@ -615,8 +653,27 @@ export default function PageEditor({ params }: PageEditorProps) {
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    placeholder="groupditya@gmail.com"
                   />
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                  Phone Operating Hours
+                </label>
+                <input
+                  type="text"
+                  value={content.info?.phoneHours || ''}
+                  onChange={(e) =>
+                    setContent({
+                      ...content,
+                      info: { ...content.info, phoneHours: e.target.value },
+                    })
+                  }
+                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  placeholder="Mon–Sat 9:00 AM – 7:00 PM IST"
+                />
               </div>
 
               <div>
