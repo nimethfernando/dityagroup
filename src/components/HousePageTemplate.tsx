@@ -16,7 +16,7 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
   const { openModal } = useConsultation();
 
   return (
-    <div className="pb-36 bg-[#FAFAFC]">
+    <div className="pb-36 bg-[#FAFAFC] dark:bg-[#030F0E] transition-colors duration-200">
       {/* Header Banner */}
       <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}
@@ -32,7 +32,7 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
 
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full border border-white/15 mb-3">
+          <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] dark:text-[#10B981] tracking-widest uppercase bg-white/10 px-3 py-1 rounded-full border border-white/15 mb-3">
             <span className="w-2 h-2 rounded-full bg-[#10B981]"></span>
             <span>{content.banner.badge}</span>
           </span>
@@ -56,24 +56,24 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
           {/* Right Column: House Details */}
           <div className="lg:col-span-8 space-y-8">
             <div className="space-y-3">
-              <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+              <span className="text-xs font-bold text-[#059669] dark:text-[#10B981] uppercase tracking-wider block">
                 {content.details.division}
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] tracking-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] dark:text-white tracking-tight">
                 {content.details.heading}
               </h2>
-              <p className="text-sm text-gray-600 leading-relaxed whitespace-pre-line pt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed whitespace-pre-line pt-1">
                 {content.details.description}
               </p>
             </div>
 
             {/* Overview Services Box */}
             {content.details.overviewDescription && (
-              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-gray-200/80 shadow-xs space-y-2.5">
-                <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+              <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#061A17] border border-gray-200/80 dark:border-white/10 shadow-xs space-y-2.5">
+                <span className="text-xs font-bold text-[#059669] dark:text-[#10B981] uppercase tracking-wider block">
                   {content.details.overviewHeading || 'Overview Services'}
                 </span>
-                <p className="text-sm text-gray-600 leading-relaxed">
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                   {content.details.overviewDescription}
                 </p>
               </div>
@@ -81,26 +81,26 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
 
             {/* Dual Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="p-6 border border-gray-200/80 rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+              <div className="p-6 border border-gray-200/80 dark:border-white/10 rounded-2xl bg-white dark:bg-[#061A17] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] text-white flex items-center justify-center mb-4 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform">
                   <TrendingUp className="w-6 h-6" />
                 </div>
-                <h4 className="text-base font-bold text-[#041614] mb-1.5 group-hover:text-[#059669] transition-colors">
+                <h4 className="text-base font-bold text-[#041614] dark:text-white mb-1.5 group-hover:text-[#059669] dark:group-hover:text-[#10B981] transition-colors">
                   {content.details.card1Title}
                 </h4>
-                <p className="text-xs text-gray-500 leading-relaxed">
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                   {content.details.card1Desc}
                 </p>
               </div>
 
-              <div className="p-6 border border-gray-200/80 rounded-2xl bg-white shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
+              <div className="p-6 border border-gray-200/80 dark:border-white/10 rounded-2xl bg-white dark:bg-[#061A17] shadow-sm hover:shadow-xl transition-all duration-300 group hover:-translate-y-1">
                 <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] text-white flex items-center justify-center mb-4 shadow-md shadow-emerald-500/20 group-hover:scale-110 transition-transform">
                   <Clock className="w-6 h-6" />
                 </div>
-                <h4 className="text-base font-bold text-[#041614] mb-1.5 group-hover:text-[#059669] transition-colors">
+                <h4 className="text-base font-bold text-[#041614] dark:text-white mb-1.5 group-hover:text-[#059669] dark:group-hover:text-[#10B981] transition-colors">
                   {content.details.card2Title}
                 </h4>
-                <p className="text-xs text-gray-500 leading-relaxed">
+                <p className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
                   {content.details.card2Desc}
                 </p>
               </div>
@@ -109,17 +109,17 @@ export default function HousePageTemplate({ content, houseName }: HousePageTempl
             {/* Checklist */}
             {content.details.checklists && content.details.checklists.length > 0 && (
               <div className="space-y-4 pt-2">
-                <h3 className="text-lg sm:text-xl font-bold text-[#041614]">
+                <h3 className="text-lg sm:text-xl font-bold text-[#041614] dark:text-white">
                   {content.details.checklistTitle || 'Key Capabilities & Features:'}
                 </h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-gray-700">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
                   {content.details.checklists.map((item, idx) => (
                     <div
                       key={idx}
-                      className="flex items-center space-x-2.5 p-3 rounded-xl bg-white border border-gray-100 shadow-xs"
+                      className="flex items-center space-x-2.5 p-3 rounded-xl bg-white dark:bg-[#061A17] border border-gray-100 dark:border-white/10 shadow-xs"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0" />
-                      <span className="font-medium text-xs sm:text-sm text-gray-700">{item}</span>
+                      <CheckCircle2 className="w-4 h-4 text-[#059669] dark:text-[#10B981] shrink-0" />
+                      <span className="font-medium text-xs sm:text-sm text-gray-700 dark:text-gray-200">{item}</span>
                     </div>
                   ))}
                 </div>

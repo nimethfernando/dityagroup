@@ -117,7 +117,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
   const cleanSecondaryPhone = (content.info.secondaryPhone || '+995 555433091').replace(/[^0-9]/g, '');
 
   return (
-    <div className="pb-24 bg-[#FAFAFC]">
+    <div className="pb-24 bg-[#FAFAFC] dark:bg-[#030F0E] text-[#041614] dark:text-gray-100 transition-colors duration-200">
       {/* Banner */}
       <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         {/* Silk Textured Banner Background */}

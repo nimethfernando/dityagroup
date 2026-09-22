@@ -35,11 +35,11 @@ export default function HomeClient({ content }: HomeClientProps) {
   const { openModal } = useConsultation();
 
   return (
-    <div className="flex flex-col w-full overflow-hidden bg-white">
+    <div className="flex flex-col w-full overflow-hidden bg-white dark:bg-[#030F0E] transition-colors duration-200">
       {/* ============================================================ */}
       {/* 1. HERO SECTION */}
       {/* ============================================================ */}
-      <section className="relative min-h-[780px] lg:min-h-[860px] flex flex-col justify-between bg-[#F8F9FA] overflow-hidden">
+      <section className="relative min-h-[780px] lg:min-h-[860px] flex flex-col justify-between bg-[#F8F9FA] dark:bg-[#030F0E] overflow-hidden">
         {/* Background Graphic */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -50,8 +50,8 @@ export default function HomeClient({ content }: HomeClientProps) {
             priority
           />
           {/* Subtle responsive overlay on mobile to ensure text readability */}
-          <div className="absolute inset-0 bg-white/40 lg:bg-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent lg:from-white/75 lg:via-white/25 lg:to-transparent" />
+          <div className="absolute inset-0 bg-white/40 dark:bg-black/60 lg:bg-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/80 to-transparent lg:from-white/75 lg:via-white/25 lg:to-transparent dark:from-[#030F0E]/95 dark:via-[#030F0E]/80 dark:to-transparent" />
         </div>
 
         {/* Hero Left Content Overlay */}
@@ -63,7 +63,7 @@ export default function HomeClient({ content }: HomeClientProps) {
             className="max-w-xl space-y-6"
           >
             {/* Live Pulsing Tagline Badge */}
-            <div className="inline-flex items-center space-x-2 text-[#059669] text-xs font-bold uppercase tracking-widest bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full border border-emerald-200/80 shadow-[0_2px_12px_rgba(5,150,105,0.15)]">
+            <div className="inline-flex items-center space-x-2 text-[#059669] dark:text-[#10B981] text-xs font-bold uppercase tracking-widest bg-white/95 dark:bg-[#061A17]/95 backdrop-blur-md px-4 py-1.5 rounded-full border border-emerald-200/80 dark:border-emerald-500/30 shadow-[0_2px_12px_rgba(5,150,105,0.15)]">
               <span className="w-2 h-2 rounded-full bg-[#059669] animate-pulse"></span>
               <Sparkles className="w-3.5 h-3.5 text-[#059669]" />
               <span>{content.hero.tagline || 'Since 2018'}</span>
@@ -71,10 +71,10 @@ export default function HomeClient({ content }: HomeClientProps) {
 
             {/* Typography Stack */}
             <div>
-              <span className="block text-xs font-bold tracking-[0.25em] text-[#041614] uppercase">
+              <span className="block text-xs font-bold tracking-[0.25em] text-[#041614] dark:text-gray-300 uppercase">
                 {content.hero.superHeading || 'Code Your Destiny. Create Your Legacy.'}
               </span>
-              <h1 className="text-3xl sm:text-5xl lg:text-[50px] font-extrabold text-[#041614] leading-[1.12] mt-2 tracking-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-[50px] font-extrabold text-[#041614] dark:text-white leading-[1.12] mt-2 tracking-tight">
                 {content.hero.title || 'Ancient Wisdom. Modern Solutions.'}
               </h1>
               <span className="block text-2xl sm:text-3xl lg:text-[38px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#B8860B] via-[#D4AF37] to-[#059669] mt-1 font-serif">
@@ -82,7 +82,7 @@ export default function HomeClient({ content }: HomeClientProps) {
               </span>
             </div>
 
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-lg font-normal">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg font-normal">
               {content.hero.description ||
                 'We blend timeless sciences with modern innovations to help you gain clarity, create wealth, build connections and live a life of purpose and fulfillment.'}
             </p>
@@ -107,11 +107,11 @@ export default function HomeClient({ content }: HomeClientProps) {
         </div>
 
         {/* Bottom Hero Ornate Services Banner */}
-        <div className="relative z-10 w-full bg-gradient-to-t from-white via-white/80 to-transparent pt-8 pb-4">
+        <div className="relative z-10 w-full bg-gradient-to-t from-white via-white/80 to-transparent dark:from-[#030F0E] dark:via-[#030F0E]/80 dark:to-transparent pt-8 pb-4">
           <div className="max-w-[1140px] mx-auto px-4">
             <div className="flex items-center justify-center space-x-4 mb-3">
               <div className="h-[1px] w-16 sm:w-28 bg-[#C59B27]/40"></div>
-              <span className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#041614] uppercase">
+              <span className="text-xs sm:text-sm font-bold tracking-[0.2em] text-[#041614] dark:text-white uppercase">
                 ✦ Our Services ✦
               </span>
               <div className="h-[1px] w-16 sm:w-28 bg-[#C59B27]/40"></div>

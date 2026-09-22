@@ -25,8 +25,8 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
   return (
     <aside className="space-y-8">
       {/* House Navigation Box */}
-      <div className="bg-[#F8FAFC] rounded-asymmetric p-6 border border-gray-200/70 shadow-sm">
-        <h3 className="text-xl font-bold text-[#041614] mb-5 border-b border-gray-200 pb-3">
+      <div className="bg-[#F8FAFC] dark:bg-[#061816] rounded-asymmetric p-6 border border-gray-200/70 dark:border-white/10 shadow-sm transition-colors">
+        <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-5 border-b border-gray-200 dark:border-white/10 pb-3">
           Our Houses & Network
         </h3>
         <ul className="space-y-2">
@@ -41,8 +41,8 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
                       active
                         ? 'bg-[#059669] text-white shadow-md translate-x-1'
                         : isGBN
-                        ? 'bg-emerald-50/70 text-[#041614] hover:bg-[#ECFDF5] hover:text-[#059669] border border-emerald-200/80 font-bold'
-                        : 'bg-white text-[#041614] hover:bg-[#ECFDF5] hover:text-[#059669] border border-gray-100'
+                        ? 'bg-emerald-50/70 dark:bg-emerald-950/40 text-[#041614] dark:text-emerald-300 hover:bg-[#ECFDF5] dark:hover:bg-emerald-900/40 hover:text-[#059669] border border-emerald-200/80 dark:border-emerald-500/30 font-bold'
+                        : 'bg-white dark:bg-[#030F0E] text-[#041614] dark:text-gray-200 hover:bg-[#ECFDF5] dark:hover:bg-white/5 hover:text-[#059669] dark:hover:text-[#10B981] border border-gray-100 dark:border-white/5'
                     }`}
                   >
                     <span className="flex items-center space-x-2">

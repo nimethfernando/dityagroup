@@ -59,9 +59,185 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark body {
-  background-color: #030F0E;
-  color: #E2E8F0;
+html.dark {
+  color-scheme: dark;
+}
+
+html.dark body {
+  background-color: #030F0E !important;
+  color: #E2E8F0 !important;
+}
+
+html.dark main {
+  background-color: #030F0E !important;
+}
+
+/* Page containers & white backgrounds */
+html.dark .bg-white,
+html.dark section.bg-white,
+html.dark div.bg-white:not([data-keep-white]) {
+  background-color: #030F0E !important;
+}
+
+/* Alternate light sections */
+html.dark .bg-\[\#FAFAFC\],
+html.dark .bg-\[\#F8F9FA\],
+html.dark .bg-\[\#F8FAFC\],
+html.dark .bg-\[\#F9F9F9\],
+html.dark .bg-\[\#F8F9FB\],
+html.dark .bg-gray-50,
+html.dark .bg-slate-50 {
+  background-color: #051513 !important;
+}
+
+/* Elevated card surfaces & containers in dark mode */
+html.dark .rounded-3xl.bg-white,
+html.dark .rounded-2xl.bg-white,
+html.dark .rounded-xl.bg-white,
+html.dark .rounded-asymmetric.bg-white,
+html.dark .rounded-asymmetric.bg-\[\#F9F9F9\],
+html.dark .rounded-asymmetric.bg-\[\#F8FAFC\],
+html.dark .rounded-asymmetric.bg-\[\#FAFAFC\],
+html.dark .rounded-2xl.bg-\[\#F8FAFC\],
+html.dark .rounded-3xl.bg-\[\#F8FAFC\],
+html.dark .p-6.bg-white,
+html.dark .p-8.bg-white,
+html.dark .p-7.bg-white,
+html.dark .p-5.bg-white,
+html.dark .shadow-sm.bg-white,
+html.dark .shadow-md.bg-white,
+html.dark .shadow-lg.bg-white,
+html.dark .shadow-xl.bg-white,
+html.dark .shadow-xs.bg-white,
+html.dark .card-hover,
+html.dark .rounded-asymmetric {
+  background-color: #061A17 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Typography & Headings */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6,
+html.dark .text-\[\#041614\],
+html.dark .text-\[\#011633\],
+html.dark .text-slate-900,
+html.dark .text-gray-900,
+html.dark .text-gray-800 {
+  color: #FFFFFF !important;
+}
+
+html.dark p,
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-slate-600,
+html.dark .text-slate-500 {
+  color: #94A3B8 !important;
+}
+
+html.dark .text-gray-700,
+html.dark .text-slate-700 {
+  color: #CBD5E1 !important;
+}
+
+/* Ensure light text stays crisp */
+html.dark .text-white,
+html.dark .text-gray-100,
+html.dark .text-gray-200,
+html.dark .text-gray-300 {
+  color: #F1F5F9 !important;
+}
+
+/* Light borders to subtle dark lines */
+html.dark .border-gray-100,
+html.dark .border-gray-200,
+html.dark .border-gray-200\/80,
+html.dark .border-gray-200\/70,
+html.dark .border-gray-200\/60,
+html.dark .border-gray-300,
+html.dark .border-slate-100,
+html.dark .border-slate-200,
+html.dark .border-slate-300 {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Badges & Emerald Accents */
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-50\/70,
+html.dark .bg-emerald-50\/50 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+html.dark .text-\[\#059669\] {
+  color: #10B981 !important;
+}
+
+html.dark .text-emerald-700,
+html.dark .text-emerald-800,
+html.dark .text-emerald-900,
+html.dark .text-emerald-950 {
+  color: #34D399 !important;
+}
+
+/* Form Inputs, Textareas, Selects */
+html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html.dark textarea,
+html.dark select,
+html.dark .bg-\[\#F9F9FB\] {
+  background-color: #08211D !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  background-color: #092823 !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: #64748B !important;
+}
+
+/* Home hero overlay adjustments */
+html.dark .from-white\/95,
+html.dark .from-white\/75 {
+  --tw-gradient-from: rgba(3, 15, 14, 0.95) !important;
+}
+html.dark .via-white\/80,
+html.dark .via-white\/25 {
+  --tw-gradient-via: rgba(3, 15, 14, 0.75) !important;
+}
+html.dark .from-white {
+  --tw-gradient-from: #030F0E !important;
+}
+html.dark .via-white {
+  --tw-gradient-via: #030F0E !important;
+}
+html.dark .bg-white\/95 {
+  background-color: rgba(6, 26, 23, 0.92) !important;
+}
+html.dark .bg-white\/40 {
+  background-color: rgba(3, 15, 14, 0.65) !important;
+}
+
+/* Navy button in dark mode */
+html.dark .btn-ditya-navy {
+  background: #061A17 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  color: #FFFFFF !important;
+}
+html.dark .btn-ditya-navy:hover {
+  border-color: #10B981 !important;
+  color: #10B981 !important;
 }
 
 .dark .glass-card {

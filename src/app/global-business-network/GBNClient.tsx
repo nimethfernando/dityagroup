@@ -103,7 +103,7 @@ export default function GBNClient({ content }: GBNClientProps) {
   };
 
   return (
-    <div className="bg-[#FAFAFC] text-[#041614] min-h-screen font-sans pb-24">
+    <div className="bg-[#FAFAFC] dark:bg-[#030F0E] text-[#041614] dark:text-gray-100 min-h-screen font-sans pb-24 transition-colors duration-200">
       {/* ============================================================ */}
       {/* 1. DITYA GROUP HEADER BANNER */}
       {/* ============================================================ */}

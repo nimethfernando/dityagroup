@@ -66,7 +66,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
   const recentPosts = initialPosts.slice(0, 3);
 
   return (
-    <div className="pb-20 bg-[#FBFBFB]">
+    <div className="pb-20 bg-[#FBFBFB] dark:bg-[#030F0E] text-[#041614] dark:text-gray-100 transition-colors duration-200">
       {/* 1. Page Banner */}
       <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}

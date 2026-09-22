@@ -49,7 +49,7 @@ export default function BlogPostClient({
   const { openModal } = useConsultation();
 
   return (
-    <div className="pb-20 bg-white">
+    <div className="pb-20 bg-white dark:bg-[#030F0E] text-[#041614] dark:text-gray-100 transition-colors duration-200">
       {/* 1. Header Banner */}
       <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-16 lg:py-20 relative overflow-hidden border-b border-white/5">
         {/* Sacred Geometry Silk Banner Background */}

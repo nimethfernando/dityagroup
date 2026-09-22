@@ -114,7 +114,7 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
   ];
 
   return (
-    <div className="pb-0 bg-white selection:bg-[#059669]/20 selection:text-[#041614]">
+    <div className="pb-0 bg-white dark:bg-[#030F0E] text-[#041614] dark:text-gray-100 selection:bg-[#059669]/20 selection:text-[#041614] transition-colors duration-200">
       {/* 1. Page Title Banner */}
       <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-24 text-center relative overflow-hidden border-b border-white/5">
         {/* Silk Ambient Background Pattern */}
