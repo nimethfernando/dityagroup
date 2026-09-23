@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AdminHeader from '@/components/admin/AdminHeader';
+import AdminImageUpload, { ImagePreset } from '@/components/admin/AdminImageUpload';
 import {
   BookOpen,
   Plus,
@@ -42,6 +43,17 @@ const DEFAULT_CATEGORIES = [
   'Vedic Mathematics',
   'Tech & Architecture',
   'Personal Growth & Mindset',
+];
+
+const BLOG_IMAGE_PRESETS: ImagePreset[] = [
+  { label: '🌿 Bay Leaf Ritual', url: '/images/blog-bay-leaf.jpg' },
+  { label: '🧂 Crystal Salt Ritual', url: '/images/blog-crystal-salt.jpg' },
+  { label: '🫖 Copper Water Remedy', url: '/images/blog-copper-water.jpg' },
+  { label: '✨ Core Values Modern', url: '/images/core-values-modern.jpg' },
+  { label: '🌟 Core Values Classic', url: '/images/core-values.jpg' },
+  { label: '🚀 Hero Clean Banner', url: '/images/hero-banner-clean.jpg' },
+  { label: '💎 Why Choose Us', url: '/images/why-choose-modern.jpg' },
+  { label: '🏛️ Inner Banner Silk', url: '/images/inner-banner-bg.jpg' },
 ];
 
 export default function AdminBlogsPage() {
@@ -390,6 +402,7 @@ export default function AdminBlogsPage() {
               <table className="w-full text-left border-collapse">
                 <thead>
                   <tr className="bg-[#041614] text-white text-[11px] uppercase tracking-wider font-bold">
+                    <th className="py-3.5 px-4 w-16">Cover</th>
                     <th className="py-3.5 px-4">Article Title & Category</th>
                     <th className="py-3.5 px-4">URL Path</th>
                     <th className="py-3.5 px-4">Author</th>
@@ -401,6 +414,19 @@ export default function AdminBlogsPage() {
                 <tbody className="divide-y divide-gray-100 text-xs text-gray-700">
                   {filteredBlogs.map((b) => (
                     <tr key={b.id} className="hover:bg-gray-50/70 transition-colors">
+                      <td className="py-3 px-4 shrink-0">
+                        <div className="w-14 h-10 rounded-lg overflow-hidden border border-gray-200 bg-gray-100 relative shadow-2xs">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={b.image || '/images/hero-banner.jpeg'}
+                            alt={b.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src = '/images/hero-banner.jpeg';
+                            }}
+                          />
+                        </div>
+                      </td>
                       <td className="py-4 px-4 font-semibold text-[#041614] max-w-md">
                         <div className="font-bold text-sm leading-snug">{b.title}</div>
                         <span className="inline-block mt-1 text-[10px] font-bold uppercase tracking-wider text-[#059669] bg-emerald-50 px-2.5 py-0.5 rounded border border-emerald-200">
@@ -569,16 +595,16 @@ export default function AdminBlogsPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-bold mb-1">Cover Image URL</label>
-                <input
-                  type="text"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  placeholder="/images/hero-banner.jpeg or /images/blog-crystal-salt.jpg"
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
-                />
-              </div>
+              <AdminImageUpload
+                label="Article Cover Image"
+                value={image}
+                onChange={setImage}
+                description="Upload an image file from your computer, choose from website presets, or enter a URL."
+                aspectHint="Recommended: 16:9 ratio (PNG, JPG, WebP under 2.5MB)"
+                presets={BLOG_IMAGE_PRESETS}
+                defaultUrl="/images/hero-banner.jpeg"
+                previewHeight="h-40 sm:h-48"
+              />
 
               <div>
                 <label className="block text-gray-700 font-bold mb-1">Short Excerpt (Summary)</label>
@@ -735,15 +761,16 @@ export default function AdminBlogsPage() {
                 </div>
               </div>
 
-              <div>
-                <label className="block text-gray-700 font-bold mb-1">Cover Image URL</label>
-                <input
-                  type="text"
-                  value={image}
-                  onChange={(e) => setImage(e.target.value)}
-                  className="w-full px-3.5 py-2.5 border border-gray-300 rounded-asymmetric text-xs focus:outline-none focus:border-[#059669]"
-                />
-              </div>
+              <AdminImageUpload
+                label="Article Cover Image"
+                value={image}
+                onChange={setImage}
+                description="Upload an image file from your computer, choose from website presets, or enter a URL."
+                aspectHint="Recommended: 16:9 ratio (PNG, JPG, WebP under 2.5MB)"
+                presets={BLOG_IMAGE_PRESETS}
+                defaultUrl="/images/hero-banner.jpeg"
+                previewHeight="h-40 sm:h-48"
+              />
 
               <div>
                 <label className="block text-gray-700 font-bold mb-1">Short Excerpt (Summary)</label>

@@ -105,6 +105,20 @@ export default function BlogPostClient({
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Main Article Body */}
           <article className="lg:col-span-8 space-y-6 text-gray-700 leading-relaxed text-sm sm:text-base">
+            {/* Featured Cover Image */}
+            {post.image && (
+              <div className="relative h-64 sm:h-[400px] w-full rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-white/10 bg-gray-100 dark:bg-white/5">
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  fill
+                  priority
+                  className="object-cover object-center"
+                  unoptimized={Boolean(post.image.startsWith('data:') || post.image.startsWith('http'))}
+                />
+              </div>
+            )}
+
             {/* Excerpt Callout */}
             {post.excerpt && (
               <p className="text-base sm:text-lg font-medium text-[#041614] bg-emerald-50/70 p-6 sm:p-7 rounded-2xl border-l-4 border-[#059669] shadow-sm leading-relaxed">

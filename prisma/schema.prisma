@@ -34,7 +34,7 @@ model Blog {
   excerpt     String   @db.Text
   content     String   @db.LongText
   takeaways   String?  @db.Text
-  image       String   @db.Text
+  image       String   @db.LongText
   category    String   @default("Ditya Astroverse")
   readTime    String   @default("5 min read")
   authorName  String   @default("Ditya Group")

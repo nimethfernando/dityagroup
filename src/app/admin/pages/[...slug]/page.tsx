@@ -46,6 +46,21 @@ import {
 } from 'react-icons/fa6';
 import { IconType } from 'react-icons';
 import { SocialLinkItem, PAGE_DEFINITIONS, DEFAULT_PAGE_CONTENTS } from '@/lib/defaultPageContent';
+import AdminImageUpload, { ImagePreset } from '@/components/admin/AdminImageUpload';
+
+const WEBSITE_IMAGE_PRESETS: ImagePreset[] = [
+  { label: '🚀 Hero Clean Banner', url: '/images/hero-banner-clean.jpg' },
+  { label: '🌌 Hero Classic Banner', url: '/images/hero-banner.jpeg' },
+  { label: '✨ Core Values Modern', url: '/images/core-values-modern.jpg' },
+  { label: '🏛️ Core Values Classic', url: '/images/core-values.jpg' },
+  { label: '💎 Why Choose Modern', url: '/images/why-choose-modern.jpg' },
+  { label: '🤝 Why Choose Us', url: '/images/why-choose-us.jpg' },
+  { label: '⚡ Services Silk Pattern', url: '/images/services-bg.jpg' },
+  { label: '🗺️ Roadmap Silk Pattern', url: '/images/roadmap-bg.jpg' },
+  { label: '💬 Consultation Banner', url: '/images/consultation-banner-bg.jpg' },
+  { label: '📜 Silk Inner Page Banner', url: '/images/inner-banner-bg.jpg' },
+  { label: '✍️ Founder Signature', url: '/images/signature.png' },
+];
 
 const ADMIN_ICON_MAP: Record<string, IconType> = {
   facebook: FaFacebookF,
@@ -518,6 +533,23 @@ export default function PageEditor({ params }: PageEditorProps) {
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                   ></textarea>
                 </div>
+
+                <div className="pt-2 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="Hero Section Background Banner"
+                    value={content.hero?.backgroundImage || '/images/hero-banner.jpeg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        hero: { ...content.hero, backgroundImage: url },
+                      })
+                    }
+                    description="Upload a high-resolution banner image from your device or select from presets."
+                    aspectHint="Recommended: 1920x1080px (PNG, JPG, WebP under 2.5MB)"
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/hero-banner.jpeg"
+                  />
+                </div>
               </div>
 
               {/* Core Values & Vision */}
@@ -656,6 +688,38 @@ export default function PageEditor({ params }: PageEditorProps) {
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="Core Values Section Image"
+                    value={content.coreValues?.image || '/images/core-values.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        coreValues: { ...content.coreValues, image: url },
+                      })
+                    }
+                    description="Displays in the core values section."
+                    aspectHint="Vertical orientation (PNG, JPG under 2.5MB)"
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/core-values.jpg"
+                  />
+                  <AdminImageUpload
+                    label="Founder Signature Image"
+                    value={content.coreValues?.signatureImage || '/images/signature.png'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        coreValues: { ...content.coreValues, signatureImage: url },
+                      })
+                    }
+                    description="Appears beside the founder title."
+                    aspectHint="Transparent PNG signature"
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/signature.png"
+                    previewHeight="h-32"
+                  />
                 </div>
               </div>
 
@@ -833,6 +897,23 @@ export default function PageEditor({ params }: PageEditorProps) {
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                   />
                 </div>
+
+                <div className="pt-3 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="Why Choose Us Section Image"
+                    value={content.whyChooseUs?.image || '/images/why-choose-us.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        whyChooseUs: { ...content.whyChooseUs, image: url },
+                      })
+                    }
+                    description="Displays beside the why choose us metrics."
+                    aspectHint="Vertical orientation (PNG, JPG under 2.5MB)"
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/why-choose-us.jpg"
+                  />
+                </div>
               </div>
             </>
           )}
@@ -896,6 +977,22 @@ export default function PageEditor({ params }: PageEditorProps) {
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
                     />
                   </div>
+                </div>
+
+                <div className="pt-2 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="About Page Silk Banner Background"
+                    value={content.banner?.backgroundImage || '/images/inner-banner-bg.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        banner: { ...content.banner, backgroundImage: url },
+                      })
+                    }
+                    description="Header banner background image across the About Us page."
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/inner-banner-bg.jpg"
+                  />
                 </div>
               </div>
 
@@ -1098,6 +1195,23 @@ export default function PageEditor({ params }: PageEditorProps) {
                     />
                   </div>
                 </div>
+
+                <div className="pt-3 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="Core Values Side Feature Image"
+                    value={content.coreValues?.image || '/images/core-values.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        coreValues: { ...content.coreValues, image: url },
+                      })
+                    }
+                    description="Visual card image displayed on the left column beside the core values list."
+                    aspectHint="Vertical orientation (PNG, JPG under 2.5MB)"
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/core-values.jpg"
+                  />
+                </div>
               </div>
 
               {/* 3. Founder Message */}
@@ -1188,6 +1302,23 @@ export default function PageEditor({ params }: PageEditorProps) {
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
                   </div>
+                </div>
+
+                <div className="pt-3 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="Founder Signature Image"
+                    value={content.founder?.signatureImage || '/images/signature.png'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        founder: { ...content.founder, signatureImage: url },
+                      })
+                    }
+                    description="Founder's signature displayed beneath the quote and credentials."
+                    aspectHint="Transparent PNG recommended (under 2.5MB)"
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/signature.png"
+                  />
                 </div>
               </div>
 
@@ -1509,10 +1640,85 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* 3. CONTACT PAGE EDITOR */}
           {/* ============================================================ */}
           {slug === 'contact' && (
-            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                Contact Information & Office Details
-              </h3>
+            <div className="space-y-8">
+              {/* 1. Contact Banner */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  1. Contact Page Banner
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Badge Pill
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="Contact Page Banner Background"
+                    value={content.banner?.backgroundImage || '/images/inner-banner-bg.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        banner: { ...content.banner, backgroundImage: url },
+                      })
+                    }
+                    description="Header banner background image across the Contact Us page."
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/inner-banner-bg.jpg"
+                  />
+                </div>
+              </div>
+
+              {/* 2. Contact Information & Office Details */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  2. Contact Information & Office Details
+                </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
@@ -1624,6 +1830,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 ></textarea>
               </div>
             </div>
+          </div>
           )}
 
 
@@ -1635,7 +1842,23 @@ export default function PageEditor({ params }: PageEditorProps) {
               <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                 Services Directory Header & Intro
               </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Banner Badge Pill
+                  </label>
+                  <input
+                    type="text"
+                    value={content.banner?.badge || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        banner: { ...content.banner, badge: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
                     Banner Title
@@ -1654,36 +1877,71 @@ export default function PageEditor({ params }: PageEditorProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Badge
+                    Banner Subtitle
                   </label>
                   <input
                     type="text"
-                    value={content.banner?.badge || ''}
+                    value={content.banner?.subtitle || ''}
                     onChange={(e) =>
                       setContent({
                         ...content,
-                        banner: { ...content.banner, badge: e.target.value },
+                        banner: { ...content.banner, subtitle: e.target.value },
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                   />
                 </div>
               </div>
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Introduction Heading
-                </label>
-                <input
-                  type="text"
-                  value={content.intro?.heading || ''}
-                  onChange={(e) =>
+
+              <div className="pt-2 border-t border-gray-100">
+                <AdminImageUpload
+                  label="Services Page Banner Background"
+                  value={content.banner?.backgroundImage || '/images/inner-banner-bg.jpg'}
+                  onChange={(url) =>
                     setContent({
                       ...content,
-                      intro: { ...content.intro, heading: e.target.value },
+                      banner: { ...content.banner, backgroundImage: url },
                     })
                   }
-                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  description="Header banner background image across the Services & Houses Directory page."
+                  presets={WEBSITE_IMAGE_PRESETS}
+                  defaultUrl="/images/inner-banner-bg.jpg"
                 />
+              </div>
+
+              <div className="pt-3 border-t border-gray-100 space-y-4">
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Introduction Heading
+                  </label>
+                  <input
+                    type="text"
+                    value={content.intro?.heading || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        intro: { ...content.intro, heading: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Introduction Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.intro?.description || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        intro: { ...content.intro, description: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
               </div>
             </div>
           )}
@@ -1776,10 +2034,85 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* 6. HOUSES & CUSTOM SUB-PAGES EDITOR */}
           {/* ============================================================ */}
           {isHouseOrCustom && (
-            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                House Overview & Offerings
-              </h3>
+            <div className="space-y-8">
+              {/* 1. House Header Banner */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  1. House Banner Header
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Badge Pill
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="House Banner Background Silk Texture"
+                    value={content.banner?.backgroundImage || '/images/inner-banner-bg.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        banner: { ...content.banner, backgroundImage: url },
+                      })
+                    }
+                    description="Header banner background image across this House or Custom sub-page."
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/inner-banner-bg.jpg"
+                  />
+                </div>
+              </div>
+
+              {/* 2. House Overview & Offerings */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  2. House Overview & Offerings
+                </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
@@ -2053,6 +2386,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 </div>
               </div>
             </div>
+          </div>
           )}
 
           {/* ============================================================ */}
@@ -2116,6 +2450,22 @@ export default function PageEditor({ params }: PageEditorProps) {
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+
+                <div className="pt-2 border-t border-gray-100">
+                  <AdminImageUpload
+                    label="GBN Banner Background Silk Texture"
+                    value={content.banner?.backgroundImage || '/images/inner-banner-bg.jpg'}
+                    onChange={(url) =>
+                      setContent({
+                        ...content,
+                        banner: { ...content.banner, backgroundImage: url },
+                      })
+                    }
+                    description="Header banner background image across the Global Business Network page."
+                    presets={WEBSITE_IMAGE_PRESETS}
+                    defaultUrl="/images/inner-banner-bg.jpg"
                   />
                 </div>
               </div>

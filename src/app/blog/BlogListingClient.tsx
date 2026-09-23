@@ -181,6 +181,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                           alt={post.title}
                           fill
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
+                          unoptimized={Boolean(post.image?.startsWith('data:') || post.image?.startsWith('http'))}
                         />
                         <div className="absolute top-3.5 left-3.5 z-10">
                           <span className="text-[10px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-2.5 py-1 rounded-full shadow-md">

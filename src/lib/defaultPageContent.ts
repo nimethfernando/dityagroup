@@ -7,6 +7,7 @@ export interface HomePageContent {
     description: string;
     exploreBtnText: string;
     getStartedBtnText: string;
+    backgroundImage?: string;
   };
   coreValues: {
     subtitle: string;
@@ -23,6 +24,8 @@ export interface HomePageContent {
     timeCardDesc: string;
     founderName: string;
     founderRole: string;
+    image?: string;
+    signatureImage?: string;
   };
   stats: {
     stat1Number: string;
@@ -46,6 +49,10 @@ export interface HomePageContent {
     metric2Desc: string;
     testimonialQuote: string;
     testimonialAuthor: string;
+    image?: string;
+  };
+  services?: {
+    backgroundImage?: string;
   };
   howItWorks: {
     subtitle: string;
@@ -64,6 +71,7 @@ export interface HomePageContent {
     heading: string;
     description: string;
     btnText: string;
+    backgroundImage?: string;
   };
 }
 
@@ -72,6 +80,7 @@ export interface AboutPageContent {
     badge: string;
     title: string;
     subtitle: string;
+    backgroundImage?: string;
   };
   coreValues?: {
     subtitle: string;
@@ -88,6 +97,7 @@ export interface AboutPageContent {
     prodCardDesc: string;
     timeCardTitle: string;
     timeCardDesc: string;
+    image?: string;
   };
   story?: {
     subtitle: string;
@@ -106,6 +116,7 @@ export interface AboutPageContent {
     quote: string;
     name: string;
     role: string;
+    signatureImage?: string;
   };
   stats?: {
     stat1Number: string;
@@ -151,6 +162,7 @@ export interface ContactPageContent {
     badge: string;
     title: string;
     subtitle: string;
+    backgroundImage?: string;
   };
   info: {
     subtitle: string;
@@ -171,6 +183,7 @@ export interface HousePageContent {
     badge: string;
     title: string;
     subtitle: string;
+    backgroundImage?: string;
   };
   details: {
     division: string;
@@ -195,6 +208,7 @@ export interface ServicesPageContent {
     badge: string;
     title: string;
     subtitle: string;
+    backgroundImage?: string;
   };
   intro: {
     heading: string;
@@ -229,6 +243,7 @@ export interface CustomPageContent {
     badge: string;
     title: string;
     subtitle: string;
+    backgroundImage?: string;
   };
   details: {
     division: string;
@@ -252,6 +267,7 @@ export interface GBNPageContent {
     badge: string;
     title: string;
     subtitle: string;
+    backgroundImage?: string;
   };
   intro: {
     tagline: string;
@@ -444,10 +460,13 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
         'We blend timeless sciences with modern innovations to help you gain clarity, create wealth, build connections and live a life of purpose and fulfillment.',
       exploreBtnText: 'Explore Our Services',
       getStartedBtnText: 'Get Started',
+      backgroundImage: '/images/hero-banner.jpeg',
     },
     coreValues: {
       subtitle: 'Welcome to DITYA GROUP',
       heading: 'Our Vision Is Creating Infinite Growth Possibilities',
+      image: '/images/core-values.jpg',
+      signatureImage: '/images/signature.png',
       para1:
         'If you’re like most ambitious individuals or business owners, you manage multiple roles at once—handling finances, operations, strategy, and execution. Managing everything alone can become overwhelming and limit your true growth potential. That’s where Ditya Group steps in.',
       para2:
@@ -491,6 +510,10 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       testimonialQuote:
         'Working with Ditya Group has been a game changer. Their guidance in trading, numerology, and business support made decision-making easier and more effective. Everything is well-managed and results are clearly visible. Truly worth the investment and their other services.',
       testimonialAuthor: 'Aditya Malhotra',
+      image: '/images/why-choose-us.jpg',
+    },
+    services: {
+      backgroundImage: '/images/services-bg.jpg',
     },
     howItWorks: {
       subtitle: 'How It Works',
@@ -510,6 +533,7 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       description:
         'If you’re unsure about our services, don’t worry! We offer consultations to guide you with complete clarity. Our team provides the right support across trading, numerology, and essential services to help you make confident decisions.',
       btnText: 'Start Consultation',
+      backgroundImage: '/images/consultation-banner-bg.jpg',
     },
   },
   about: {
@@ -517,11 +541,13 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       badge: 'About Us',
       title: 'About Us',
       subtitle: 'Building Solutions That Simplify Growth',
+      backgroundImage: '/images/inner-banner-bg.jpg',
     },
     coreValues: {
       subtitle: 'Our Core Value',
       heading: 'Our Business Is Making Your Life Easier',
       welcomeBadge: 'Welcome To DITYA GROUP',
+      image: '/images/core-values.jpg',
       para1:
         'At DITYA Group, we believe growth becomes easier when people have access to the right support systems, structured solutions, and clear guidance. Our mission is to create an ecosystem where individuals, students, professionals, businesses, and organizations can access multiple solutions under one platform.',
       para2:
@@ -562,6 +588,7 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
         '“Our vision is simple — create systems, services, and solutions that make growth easier for individuals and businesses while continuously expanding opportunities under one ecosystem.”',
       name: 'Aamitt Batra',
       role: 'Founder, DITYA GROUP',
+      signatureImage: '/images/signature.png',
     },
     stats: {
       stat1Number: '500 +',
@@ -611,6 +638,7 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       badge: 'We Are Available 24/7',
       title: 'Contact Us',
       subtitle: 'Have questions about our Houses or guidance programs? Connect directly with our team.',
+      backgroundImage: '/images/inner-banner-bg.jpg',
     },
     info: {
       subtitle: 'Reach Out Directly',
@@ -674,6 +702,7 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       badge: 'Premier International Community',
       title: 'Global Business Network (GBN)',
       subtitle: 'Expand Your Reach. Connect with Industry Leaders Worldwide.',
+      backgroundImage: '/images/inner-banner-bg.jpg',
     },
     intro: {
       tagline: 'Connect • Collaborate • Grow',
@@ -936,6 +965,7 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
       title: 'Our Services & Houses',
       subtitle:
         'Explore our specialized Houses and bespoke service divisions designed to elevate your personal clarity, educational excellence, and business growth.',
+      backgroundImage: '/images/inner-banner-bg.jpg',
     },
     intro: {
       heading: 'End-to-End Solutions Across Ancient Sciences & Modern Innovation',

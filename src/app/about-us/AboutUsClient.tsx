@@ -120,11 +120,12 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
         {/* Silk Ambient Background Pattern */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="/images/inner-banner-bg.jpg"
+            src={banner.backgroundImage || '/images/inner-banner-bg.jpg'}
             alt="About Banner Background"
             fill
             priority
             className="object-cover object-center opacity-25 mix-blend-overlay"
+            unoptimized={Boolean(banner.backgroundImage?.startsWith('data:') || banner.backgroundImage?.startsWith('http'))}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
         </div>
@@ -158,10 +159,11 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
             <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-100 group">
               <div className="relative h-[400px] w-full">
                 <Image
-                  src="/images/core-values.jpg"
+                  src={coreValues?.image || '/images/core-values.jpg'}
                   alt="Ditya Group Core Values"
                   fill
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  unoptimized={Boolean(coreValues?.image?.startsWith('data:') || coreValues?.image?.startsWith('http'))}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#020D0C]/80 via-[#041614]/20 to-transparent" />
               </div>
@@ -314,10 +316,11 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
 
           <div className="relative h-14 w-36 mx-auto opacity-85">
             <Image
-              src="/images/signature.png"
+              src={founder.signatureImage || '/images/signature.png'}
               alt="Aamitt Batra Signature"
               fill
               className="object-contain object-center"
+              unoptimized={Boolean(founder.signatureImage?.startsWith('data:') || founder.signatureImage?.startsWith('http'))}
             />
           </div>
         </div>

@@ -123,11 +123,12 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
         {/* Silk Textured Banner Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
-            src="/images/inner-banner-bg.jpg"
+            src={content.banner?.backgroundImage || '/images/inner-banner-bg.jpg'}
             alt="Contact Banner Background"
             fill
             className="object-cover object-center opacity-30 mix-blend-overlay"
             priority
+            unoptimized={Boolean(content.banner?.backgroundImage?.startsWith('data:') || content.banner?.backgroundImage?.startsWith('http'))}
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#020D0C]/90 via-[#041614]/80 to-[#0D2622]/85" />
         </div>
