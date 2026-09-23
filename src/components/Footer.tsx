@@ -422,7 +422,6 @@ export default function Footer() {
             <div className="pt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-gray-400 border-t border-white/10 mt-3">
               <Link href="/privacy-policy" className="hover:text-[#10B981] transition-colors">{t('footer.privacy_policy')}</Link>
               <Link href="/terms-and-conditions" className="hover:text-[#10B981] transition-colors">{t('footer.terms')}</Link>
-              <Link href="/admin/login" className="hover:text-[#10B981] transition-colors">{t('footer.admin')}</Link>
             </div>
           </div>
 
