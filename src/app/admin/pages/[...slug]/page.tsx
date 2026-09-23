@@ -12,9 +12,75 @@ import {
   CheckCircle2,
   AlertCircle,
   Loader2,
+  Sparkles,
   Trash2,
+  Eye,
+  EyeOff,
   Plus,
+  Share2,
+  Globe,
+  MessageSquare,
+  Phone,
+  Mail,
+  MapPin,
 } from 'lucide-react';
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaQuora,
+  FaTumblr,
+  FaMedium,
+  FaBloggerB,
+  FaWhatsapp,
+  FaPinterestP,
+  FaThreads,
+  FaFlipboard,
+  FaTelegram,
+  FaXTwitter,
+  FaLinkedinIn,
+  FaLink,
+} from 'react-icons/fa6';
+import { IconType } from 'react-icons';
+import { SocialLinkItem, PAGE_DEFINITIONS, DEFAULT_PAGE_CONTENTS } from '@/lib/defaultPageContent';
+
+const ADMIN_ICON_MAP: Record<string, IconType> = {
+  facebook: FaFacebookF,
+  FaFacebookF: FaFacebookF,
+  instagram: FaInstagram,
+  FaInstagram: FaInstagram,
+  youtube: FaYoutube,
+  FaYoutube: FaYoutube,
+  quora: FaQuora,
+  FaQuora: FaQuora,
+  tumblr: FaTumblr,
+  FaTumblr: FaTumblr,
+  medium: FaMedium,
+  FaMedium: FaMedium,
+  x: FaXTwitter,
+  twitter: FaXTwitter,
+  FaXTwitter: FaXTwitter,
+  blogger: FaBloggerB,
+  FaBloggerB: FaBloggerB,
+  whatsapp: FaWhatsapp,
+  FaWhatsapp: FaWhatsapp,
+  pinterest: FaPinterestP,
+  FaPinterestP: FaPinterestP,
+  threads: FaThreads,
+  FaThreads: FaThreads,
+  flipboard: FaFlipboard,
+  FaFlipboard: FaFlipboard,
+  telegram: FaTelegram,
+  FaTelegram: FaTelegram,
+  linkedin: FaLinkedinIn,
+  FaLinkedinIn: FaLinkedinIn,
+};
+
+function getAdminSocialIcon(item: { id?: string; icon?: string }): IconType {
+  if (item.icon && ADMIN_ICON_MAP[item.icon]) return ADMIN_ICON_MAP[item.icon];
+  if (item.id && ADMIN_ICON_MAP[item.id.toLowerCase()]) return ADMIN_ICON_MAP[item.id.toLowerCase()];
+  return FaLink;
+}
 
 interface PageEditorProps {
   params: Promise<{ slug: string[] | string }>;
@@ -23,7 +89,7 @@ interface PageEditorProps {
 export default function PageEditor({ params }: PageEditorProps) {
   const router = useRouter();
   const resolvedParams = use(params);
-  const slug = Array.isArray(resolvedParams.slug) ? resolvedParams.slug.join('/') : resolvedParams.slug;
+  const slug = Array.isArray(resolvedParams.slug) ? resolvedParams.slug.join('/') : (resolvedParams.slug || '');
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -41,10 +107,20 @@ export default function PageEditor({ params }: PageEditorProps) {
   useEffect(() => {
     async function loadData() {
       setLoading(true);
+      setStatusMsg(null);
       try {
-        const res = await fetch(`/api/admin/pages/${slug}`);
+        const cleanSlug = encodeURIComponent(slug).replace(/%2F/g, '/');
+        const res = await fetch(`/api/admin/pages/${cleanSlug}`, {
+          cache: 'no-store',
+        });
+
+        if (res.status === 401) {
+          router.push(`/admin/login?redirect=/admin/pages/${cleanSlug}`);
+          return;
+        }
+
         const data = await res.json();
-        if (res.ok && data.success) {
+        if (res.ok && data.success && data.data?.content) {
           setPageMeta({
             title: data.data.title,
             path: data.data.path,
@@ -54,16 +130,58 @@ export default function PageEditor({ params }: PageEditorProps) {
           });
           setContent(data.data.content);
         } else {
-          setStatusMsg({ type: 'error', text: data.message || 'Failed to load page content' });
+          // If API query failed (e.g. database latency), check if we have local default fallback
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const fallback = (DEFAULT_PAGE_CONTENTS as Record<string, any>)[slug];
+          const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
+          if (fallback) {
+            setPageMeta({
+              title: pageDef?.title || slug,
+              path: pageDef?.path || `/${slug}`,
+              category: pageDef?.category || 'Core Pages',
+              isCustomPage: false,
+              isCustomized: false,
+            });
+            setContent(fallback);
+            setStatusMsg({
+              type: 'error',
+              text: data.message
+                ? `${data.message} - Displaying default baseline. You can make edits and save.`
+                : 'Displaying baseline default content. You can make edits and save.',
+            });
+          } else {
+            setStatusMsg({ type: 'error', text: data.message || 'Failed to load page content' });
+          }
         }
-      } catch {
-        setStatusMsg({ type: 'error', text: 'Network error while loading content.' });
+      } catch (err: any) { // eslint-disable-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const fallback = (DEFAULT_PAGE_CONTENTS as Record<string, any>)[slug];
+        const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
+        if (fallback) {
+          setPageMeta({
+            title: pageDef?.title || slug,
+            path: pageDef?.path || `/${slug}`,
+            category: pageDef?.category || 'Core Pages',
+            isCustomPage: false,
+            isCustomized: false,
+          });
+          setContent(fallback);
+          setStatusMsg({
+            type: 'error',
+            text: 'Network issue contacting database. Displaying default baseline content.',
+          });
+        } else {
+          setStatusMsg({
+            type: 'error',
+            text: 'Network error while loading content. Please check your connection.',
+          });
+        }
       } finally {
         setLoading(false);
       }
     }
     loadData();
-  }, [slug]);
+  }, [slug, router]);
 
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -71,7 +189,8 @@ export default function PageEditor({ params }: PageEditorProps) {
     setStatusMsg(null);
 
     try {
-      const res = await fetch(`/api/admin/pages/${slug}`, {
+      const cleanSlug = encodeURIComponent(slug).replace(/%2F/g, '/');
+      const res = await fetch(`/api/admin/pages/${cleanSlug}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -99,13 +218,14 @@ export default function PageEditor({ params }: PageEditorProps) {
     const isCustom = pageMeta?.isCustomPage;
     const confirmMsg = isCustom
       ? `Are you sure you want to permanently delete this custom sub-page (${pageMeta?.title})?`
-      : `Are you sure you want to reset this page back to default content?`;
+      : 'Are you sure you want to reset this page back to default content?';
 
     if (!confirm(confirmMsg)) return;
 
     setSaving(true);
     try {
-      const res = await fetch(`/api/admin/pages/${slug}`, { method: 'DELETE' });
+      const cleanSlug = encodeURIComponent(slug).replace(/%2F/g, '/');
+      const res = await fetch(`/api/admin/pages/${cleanSlug}`, { method: 'DELETE' });
       if (res.ok) {
         if (isCustom) {
           router.push('/admin/pages');
@@ -113,6 +233,8 @@ export default function PageEditor({ params }: PageEditorProps) {
           router.refresh();
           window.location.reload();
         }
+      } else {
+        alert('Action failed. Please try again.');
       }
     } catch {
       alert('Action failed. Please try again.');
@@ -163,16 +285,42 @@ export default function PageEditor({ params }: PageEditorProps) {
       <div className="min-h-screen bg-[#F8F9FA]">
         <AdminHeader />
         <div className="max-w-xl mx-auto py-24 px-4 text-center">
-          <p className="text-base font-bold text-red-600">Unable to load page content.</p>
-          <Link href="/admin/pages" className="mt-4 inline-block btn-ditya-orange text-xs">
-            Back to Pages
-          </Link>
+          <AlertCircle className="w-10 h-10 text-red-500 mx-auto mb-3" />
+          <p className="text-base font-bold text-gray-800">
+            {statusMsg?.text || 'Unable to load page content.'}
+          </p>
+          <p className="text-xs text-gray-500 mt-1 mb-6">
+            The requested page slug was &quot;{slug}&quot;.
+          </p>
+          <div className="flex items-center justify-center space-x-3">
+            <button
+              onClick={() => window.location.reload()}
+              className="btn-ditya-orange text-xs py-2 px-4 font-bold flex items-center space-x-1.5 cursor-pointer"
+            >
+              <RotateCcw className="w-3.5 h-3.5" />
+              <span>Retry</span>
+            </button>
+            <Link
+              href="/admin/pages"
+              className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-asymmetric text-xs font-semibold hover:bg-gray-50"
+            >
+              Back to Pages
+            </Link>
+          </div>
         </div>
       </div>
     );
   }
 
-  const isHouseOrCustom = slug !== 'home' && slug !== 'about' && slug !== 'contact' && slug !== 'services' && slug !== 'privacy-policy' && slug !== 'terms-and-conditions' && slug !== 'global-business-network' && slug !== 'footer';
+  const isHouseOrCustom =
+    slug !== 'home' &&
+    slug !== 'about' &&
+    slug !== 'contact' &&
+    slug !== 'services' &&
+    slug !== 'privacy-policy' &&
+    slug !== 'terms-and-conditions' &&
+    slug !== 'global-business-network' &&
+    slug !== 'footer';
 
   return (
     <div className="min-h-screen bg-[#F8F9FA] text-gray-800 pb-28">
@@ -271,46 +419,12 @@ export default function PageEditor({ params }: PageEditorProps) {
 
         {/* Dynamic Form Editor */}
         <form onSubmit={handleSave} className="space-y-8">
-          {/* Custom Sub-Page Meta Editor */}
-          {pageMeta?.isCustomPage && (
-            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                Sub-Page Settings & Category
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Page Display Title *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={pageMeta.title}
-                    onChange={(e) => setPageMeta({ ...pageMeta, title: e.target.value })}
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Category Tag
-                  </label>
-                  <input
-                    type="text"
-                    value={pageMeta.category || 'Services Sub-Page'}
-                    onChange={(e) => setPageMeta({ ...pageMeta, category: e.target.value })}
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-
           {/* ============================================================ */}
           {/* 1. HOME PAGE EDITOR */}
           {/* ============================================================ */}
           {slug === 'home' && (
             <>
-              {/* Hero Section */}
+              {/* Hero Section Card */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
                 <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
                   1. Hero Section Content
@@ -353,7 +467,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                      Main Title
+                      Primary Headline
                     </label>
                     <input
                       type="text"
@@ -369,7 +483,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                      Subtitle Accent
+                      Gold Sub-Headline
                     </label>
                     <input
                       type="text"
@@ -387,7 +501,7 @@ export default function PageEditor({ params }: PageEditorProps) {
 
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Hero Description
+                    Hero Paragraph Description
                   </label>
                   <textarea
                     rows={3}
@@ -399,116 +513,322 @@ export default function PageEditor({ params }: PageEditorProps) {
                       })
                     }
                     className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
-                  />
+                  ></textarea>
+                </div>
+              </div>
+
+              {/* Core Values & Vision */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  2. Welcome & Core Values Section
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Paragraph 1
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.coreValues?.para1 || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        coreValues: { ...content.coreValues, para1: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                  ></textarea>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Paragraph 2
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.coreValues?.para2 || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        coreValues: { ...content.coreValues, para2: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                  ></textarea>
+                </div>
+
+                {/* 4 Core Value Bullets */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {[1, 2, 3, 4].map((num) => {
+                    const key = `bullet${num}` as keyof typeof content.coreValues;
+                    return (
+                      <div key={num}>
+                        <label className="block text-[11px] font-bold text-gray-600 uppercase mb-1">
+                          Core Value Bullet {num}
+                        </label>
+                        <input
+                          type="text"
+                          value={content.coreValues?.[key] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              coreValues: {
+                                ...content.coreValues,
+                                [key]: e.target.value,
+                              },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Founder Info */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Founder Name
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.founderName || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, founderName: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Founder Role
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.founderRole || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, founderRole: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
                 </div>
               </div>
 
               {/* Stats Bar */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
                 <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                  2. Performance Stats Counter Bar
+                  3. Key Statistics Numbers
                 </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map((n) => {
+                    const numKey = `stat${n}Number` as keyof typeof content.stats;
+                    const labelKey = `stat${n}Label` as keyof typeof content.stats;
+                    return (
+                      <div key={n} className="p-3 bg-[#F9F9F9] rounded-lg border border-gray-200">
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Stat {n} Number
+                        </label>
+                        <input
+                          type="text"
+                          value={content.stats?.[numKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              stats: { ...content.stats, [numKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded mb-2 bg-white"
+                        />
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Stat {n} Label
+                        </label>
+                        <input
+                          type="text"
+                          value={content.stats?.[labelKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              stats: { ...content.stats, [labelKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Why Choose Us & Metrics */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  4. Why Choose Us & Radial Progress Metrics
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-600 mb-1">Stat 1</label>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Heading
+                    </label>
                     <input
                       type="text"
-                      value={content.stats?.stat1Number || ''}
+                      value={content.whyChooseUs?.heading || ''}
                       onChange={(e) =>
                         setContent({
                           ...content,
-                          stats: { ...content.stats, stat1Number: e.target.value },
+                          whyChooseUs: { ...content.whyChooseUs, heading: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mb-1 font-bold"
-                    />
-                    <input
-                      type="text"
-                      value={content.stats?.stat1Label || ''}
-                      onChange={(e) =>
-                        setContent({
-                          ...content,
-                          stats: { ...content.stats, stat1Label: e.target.value },
-                        })
-                      }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-500"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-600 mb-1">Stat 2</label>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Percentage (e.g. 95%)
+                    </label>
                     <input
                       type="text"
-                      value={content.stats?.stat2Number || ''}
+                      value={content.whyChooseUs?.metric1Percent || ''}
                       onChange={(e) =>
                         setContent({
                           ...content,
-                          stats: { ...content.stats, stat2Number: e.target.value },
+                          whyChooseUs: { ...content.whyChooseUs, metric1Percent: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mb-1 font-bold"
-                    />
-                    <input
-                      type="text"
-                      value={content.stats?.stat2Label || ''}
-                      onChange={(e) =>
-                        setContent({
-                          ...content,
-                          stats: { ...content.stats, stat2Label: e.target.value },
-                        })
-                      }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-500"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
                   </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-600 mb-1">Stat 3</label>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Title & Description
+                    </label>
                     <input
                       type="text"
-                      value={content.stats?.stat3Number || ''}
+                      value={content.whyChooseUs?.metric1Title || ''}
                       onChange={(e) =>
                         setContent({
                           ...content,
-                          stats: { ...content.stats, stat3Number: e.target.value },
+                          whyChooseUs: { ...content.whyChooseUs, metric1Title: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mb-1 font-bold"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg mb-2"
                     />
-                    <input
-                      type="text"
-                      value={content.stats?.stat3Label || ''}
+                    <textarea
+                      rows={2}
+                      value={content.whyChooseUs?.metric1Desc || ''}
                       onChange={(e) =>
                         setContent({
                           ...content,
-                          stats: { ...content.stats, stat3Label: e.target.value },
+                          whyChooseUs: { ...content.whyChooseUs, metric1Desc: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-500"
-                    />
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    ></textarea>
                   </div>
+
                   <div>
-                    <label className="block text-[11px] font-bold text-gray-600 mb-1">Stat 4</label>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 (e.g. 100% Ditya Smart System)
+                    </label>
                     <input
                       type="text"
-                      value={content.stats?.stat4Number || ''}
+                      value={content.whyChooseUs?.metric2Title || ''}
                       onChange={(e) =>
                         setContent({
                           ...content,
-                          stats: { ...content.stats, stat4Number: e.target.value },
+                          whyChooseUs: { ...content.whyChooseUs, metric2Title: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mb-1 font-bold"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg mb-2"
                     />
-                    <input
-                      type="text"
-                      value={content.stats?.stat4Label || ''}
+                    <textarea
+                      rows={2}
+                      value={content.whyChooseUs?.metric2Desc || ''}
                       onChange={(e) =>
                         setContent({
                           ...content,
-                          stats: { ...content.stats, stat4Label: e.target.value },
+                          whyChooseUs: { ...content.whyChooseUs, metric2Desc: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded text-gray-500"
-                    />
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    ></textarea>
                   </div>
+                </div>
+
+                {/* Testimonial */}
+                <div className="pt-2 border-t border-gray-100">
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Client Testimonial Quote
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.whyChooseUs?.testimonialQuote || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        whyChooseUs: { ...content.whyChooseUs, testimonialQuote: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg mb-2"
+                  ></textarea>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Testimonial Author
+                  </label>
+                  <input
+                    type="text"
+                    value={content.whyChooseUs?.testimonialAuthor || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        whyChooseUs: { ...content.whyChooseUs, testimonialAuthor: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
                 </div>
               </div>
             </>
@@ -518,60 +838,666 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* 2. ABOUT PAGE EDITOR */}
           {/* ============================================================ */}
           {slug === 'about' && (
-            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
-              <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                About Us Content
-              </h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Title
-                  </label>
-                  <input
-                    type="text"
-                    value={content.banner?.title || ''}
-                    onChange={(e) =>
-                      setContent({
-                        ...content,
-                        banner: { ...content.banner, title: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Subtitle
-                  </label>
-                  <input
-                    type="text"
-                    value={content.banner?.subtitle || ''}
-                    onChange={(e) =>
-                      setContent({
-                        ...content,
-                        banner: { ...content.banner, subtitle: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                  />
+            <div className="space-y-8">
+              {/* 1. Banner */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  1. Page Banner
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Badge Pill
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Banner Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.banner?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          banner: { ...content.banner, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Story Narrative
-                </label>
-                <textarea
-                  rows={4}
-                  value={content.story?.para1 || ''}
-                  onChange={(e) =>
-                    setContent({
-                      ...content,
-                      story: { ...content.story, para1: e.target.value },
-                    })
-                  }
-                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                />
+              {/* 2. Welcome & Core Values */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  2. Welcome & Core Values
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Core Values Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Welcome Badge
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.welcomeBadge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, welcomeBadge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Main Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Paragraph 1
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.para1 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, para1: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Paragraph 2
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.para2 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, para2: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Paragraph 3
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.para3 || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, para3: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                    />
+                  </div>
+                </div>
+
+                {/* 4 Core Value Bullets */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {[1, 2, 3, 4].map((num) => {
+                    const key = `bullet${num}` as keyof typeof content.coreValues;
+                    return (
+                      <div key={num}>
+                        <label className="block text-[11px] font-bold text-gray-600 uppercase mb-1">
+                          Core Value Bullet {num}
+                        </label>
+                        <input
+                          type="text"
+                          value={content.coreValues?.[key] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              coreValues: {
+                                ...content.coreValues,
+                                [key]: e.target.value,
+                              },
+                            })
+                          }
+                          className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669]"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Feature Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 1 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.prodCardTitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, prodCardTitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 1 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.prodCardDesc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, prodCardDesc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 2 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.coreValues?.timeCardTitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, timeCardTitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Feature Card 2 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.coreValues?.timeCardDesc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          coreValues: { ...content.coreValues, timeCardDesc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Founder Message */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  3. Founder Message Section
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Badge Text (e.g. CEO & Founder BMC Genie)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.badge || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, badge: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Tag Text (e.g. Founder Message)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.tag || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, tag: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Founder Quote
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={content.founder?.quote || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        founder: { ...content.founder, quote: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Founder Name
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.name || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, name: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Founder Role
+                    </label>
+                    <input
+                      type="text"
+                      value={content.founder?.role || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          founder: { ...content.founder, role: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 4. Stats Dock */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  4. Key Statistics Dock
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map((n) => {
+                    const numKey = `stat${n}Number` as keyof typeof content.stats;
+                    const labelKey = `stat${n}Label` as keyof typeof content.stats;
+                    return (
+                      <div key={n} className="p-3 bg-[#F9F9F9] rounded-lg border border-gray-200">
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Stat {n} Number
+                        </label>
+                        <input
+                          type="text"
+                          value={content.stats?.[numKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              stats: { ...content.stats, [numKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded mb-2 bg-white"
+                        />
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Stat {n} Label
+                        </label>
+                        <input
+                          type="text"
+                          value={content.stats?.[labelKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              stats: { ...content.stats, [labelKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 5. How It Works */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  5. How It Works Section & Testimonial
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.howItWorks?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.howItWorks?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.howItWorks?.description || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        howItWorks: { ...content.howItWorks, description: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
+                  {[1, 2, 3].map((s) => {
+                    const descKey = `step${s}Desc` as keyof typeof content.howItWorks;
+                    return (
+                      <div key={s} className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                        <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                          Step 0{s} Description
+                        </label>
+                        <textarea
+                          rows={2}
+                          value={content.howItWorks?.[descKey] || ''}
+                          onChange={(e) =>
+                            setContent({
+                              ...content,
+                              howItWorks: { ...content.howItWorks, [descKey]: e.target.value },
+                            })
+                          }
+                          className="w-full px-2.5 py-1.5 text-xs border border-gray-300 rounded bg-white"
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="pt-2 border-t border-gray-100 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Testimonial Quote
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.howItWorks?.testimonialQuote || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, testimonialQuote: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Testimonial Author
+                    </label>
+                    <input
+                      type="text"
+                      value={content.howItWorks?.testimonialAuthor || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          howItWorks: { ...content.howItWorks, testimonialAuthor: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* 6. Why Choose Us */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
+                <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
+                  6. Why Choose Us & Metrics
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Subtitle
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.subtitle || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, subtitle: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Section Heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.heading || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, heading: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                    Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.whyChooseUs?.description || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        whyChooseUs: { ...content.whyChooseUs, description: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                  />
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Percentage (e.g. 35%)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric1Percent || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric1Percent: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric1Title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric1Title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 1 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.whyChooseUs?.metric1Desc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric1Desc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+
+                  <div className="p-3 bg-gray-50 rounded-lg border border-gray-200">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 Percentage (e.g. 100%)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric2Percent || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric2Percent: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 Title
+                    </label>
+                    <input
+                      type="text"
+                      value={content.whyChooseUs?.metric2Title || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric2Title: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg mb-2 bg-white"
+                    />
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Metric 2 Description
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={content.whyChooseUs?.metric2Desc || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          whyChooseUs: { ...content.whyChooseUs, metric2Desc: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg bg-white"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -692,10 +1618,11 @@ export default function PageEditor({ params }: PageEditorProps) {
                     })
                   }
                   className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                />
+                ></textarea>
               </div>
             </div>
           )}
+
 
           {/* ============================================================ */}
           {/* 4. SERVICES DIRECTORY EDITOR */}
@@ -808,13 +1735,13 @@ export default function PageEditor({ params }: PageEditorProps) {
                   </label>
                   <input
                     type="text"
-                    value={content.content?.[`section${num}Title`] || ''}
+                    value={content.content ? content.content['section' + num + 'Title'] || '' : ''}
                     onChange={(e) =>
                       setContent({
                         ...content,
                         content: {
                           ...content.content,
-                          [`section${num}Title`]: e.target.value,
+                          ['section' + num + 'Title']: e.target.value,
                         },
                       })
                     }
@@ -825,13 +1752,13 @@ export default function PageEditor({ params }: PageEditorProps) {
                   </label>
                   <textarea
                     rows={3}
-                    value={content.content?.[`section${num}Text`] || ''}
+                    value={content.content ? content.content['section' + num + 'Text'] || '' : ''}
                     onChange={(e) =>
                       setContent({
                         ...content,
                         content: {
                           ...content.content,
-                          [`section${num}Text`]: e.target.value,
+                          ['section' + num + 'Text']: e.target.value,
                         },
                       })
                     }
@@ -846,69 +1773,14 @@ export default function PageEditor({ params }: PageEditorProps) {
           {/* 6. HOUSES & CUSTOM SUB-PAGES EDITOR */}
           {/* ============================================================ */}
           {isHouseOrCustom && (
-            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+            <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-4">
               <h3 className="text-lg font-bold text-[#041614] border-b border-gray-100 pb-2">
-                {pageMeta?.isCustomPage ? 'Sub-Page Content & Structure' : 'House Overview & Offerings'}
+                House Overview & Offerings
               </h3>
-
-              {/* Banner Details */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Badge
-                  </label>
-                  <input
-                    type="text"
-                    value={content.banner?.badge || ''}
-                    onChange={(e) =>
-                      setContent({
-                        ...content,
-                        banner: { ...content.banner, badge: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Banner Title
-                  </label>
-                  <input
-                    type="text"
-                    value={content.banner?.title || ''}
-                    onChange={(e) =>
-                      setContent({
-                        ...content,
-                        banner: { ...content.banner, title: e.target.value },
-                      })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Banner Subtitle
-                </label>
-                <input
-                  type="text"
-                  value={content.banner?.subtitle || ''}
-                  onChange={(e) =>
-                    setContent({
-                      ...content,
-                      banner: { ...content.banner, subtitle: e.target.value },
-                    })
-                  }
-                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                />
-              </div>
-
-              {/* Main Division & Heading */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Division Tagline / Pre-Heading
+                    Division Tagline / Badge
                   </label>
                   <input
                     type="text"
@@ -924,7 +1796,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Main Section Heading
+                    Main Title
                   </label>
                   <input
                     type="text"
@@ -942,7 +1814,7 @@ export default function PageEditor({ params }: PageEditorProps) {
 
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Description Narrative
+                  Description Paragraph
                 </label>
                 <textarea
                   rows={4}
@@ -954,13 +1826,52 @@ export default function PageEditor({ params }: PageEditorProps) {
                     })
                   }
                   className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
-                />
+                ></textarea>
               </div>
 
-              {/* Dual Feature Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-[#F9F9F9] rounded-asymmetric border border-gray-200">
+              {/* Overview Services Box */}
+              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  Overview Services Section
+                </h4>
                 <div>
-                  <h4 className="text-xs font-bold text-[#059669] uppercase mb-2">Feature Card 1</h4>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    Overview Heading
+                  </label>
+                  <input
+                    type="text"
+                    value={content.details?.overviewHeading || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, overviewHeading: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    Overview Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.details?.overviewDescription || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, overviewDescription: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
+                </div>
+              </div>
+
+              {/* Dual Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100 space-y-2">
+                  <span className="text-xs font-bold text-emerald-800 uppercase block">Card 1 (Growth)</span>
                   <input
                     type="text"
                     placeholder="Card 1 Title"
@@ -971,7 +1882,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                         details: { ...content.details, card1Title: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mb-2 font-bold"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
                   />
                   <textarea
                     rows={2}
@@ -983,12 +1894,12 @@ export default function PageEditor({ params }: PageEditorProps) {
                         details: { ...content.details, card1Desc: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded"
-                  />
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
                 </div>
 
-                <div>
-                  <h4 className="text-xs font-bold text-[#059669] uppercase mb-2">Feature Card 2</h4>
+                <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100 space-y-2">
+                  <span className="text-xs font-bold text-emerald-800 uppercase block">Card 2 (Time)</span>
                   <input
                     type="text"
                     placeholder="Card 2 Title"
@@ -999,7 +1910,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                         details: { ...content.details, card2Title: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded mb-2 font-bold"
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
                   />
                   <textarea
                     rows={2}
@@ -1011,26 +1922,42 @@ export default function PageEditor({ params }: PageEditorProps) {
                         details: { ...content.details, card2Desc: e.target.value },
                       })
                     }
-                    className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded"
-                  />
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
                 </div>
               </div>
 
               {/* Checklist Items */}
-              <div className="space-y-3">
+              <div className="pt-2 space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="block text-xs font-bold text-gray-700 uppercase">
-                    Offerings & Capability Checklists
+                    Checklist Title
                   </label>
                   <button
                     type="button"
-                    onClick={addChecklistItem}
-                    className="text-xs font-bold text-[#059669] hover:underline flex items-center space-x-1 cursor-pointer"
+                    onClick={() => {
+                      const updated = [...(content.details?.checklists || []), ''];
+                      setContent({
+                        ...content,
+                        details: { ...content.details, checklists: updated },
+                      });
+                    }}
+                    className="text-xs text-[#059669] font-semibold hover:underline cursor-pointer"
                   >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>Add Item</span>
+                    + Add Item
                   </button>
                 </div>
+                <input
+                  type="text"
+                  value={content.details?.checklistTitle || ''}
+                  onChange={(e) =>
+                    setContent({
+                      ...content,
+                      details: { ...content.details, checklistTitle: e.target.value },
+                    })
+                  }
+                  className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg mb-2"
+                />
                 <div className="space-y-2">
                   {content.details?.checklists?.map((item: string, idx: number) => (
                     <div key={idx} className="flex items-center space-x-2">
@@ -1045,27 +1972,37 @@ export default function PageEditor({ params }: PageEditorProps) {
                             details: { ...content.details, checklists: updated },
                           });
                         }}
-                        className="flex-1 px-3 py-1.5 text-xs border border-gray-300 rounded-lg"
+                        className="w-full px-3 py-1.5 text-xs border border-gray-300 rounded-lg"
                       />
                       <button
                         type="button"
-                        onClick={() => removeChecklistItem(idx)}
-                        className="p-1.5 text-gray-400 hover:text-red-500 rounded cursor-pointer"
-                        title="Remove item"
+                        onClick={() => {
+                          const updated = content.details.checklists.filter((_: string, i: number) => i !== idx);
+                          setContent({
+                            ...content,
+                            details: { ...content.details, checklists: updated },
+                          });
+                        }}
+                        className="p-1.5 text-gray-400 hover:text-red-500 rounded"
+                        title="Remove Item"
                       >
-                        <Trash2 className="w-4 h-4" />
+                        <Trash2 className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   ))}
                 </div>
               </div>
 
-              {/* CTA Box */}
-              <div className="p-4 bg-[#041614] text-white rounded-asymmetric space-y-3">
-                <h4 className="text-xs font-bold text-[#059669] uppercase">Consultation CTA Banner</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Call to Action Box */}
+              <div className="p-4 bg-gray-50 rounded-xl border border-gray-200/80 space-y-3">
+                <h4 className="text-xs font-bold text-gray-700 uppercase tracking-wider">
+                  Bottom Call to Action
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] text-gray-300 mb-1">Heading</label>
+                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                      CTA Title
+                    </label>
                     <input
                       type="text"
                       value={content.details?.ctaTitle || ''}
@@ -1075,25 +2012,13 @@ export default function PageEditor({ params }: PageEditorProps) {
                           details: { ...content.details, ctaTitle: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs bg-white/10 border border-white/20 rounded text-white"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
                     />
                   </div>
                   <div>
-                    <label className="block text-[11px] text-gray-300 mb-1">Description</label>
-                    <input
-                      type="text"
-                      value={content.details?.ctaDesc || ''}
-                      onChange={(e) =>
-                        setContent({
-                          ...content,
-                          details: { ...content.details, ctaDesc: e.target.value },
-                        })
-                      }
-                      className="w-full px-3 py-1.5 text-xs bg-white/10 border border-white/20 rounded text-white"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-[11px] text-gray-300 mb-1">Button Text</label>
+                    <label className="block text-xs font-semibold text-gray-600 mb-1">
+                      Button Text
+                    </label>
                     <input
                       type="text"
                       value={content.details?.ctaBtnText || ''}
@@ -1103,16 +2028,32 @@ export default function PageEditor({ params }: PageEditorProps) {
                           details: { ...content.details, ctaBtnText: e.target.value },
                         })
                       }
-                      className="w-full px-3 py-1.5 text-xs bg-white/10 border border-white/20 rounded text-white"
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
                     />
                   </div>
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-gray-600 mb-1">
+                    CTA Description
+                  </label>
+                  <textarea
+                    rows={2}
+                    value={content.details?.ctaDesc || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        details: { ...content.details, ctaDesc: e.target.value },
+                      })
+                    }
+                    className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg bg-white"
+                  ></textarea>
                 </div>
               </div>
             </div>
           )}
 
           {/* ============================================================ */}
-          {/* 7. GLOBAL BUSINESS NETWORK (GBN) CMS EDITOR */}
+          {/* 5. GLOBAL BUSINESS NETWORK (GBN) CMS EDITOR */}
           {/* ============================================================ */}
           {slug === 'global-business-network' && (
             <div className="space-y-6">
@@ -1800,6 +2741,480 @@ export default function PageEditor({ params }: PageEditorProps) {
             </div>
           )}
 
+          {/* ============================================================ */}
+          {/* 6. FOOTER & SOCIAL MEDIA COMMAND CENTER */}
+          {/* ============================================================ */}
+          {slug === 'footer' && (
+            <div className="space-y-8">
+              {/* Section A: Banner Info */}
+              <div className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white p-6 sm:p-8 rounded-asymmetric border border-emerald-500/20 shadow-md">
+                <div className="flex items-center space-x-2 text-[#10B981] text-xs font-bold uppercase tracking-wider mb-2">
+                  <Share2 className="w-4 h-4" />
+                  <span>Global Footer & Social Hub</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-white">
+                  Footer & Social Media Management
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-2xl">
+                  Customize the brand words and paragraphs displayed in the footer, manage each social media platform button (toggle to hide or unhide on the site, update links), and configure contact info and newsletter copy.
+                </p>
+              </div>
+
+              {/* Section B: Social Media Buttons (Show / Hide & Update Links) */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <Share2 className="w-5 h-5 text-[#059669]" />
+                      <h3 className="text-lg font-bold text-[#041614]">
+                        Social Media Buttons (Hide/Unhide & Change Links)
+                      </h3>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Toggle the visibility of any button with 1 click to show or hide it from the public website, or update its destination URL.
+                    </p>
+                  </div>
+
+                  <div className="flex items-center flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (content.socialLinks || []).map((s: SocialLinkItem) => ({ ...s, enabled: true }));
+                        setContent({ ...content, socialLinks: updated });
+                      }}
+                      className="px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-bold rounded-lg transition-colors border border-emerald-200 cursor-pointer flex items-center space-x-1"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Unhide All</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (content.socialLinks || []).map((s: SocialLinkItem) => ({ ...s, enabled: false }));
+                        setContent({ ...content, socialLinks: updated });
+                      }}
+                      className="px-3 py-1.5 bg-red-50 text-red-700 hover:bg-red-100 text-xs font-bold rounded-lg transition-colors border border-red-200 cursor-pointer flex items-center space-x-1"
+                    >
+                      <EyeOff className="w-3.5 h-3.5" />
+                      <span>Hide All</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const newLink: SocialLinkItem = {
+                          id: 'custom-' + Date.now(),
+                          label: 'New Platform',
+                          href: 'https://',
+                          enabled: true,
+                          icon: 'FaGlobe',
+                        };
+                        setContent({
+                          ...content,
+                          socialLinks: [...(content.socialLinks || []), newLink],
+                        });
+                      }}
+                      className="btn-ditya-orange text-xs py-1.5 px-3 font-bold flex items-center space-x-1 shadow-sm cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Add Custom Button</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Social Buttons Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {(content.socialLinks || []).map((link: SocialLinkItem, idx: number) => {
+                    const IconComp = getAdminSocialIcon(link);
+                    const isEnabled = link.enabled !== false;
+
+                    return (
+                      <div
+                        key={link.id || idx}
+                        className={`p-4 rounded-xl border transition-all ${
+                          isEnabled
+                            ? 'bg-white border-gray-200 shadow-xs hover:border-[#10B981]'
+                            : 'bg-gray-50/80 border-dashed border-gray-300 opacity-75'
+                        }`}
+                      >
+                        <div className="flex items-center justify-between gap-3 mb-3">
+                          <div className="flex items-center space-x-3">
+                            <div
+                              className={`w-9 h-9 rounded-xl flex items-center justify-center text-sm shadow-xs transition-colors ${
+                                isEnabled
+                                  ? 'bg-[#041614] text-white'
+                                  : 'bg-gray-200 text-gray-500'
+                              }`}
+                            >
+                              <IconComp className="w-4 h-4" />
+                            </div>
+                            <div>
+                              <input
+                                type="text"
+                                value={link.label}
+                                onChange={(e) => {
+                                  const updated = [...(content.socialLinks || [])];
+                                  updated[idx] = { ...updated[idx], label: e.target.value };
+                                  setContent({ ...content, socialLinks: updated });
+                                }}
+                                className="font-bold text-xs text-[#041614] bg-transparent border-b border-transparent hover:border-gray-300 focus:border-[#059669] focus:outline-none px-1"
+                                placeholder="Platform Name"
+                              />
+                              <span className="block text-[10px] text-gray-400 font-mono px-1">
+                                id: {link.id}
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Toggle Visibility Switch */}
+                          <div className="flex items-center space-x-2">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                const updated = [...(content.socialLinks || [])];
+                                updated[idx] = { ...updated[idx], enabled: !isEnabled };
+                                setContent({ ...content, socialLinks: updated });
+                              }}
+                              className={`px-3 py-1 rounded-full text-xs font-extrabold flex items-center space-x-1.5 transition-all cursor-pointer ${
+                                isEnabled
+                                  ? 'bg-emerald-100 text-emerald-800 hover:bg-emerald-200'
+                                  : 'bg-gray-200 text-gray-600 hover:bg-gray-300'
+                              }`}
+                              title={isEnabled ? 'Click to hide this button from site' : 'Click to show this button on site'}
+                            >
+                              {isEnabled ? (
+                                <>
+                                  <Eye className="w-3.5 h-3.5 text-emerald-700" />
+                                  <span>Visible</span>
+                                </>
+                              ) : (
+                                <>
+                                  <EyeOff className="w-3.5 h-3.5 text-gray-500" />
+                                  <span>Hidden</span>
+                                </>
+                              )}
+                            </button>
+
+                            {link.id?.startsWith('custom-') && (
+                              <button
+                                type="button"
+                                onClick={() => {
+                                  const updated = (content.socialLinks || []).filter((_: unknown, i: number) => i !== idx);
+                                  setContent({ ...content, socialLinks: updated });
+                                }}
+                                className="p-1 text-gray-400 hover:text-red-600 transition-colors"
+                                title="Delete custom button"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </button>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* URL input field */}
+                        <div className="flex items-center space-x-2">
+                          <div className="relative flex-1">
+                            <input
+                              type="text"
+                              value={link.href}
+                              onChange={(e) => {
+                                const updated = [...(content.socialLinks || [])];
+                                updated[idx] = { ...updated[idx], href: e.target.value };
+                                setContent({ ...content, socialLinks: updated });
+                              }}
+                              placeholder="https://..."
+                              className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669] font-mono"
+                            />
+                          </div>
+                          {link.href && link.href.startsWith('http') && (
+                            <a
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="p-2 bg-gray-100 hover:bg-[#059669] hover:text-white text-gray-600 rounded-lg text-xs transition-colors shrink-0"
+                              title="Test link in new tab"
+                            >
+                              <ExternalLink className="w-3.5 h-3.5" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Section C: Words & Paragraphs */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <div className="border-b border-gray-100 pb-3 flex items-center justify-between">
+                  <div>
+                    <div className="flex items-center space-x-2">
+                      <MessageSquare className="w-5 h-5 text-[#059669]" />
+                      <h3 className="text-lg font-bold text-[#041614]">
+                        Brand Words & Paragraphs
+                      </h3>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-1">
+                      Customize the brand tagline, primary paragraph, and add as many additional paragraphs or notes as needed.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="space-y-4">
+                  {/* Tagline */}
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Brand Tagline / Super-heading
+                    </label>
+                    <input
+                      type="text"
+                      value={content.branding?.tagline || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          branding: { ...content.branding, tagline: e.target.value },
+                        })
+                      }
+                      placeholder="e.g. One Group. Infinite Possibilities!"
+                      className="w-full px-3 py-2.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669] font-semibold text-[#D4AF37]"
+                    />
+                  </div>
+
+                  {/* Primary Description Paragraph */}
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Primary Description Paragraph
+                    </label>
+                    <textarea
+                      rows={3}
+                      value={content.branding?.description || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          branding: { ...content.branding, description: e.target.value },
+                        })
+                      }
+                      placeholder="Empowering wealth creation, business growth..."
+                      className="w-full px-3 py-2.5 text-xs border border-gray-300 rounded-lg focus:outline-none focus:border-[#059669] leading-relaxed"
+                    />
+                  </div>
+
+                  {/* Additional Paragraphs */}
+                  <div className="pt-4 border-t border-gray-100 space-y-3">
+                    <div className="flex items-center justify-between">
+                      <label className="block text-xs font-bold text-gray-700 uppercase">
+                        Additional Words & Paragraphs ({content.branding?.paragraphs?.length || 0})
+                      </label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const existing = content.branding?.paragraphs || [];
+                          setContent({
+                            ...content,
+                            branding: {
+                              ...content.branding,
+                              paragraphs: [...existing, ''],
+                            },
+                          });
+                        }}
+                        className="px-3 py-1.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 text-xs font-bold rounded-lg transition-colors border border-emerald-200 cursor-pointer flex items-center space-x-1"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Add Another Paragraph</span>
+                      </button>
+                    </div>
+
+                    {(content.branding?.paragraphs || []).map((p: string, pIdx: number) => (
+                      <div key={pIdx} className="flex items-start space-x-2 bg-gray-50 p-3 rounded-xl border border-gray-200">
+                        <span className="text-[11px] font-bold text-gray-400 mt-2">#{pIdx + 1}</span>
+                        <textarea
+                          rows={2}
+                          value={p}
+                          onChange={(e) => {
+                            const updated = [...(content.branding?.paragraphs || [])];
+                            updated[pIdx] = e.target.value;
+                            setContent({
+                              ...content,
+                              branding: {
+                                ...content.branding,
+                                paragraphs: updated,
+                              },
+                            });
+                          }}
+                          placeholder={`Enter additional paragraph or custom text #${pIdx + 1}...`}
+                          className="flex-1 px-3 py-2 text-xs border border-gray-300 bg-white rounded-lg focus:outline-none focus:border-[#059669] leading-relaxed"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const updated = (content.branding?.paragraphs || []).filter((_: unknown, i: number) => i !== pIdx);
+                            setContent({
+                              ...content,
+                              branding: {
+                                ...content.branding,
+                                paragraphs: updated,
+                              },
+                            });
+                          }}
+                          className="p-2 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
+                          title="Delete paragraph"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {/* Section D: Live Preview */}
+              <div className="bg-gradient-to-b from-[#031513] via-[#020e0d] to-[#010706] text-white p-6 sm:p-8 rounded-asymmetric border border-emerald-500/30 shadow-xl space-y-4">
+                <div className="flex items-center justify-between border-b border-white/10 pb-3">
+                  <div className="flex items-center space-x-2">
+                    <Sparkles className="w-4 h-4 text-[#10B981]" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
+                      Live Public Footer Preview
+                    </span>
+                  </div>
+                  <span className="text-[10px] bg-white/10 text-gray-300 px-2 py-0.5 rounded font-mono">
+                    {(content.socialLinks || []).filter((s: SocialLinkItem) => s.enabled !== false && s.href).length} Active Buttons Visible
+                  </span>
+                </div>
+
+                <div className="space-y-3 max-w-lg">
+                  <p className="text-[#D4AF37] font-semibold text-sm tracking-wide">
+                    {content.branding?.tagline || 'One Group. Infinite Possibilities!'}
+                  </p>
+                  <p className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                    {content.branding?.description || 'Empowering wealth creation...'}
+                  </p>
+                  {(content.branding?.paragraphs || []).map((p: string, idx: number) =>
+                    p ? (
+                      <p key={idx} className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+                        {p}
+                      </p>
+                    ) : null
+                  )}
+
+                  {/* Active Buttons Preview */}
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {(content.socialLinks || [])
+                      .filter((s: SocialLinkItem) => s.enabled !== false && s.href)
+                      .map((s: SocialLinkItem, idx: number) => {
+                        const IconComp = getAdminSocialIcon(s);
+                        return (
+                          <div
+                            key={idx}
+                            title={`${s.label}: ${s.href}`}
+                            className="w-8 h-8 rounded-xl bg-white/10 border border-white/15 text-gray-200 flex items-center justify-center text-xs shadow-xs"
+                          >
+                            <IconComp className="w-3.5 h-3.5" />
+                          </div>
+                        );
+                      })}
+                  </div>
+                </div>
+              </div>
+
+              {/* Section E: Executive Contact Cards */}
+              <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
+                <div className="border-b border-gray-100 pb-3">
+                  <div className="flex items-center space-x-2">
+                    <Phone className="w-5 h-5 text-[#059669]" />
+                    <h3 className="text-lg font-bold text-[#041614]">
+                      Contact Cards & Office Addresses
+                    </h3>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">
+                    Manage the phones, emails, and address locations shown in the top contact docks of the footer.
+                  </p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Phone 1 (India HQ)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.phoneIndia || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, phoneIndia: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Phone 2 (Georgia)
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.phoneGeorgia || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, phoneGeorgia: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Phone Working Hours
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.phoneHours || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, phoneHours: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      Corporate Email
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.emailCorporate || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, emailCorporate: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
+                      India Office Address
+                    </label>
+                    <input
+                      type="text"
+                      value={content.contactCards?.officeIndiaAddress || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          contactCards: { ...content.contactCards, officeIndiaAddress: e.target.value },
+                        })
+                      }
+                      className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Bottom Save Bar */}
           <div className="flex items-center justify-end space-x-3 pt-4 border-t border-gray-200">
             <Link
@@ -1813,7 +3228,7 @@ export default function PageEditor({ params }: PageEditorProps) {
               disabled={saving}
               className="btn-ditya-orange text-xs py-2.5 px-8 font-bold flex items-center space-x-1.5 shadow-md cursor-pointer disabled:opacity-50"
             >
-              {saving ? 'Saving to MariaDB...' : 'Save Changes'}
+              {saving ? 'Saving to Database...' : 'Save Changes'}
             </button>
           </div>
         </form>

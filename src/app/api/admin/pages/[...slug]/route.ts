@@ -2,24 +2,58 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { verifyAdminToken, ADMIN_COOKIE_NAME } from '@/lib/auth';
-import { PAGE_DEFINITIONS, PageContentMap, createDefaultCustomPage } from '@/lib/defaultPageContent';
-import { getPageContent } from '@/lib/getPageContent';
+import {
+  PAGE_DEFINITIONS,
+  PageContentMap,
+  DEFAULT_PAGE_CONTENTS,
+  createDefaultCustomPage,
+} from '@/lib/defaultPageContent';
+import { getPageContent, invalidatePageContentCache } from '@/lib/getPageContent';
 import { revalidatePath } from 'next/cache';
 
-async function checkAdminAuth() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  if (!token) return false;
-  const payload = await verifyAdminToken(token);
-  return Boolean(payload);
+async function checkAdminAuth(req?: NextRequest) {
+  try {
+    let token = req?.cookies?.get(ADMIN_COOKIE_NAME)?.value;
+    if (!token) {
+      try {
+        const cookieStore = await cookies();
+        token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
+      } catch {
+        // cookies() called outside request scope
+      }
+    }
+    if (!token) return false;
+    const payload = await verifyAdminToken(token);
+    return Boolean(payload);
+  } catch (err) {
+    console.error('[API] Auth check error:', err);
+    return false;
+  }
+}
+
+// Timeout-safe database helper that will never block or crash requests on WAN latency
+async function safeFindUnique(slug: string, timeoutMs = 2500) {
+  try {
+    const dbPromise = prisma.pageContent.findUnique({
+      where: { slug },
+    });
+    const timeoutPromise = new Promise<null>((resolve) =>
+      setTimeout(() => resolve(null), timeoutMs)
+    );
+    return await Promise.race([dbPromise, timeoutPromise]);
+  } catch (err) {
+    console.warn(`[API] Safe query failed for slug "${slug}":`, err);
+    return null;
+  }
 }
 
 export async function GET(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ slug: string[] | string }> }
 ) {
+  let slug = '';
   try {
-    if (!(await checkAdminAuth())) {
+    if (!(await checkAdminAuth(req))) {
       return NextResponse.json(
         { success: false, message: 'Administrative authentication required' },
         { status: 401 }
@@ -27,32 +61,37 @@ export async function GET(
     }
 
     const resolved = await params;
-    const slug = Array.isArray(resolved.slug) ? resolved.slug.join('/') : resolved.slug;
+    slug = Array.isArray(resolved.slug) ? resolved.slug.join('/') : (resolved.slug || '');
 
-    // 1. Check if it's a built-in page
+    // 1. Check if it's a built-in page defined in PAGE_DEFINITIONS or DEFAULT_PAGE_CONTENTS
     const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
-    const savedRecord = await prisma.pageContent.findUnique({
-      where: { slug },
-    });
+    const fallback = (DEFAULT_PAGE_CONTENTS as Record<string, unknown>)[slug];
 
-    if (pageDef) {
+    if (pageDef || fallback) {
+      // getPageContent already has internal in-memory caching and a 1500ms timeout race
       const mergedContent = await getPageContent(slug as keyof PageContentMap);
+      const finalContent = mergedContent || fallback;
+
+      // Safe check for DB record customization status (never throws)
+      const savedRecord = await safeFindUnique(slug);
+
       return NextResponse.json({
         success: true,
         data: {
-          slug: pageDef.slug,
-          title: pageDef.title,
-          path: pageDef.path,
-          category: pageDef.category,
+          slug: pageDef?.slug || slug,
+          title: pageDef?.title || (slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())),
+          path: pageDef?.path || (slug.startsWith('/') ? slug : `/${slug}`),
+          category: pageDef?.category || 'Core Pages',
           isCustomPage: false,
-          content: mergedContent,
+          content: finalContent,
           isCustomized: Boolean(savedRecord),
           updatedAt: savedRecord?.updatedAt || null,
         },
       });
     }
 
-    // 2. Check if it's a custom dynamic sub-page in DB
+    // 2. Check if it's a dynamic custom sub-page stored in DB
+    const savedRecord = await safeFindUnique(slug);
     if (savedRecord) {
       let parsed = {};
       try {
@@ -76,12 +115,55 @@ export async function GET(
       });
     }
 
+    // 3. If it's a services subpage that hasn't been saved yet, provide default template
+    if (slug.startsWith('services/')) {
+      const pageTitle = slug
+        .replace(/^services\//, '')
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+      const defaultContent = createDefaultCustomPage(pageTitle);
+
+      return NextResponse.json({
+        success: true,
+        data: {
+          slug,
+          title: pageTitle,
+          path: `/${slug}`,
+          category: 'Services Sub-Page',
+          isCustomPage: true,
+          content: defaultContent,
+          isCustomized: false,
+          updatedAt: null,
+        },
+      });
+    }
+
     return NextResponse.json(
-      { success: false, message: `Page "${slug}" not found in database.` },
+      { success: false, message: `Page "${slug}" not found in database or defaults.` },
       { status: 404 }
     );
   } catch (error) {
-    console.error('Error fetching page content for admin:', error);
+    console.error(`Error fetching page content for admin (${slug}):`, error);
+
+    // Resilient ultimate recovery: if this is a known page, return fallback instead of 500
+    const emergencyFallback = (DEFAULT_PAGE_CONTENTS as Record<string, unknown>)[slug];
+    const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
+    if (emergencyFallback) {
+      return NextResponse.json({
+        success: true,
+        data: {
+          slug: pageDef?.slug || slug,
+          title: pageDef?.title || slug,
+          path: pageDef?.path || `/${slug}`,
+          category: pageDef?.category || 'Core Pages',
+          isCustomPage: false,
+          content: emergencyFallback,
+          isCustomized: false,
+          updatedAt: null,
+        },
+      });
+    }
+
     return NextResponse.json(
       { success: false, message: 'Failed to fetch page content' },
       { status: 500 }
@@ -94,7 +176,7 @@ export async function PUT(
   { params }: { params: Promise<{ slug: string[] | string }> }
 ) {
   try {
-    if (!(await checkAdminAuth())) {
+    if (!(await checkAdminAuth(req))) {
       return NextResponse.json(
         { success: false, message: 'Administrative authentication required' },
         { status: 401 }
@@ -102,7 +184,7 @@ export async function PUT(
     }
 
     const resolved = await params;
-    const slug = Array.isArray(resolved.slug) ? resolved.slug.join('/') : resolved.slug;
+    const slug = Array.isArray(resolved.slug) ? resolved.slug.join('/') : (resolved.slug || '');
 
     const body = await req.json();
     const { content, title, category } = body;
@@ -115,7 +197,7 @@ export async function PUT(
     }
 
     const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
-    const existingRecord = await prisma.pageContent.findUnique({ where: { slug } });
+    const existingRecord = await safeFindUnique(slug);
 
     const pageTitle = title || pageDef?.title || existingRecord?.title || slug;
     const pagePath = pageDef?.path || (slug.startsWith('/') ? slug : `/${slug}`);
@@ -140,11 +222,17 @@ export async function PUT(
       },
     });
 
+    // Invalidate local in-memory cache
+    invalidatePageContentCache(slug);
+
     try {
       revalidatePath('/', 'layout');
       revalidatePath('/');
       revalidatePath(pagePath);
       revalidatePath('/services');
+      if (slug === 'about') revalidatePath('/about-us');
+      if (slug === 'contact') revalidatePath('/contact-us');
+      if (slug === 'global-business-network') revalidatePath('/global-business-network');
     } catch (revalErr) {
       console.warn('Revalidation warning:', revalErr);
     }
@@ -167,11 +255,11 @@ export async function PUT(
 }
 
 export async function DELETE(
-  _req: NextRequest,
+  req: NextRequest,
   { params }: { params: Promise<{ slug: string[] | string }> }
 ) {
   try {
-    if (!(await checkAdminAuth())) {
+    if (!(await checkAdminAuth(req))) {
       return NextResponse.json(
         { success: false, message: 'Administrative authentication required' },
         { status: 401 }
@@ -179,7 +267,7 @@ export async function DELETE(
     }
 
     const resolved = await params;
-    const slug = Array.isArray(resolved.slug) ? resolved.slug.join('/') : resolved.slug;
+    const slug = Array.isArray(resolved.slug) ? resolved.slug.join('/') : (resolved.slug || '');
 
     const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
 
@@ -187,11 +275,17 @@ export async function DELETE(
       where: { slug },
     });
 
+    // Invalidate local in-memory cache
+    invalidatePageContentCache(slug);
+
     try {
       revalidatePath('/', 'layout');
       revalidatePath('/services');
       if (pageDef) {
         revalidatePath(pageDef.path);
+        if (slug === 'about') revalidatePath('/about-us');
+        if (slug === 'contact') revalidatePath('/contact-us');
+        if (slug === 'global-business-network') revalidatePath('/global-business-network');
       } else {
         revalidatePath(`/${slug}`);
       }
@@ -218,4 +312,3 @@ export async function DELETE(
     );
   }
 }
-

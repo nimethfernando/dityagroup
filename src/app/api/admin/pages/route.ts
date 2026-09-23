@@ -5,30 +5,50 @@ import { verifyAdminToken, ADMIN_COOKIE_NAME } from '@/lib/auth';
 import { PAGE_DEFINITIONS, createDefaultCustomPage } from '@/lib/defaultPageContent';
 import { revalidatePath } from 'next/cache';
 
-async function checkAdminAuth() {
-  const cookieStore = await cookies();
-  const token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
-  if (!token) return false;
-  return Boolean(await verifyAdminToken(token));
+async function checkAdminAuth(req?: NextRequest) {
+  try {
+    let token = req?.cookies?.get(ADMIN_COOKIE_NAME)?.value;
+    if (!token) {
+      try {
+        const cookieStore = await cookies();
+        token = cookieStore.get(ADMIN_COOKIE_NAME)?.value;
+      } catch {
+        // cookies() called outside request scope
+      }
+    }
+    if (!token) return false;
+    return Boolean(await verifyAdminToken(token));
+  } catch (err) {
+    console.error('[API] Auth check error:', err);
+    return false;
+  }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    if (!(await checkAdminAuth())) {
+    if (!(await checkAdminAuth(req))) {
       return NextResponse.json(
         { success: false, message: 'Administrative authentication required' },
         { status: 401 }
       );
     }
 
-    const savedRecords = await prisma.pageContent.findMany({
-      select: {
-        slug: true,
-        title: true,
-        updatedAt: true,
-        data: true,
-      },
-    });
+    let savedRecords: Array<{ slug: string; title: string; updatedAt: Date; data: string }> = [];
+    try {
+      const dbPromise = prisma.pageContent.findMany({
+        select: {
+          slug: true,
+          title: true,
+          updatedAt: true,
+          data: true,
+        },
+      });
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 2500));
+      const result = await Promise.race([dbPromise, timeoutPromise]);
+      if (result) savedRecords = result;
+    } catch (dbErr) {
+      console.warn('[API] Could not fetch saved records from DB, using defaults:', dbErr);
+    }
     const savedMap = new Map(savedRecords.map((r) => [r.slug, r]));
 
     // Built-in pages
@@ -92,7 +112,7 @@ export async function GET() {
 
 export async function POST(req: NextRequest) {
   try {
-    if (!(await checkAdminAuth())) {
+    if (!(await checkAdminAuth(req))) {
       return NextResponse.json(
         { success: false, message: 'Administrative authentication required' },
         { status: 401 }
