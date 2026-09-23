@@ -8,10 +8,10 @@ const globalForPrisma = globalThis as unknown as {
 const rawConnectionString = (process.env.DATABASE_URL || '').trim();
 let connectionString = rawConnectionString
   ? rawConnectionString.replace(/^mysql:\/\//, 'mariadb://')
-  : 'mariadb://localhost:3306/fallback';
+  : 'mariadb://127.0.0.1:3306/fallback?connectTimeout=500&acquireTimeout=500';
 
 // Append connection parameters for WAN network speed and reliability
-if (connectionString && !connectionString.includes('connectTimeout')) {
+if (rawConnectionString && !connectionString.includes('connectTimeout')) {
   const separator = connectionString.includes('?') ? '&' : '?';
   connectionString += `${separator}connectTimeout=15000&acquireTimeout=15000&compress=true&connectionLimit=5`;
 }
