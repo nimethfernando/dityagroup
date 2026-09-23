@@ -46,6 +46,20 @@ export default function LanguageToggle({ className = '', variant = 'navbar' }: L
     );
   }
 
+  if (variant === 'compact') {
+    return (
+      <button
+        onClick={toggleLanguage}
+        aria-label={t('switcher.language')}
+        title={t('switcher.language')}
+        className={`h-8 px-2 rounded-lg shrink-0 flex items-center space-x-1 bg-gray-100 dark:bg-white/10 hover:bg-gray-200 dark:hover:bg-white/15 border border-gray-200 dark:border-white/10 text-[#041614] dark:text-white text-xs font-bold transition-all cursor-pointer shadow-xs ${className}`}
+      >
+        <span className="text-sm leading-none">{currentLang.flag}</span>
+        <span className="text-[11px] leading-none tracking-wide">{currentLang.label}</span>
+      </button>
+    );
+  }
+
   if (variant === 'pill') {
     return (
       <div className={`inline-flex items-center bg-gray-100 dark:bg-white/10 p-0.5 rounded-xl border border-gray-200 dark:border-white/10 text-xs ${className}`}>

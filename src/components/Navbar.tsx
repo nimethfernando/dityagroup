@@ -108,16 +108,16 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
   return (
     <header
-      className={`sticky top-0 z-40 transition-all duration-300 ${
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/95 dark:bg-[#020D0C]/95 backdrop-blur-xl shadow-[0_4px_25px_rgba(1,22,51,0.06)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.5)] py-3 border-b border-slate-100 dark:border-white/10'
-          : 'bg-white/90 dark:bg-[#020D0C]/90 backdrop-blur-md py-4 border-b border-gray-100/70 dark:border-white/5'
+          ? 'bg-white/95 dark:bg-[#020D0C]/95 backdrop-blur-xl shadow-[0_4px_25px_rgba(1,22,51,0.06)] dark:shadow-[0_4px_25px_rgba(0,0,0,0.5)] py-2 sm:py-3 border-b border-slate-100 dark:border-white/10'
+          : 'bg-white/95 dark:bg-[#020D0C]/95 backdrop-blur-md py-2.5 sm:py-4 border-b border-gray-100/70 dark:border-white/5'
       }`}
     >
-      <div className="max-w-[1140px] mx-auto px-4 flex items-center justify-between">
+      <div className="max-w-[1140px] mx-auto px-3 sm:px-4 flex items-center justify-between">
         {/* Brand Logo - Switches to crisp white in Dark Mode or Custom Logo */}
-        <Link href="/" className="flex items-center space-x-3 group">
-          <div className="relative h-11 sm:h-12 w-44 sm:w-56 transition-transform group-hover:scale-[1.01]">
+        <Link href="/" className="flex items-center space-x-3 group shrink-0">
+          <div className="relative h-8 sm:h-11 md:h-12 w-28 sm:w-44 md:w-56 transition-transform group-hover:scale-[1.01]">
             <Image
               src={logoSrc}
               alt={logoAlt}
@@ -247,20 +247,20 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         </div>
 
         {/* Mobile Action Controls */}
-        <div className="lg:hidden flex items-center space-x-2">
+        <div className="lg:hidden flex items-center space-x-1 sm:space-x-2 shrink-0">
           <ThemeToggle variant="compact" />
           <LanguageToggle variant="compact" />
           {isConsultationEnabled && (
             <button
               onClick={handleConsultationClick}
-              className="btn-ditya-orange py-1.5 px-3 text-xs shadow-xs"
+              className="btn-ditya-orange py-1.5 px-2 sm:px-3 text-[11px] sm:text-xs font-semibold shadow-xs shrink-0 whitespace-nowrap cursor-pointer"
             >
               {consultationMobileText}
             </button>
           )}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 text-[#041614] dark:text-white hover:text-[#059669] focus:outline-none rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+            className="w-8 h-8 sm:w-9 sm:h-9 flex items-center justify-center text-[#041614] dark:text-white hover:text-[#059669] focus:outline-none rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer shrink-0"
             aria-label="Toggle Menu"
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -270,7 +270,7 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
 
       {/* Mobile Drawer Menu */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-white/98 dark:bg-[#020D0C]/98 backdrop-blur-xl border-t border-gray-100 dark:border-white/10 shadow-2xl px-5 py-6 space-y-3 animate-in slide-in-from-top-2 duration-200 text-[#041614] dark:text-white">
+        <div className="lg:hidden bg-white/98 dark:bg-[#020D0C]/98 backdrop-blur-xl border-t border-gray-100 dark:border-white/10 shadow-2xl px-5 py-6 space-y-3 animate-in slide-in-from-top-2 duration-200 text-[#041614] dark:text-white max-h-[calc(100vh-4rem)] overflow-y-auto">
           <Link
             href="/"
             className={`block px-3 py-2 rounded-xl text-base font-medium ${
