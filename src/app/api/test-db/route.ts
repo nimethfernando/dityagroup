@@ -3,10 +3,12 @@ import { NextResponse } from 'next/server';
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
-  const dbUrl = process.env.DATABASE_URL || '';
-  return NextResponse.json({
-    hasDbUrl: Boolean(dbUrl),
-    dbUrlLength: dbUrl.length,
-    starts: dbUrl.slice(0, 10),
-  });
+  const envStatus = {
+    hasDatabaseUrl: Boolean(process.env.DATABASE_URL),
+    hasAdminJwtSecret: Boolean(process.env.ADMIN_JWT_SECRET),
+    hasEmailUser: Boolean(process.env.EMAIL_USER),
+    hasEmailPass: Boolean(process.env.EMAIL_PASS),
+    nodeEnv: process.env.NODE_ENV,
+  };
+  return NextResponse.json(envStatus);
 }
