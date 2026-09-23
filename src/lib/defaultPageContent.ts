@@ -59,6 +59,7 @@ export interface HomePageContent {
     step3Desc: string;
   };
   consultationBanner: {
+    enabled?: boolean;
     badge: string;
     heading: string;
     description: string;
@@ -301,6 +302,22 @@ export interface SocialLinkItem {
   icon?: string;
 }
 
+export interface HeaderPageContent {
+  logo: {
+    lightLogoUrl: string;
+    darkLogoUrl: string;
+    altText: string;
+    height?: number;
+  };
+  consultationButton: {
+    enabled: boolean;
+    text: string;
+    mobileText: string;
+    actionType: 'modal' | 'link';
+    customLink: string;
+  };
+}
+
 export interface FooterPageContent {
   branding: {
     tagline: string;
@@ -351,6 +368,7 @@ export interface PageContentMap {
   'ditya-business-house': HousePageContent;
   'ditya-trading-house': HousePageContent;
   'ditya-tech-house': HousePageContent;
+  header: HeaderPageContent;
   footer: FooterPageContent;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [customSlug: string]: any;
@@ -378,6 +396,7 @@ export const PAGE_DEFINITIONS: PageDefinition[] = [
   { slug: 'ditya-business-house', title: 'Ditya Business House', path: '/ditya-business-house', category: 'Houses' },
   { slug: 'ditya-trading-house', title: 'Ditya Trading House', path: '/ditya-trading-house', category: 'Houses' },
   { slug: 'ditya-tech-house', title: 'Ditya Tech House', path: '/ditya-tech-house', category: 'Houses' },
+  { slug: 'header', title: 'Header, Logo & Consultation Button', path: '/#header', category: 'Site Settings & Brand' },
   { slug: 'footer', title: 'Footer & Social Media Links', path: '/#footer', category: 'Site Settings & Brand' },
 ];
 
@@ -1021,6 +1040,21 @@ export const DEFAULT_PAGE_CONTENTS: PageContentMap = {
     copyright: {
       text: '© 2026 Ditya Group. All rights reserved.',
       subText: 'One Group. Infinite Possibilities.',
+    },
+  },
+  header: {
+    logo: {
+      lightLogoUrl: '/images/logo.png',
+      darkLogoUrl: '/images/logo-white.png',
+      altText: 'Ditya Group',
+      height: 48,
+    },
+    consultationButton: {
+      enabled: true,
+      text: 'Free Consultation',
+      mobileText: 'Consultation',
+      actionType: 'modal',
+      customLink: '/contact-us',
     },
   },
 };

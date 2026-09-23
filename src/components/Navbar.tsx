@@ -10,6 +10,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useLanguage } from '@/contexts/LanguageContext';
 import LanguageToggle from './LanguageToggle';
 import ThemeToggle from './ThemeToggle';
+import { DEFAULT_PAGE_CONTENTS, HeaderPageContent } from '@/lib/defaultPageContent';
 
 interface NavbarProps {
   onOpenConsultation?: () => void;
@@ -23,6 +24,28 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [headerContent, setHeaderContent] = useState<HeaderPageContent>(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (DEFAULT_PAGE_CONTENTS as any).header
+  );
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/header')
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data && data.success && data.data) {
+          setHeaderContent(data.data);
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch live header content:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   if (pathname.startsWith('/admin')) {
     return null;
@@ -34,6 +57,18 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
     } else {
       openModal();
     }
+  };
+
+  const isConsultationEnabled = headerContent.consultationButton?.enabled !== false;
+  const consultationText = headerContent.consultationButton?.text || t('nav.free_consultation');
+  const consultationMobileText = headerContent.consultationButton?.mobileText || t('nav.consultation');
+
+  const handleConsultationClick = () => {
+    if (headerContent.consultationButton?.actionType === 'link' && headerContent.consultationButton?.customLink) {
+      window.location.href = headerContent.consultationButton.customLink;
+      return;
+    }
+    handleOpenConsultation();
   };
 
   useEffect(() => {
@@ -66,6 +101,10 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
   };
 
   const isDark = theme === 'dark';
+  const logoSrc = isDark
+    ? (headerContent.logo?.darkLogoUrl || '/images/logo-white.png')
+    : (headerContent.logo?.lightLogoUrl || '/images/logo.png');
+  const logoAlt = headerContent.logo?.altText || 'Ditya Group Logo';
 
   return (
     <header
@@ -76,15 +115,16 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
       }`}
     >
       <div className="max-w-[1140px] mx-auto px-4 flex items-center justify-between">
-        {/* Brand Logo - Switches to crisp white in Dark Mode */}
+        {/* Brand Logo - Switches to crisp white in Dark Mode or Custom Logo */}
         <Link href="/" className="flex items-center space-x-3 group">
           <div className="relative h-11 sm:h-12 w-44 sm:w-56 transition-transform group-hover:scale-[1.01]">
             <Image
-              src={isDark ? '/images/logo-white.png' : '/images/logo.png'}
-              alt="Ditya Group Logo"
+              src={logoSrc}
+              alt={logoAlt}
               fill
               className="object-contain object-left"
               priority
+              unoptimized={logoSrc.startsWith('data:')}
             />
           </div>
         </Link>
@@ -196,24 +236,28 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
         <div className="hidden lg:flex items-center space-x-2.5">
           <LanguageToggle />
           <ThemeToggle />
-          <button
-            onClick={handleOpenConsultation}
-            className="btn-ditya-orange text-sm shadow-md hover:shadow-emerald-500/25 cursor-pointer ml-1"
-          >
-            {t('nav.free_consultation')}
-          </button>
+          {isConsultationEnabled && (
+            <button
+              onClick={handleConsultationClick}
+              className="btn-ditya-orange text-sm shadow-md hover:shadow-emerald-500/25 cursor-pointer ml-1"
+            >
+              {consultationText}
+            </button>
+          )}
         </div>
 
         {/* Mobile Action Controls */}
         <div className="lg:hidden flex items-center space-x-2">
           <ThemeToggle variant="compact" />
           <LanguageToggle variant="compact" />
-          <button
-            onClick={handleOpenConsultation}
-            className="btn-ditya-orange py-1.5 px-3 text-xs shadow-xs"
-          >
-            {t('nav.consultation')}
-          </button>
+          {isConsultationEnabled && (
+            <button
+              onClick={handleConsultationClick}
+              className="btn-ditya-orange py-1.5 px-3 text-xs shadow-xs"
+            >
+              {consultationMobileText}
+            </button>
+          )}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className="p-2 text-[#041614] dark:text-white hover:text-[#059669] focus:outline-none rounded-xl hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
@@ -328,17 +372,19 @@ export default function Navbar({ onOpenConsultation }: NavbarProps) {
             </div>
           </div>
 
-          <div className="pt-2">
-            <button
-              onClick={() => {
-                setIsMobileMenuOpen(false);
-                handleOpenConsultation();
-              }}
-              className="w-full btn-ditya-orange py-3 font-semibold text-center shadow-md cursor-pointer"
-            >
-              {t('nav.free_consultation')}
-            </button>
-          </div>
+          {isConsultationEnabled && (
+            <div className="pt-2">
+              <button
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  handleConsultationClick();
+                }}
+                className="w-full btn-ditya-orange py-3 font-semibold text-center shadow-md cursor-pointer"
+              >
+                {consultationText}
+              </button>
+            </div>
+          )}
         </div>
       )}
     </header>

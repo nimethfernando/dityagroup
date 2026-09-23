@@ -76,9 +76,21 @@ export default function Footer() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (DEFAULT_PAGE_CONTENTS as any).footer
   );
+  const [logoDark, setLogoDark] = useState('/images/logo-white.png');
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterStatus, setNewsletterStatus] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/header')
+      .then((res) => res.json())
+      .then((d) => {
+        if (d?.data?.logo?.darkLogoUrl) {
+          setLogoDark(d.data.logo.darkLogoUrl);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     let isMounted = true;
@@ -269,10 +281,11 @@ export default function Footer() {
           <div className="lg:col-span-4 space-y-5">
             <div className="relative h-12 sm:h-14 w-52 sm:w-56">
               <Image
-                src="/images/logo-white.png"
+                src={logoDark}
                 alt="Ditya Group"
                 fill
                 className="object-contain object-left"
+                unoptimized={logoDark.startsWith('data:')}
               />
             </div>
 

@@ -846,46 +846,48 @@ export default function HomeClient({ content }: HomeClientProps) {
       {/* ============================================================ */}
       {/* 7. CONSULTATION CALLOUT BANNER */}
       {/* ============================================================ */}
-      <section className="py-20 bg-white">
-        <div className="max-w-[1140px] mx-auto px-4">
-          <div className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
-            {/* Background Sacred Geometry Graphic */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <Image
-                src="/images/consultation-banner-bg.jpg"
-                alt="Consultation Background Pattern"
-                fill
-                className="object-cover object-center opacity-40 mix-blend-luminosity"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/85 via-[#011633]/75 to-[#0d274c]/85" />
-            </div>
+      {content.consultationBanner?.enabled !== false && (
+        <section className="py-20 bg-white">
+          <div className="max-w-[1140px] mx-auto px-4">
+            <div className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
+              {/* Background Sacred Geometry Graphic */}
+              <div className="absolute inset-0 z-0 pointer-events-none">
+                <Image
+                  src="/images/consultation-banner-bg.jpg"
+                  alt="Consultation Background Pattern"
+                  fill
+                  className="object-cover object-center opacity-40 mix-blend-luminosity"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#001025]/85 via-[#011633]/75 to-[#0d274c]/85" />
+              </div>
 
-            {/* Ambient Accent Light */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/15 rounded-full blur-3xl pointer-events-none z-0" />
+              {/* Ambient Accent Light */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/15 rounded-full blur-3xl pointer-events-none z-0" />
 
-            <div className="max-w-2xl space-y-3 relative z-10">
-              <span className="text-xs font-bold tracking-widest uppercase text-[#059669] inline-flex items-center space-x-2">
-                <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
-                <span>{content.consultationBanner.badge || 'Need Clarification?'}</span>
-              </span>
-              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug tracking-tight">
-                {content.consultationBanner.heading ||
-                  'Still Confused About Our Features? Get A Consultation'}
-              </h3>
-              <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
-                {content.consultationBanner.description ||
-                  'If you’re unsure about our services, don’t worry! We offer consultations to guide you with complete clarity. Our team provides the right support across trading, numerology, and essential services to help you make confident decisions.'}
-              </p>
+              <div className="max-w-2xl space-y-3 relative z-10">
+                <span className="text-xs font-bold tracking-widest uppercase text-[#059669] inline-flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
+                  <span>{content.consultationBanner.badge || 'Need Clarification?'}</span>
+                </span>
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug tracking-tight">
+                  {content.consultationBanner.heading ||
+                    'Still Confused About Our Features? Get A Consultation'}
+                </h3>
+                <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                  {content.consultationBanner.description ||
+                    'If you’re unsure about our services, don’t worry! We offer consultations to guide you with complete clarity. Our team provides the right support across trading, numerology, and essential services to help you make confident decisions.'}
+                </p>
+              </div>
+              <button
+                onClick={() => openModal()}
+                className="btn-ditya-orange text-sm font-bold shadow-xl shrink-0 cursor-pointer relative z-10"
+              >
+                {content.consultationBanner.btnText || 'Start Consultation'}
+              </button>
             </div>
-            <button
-              onClick={() => openModal()}
-              className="btn-ditya-orange text-sm font-bold shadow-xl shrink-0 cursor-pointer relative z-10"
-            >
-              {content.consultationBanner.btnText || 'Start Consultation'}
-            </button>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ============================================================ */}
       {/* 8. LATEST BLOG & ARTICLES PREVIEW WITH MODERN IMAGES */}

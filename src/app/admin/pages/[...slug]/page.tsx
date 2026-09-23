@@ -23,6 +23,9 @@ import {
   Phone,
   Mail,
   MapPin,
+  Upload,
+  Image as ImageIcon,
+  Sliders,
 } from 'lucide-react';
 import {
   FaFacebookF,
@@ -3209,6 +3212,439 @@ export default function PageEditor({ params }: PageEditorProps) {
                       }
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* ============================================================ */}
+          {/* 7. HEADER, BRAND LOGO & CONSULTATION BUTTON COMMAND CENTER */}
+          {/* ============================================================ */}
+          {slug === 'header' && (
+            <div className="space-y-8">
+              {/* Banner Card */}
+              <div className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white p-6 sm:p-8 rounded-asymmetric border border-emerald-500/20 shadow-md">
+                <div className="flex items-center space-x-2 text-[#10B981] text-xs font-bold uppercase tracking-wider mb-2">
+                  <Sliders className="w-4 h-4" />
+                  <span>Header, Brand & Navigation Settings</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl font-black text-white">
+                  Header, Logo & Consultation Button
+                </h2>
+                <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-2xl">
+                  Upload or change your brand logo (for both Light Mode and Dark Mode) and manage the Consultation button (toggle to hide or unhide, customize button label, and configure click action).
+                </p>
+              </div>
+
+              {/* SECTION A: LOGO PROVISION */}
+              <div className="bg-white rounded-asymmetric p-6 sm:p-8 border border-gray-200 shadow-xs space-y-6">
+                <div className="flex items-center space-x-2 text-[#059669] text-xs font-bold uppercase tracking-wider pb-3 border-b border-gray-100">
+                  <ImageIcon className="w-4 h-4" />
+                  <span>Brand Logo Provision (Self-Service Customization)</span>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                  {/* Light Mode Logo */}
+                  <div className="p-5 rounded-2xl border border-gray-200 bg-gray-50/60 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                        1. Light Mode Brand Logo
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setContent({
+                            ...content,
+                            logo: { ...(content.logo || {}), lightLogoUrl: '/images/logo.png' },
+                          })
+                        }
+                        className="text-[11px] text-gray-500 hover:text-[#059669] font-semibold underline cursor-pointer"
+                      >
+                        Reset to Default
+                      </button>
+                    </div>
+
+                    {/* Preview Box */}
+                    <div className="bg-white p-4 rounded-xl border border-gray-200 flex items-center justify-center min-h-[90px] shadow-inner">
+                      {content.logo?.lightLogoUrl ? (
+                        <img
+                          src={content.logo.lightLogoUrl}
+                          alt="Light Mode Logo Preview"
+                          className="max-h-12 max-w-full object-contain"
+                        />
+                      ) : (
+                        <span className="text-xs text-gray-400">No logo set</span>
+                      )}
+                    </div>
+
+                    {/* File Upload Button */}
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-1.5">
+                        Upload Logo File (PNG, SVG, JPG, WebP)
+                      </label>
+                      <label className="flex items-center justify-center space-x-2 px-4 py-2.5 bg-white border border-gray-300 hover:border-[#059669] hover:bg-emerald-50/30 rounded-xl text-xs font-semibold text-gray-700 cursor-pointer transition-colors shadow-xs">
+                        <Upload className="w-4 h-4 text-[#059669]" />
+                        <span>Choose Logo File to Upload</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              if (file.size > 2 * 1024 * 1024) {
+                                alert('File size exceeds 2MB limit.');
+                                return;
+                              }
+                              const reader = new FileReader();
+                              reader.onload = (ev) => {
+                                const dataUrl = ev.target?.result as string;
+                                if (dataUrl) {
+                                  setContent({
+                                    ...content,
+                                    logo: { ...(content.logo || {}), lightLogoUrl: dataUrl },
+                                  });
+                                }
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                      </label>
+                      <p className="text-[11px] text-gray-400 mt-1">
+                        Upload an image directly from your computer. It is stored permanently in your database.
+                      </p>
+                    </div>
+
+                    {/* Or URL Input */}
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">
+                        Or Image URL / Path
+                      </label>
+                      <input
+                        type="text"
+                        value={content.logo?.lightLogoUrl || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            logo: { ...(content.logo || {}), lightLogoUrl: e.target.value },
+                          })
+                        }
+                        placeholder="/images/logo.png or https://..."
+                        className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:border-[#059669] outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Dark Mode Logo */}
+                  <div className="p-5 rounded-2xl border border-gray-200 bg-gray-50/60 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold uppercase tracking-wider text-gray-700">
+                        2. Dark Mode Brand Logo (Header & Footer)
+                      </span>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setContent({
+                            ...content,
+                            logo: { ...(content.logo || {}), darkLogoUrl: '/images/logo-white.png' },
+                          })
+                        }
+                        className="text-[11px] text-gray-500 hover:text-[#059669] font-semibold underline cursor-pointer"
+                      >
+                        Reset to Default
+                      </button>
+                    </div>
+
+                    {/* Preview Box on Dark Background */}
+                    <div className="bg-[#020D0C] p-4 rounded-xl border border-white/10 flex items-center justify-center min-h-[90px] shadow-inner">
+                      {content.logo?.darkLogoUrl ? (
+                        <img
+                          src={content.logo.darkLogoUrl}
+                          alt="Dark Mode Logo Preview"
+                          className="max-h-12 max-w-full object-contain"
+                        />
+                      ) : (
+                        <span className="text-xs text-gray-400">No dark logo set</span>
+                      )}
+                    </div>
+
+                    {/* File Upload Button */}
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-1.5">
+                        Upload Dark Logo File (White / Light text)
+                      </label>
+                      <label className="flex items-center justify-center space-x-2 px-4 py-2.5 bg-white border border-gray-300 hover:border-[#059669] hover:bg-emerald-50/30 rounded-xl text-xs font-semibold text-gray-700 cursor-pointer transition-colors shadow-xs">
+                        <Upload className="w-4 h-4 text-[#059669]" />
+                        <span>Choose Dark Logo File to Upload</span>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              if (file.size > 2 * 1024 * 1024) {
+                                alert('File size exceeds 2MB limit.');
+                                return;
+                              }
+                              const reader = new FileReader();
+                              reader.onload = (ev) => {
+                                const dataUrl = ev.target?.result as string;
+                                if (dataUrl) {
+                                  setContent({
+                                    ...content,
+                                    logo: { ...(content.logo || {}), darkLogoUrl: dataUrl },
+                                  });
+                                }
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                        />
+                      </label>
+                      <p className="text-[11px] text-gray-400 mt-1">
+                        Best with a transparent background and white/light lettering.
+                      </p>
+                    </div>
+
+                    {/* Or URL Input */}
+                    <div>
+                      <label className="block text-xs font-semibold text-gray-600 mb-1">
+                        Or Image URL / Path
+                      </label>
+                      <input
+                        type="text"
+                        value={content.logo?.darkLogoUrl || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            logo: { ...(content.logo || {}), darkLogoUrl: e.target.value },
+                          })
+                        }
+                        placeholder="/images/logo-white.png or https://..."
+                        className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg focus:border-[#059669] outline-none"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Logo Alt Text */}
+                <div className="pt-2">
+                  <label className="block text-xs font-bold text-gray-700 mb-1">
+                    Brand Alt Text / Accessibility Title
+                  </label>
+                  <input
+                    type="text"
+                    value={content.logo?.altText || ''}
+                    onChange={(e) =>
+                      setContent({
+                        ...content,
+                        logo: { ...(content.logo || {}), altText: e.target.value },
+                      })
+                    }
+                    placeholder="Ditya Group"
+                    className="w-full px-3.5 py-2.5 text-xs border border-gray-300 rounded-xl focus:border-[#059669] outline-none max-w-md"
+                  />
+                </div>
+              </div>
+
+              {/* SECTION B: CONSULTATION BUTTON CONTROLS */}
+              <div className="bg-white rounded-asymmetric p-6 sm:p-8 border border-gray-200 shadow-xs space-y-6">
+                <div className="flex items-center space-x-2 text-[#059669] text-xs font-bold uppercase tracking-wider pb-3 border-b border-gray-100">
+                  <MessageSquare className="w-4 h-4" />
+                  <span>Consultation Button Command & Visibility</span>
+                </div>
+
+                {/* Visibility Toggle Card */}
+                <div className="p-5 rounded-2xl border border-gray-200 bg-gray-50/50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="space-y-1">
+                    <div className="flex items-center space-x-2.5">
+                      <span className="text-sm font-bold text-gray-800">
+                        Consultation Button Visibility:
+                      </span>
+                      {content.consultationButton?.enabled !== false ? (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-green-100 text-green-800 border border-green-200">
+                          <CheckCircle2 className="w-3 h-3 mr-1" />
+                          Visible on Website
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+                          <EyeOff className="w-3 h-3 mr-1" />
+                          Hidden from Website
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      Toggle this switch to instantly show or hide the Consultation CTA button across both Desktop and Mobile headers.
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const currentVal = content.consultationButton?.enabled !== false;
+                      setContent({
+                        ...content,
+                        consultationButton: {
+                          ...(content.consultationButton || {}),
+                          enabled: !currentVal,
+                        },
+                      });
+                    }}
+                    className={`px-5 py-2.5 rounded-xl font-bold text-xs flex items-center space-x-2 transition-all cursor-pointer shadow-xs ${
+                      content.consultationButton?.enabled !== false
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white'
+                        : 'bg-gray-200 hover:bg-gray-300 text-gray-800'
+                    }`}
+                  >
+                    {content.consultationButton?.enabled !== false ? (
+                      <>
+                        <Eye className="w-4 h-4" />
+                        <span>Visible (Click to Hide)</span>
+                      </>
+                    ) : (
+                      <>
+                        <EyeOff className="w-4 h-4" />
+                        <span>Hidden (Click to Unhide)</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Text and Actions */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">
+                      Desktop Button Text
+                    </label>
+                    <input
+                      type="text"
+                      value={content.consultationButton?.text || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          consultationButton: {
+                            ...(content.consultationButton || {}),
+                            text: e.target.value,
+                          },
+                        })
+                      }
+                      placeholder="Free Consultation"
+                      className="w-full px-3.5 py-2.5 text-xs border border-gray-300 rounded-xl focus:border-[#059669] outline-none"
+                    />
+                    <p className="text-[11px] text-gray-400 mt-1">Displayed in desktop header navigation.</p>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">
+                      Mobile Button Text
+                    </label>
+                    <input
+                      type="text"
+                      value={content.consultationButton?.mobileText || ''}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          consultationButton: {
+                            ...(content.consultationButton || {}),
+                            mobileText: e.target.value,
+                          },
+                        })
+                      }
+                      placeholder="Consultation"
+                      className="w-full px-3.5 py-2.5 text-xs border border-gray-300 rounded-xl focus:border-[#059669] outline-none"
+                    />
+                    <p className="text-[11px] text-gray-400 mt-1">Compact label shown on mobile screens.</p>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-gray-700 mb-1">
+                      Button Click Action
+                    </label>
+                    <select
+                      value={content.consultationButton?.actionType || 'modal'}
+                      onChange={(e) =>
+                        setContent({
+                          ...content,
+                          consultationButton: {
+                            ...(content.consultationButton || {}),
+                            actionType: e.target.value as 'modal' | 'link',
+                          },
+                        })
+                      }
+                      className="w-full px-3.5 py-2.5 text-xs border border-gray-300 rounded-xl focus:border-[#059669] outline-none bg-white font-medium"
+                    >
+                      <option value="modal">Open Consultation Popup Form (Interactive lead capture modal)</option>
+                      <option value="link">Redirect to Custom URL / Page</option>
+                    </select>
+                  </div>
+
+                  {content.consultationButton?.actionType === 'link' && (
+                    <div>
+                      <label className="block text-xs font-bold text-gray-700 mb-1">
+                        Custom Destination Link
+                      </label>
+                      <input
+                        type="text"
+                        value={content.consultationButton?.customLink || ''}
+                        onChange={(e) =>
+                          setContent({
+                            ...content,
+                            consultationButton: {
+                              ...(content.consultationButton || {}),
+                              customLink: e.target.value,
+                            },
+                          })
+                        }
+                        placeholder="/contact-us or https://wa.me/..."
+                        className="w-full px-3.5 py-2.5 text-xs border border-gray-300 rounded-xl focus:border-[#059669] outline-none font-mono"
+                      />
+                    </div>
+                  )}
+                </div>
+
+                {/* Section C: Live Simulation Preview */}
+                <div className="pt-4 border-t border-gray-100">
+                  <span className="block text-xs font-bold uppercase tracking-wider text-gray-500 mb-3">
+                    Live Navbar Preview
+                  </span>
+                  <div className="p-4 rounded-2xl bg-white border border-gray-200 shadow-xs flex items-center justify-between">
+                    <div className="flex items-center space-x-2">
+                      {content.logo?.lightLogoUrl ? (
+                        <img
+                          src={content.logo.lightLogoUrl}
+                          alt="Preview"
+                          className="h-9 object-contain"
+                        />
+                      ) : (
+                        <span className="font-bold text-gray-800">Ditya Group</span>
+                      )}
+                    </div>
+
+                    <div className="hidden sm:flex items-center space-x-3 text-xs text-gray-500">
+                      <span>Home</span>
+                      <span>About</span>
+                      <span>Services</span>
+                      <span>Blog</span>
+                      <span>Contact</span>
+                    </div>
+
+                    <div>
+                      {content.consultationButton?.enabled !== false ? (
+                        <button
+                          type="button"
+                          className="btn-ditya-orange text-xs py-2 px-4 font-semibold shadow-xs"
+                        >
+                          {content.consultationButton?.text || 'Free Consultation'}
+                        </button>
+                      ) : (
+                        <span className="px-3 py-1 rounded bg-gray-100 text-gray-400 text-xs font-medium border border-dashed border-gray-300">
+                          Button Hidden
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
