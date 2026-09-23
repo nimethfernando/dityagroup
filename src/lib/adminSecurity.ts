@@ -53,22 +53,34 @@ export function generateOtp(): string {
 }
 
 let inMemorySecurityData: AdminSecurityData = {};
+let lastFetchedAt = 0;
+const CACHE_TTL_MS = 60 * 1000; // 60 seconds
 
 /**
  * Fetch admin security record from PageContent store
  */
-export async function getAdminSecurityRecord(): Promise<AdminSecurityData> {
+export async function getAdminSecurityRecord(forceRefresh = false): Promise<AdminSecurityData> {
+  const now = Date.now();
+  if (!forceRefresh && inMemorySecurityData.passwordHash && now - lastFetchedAt < CACHE_TTL_MS) {
+    return inMemorySecurityData;
+  }
+
+  if (!process.env.DATABASE_URL) {
+    return inMemorySecurityData;
+  }
+
   try {
     const dbPromise = prisma.pageContent.findUnique({
       where: { slug: SECURITY_SLUG },
     });
     const timeoutPromise = new Promise<null>((resolve) =>
-      setTimeout(() => resolve(null), 1200)
+      setTimeout(() => resolve(null), 8000)
     );
     const row = await Promise.race([dbPromise, timeoutPromise]);
     if (row && row.data) {
       const parsed = JSON.parse(row.data) as AdminSecurityData;
       inMemorySecurityData = { ...inMemorySecurityData, ...parsed };
+      lastFetchedAt = Date.now();
       return inMemorySecurityData;
     }
   } catch (err) {
@@ -82,7 +94,13 @@ export async function getAdminSecurityRecord(): Promise<AdminSecurityData> {
  */
 async function saveAdminSecurityRecord(data: AdminSecurityData): Promise<void> {
   inMemorySecurityData = { ...inMemorySecurityData, ...data };
+  lastFetchedAt = Date.now();
   const jsonStr = JSON.stringify(inMemorySecurityData);
+
+  if (!process.env.DATABASE_URL) {
+    return;
+  }
+
   try {
     const dbPromise = prisma.pageContent.upsert({
       where: { slug: SECURITY_SLUG },
@@ -96,7 +114,7 @@ async function saveAdminSecurityRecord(data: AdminSecurityData): Promise<void> {
       },
     });
     const timeoutPromise = new Promise<null>((resolve) =>
-      setTimeout(() => resolve(null), 1500)
+      setTimeout(() => resolve(null), 8000)
     );
     await Promise.race([dbPromise, timeoutPromise]);
   } catch (saveErr) {

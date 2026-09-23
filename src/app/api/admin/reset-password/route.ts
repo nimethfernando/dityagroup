@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyAdminResetOtp, updateAdminPassword, clearAdminResetOtp } from '@/lib/adminSecurity';
 
+export const dynamic = 'force-dynamic';
+export const maxDuration = 30;
+
 export async function POST(req: NextRequest) {
   try {
     const { otp, newPassword } = await req.json();
