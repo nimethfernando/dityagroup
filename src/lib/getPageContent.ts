@@ -61,6 +61,11 @@ export async function getPageContent<K extends keyof PageContentMap | string>(
   const slugStr = slug as string;
   const fallback = (DEFAULT_PAGE_CONTENTS as Record<string, unknown>)[slugStr] || null;
 
+  // If DATABASE_URL is not set on the environment, return fallback baseline immediately
+  if (!process.env.DATABASE_URL) {
+    return fallback;
+  }
+
   // Check in-memory cache first for instant sub-millisecond response
   const cached = memoryCache.get(slugStr);
   if (cached && Date.now() < cached.expiry) {

@@ -33,6 +33,7 @@ async function checkAdminAuth(req?: NextRequest) {
 
 // Timeout-safe database helper that will never block or crash requests on WAN latency
 async function safeFindUnique(slug: string, timeoutMs = 2500) {
+  if (!process.env.DATABASE_URL) return null;
   try {
     const dbPromise = prisma.pageContent.findUnique({
       where: { slug },
@@ -195,6 +196,17 @@ export async function PUT(
     if (!content || typeof content !== 'object') {
       return NextResponse.json(
         { success: false, message: 'Valid content object is required' },
+        { status: 400 }
+      );
+    }
+
+    if (!process.env.DATABASE_URL) {
+      return NextResponse.json(
+        {
+          success: false,
+          message:
+            'DATABASE_URL is not configured in Vercel. Please add DATABASE_URL in your Vercel Project Settings (Settings > Environment Variables) and redeploy.',
+        },
         { status: 400 }
       );
     }
