@@ -171,6 +171,9 @@ export async function GET(
   }
 }
 
+export const maxDuration = 60;
+export const dynamic = 'force-dynamic';
+
 export async function PUT(
   req: NextRequest,
   { params }: { params: Promise<{ slug: string[] | string }> }
@@ -197,9 +200,7 @@ export async function PUT(
     }
 
     const pageDef = PAGE_DEFINITIONS.find((p) => p.slug === slug);
-    const existingRecord = await safeFindUnique(slug);
-
-    const pageTitle = title || pageDef?.title || existingRecord?.title || slug;
+    const pageTitle = title || pageDef?.title || slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
     const pagePath = pageDef?.path || (slug.startsWith('/') ? slug : `/${slug}`);
 
     // Persist category inside content if customized
@@ -209,18 +210,46 @@ export async function PUT(
 
     const jsonString = JSON.stringify(content);
 
-    const saved = await prisma.pageContent.upsert({
-      where: { slug },
-      update: {
-        data: jsonString,
-        title: pageTitle,
-      },
-      create: {
-        slug,
-        title: pageTitle,
-        data: jsonString,
-      },
-    });
+    // Fast atomic update or create (avoids slow Prisma interactive transaction over WAN)
+    let saved: { slug: string; updatedAt: Date };
+    try {
+      saved = await prisma.pageContent.update({
+        where: { slug },
+        data: {
+          title: pageTitle,
+          data: jsonString,
+        },
+        select: {
+          slug: true,
+          updatedAt: true,
+        },
+      });
+    } catch (updateErr: any) {
+      // If record does not exist yet (P2025), create it
+      if (updateErr?.code === 'P2025' || updateErr?.message?.includes('Record to update not found')) {
+        saved = await prisma.pageContent.create({
+          data: {
+            slug,
+            title: pageTitle,
+            data: jsonString,
+          },
+          select: {
+            slug: true,
+            updatedAt: true,
+          },
+        });
+      } else {
+        // Retry once on transient network glitch
+        console.warn(`[API] Retrying save for slug "${slug}"...`, updateErr?.message);
+        await new Promise((resolve) => setTimeout(resolve, 300));
+        saved = await prisma.pageContent.upsert({
+          where: { slug },
+          update: { title: pageTitle, data: jsonString },
+          create: { slug, title: pageTitle, data: jsonString },
+          select: { slug: true, updatedAt: true },
+        });
+      }
+    }
 
     // Invalidate local in-memory cache
     invalidatePageContentCache(slug);
@@ -245,10 +274,11 @@ export async function PUT(
         updatedAt: saved.updatedAt,
       },
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error saving page content:', error);
+    const detail = error?.message || 'Database error while saving content';
     return NextResponse.json(
-      { success: false, message: 'Failed to save page content' },
+      { success: false, message: `Failed to save page content: ${detail}` },
       { status: 500 }
     );
   }
