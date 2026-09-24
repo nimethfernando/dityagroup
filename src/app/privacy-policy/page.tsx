@@ -1,9 +1,23 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { getPageContent } from '@/lib/getPageContent';
 import { LegalPageContent } from '@/lib/defaultPageContent';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
+  description:
+    'Read the Privacy Policy for Ditya Group and its subsidiaries. Learn how we handle, protect, and respect your personal and financial information.',
+  alternates: {
+    canonical: '/privacy-policy',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default async function PrivacyPolicyPage() {
   const pageData = (await getPageContent('privacy-policy')) as LegalPageContent;

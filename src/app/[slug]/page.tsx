@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import HousePageTemplate from '@/components/HousePageTemplate';
 import { HousePageContent } from '@/lib/defaultPageContent';
@@ -9,6 +10,46 @@ export const revalidate = 60;
 
 interface DynamicSubPageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: DynamicSubPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  if (slug.startsWith('admin') || slug.startsWith('api') || slug === 'favicon.ico') {
+    return {};
+  }
+  const resolvedSlug = slug === 'global-business-network' ? 'ditya-wealth-house' : slug;
+  const content = (await getPageContent(resolvedSlug)) as HousePageContent;
+
+  if (!content || !content.banner) {
+    return {};
+  }
+
+  const title = content.banner.title || 'Ditya Group';
+  const description =
+    content.banner.subtitle ||
+    content.details?.description ||
+    'Code Your Destiny. Create Your Legacy.';
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `/${slug}`,
+    },
+    openGraph: {
+      title: `${title} | Ditya Group`,
+      description,
+      url: `/${slug}`,
+      images: [
+        {
+          url: content.banner.backgroundImage || '/images/hero-banner-clean.jpg',
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+  };
 }
 
 export default async function DynamicSubPage({ params }: DynamicSubPageProps) {

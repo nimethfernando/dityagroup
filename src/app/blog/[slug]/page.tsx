@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
 import { BLOG_POSTS } from '@/lib/blogData';
@@ -11,6 +12,91 @@ interface BlogPostPageProps {
 }
 
 export const dynamic = 'force-dynamic';
+
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dityagroup.com';
+
+  let title = 'Article';
+  let description = 'Insights on wealth, astrology, mathematics, and business from Ditya Group.';
+  let image = '/images/hero-banner-clean.jpg';
+  let author = 'Ditya Group';
+  let date = '';
+  let category = 'Articles';
+
+  try {
+    const dbPost = await prisma.blog.findUnique({
+      where: { slug },
+      select: {
+        title: true,
+        excerpt: true,
+        image: true,
+        authorName: true,
+        category: true,
+        createdAt: true,
+      },
+    });
+
+    if (dbPost) {
+      title = dbPost.title;
+      description = dbPost.excerpt;
+      image = dbPost.image || image;
+      author = dbPost.authorName;
+      category = dbPost.category;
+      date = dbPost.createdAt.toISOString();
+    }
+  } catch (err) {
+    console.error('Error fetching blog metadata:', err);
+  }
+
+  if (title === 'Article') {
+    const preset = BLOG_POSTS.find((p) => p.slug === slug || p.aliases?.includes(slug));
+    if (preset) {
+      title = preset.title;
+      description = preset.excerpt;
+      image = preset.image || image;
+      author = preset.author;
+      category = preset.category;
+    }
+  }
+
+  const canonicalUrl = `${siteUrl}/blog/${encodeURIComponent(slug)}`;
+  const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
+
+  return {
+    title: `${title} | Ditya Group Blog`,
+    description,
+    keywords: [category, 'Ditya Group Blog', author, 'Vedic Wisdom', 'Business Insights'],
+    authors: [{ name: author }],
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      type: 'article',
+      locale: 'en_US',
+      url: canonicalUrl,
+      title: `${title} | Ditya Group`,
+      description,
+      publishedTime: date || undefined,
+      authors: [author],
+      section: category,
+      images: [
+        {
+          url: fullImageUrl,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} | Ditya Group`,
+      description,
+      images: [fullImageUrl],
+    },
+  };
+}
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
@@ -83,11 +169,46 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     count: categoryCounts[name],
   }));
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dityagroup.com';
+  const blogJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image?.startsWith('http')
+      ? post.image
+      : `${siteUrl}${post.image?.startsWith('/') ? '' : '/'}${post.image || 'images/hero-banner-clean.jpg'}`,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Ditya Group',
+      logo: {
+        '@type': 'ImageObject',
+        url: `${siteUrl}/images/logo.png`,
+      },
+    },
+    datePublished: post.date,
+    articleSection: post.category,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${siteUrl}/blog/${encodeURIComponent(slug)}`,
+    },
+  };
+
   return (
-    <BlogPostClient
-      post={post}
-      recentPosts={recentPosts}
-      categories={categories}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
+      <BlogPostClient
+        post={post}
+        recentPosts={recentPosts}
+        categories={categories}
+      />
+    </>
   );
 }

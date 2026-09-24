@@ -1,4 +1,5 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { getPageContent } from '@/lib/getPageContent';
 import { prisma } from '@/lib/prisma';
 import { PAGE_DEFINITIONS, ServicesPageContent } from '@/lib/defaultPageContent';
@@ -6,6 +7,29 @@ import ServicesClient, { ServiceCardItem } from './ServicesClient';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Our Services & Houses',
+  description:
+    'Explore Ditya Group’s specialized Houses: Global Business Network, Ditya Wealth House, Ditya Astroverse, Ditya Math House, Ditya Business House, Ditya Trading House, and Ditya Tech House.',
+  alternates: {
+    canonical: '/services',
+  },
+  openGraph: {
+    title: 'Our Services & Houses | Ditya Group',
+    description:
+      'Explore specialized divisions designed to elevate personal clarity, academic excellence, trading discipline, and business growth.',
+    url: '/services',
+    images: [
+      {
+        url: '/images/hero-banner-clean.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ditya Group Services and Houses',
+      },
+    ],
+  },
+};
 
 export default async function ServicesPage() {
   const content = (await getPageContent('services')) as ServicesPageContent;

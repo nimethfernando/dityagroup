@@ -1,9 +1,23 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { getPageContent } from '@/lib/getPageContent';
 import { LegalPageContent } from '@/lib/defaultPageContent';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  title: 'Terms & Conditions',
+  description:
+    'Review the Terms & Conditions governing your use of Ditya Group websites, consultations, education, and services.',
+  alternates: {
+    canonical: '/terms-and-conditions',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
 
 export default async function TermsAndConditionsPage() {
   const pageData = (await getPageContent('terms-and-conditions')) as LegalPageContent;

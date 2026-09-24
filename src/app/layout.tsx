@@ -20,13 +20,156 @@ const heebo = Heebo({
   display: 'swap',
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dityagroup.com';
+
 export const metadata: Metadata = {
-  title: 'Home - Ditya Group | Code Your Destiny. Create Your Legacy.',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'Ditya Group | Code Your Destiny. Create Your Legacy.',
+    template: '%s | Ditya Group',
+  },
   description:
-    'Where practical expertise in trading and business meets deep spiritual insight, helping you make powerful, aligned decisions for every part of your life.',
+    'Where practical expertise in trading, wealth management, mathematics, business consultancy, and technology meets deep spiritual insight and Vedic wisdom.',
+  applicationName: 'Ditya Group',
+  keywords: [
+    'Ditya Group',
+    'Global Business Network',
+    'GBN Circle',
+    'GBN Elite Council',
+    'Ditya Astroverse',
+    'Ditya Wealth House',
+    'Ditya Math House',
+    'Ditya Business House',
+    'Ditya Trading House',
+    'Ditya Tech House',
+    'Vedic Astrology Jaipur',
+    'Numerology Consultation',
+    'Tarot Card Reading',
+    'Stock Market Trading Jaipur',
+    'Business Consultancy Rajasthan',
+    'Financial Markets Education',
+    'Wealth Management India',
+  ],
+  authors: [{ name: 'Ditya Group', url: siteUrl }],
+  creator: 'Ditya Group',
+  publisher: 'Ditya Group',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: siteUrl,
+    siteName: 'Ditya Group',
+    title: 'Ditya Group | Code Your Destiny. Create Your Legacy.',
+    description:
+      'Where practical expertise in trading and business meets deep spiritual insight, helping you make powerful, aligned decisions for every part of your life.',
+    images: [
+      {
+        url: '/images/hero-banner-clean.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ditya Group - Code Your Destiny. Create Your Legacy.',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ditya Group | Code Your Destiny. Create Your Legacy.',
+    description:
+      'Where practical expertise in trading and business meets deep spiritual insight, helping you make powerful, aligned decisions for every part of your life.',
+    images: ['/images/hero-banner-clean.jpg'],
+    creator: '@dityagroup',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/images/favicon.png',
+    apple: '/images/favicon.png',
   },
+};
+
+const jsonLdData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': ['Organization', 'LocalBusiness'],
+      '@id': `${siteUrl}/#organization`,
+      name: 'Ditya Group',
+      url: siteUrl,
+      logo: {
+        '@type': 'ImageObject',
+        '@id': `${siteUrl}/#logo`,
+        url: `${siteUrl}/images/logo.png`,
+        caption: 'Ditya Group Logo',
+      },
+      image: `${siteUrl}/images/hero-banner-clean.jpg`,
+      description:
+        'Where practical expertise in trading, wealth management, mathematics, business consultancy, and technology meets deep spiritual and Vedic insight.',
+      telephone: '+91-9351090301',
+      email: 'groupditya@gmail.com',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar',
+        addressLocality: 'Jaipur',
+        addressRegion: 'Rajasthan',
+        postalCode: '302004',
+        addressCountry: 'IN',
+      },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+91-9351090301',
+          contactType: 'customer service',
+          areaServed: ['IN', 'Global'],
+          availableLanguage: ['English', 'Hindi'],
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+995-555433091',
+          contactType: 'international desk',
+          areaServed: ['GE', 'Global'],
+          availableLanguage: ['English'],
+        },
+      ],
+      sameAs: [
+        'https://www.facebook.com/dityagroup',
+        'https://www.instagram.com/dityagroup',
+        'https://www.linkedin.com/company/dityagroup',
+        'https://twitter.com/dityagroup',
+        'https://www.youtube.com/@dityagroup',
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': `${siteUrl}/#website`,
+      url: siteUrl,
+      name: 'Ditya Group',
+      description: 'Code Your Destiny. Create Your Legacy.',
+      publisher: {
+        '@id': `${siteUrl}/#organization`,
+      },
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: `${siteUrl}/blog?q={search_term_string}`,
+        'query-input': 'required name=search_term_string',
+      },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -37,6 +180,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className={`${inter.variable} ${heebo.variable}`}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(jsonLdData),
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `
