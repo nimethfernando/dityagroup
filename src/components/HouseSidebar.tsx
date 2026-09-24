@@ -76,13 +76,7 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
             We are available 24/7 to help you with any questions or concerns that you have about our products or services. You can contact us anytime and we will be happy to assist you.
           </p>
         </div>
-        <a
-          href="tel:+919351090301"
-          className="block text-xl font-extrabold text-[#10B981] hover:text-white transition-colors"
-        >
-          +91-93510 90301
-        </a>
-        <div className="space-y-2.5 pt-1">
+        <div className="space-y-3 pt-3 border-t border-white/10">
           <div>
             <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-400/90 block">
               India Headquarters
