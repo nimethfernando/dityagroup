@@ -247,10 +247,10 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                     {content.coreValues.founderRole || 'CEO & Founder Ditya Group'}
                   </p>
                 </div>
-                <div className="relative h-10 w-28 opacity-85">
+                <div className="relative h-12 w-32 sm:w-36 opacity-90">
                   <Image
                     src={content.coreValues.signatureImage || '/images/signature.png'}
-                    alt="Founder Signature"
+                    alt="Amit Batra Signature"
                     fill
                     className="object-contain object-right"
                     unoptimized={Boolean(content.coreValues.signatureImage?.startsWith('data:') || content.coreValues.signatureImage?.startsWith('http'))}

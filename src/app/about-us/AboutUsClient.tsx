@@ -314,10 +314,10 @@ export default function AboutUsClient({ content }: AboutUsClientProps) {
             </p>
           </div>
 
-          <div className="relative h-14 w-36 mx-auto opacity-85">
+          <div className="relative h-14 sm:h-16 w-36 sm:w-44 mx-auto opacity-90 dark:invert">
             <Image
               src={founder.signatureImage || '/images/signature.png'}
-              alt="Aamitt Batra Signature"
+              alt="Amit Batra Signature"
               fill
               className="object-contain object-center"
               unoptimized={Boolean(founder.signatureImage?.startsWith('data:') || founder.signatureImage?.startsWith('http'))}
