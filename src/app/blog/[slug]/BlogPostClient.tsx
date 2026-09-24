@@ -104,7 +104,7 @@ export default function BlogPostClient({
       <section className="py-16 max-w-[1240px] mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
           {/* Main Article Body */}
-          <article className="lg:col-span-8 space-y-6 text-gray-700 leading-relaxed text-sm sm:text-base">
+          <article className="lg:col-span-8 space-y-6 text-gray-700 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
             {/* Featured Cover Image */}
             {post.image && (
               <div className="relative h-64 sm:h-[400px] w-full rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-white/10 bg-gray-100 dark:bg-white/5">
@@ -121,7 +121,7 @@ export default function BlogPostClient({
 
             {/* Excerpt Callout */}
             {post.excerpt && (
-              <p className="text-base sm:text-lg font-medium text-[#041614] bg-emerald-50/70 p-6 sm:p-7 rounded-2xl border-l-4 border-[#059669] shadow-sm leading-relaxed">
+              <p className="text-base sm:text-lg font-medium text-[#041614] dark:text-white bg-emerald-50/70 dark:bg-emerald-950/40 p-6 sm:p-7 rounded-2xl border-l-4 border-[#059669] shadow-sm leading-relaxed">
                 {post.excerpt}
               </p>
             )}
@@ -129,14 +129,14 @@ export default function BlogPostClient({
             {/* Paragraphs */}
             <div className="space-y-5 pt-2">
               {post.content.map((paragraph, idx) => (
-                <p key={idx} className="leading-relaxed whitespace-pre-line text-gray-600">
+                <p key={idx} className="leading-relaxed whitespace-pre-line text-gray-600 dark:text-gray-300">
                   {paragraph}
                 </p>
               ))}
             </div>
 
             {/* Bottom Navigation & Share */}
-            <div className="pt-10 mt-10 border-t border-gray-200 flex flex-wrap justify-between items-center gap-4">
+            <div className="pt-10 mt-10 border-t border-gray-200 dark:border-white/10 flex flex-wrap justify-between items-center gap-4">
               <Link
                 href="/blog"
                 className="btn-ditya-orange text-xs py-2 px-4 font-semibold shadow-md cursor-pointer inline-flex items-center space-x-1.5"
@@ -157,10 +157,10 @@ export default function BlogPostClient({
           {/* Sidebar */}
           <aside className="lg:col-span-4 space-y-7">
             {/* 1. Recent Posts Widget */}
-            <div className="bg-[#FBFBFB] rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-4">
-              <div className="flex items-center space-x-2 border-b border-gray-200/70 pb-3">
+            <div className="bg-[#FBFBFB] dark:bg-[#061A17] rounded-2xl p-6 border border-gray-200/80 dark:border-white/10 shadow-sm space-y-4">
+              <div className="flex items-center space-x-2 border-b border-gray-200/70 dark:border-white/10 pb-3">
                 <Clock className="w-4 h-4 text-[#059669]" />
-                <h3 className="text-sm font-extrabold text-[#041614] tracking-tight uppercase">
+                <h3 className="text-sm font-extrabold text-[#041614] dark:text-white tracking-tight uppercase">
                   Recent Posts
                 </h3>
               </div>
@@ -170,7 +170,7 @@ export default function BlogPostClient({
                   <div key={r.id} className="group flex items-start space-x-3">
                     <div className="w-2 h-2 rounded-full bg-[#059669] mt-2 shrink-0 group-hover:scale-125 transition-transform" />
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-[#041614] group-hover:text-[#059669] transition-colors leading-snug line-clamp-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#041614] dark:text-gray-200 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors leading-snug line-clamp-2">
                         <Link href={`/blog/${r.slug}`}>{r.title}</Link>
                       </h4>
                       <span className="text-[11px] text-gray-400 mt-1 block">{r.date}</span>
@@ -250,10 +250,10 @@ export default function BlogPostClient({
             </div>
 
             {/* 3. Categories Widget */}
-            <div className="bg-[#FBFBFB] rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-4">
-              <div className="flex items-center space-x-2 border-b border-gray-200/70 pb-3">
+            <div className="bg-[#FBFBFB] dark:bg-[#061A17] rounded-2xl p-6 border border-gray-200/80 dark:border-white/10 shadow-sm space-y-4">
+              <div className="flex items-center space-x-2 border-b border-gray-200/70 dark:border-white/10 pb-3">
                 <Tag className="w-4 h-4 text-[#059669]" />
-                <h3 className="text-sm font-extrabold text-[#041614] tracking-tight uppercase">
+                <h3 className="text-sm font-extrabold text-[#041614] dark:text-white tracking-tight uppercase">
                   Categories
                 </h3>
               </div>
@@ -263,10 +263,10 @@ export default function BlogPostClient({
                   <Link
                     key={c.name}
                     href="/blog"
-                    className="flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-gray-700 hover:bg-emerald-50 hover:text-[#059669] transition-colors"
+                    className="flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-emerald-50 dark:hover:bg-emerald-950/30 hover:text-[#059669] dark:hover:text-emerald-400 transition-colors"
                   >
                     <span>{c.name}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-200/80 text-gray-600">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-200/80 dark:bg-white/10 text-gray-600 dark:text-gray-300">
                       {c.count}
                     </span>
                   </Link>

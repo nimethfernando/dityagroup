@@ -229,6 +229,34 @@ html.dark .bg-white\/40 {
   background-color: rgba(3, 15, 14, 0.65) !important;
 }
 
+/* Light gradient safety fallbacks in dark mode */
+html.dark [class*="from-[#F8F9FB]"],
+html.dark [class*="from-[#F9FAFB]"],
+html.dark [class*="from-[#FAFAFC]"],
+html.dark [class*="from-[#F8FAFC]"],
+html.dark [class*="from-gray-50"],
+html.dark [class*="from-slate-50"] {
+  --tw-gradient-from: rgba(3, 15, 14, 0.95) !important;
+}
+
+html.dark [class*="to-[#F8F9FB]"],
+html.dark [class*="to-[#F9FAFB]"],
+html.dark [class*="to-[#FAFAFC]"],
+html.dark [class*="to-[#F8FAFC]"],
+html.dark [class*="to-gray-50"],
+html.dark [class*="to-slate-50"] {
+  --tw-gradient-to: rgba(3, 15, 14, 0.95) !important;
+}
+
+html.dark [class*="via-[#F8F9FB]"],
+html.dark [class*="via-[#F9FAFB]"],
+html.dark [class*="via-[#FAFAFC]"],
+html.dark [class*="via-[#F8FAFC]"],
+html.dark [class*="via-gray-50"],
+html.dark [class*="via-slate-50"] {
+  --tw-gradient-via: rgba(3, 15, 14, 0.75) !important;
+}
+
 /* Navy button in dark mode */
 html.dark .btn-ditya-navy {
   background: #061A17 !important;

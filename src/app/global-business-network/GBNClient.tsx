@@ -177,61 +177,61 @@ export default function GBNClient({ content }: GBNClientProps) {
       {/* 2. CORE VISION & STRATEGIC ECOSYSTEM SECTION */}
       {/* ============================================================ */}
       <section className="py-16 sm:py-20 max-w-[1140px] mx-auto px-4 sm:px-6">
-        <div className="bg-white border border-gray-200/80 rounded-3xl p-8 sm:p-12 shadow-sm hover:shadow-md transition-shadow">
+        <div className="bg-white dark:bg-[#061A17] border border-gray-200/80 dark:border-white/10 rounded-3xl p-8 sm:p-12 shadow-sm hover:shadow-md transition-shadow">
           <div className="max-w-3xl mx-auto text-center space-y-4">
-            <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-wider uppercase bg-emerald-50 px-3.5 py-1 rounded-full border border-emerald-100">
-              <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
+            <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] dark:text-emerald-400 tracking-wider uppercase bg-emerald-50 dark:bg-emerald-500/20 px-3.5 py-1 rounded-full border border-emerald-100 dark:border-emerald-500/30">
+              <span className="w-2 h-2 rounded-full bg-[#059669] dark:bg-emerald-400"></span>
               <span>{intro.tagline || 'Connect • Collaborate • Grow'}</span>
             </span>
 
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] dark:text-white tracking-tight">
               {intro.heading || 'A Business Network Built Around Meaningful Relationships'}
             </h2>
 
-            <p className="text-sm sm:text-base text-gray-600 leading-relaxed font-normal pt-1">
+            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed font-normal pt-1">
               {intro.description ||
                 'The Global Business Network is a premier community designed for ambitious entrepreneurs, executives, and business owners. We bridge the gap between local expertise and global opportunities by fostering powerful collaborations, sharing actionable market insights, and providing a trusted ecosystem for sustainable business growth.'}
             </p>
 
             {/* Strategic Pillars Ribbon */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-left">
-              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-100 flex items-start space-x-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-[#059669] flex items-center justify-center shrink-0">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-[#041614] border border-gray-100 dark:border-white/10 flex items-start space-x-3">
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#041614]">High-Trust Network</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">Strictly vetted entrepreneurs & founders</p>
+                  <h4 className="text-sm font-bold text-[#041614] dark:text-white">High-Trust Network</h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-300 mt-0.5">Strictly vetted entrepreneurs & founders</p>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-100 flex items-start space-x-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-[#059669] flex items-center justify-center shrink-0">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-[#041614] border border-gray-100 dark:border-white/10 flex items-start space-x-3">
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <Globe2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#041614]">Cross-Border Reach</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">International market scaling & insights</p>
+                  <h4 className="text-sm font-bold text-[#041614] dark:text-white">Cross-Border Reach</h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-300 mt-0.5">International market scaling & insights</p>
                 </div>
               </div>
 
-              <div className="p-4 rounded-2xl bg-gray-50 border border-gray-100 flex items-start space-x-3">
-                <div className="w-9 h-9 rounded-xl bg-emerald-50 text-[#059669] flex items-center justify-center shrink-0">
+              <div className="p-4 rounded-2xl bg-gray-50 dark:bg-[#041614] border border-gray-100 dark:border-white/10 flex items-start space-x-3">
+                <div className="w-9 h-9 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center shrink-0">
                   <TrendingUp className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-[#041614]">Proven Growth</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">Direct referral exchange & joint ventures</p>
+                  <h4 className="text-sm font-bold text-[#041614] dark:text-white">Proven Growth</h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-300 mt-0.5">Direct referral exchange & joint ventures</p>
                 </div>
               </div>
             </div>
 
             {/* Quote attribution */}
-            <div className="pt-6 border-t border-gray-100 mt-6">
-              <p className="text-xs sm:text-sm text-gray-500 italic">
+            <div className="pt-6 border-t border-gray-100 dark:border-white/10 mt-6">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 italic">
                 “Alone we grow slowly; connected, our reach becomes infinite.”
               </p>
-              <span className="text-xs font-bold text-[#041614] block mt-1">
+              <span className="text-xs font-bold text-[#041614] dark:text-white block mt-1">
                 Global Business Network Advisory Council
               </span>
             </div>
@@ -244,73 +244,73 @@ export default function GBNClient({ content }: GBNClientProps) {
       {/* ============================================================ */}
       <section className="py-12 pb-20 max-w-[1140px] mx-auto px-4 sm:px-6">
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-          <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+          <span className="text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider block">
             Why Global Business Network Stands Apart
           </span>
-          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] tracking-tight">
+          <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] dark:text-white tracking-tight">
             Key Pillars of the Network
           </h3>
-          <p className="text-sm text-gray-500">
+          <p className="text-sm text-gray-500 dark:text-gray-300">
             Engineered to empower visionary leaders with direct access, market intelligence, and executive alliances.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Card 1: Strategic Networking */}
-          <div className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5">
+          <div className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                 <Users2 className="w-7 h-7" />
               </div>
-              <h4 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+              <h4 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                 {features.card1Title || 'Strategic Networking'}
               </h4>
-              <p className="text-sm text-gray-500 leading-relaxed">
+              <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                 {features.card1Desc ||
                   'Connect with high-net-worth individuals, investors, and elite professionals across international markets to build partnerships that matter.'}
               </p>
             </div>
-            <div className="pt-6 border-t border-gray-100 mt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+            <div className="pt-6 border-t border-gray-100 dark:border-white/10 mt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
               <span>High-Value Alliances</span>
               <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
           {/* Card 2: Global Market Insights */}
-          <div className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5">
+          <div className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                 <TrendingUp className="w-7 h-7" />
               </div>
-              <h4 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+              <h4 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                 {features.card2Title || 'Global Market Insights'}
               </h4>
-              <p className="text-sm text-gray-500 leading-relaxed">
+              <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                 {features.card2Desc ||
                   'Gain access to exclusive resources, trends, and strategies to help your business scale across borders seamlessly.'}
               </p>
             </div>
-            <div className="pt-6 border-t border-gray-100 mt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+            <div className="pt-6 border-t border-gray-100 dark:border-white/10 mt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
               <span>Cross-Border Scaling</span>
               <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
           </div>
 
           {/* Card 3: Exclusive Events & Cohorts */}
-          <div className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5">
+          <div className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                 <Crown className="w-7 h-7" />
               </div>
-              <h4 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+              <h4 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                 {features.card3Title || 'Exclusive Events & Cohorts'}
               </h4>
-              <p className="text-sm text-gray-500 leading-relaxed">
+              <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                 {features.card3Desc ||
                   'Participate in private networking events, mastermind sessions, and specialized cohorts (like the Elite Council) designed to accelerate your growth.'}
               </p>
             </div>
-            <div className="pt-6 border-t border-gray-100 mt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+            <div className="pt-6 border-t border-gray-100 dark:border-white/10 mt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
               <span>Masterminds & Roundtables</span>
               <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
             </div>
@@ -321,16 +321,16 @@ export default function GBNClient({ content }: GBNClientProps) {
       {/* ============================================================ */}
       {/* 4. TAILORED MEMBERSHIP TIERS */}
       {/* ============================================================ */}
-      <section id="membership-tiers" className="py-20 bg-white border-y border-gray-200/80">
+      <section id="membership-tiers" className="py-20 bg-white dark:bg-[#030F0E] border-y border-gray-200/80 dark:border-white/10 transition-colors duration-200">
         <div className="max-w-[1140px] mx-auto px-4 sm:px-6">
           <div className="text-center max-w-2xl mx-auto mb-14 space-y-2">
-            <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+            <span className="text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider block">
               Structured For Your Scale
             </span>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] tracking-tight">
+            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#041614] dark:text-white tracking-tight">
               {tiers.heading || 'Tailored Membership Tiers'}
             </h3>
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-gray-500 dark:text-gray-400">
               {tiers.subtitle ||
                 'Select the networking circle aligned with your business scale and strategic ambitions.'}
             </p>
@@ -338,35 +338,35 @@ export default function GBNClient({ content }: GBNClientProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
             {/* Tier 1: GBN Circle */}
-            <div className="bg-[#FAFAFC] border border-gray-200 rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover:shadow-xl transition-all">
+            <div className="bg-[#FAFAFC] dark:bg-[#061A17] border border-gray-200 dark:border-white/10 rounded-3xl p-8 sm:p-10 flex flex-col justify-between hover:shadow-xl transition-all">
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center text-[#059669]">
+                    <div className="w-11 h-11 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 flex items-center justify-center text-[#059669] dark:text-emerald-400">
                       <Briefcase className="w-5 h-5" />
                     </div>
-                    <h4 className="text-2xl font-bold text-[#041614]">
+                    <h4 className="text-2xl font-bold text-[#041614] dark:text-white">
                       {tiers.tier1Title || 'GBN Circle'}
                     </h4>
                   </div>
-                  <span className="text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 bg-emerald-50 text-[#059669] rounded-full border border-emerald-100">
+                  <span className="text-[11px] font-extrabold uppercase tracking-wider px-3 py-1 bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 rounded-full border border-emerald-100 dark:border-emerald-500/30">
                     Growth Circle
                   </span>
                 </div>
 
-                <div className="p-3 bg-white rounded-xl border border-gray-200 mb-5">
-                  <span className="text-xs font-bold text-[#059669] block">
+                <div className="p-3 bg-white dark:bg-[#041614] rounded-xl border border-gray-200 dark:border-white/10 mb-5">
+                  <span className="text-xs font-bold text-[#059669] dark:text-emerald-400 block">
                     {tiers.tier1Criteria || 'For businesses with ₹20 Lakh+ annual turnover'}
                   </span>
                 </div>
 
-                <p className="text-sm text-gray-600 leading-relaxed mb-6">
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed mb-6">
                   {tiers.tier1Desc ||
                     'A structured business networking experience for entrepreneurs, professionals, and rising business leaders.'}
                 </p>
 
-                <div className="space-y-3 pt-4 border-t border-gray-200">
-                  <span className="text-xs font-bold uppercase tracking-wider text-gray-400 block mb-2">
+                <div className="space-y-3 pt-4 border-t border-gray-200 dark:border-white/10">
+                  <span className="text-xs font-bold uppercase tracking-wider text-gray-400 dark:text-emerald-400/80 block mb-2">
                     Key Inclusions:
                   </span>
                   {(tiers.tier1Features || [
@@ -376,8 +376,8 @@ export default function GBNClient({ content }: GBNClientProps) {
                     'Cross-industry collaboration opportunities',
                     'Global business community connections',
                   ]).map((item, idx) => (
-                    <div key={idx} className="flex items-start space-x-2.5 text-xs sm:text-sm text-gray-700">
-                      <CheckCircle2 className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                    <div key={idx} className="flex items-start space-x-2.5 text-xs sm:text-sm text-gray-700 dark:text-gray-200">
+                      <CheckCircle2 className="w-4 h-4 text-[#059669] dark:text-emerald-400 shrink-0 mt-0.5" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -387,7 +387,7 @@ export default function GBNClient({ content }: GBNClientProps) {
               <div className="pt-8">
                 <Link
                   href="/contact-us?service=GBN%20Circle"
-                  className="w-full block text-center py-3.5 bg-white hover:bg-emerald-50 text-[#059669] font-bold rounded-xl border border-emerald-200 transition-all text-xs uppercase tracking-wider cursor-pointer shadow-xs hover:shadow-md"
+                  className="w-full block text-center py-3.5 bg-white dark:bg-white/10 hover:bg-emerald-50 dark:hover:bg-white/20 text-[#059669] dark:text-emerald-400 font-bold rounded-xl border border-emerald-200 dark:border-emerald-500/30 transition-all text-xs uppercase tracking-wider cursor-pointer shadow-xs hover:shadow-md"
                 >
                   Apply for GBN Circle
                 </Link>
@@ -460,40 +460,40 @@ export default function GBNClient({ content }: GBNClientProps) {
       {/* 5. GLOBAL IMPACT STATS DOCK */}
       {/* ============================================================ */}
       <section className="py-16 max-w-[1140px] mx-auto px-4 sm:px-6">
-        <div className="bg-white rounded-3xl border border-gray-200/80 p-8 sm:p-12 shadow-[0_10px_35px_rgba(1,22,51,0.06)]">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-100">
+        <div className="bg-white dark:bg-[#061A17] rounded-3xl border border-gray-200/80 dark:border-white/10 p-8 sm:p-12 shadow-[0_10px_35px_rgba(1,22,51,0.06)]">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-100 dark:divide-white/10">
             <div className="pt-4 sm:pt-0 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                 <Users2 className="w-6 h-6" />
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+              <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                 {stats.stat1Number || '500+'}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                 {stats.stat1Label || 'Vetted Business Leaders'}
               </span>
             </div>
 
             <div className="pt-4 sm:pt-0 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                 <Globe2 className="w-6 h-6" />
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+              <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                 {stats.stat2Number || '12+'}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                 {stats.stat2Label || 'Global Chapters & Hubs'}
               </span>
             </div>
 
             <div className="pt-4 sm:pt-0 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                 <TrendingUp className="w-6 h-6" />
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+              <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                 {stats.stat3Number || '₹150Cr+'}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                 {stats.stat3Label || 'Closed Business Collaborations'}
               </span>
             </div>

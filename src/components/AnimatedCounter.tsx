@@ -95,7 +95,7 @@ export function AnimatedRadialProgress({
   return (
     <div
       ref={ref}
-      className="relative inline-flex items-center justify-center shrink-0 shadow-sm rounded-full bg-white"
+      className="relative inline-flex items-center justify-center shrink-0 shadow-sm rounded-full bg-white dark:bg-[#061A17]"
       style={{ width: size, height: size }}
     >
       <svg width={size} height={size} className="transform -rotate-90">
@@ -123,7 +123,7 @@ export function AnimatedRadialProgress({
         />
       </svg>
       {/* Percentage Center Text */}
-      <span className="absolute text-xl font-extrabold text-[#041614] tracking-tight">
+      <span className="absolute text-xl font-extrabold text-[#041614] dark:text-white tracking-tight">
         {currentPercent}%
       </span>
     </div>

@@ -358,27 +358,27 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
       {/* ============================================================ */}
       {/* 4. OUR BUSINESS 6-HOUSE BENTO GRID */}
       {/* ============================================================ */}
-      <section id="services-section" className="py-24 bg-[#F8F9FB] relative overflow-hidden">
+      <section id="services-section" className="py-24 bg-[#F8F9FB] dark:bg-[#030F0E] relative overflow-hidden transition-colors duration-200">
         {/* Subtle Sacred Geometry / Modern Luxury Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
             src={content.services?.backgroundImage || '/images/services-bg.jpg'}
             alt="Services background pattern"
             fill
-            className="object-cover object-center opacity-30 mix-blend-multiply"
+            className="object-cover object-center opacity-30 mix-blend-multiply dark:opacity-10 dark:mix-blend-screen"
             unoptimized={Boolean(content.services?.backgroundImage?.startsWith('data:') || content.services?.backgroundImage?.startsWith('http'))}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB] via-transparent to-[#F8F9FB]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB] via-transparent to-[#F8F9FB] dark:from-[#030F0E]/95 dark:via-[#030F0E]/70 dark:to-[#030F0E]/95" />
         </div>
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
             <div>
-              <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-wider uppercase bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
-                <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
+              <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] dark:text-emerald-400 tracking-wider uppercase bg-emerald-50 dark:bg-emerald-500/20 px-3 py-1 rounded-full border border-emerald-100 dark:border-emerald-500/30">
+                <span className="w-2 h-2 rounded-full bg-[#059669] dark:bg-emerald-400"></span>
                 <span>Our Business</span>
               </span>
-              <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#041614] mt-3 tracking-tight">
+              <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#041614] dark:text-white mt-3 tracking-tight">
                 We Provide Smart & Integrated Business Solutions
               </h2>
             </div>
@@ -395,25 +395,25 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {/* Card 1: Global Business Network (GBN) */}
             <Link
               href="/global-business-network"
-              className="bg-white rounded-3xl p-8 border-2 border-emerald-500/30 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 relative overflow-hidden"
+              className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border-2 border-emerald-500/30 dark:border-emerald-500/50 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5 relative overflow-hidden"
             >
               <div className="absolute top-5 right-5">
-                <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-700 border border-amber-500/30">
+                <span className="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
                   Main Business
                 </span>
               </div>
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                   <Globe2 className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                   Global Business Network (GBN)
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                   The premier international community for ambitious entrepreneurs, executives, and business owners to connect, build high-trust partnerships, and scale globally.
                 </p>
               </div>
-              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
                 <span>Explore Network</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -422,21 +422,21 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {/* Card 2: Ditya Astro Verse */}
             <Link
               href="/ditya-astroverse"
-              className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+              className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                   <Sparkles className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                   Ditya Astro Verse
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                   Our numerology and spiritual guidance services help you align your decisions,
                   timing, and energy for better life and business outcomes.
                 </p>
               </div>
-              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
                 <span>Explore House</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -445,21 +445,21 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {/* Card 3: Ditya Math House */}
             <Link
               href="/ditya-math-house"
-              className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+              className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                   <Binary className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                   Ditya Math House
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                   We provide structured math support and learning solutions to improve clarity,
                   performance, and confidence for students.
                 </p>
               </div>
-              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
                 <span>Explore House</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -468,21 +468,21 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {/* Card 4: Ditya Trading House */}
             <Link
               href="/ditya-trading-house"
-              className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+              className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                   <LineChart className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                   Ditya Trading House
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                   We help individuals understand financial markets with practical learning, market
                   awareness, and guided support.
                 </p>
               </div>
-              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
                 <span>Explore House</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -491,21 +491,21 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {/* Card 5: Ditya Business House */}
             <Link
               href="/ditya-business-house"
-              className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+              className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                   <Briefcase className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                   Ditya Business House
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                   We offer easy business consultancy, growth planning, and strategic support where we
                   provide expert guidance and complete assistance for better performance.
                 </p>
               </div>
-              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
                 <span>Explore House</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -514,21 +514,21 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {/* Card 6: Ditya Tech House */}
             <Link
               href="/ditya-tech-house"
-              className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
+              className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1.5"
             >
               <div>
-                <div className="w-14 h-14 rounded-2xl bg-emerald-50 text-[#059669] group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
+                <div className="w-14 h-14 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 group-hover:bg-gradient-to-br group-hover:from-[#059669] group-hover:to-[#047857] group-hover:text-white transition-all flex items-center justify-center mb-6 shadow-xs">
                   <Laptop className="w-7 h-7" />
                 </div>
-                <h3 className="text-xl font-bold text-[#041614] mb-3 group-hover:text-[#059669] transition-colors">
+                <h3 className="text-xl font-bold text-[#041614] dark:text-white mb-3 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                   Ditya Tech House
                 </h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
+                <p className="text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                   We deliver complex software development, digital solutions, AI and technical
                   support to help businesses grow in the digital world.
                 </p>
               </div>
-              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] uppercase tracking-wider">
+              <div className="pt-6 flex items-center text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider">
                 <span>Explore House</span>
                 <ArrowRight className="w-4 h-4 ml-1.5 group-hover:translate-x-1.5 transition-transform" />
               </div>
@@ -778,78 +778,78 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
       {/* ============================================================ */}
       {/* 6. HOW IT WORKS SECTION */}
       {/* ============================================================ */}
-      <section className="py-24 bg-[#F8F9FB] border-t border-gray-100 relative overflow-hidden">
+      <section className="py-24 bg-[#F8F9FB] dark:bg-[#030F0E] border-t border-gray-100 dark:border-white/10 relative overflow-hidden transition-colors duration-200">
         {/* Roadmap Subtle Network Background */}
         <div className="absolute inset-0 z-0 pointer-events-none">
           <Image
             src="/images/roadmap-bg.jpg"
             alt="Roadmap background pattern"
             fill
-            className="object-cover object-center opacity-35 mix-blend-multiply"
+            className="object-cover object-center opacity-35 mix-blend-multiply dark:opacity-10 dark:mix-blend-screen"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB]/90 via-transparent to-[#F8F9FB]/90" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#F8F9FB]/90 via-transparent to-[#F8F9FB]/90 dark:from-[#030F0E]/95 dark:via-[#030F0E]/75 dark:to-[#030F0E]/95" />
         </div>
 
         <div className="max-w-[1140px] mx-auto px-4 text-center relative z-10">
-          <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-wider uppercase bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
+          <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] dark:text-emerald-400 tracking-wider uppercase bg-emerald-50 dark:bg-emerald-500/20 px-3.5 py-1.5 rounded-full border border-emerald-100 dark:border-emerald-500/30 mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#059669] dark:bg-emerald-400"></span>
             <span>{content.howItWorks.subtitle || 'How It Works'}</span>
           </span>
-          <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#041614] mt-2 mb-4 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#041614] dark:text-white mt-2 mb-4 tracking-tight">
             {content.howItWorks.heading || 'How Ditya Group Personalized Approach Works'}
           </h2>
-          <p className="text-sm text-gray-600 max-w-2xl mx-auto mb-16 leading-relaxed">
+          <p className="text-sm text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-16 leading-relaxed">
             {content.howItWorks.description ||
               'Ditya Group provides integrated solutions across finance, numerology, and all other essential services. Our personalized approach helps you make better decisions, simplify tasks, and grow faster with clarity.'}
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left relative">
             {/* Step 01 */}
-            <div className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1">
+            <div className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1">
               <div className="flex items-center justify-between mb-4">
-                <span className="w-10 h-10 rounded-xl bg-emerald-50 text-[#059669] font-black text-sm flex items-center justify-center font-mono">
+                <span className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 font-black text-sm flex items-center justify-center font-mono">
                   01
                 </span>
                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Step One</span>
               </div>
-              <h4 className="text-lg font-bold text-[#041614] mb-2 group-hover:text-[#059669] transition-colors">
+              <h4 className="text-lg font-bold text-[#041614] dark:text-white mb-2 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                 {content.howItWorks.step1Title || 'Book a Session'}
               </h4>
-              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                 {content.howItWorks.step1Desc ||
                   'Connect with our expert team for one-on-one initial guidance and customized planning.'}
               </p>
             </div>
 
             {/* Step 02 */}
-            <div className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1">
+            <div className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1">
               <div className="flex items-center justify-between mb-4">
-                <span className="w-10 h-10 rounded-xl bg-emerald-50 text-[#059669] font-black text-sm flex items-center justify-center font-mono">
+                <span className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 font-black text-sm flex items-center justify-center font-mono">
                   02
                 </span>
                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Step Two</span>
               </div>
-              <h4 className="text-lg font-bold text-[#041614] mb-2 group-hover:text-[#059669] transition-colors">
+              <h4 className="text-lg font-bold text-[#041614] dark:text-white mb-2 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                 {content.howItWorks.step2Title || 'Choose Your Service'}
               </h4>
-              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                 {content.howItWorks.step2Desc ||
                   'Select from our 6 specialized Houses to fit your precise personal or business needs.'}
               </p>
             </div>
 
             {/* Step 03 */}
-            <div className="bg-white rounded-3xl p-8 border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1">
+            <div className="bg-white dark:bg-[#061A17] rounded-3xl p-8 border border-gray-200/80 dark:border-white/10 shadow-sm hover:shadow-xl transition-all duration-300 relative group hover:-translate-y-1">
               <div className="flex items-center justify-between mb-4">
-                <span className="w-10 h-10 rounded-xl bg-emerald-50 text-[#059669] font-black text-sm flex items-center justify-center font-mono">
+                <span className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 font-black text-sm flex items-center justify-center font-mono">
                   03
                 </span>
                 <span className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Step Three</span>
               </div>
-              <h4 className="text-lg font-bold text-[#041614] mb-2 group-hover:text-[#059669] transition-colors">
+              <h4 className="text-lg font-bold text-[#041614] dark:text-white mb-2 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors">
                 {content.howItWorks.step3Title || 'Start Your Journey'}
               </h4>
-              <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
+              <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 leading-relaxed">
                 {content.howItWorks.step3Desc ||
                   'Launch with structured support, active mentorship, and experience tangible results.'}
               </p>
@@ -862,7 +862,7 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
       {/* 7. CONSULTATION CALLOUT BANNER */}
       {/* ============================================================ */}
       {content.consultationBanner?.enabled !== false && (
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-white dark:bg-[#030F0E] transition-colors duration-200">
           <div className="max-w-[1140px] mx-auto px-4">
             <div className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-white/10">
               {/* Background Sacred Geometry Graphic */}
@@ -881,8 +881,8 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
               <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/15 rounded-full blur-3xl pointer-events-none z-0" />
 
               <div className="max-w-2xl space-y-3 relative z-10">
-                <span className="text-xs font-bold tracking-widest uppercase text-[#059669] inline-flex items-center space-x-2">
-                  <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
+                <span className="text-xs font-bold tracking-widest uppercase text-[#059669] dark:text-[#10B981] inline-flex items-center space-x-2">
+                  <span className="w-2 h-2 rounded-full bg-[#059669] dark:bg-[#10B981]"></span>
                   <span>{content.consultationBanner.badge || 'Need Clarification?'}</span>
                 </span>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white leading-snug tracking-tight">
@@ -941,14 +941,14 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
         const displayBlogs = latestBlogs && latestBlogs.length > 0 ? latestBlogs : fallbackBlogs;
 
         return (
-          <section className="py-24 bg-[#F8F9FB] border-t border-gray-100">
+          <section className="py-24 bg-[#F8F9FB] dark:bg-[#030F0E] border-t border-gray-100 dark:border-white/10 transition-colors duration-200">
         <div className="max-w-[1140px] mx-auto px-4">
           <div className="text-center mb-16">
-            <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-wider uppercase bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-100 mb-3">
-              <span className="w-2 h-2 rounded-full bg-[#059669]"></span>
+            <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] dark:text-emerald-400 tracking-wider uppercase bg-emerald-50 dark:bg-emerald-500/20 px-3.5 py-1.5 rounded-full border border-emerald-100 dark:border-emerald-500/30 mb-3">
+              <span className="w-2 h-2 rounded-full bg-[#059669] dark:bg-emerald-400"></span>
               <span>Our Blog</span>
             </span>
-            <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#041614] mt-2 tracking-tight">
+            <h2 className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold text-[#041614] dark:text-white mt-2 tracking-tight">
               Latest Blog & Articles
             </h2>
           </div>
@@ -957,10 +957,10 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
             {displayBlogs.map((b) => (
               <article
                 key={b.id || b.slug}
-                className="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                className="bg-white dark:bg-[#061A17] rounded-3xl border border-gray-200/80 dark:border-white/10 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
-                  <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                  <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5">
                     <Image
                       src={b.image || '/images/hero-banner-clean.jpg'}
                       alt={b.title}
@@ -969,26 +969,26 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                       unoptimized={Boolean(b.image?.startsWith('data:') || b.image?.startsWith('http'))}
                     />
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#059669] bg-white/95 backdrop-blur-md uppercase tracking-wider shadow-sm">
+                      <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#059669] dark:text-emerald-400 bg-white/95 dark:bg-[#030F0E]/95 backdrop-blur-md uppercase tracking-wider shadow-sm">
                         {b.category || 'Ditya Astroverse'}
                       </span>
                     </div>
                   </div>
                   <div className="p-7 space-y-3">
-                    <h3 className="text-lg font-bold text-[#041614] group-hover:text-[#059669] transition-colors line-clamp-2">
+                    <h3 className="text-lg font-bold text-[#041614] dark:text-white group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                       <Link href={`/blog/${b.slug}`}>
                         {b.title}
                       </Link>
                     </h3>
-                    <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                    <p className="text-xs text-gray-500 dark:text-gray-300 leading-relaxed line-clamp-3">
                       {b.excerpt}
                     </p>
                   </div>
                 </div>
-                <div className="px-7 pb-6 pt-2 border-t border-gray-100">
+                <div className="px-7 pb-6 pt-2 border-t border-gray-100 dark:border-white/10">
                   <Link
                     href={`/blog/${b.slug}`}
-                    className="text-xs font-bold text-[#059669] inline-flex items-center space-x-1.5 hover:underline uppercase tracking-wider"
+                    className="text-xs font-bold text-[#059669] dark:text-emerald-400 inline-flex items-center space-x-1.5 hover:underline uppercase tracking-wider"
                   >
                     <span>Read More</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

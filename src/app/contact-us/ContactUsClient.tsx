@@ -156,13 +156,13 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
           {/* Left Column: Contact Cards & WhatsApp CTA */}
           <div className="lg:col-span-5 space-y-6">
             <div className="space-y-2">
-              <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+              <span className="text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider block">
                 {content.info.subtitle || 'Reach Out Directly'}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#041614] tracking-tight">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#041614] dark:text-white tracking-tight">
                 {content.info.heading || 'Let’s Start a Conversation Today'}
               </h2>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
                 {content.info.description ||
                   'Whether you are looking for stock market mentorship, business growth advisory, numerology solutions, or software engineering, our executive team is ready to assist.'}
               </p>
@@ -204,7 +204,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
             {/* Contact Information Cards */}
             <div className="space-y-3.5">
               {/* Phone Card with Primary (India) and Secondary (Georgia) */}
-              <div className="flex items-start space-x-4 p-5 bg-white rounded-2xl border border-gray-200/80 shadow-xs hover:shadow-md transition-shadow">
+              <div className="flex items-start space-x-4 p-5 bg-white dark:bg-[#061A17] rounded-2xl border border-gray-200/80 dark:border-white/10 shadow-xs hover:shadow-md transition-shadow">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] text-white flex items-center justify-center shrink-0 shadow-sm">
                   <Phone className="w-5 h-5" />
                 </div>
@@ -212,85 +212,85 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                   {/* Primary Phone (India) */}
                   <div>
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                      <h4 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         Primary Call (India HQ)
                       </h4>
-                      <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-md border border-emerald-200">
+                      <span className="text-[10px] font-bold bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-200 dark:border-emerald-500/30">
                         🇮🇳 India
                       </span>
                     </div>
                     <a
                       href={`tel:${(content.info.phone || '+919351090301').replace(/[^0-9+]/g, '')}`}
-                      className="text-base font-bold text-[#041614] hover:text-[#059669] transition-colors block mt-0.5"
+                      className="text-base font-bold text-[#041614] dark:text-white hover:text-[#059669] dark:hover:text-emerald-400 transition-colors block mt-0.5"
                     >
                       {content.info.phone || '+91-93510 90301'}
                     </a>
                   </div>
 
                   {/* Secondary Phone (Georgia) */}
-                  <div className="pt-2.5 border-t border-gray-100">
+                  <div className="pt-2.5 border-t border-gray-100 dark:border-white/10">
                     <div className="flex items-center justify-between">
-                      <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">
+                      <h4 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                         {content.info.secondaryPhoneLabel || 'Secondary Phone (Georgia)'}
                       </h4>
-                      <span className="text-[10px] font-bold bg-blue-50 text-blue-700 px-2 py-0.5 rounded-md border border-blue-200">
+                      <span className="text-[10px] font-bold bg-blue-50 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 px-2 py-0.5 rounded-md border border-blue-200 dark:border-blue-500/30">
                         🇬🇪 Georgia
                       </span>
                     </div>
                     <a
                       href={`tel:${(content.info.secondaryPhone || '+995555433091').replace(/[^0-9+]/g, '')}`}
-                      className="text-base font-bold text-[#041614] hover:text-[#059669] transition-colors block mt-0.5"
+                      className="text-base font-bold text-[#041614] dark:text-white hover:text-[#059669] dark:hover:text-emerald-400 transition-colors block mt-0.5"
                     >
                       {content.info.secondaryPhone || '+995 555433091'}
                     </a>
                   </div>
 
-                  <p className="text-xs text-gray-500 pt-1 flex items-center space-x-1">
-                    <Clock className="w-3 h-3 text-[#059669] shrink-0" />
+                  <p className="text-xs text-gray-500 dark:text-gray-400 pt-1 flex items-center space-x-1">
+                    <Clock className="w-3 h-3 text-[#059669] dark:text-emerald-400 shrink-0" />
                     <span>{content.info.phoneHours || 'Mon–Sat 9:00 AM – 7:00 PM IST'}</span>
                   </p>
                 </div>
               </div>
 
               {/* Email Card */}
-              <div className="flex items-start space-x-4 p-5 bg-white rounded-2xl border border-gray-200/80 shadow-xs hover:shadow-md transition-shadow">
+              <div className="flex items-start space-x-4 p-5 bg-white dark:bg-[#061A17] rounded-2xl border border-gray-200/80 dark:border-white/10 shadow-xs hover:shadow-md transition-shadow">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] text-white flex items-center justify-center shrink-0 shadow-sm">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
-                  <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Email Support</h4>
+                  <h4 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Email Support</h4>
                   <a
                     href={`mailto:${content.info.email || 'groupditya@gmail.com'}`}
-                    className="text-base font-bold text-[#041614] hover:text-[#059669] transition-colors block mt-0.5"
+                    className="text-base font-bold text-[#041614] dark:text-white hover:text-[#059669] dark:hover:text-emerald-400 transition-colors block mt-0.5"
                   >
                     {content.info.email || 'groupditya@gmail.com'}
                   </a>
-                  <p className="text-xs text-gray-500 mt-1 flex items-center space-x-1">
-                    <CheckCircle2 className="w-3 h-3 text-[#059669]" />
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-1 flex items-center space-x-1">
+                    <CheckCircle2 className="w-3 h-3 text-[#059669] dark:text-emerald-400" />
                     <span>{content.info.emailDesc || 'Prompt response within 24 hours'}</span>
                   </p>
                 </div>
               </div>
 
               {/* Address Card */}
-              <div className="flex items-start space-x-4 p-5 bg-white rounded-2xl border border-gray-200/80 shadow-xs hover:shadow-md transition-shadow">
+              <div className="flex items-start space-x-4 p-5 bg-white dark:bg-[#061A17] rounded-2xl border border-gray-200/80 dark:border-white/10 shadow-xs hover:shadow-md transition-shadow">
                 <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#059669] to-[#10B981] text-white flex items-center justify-center shrink-0 shadow-sm">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Corporate Headquarters</h4>
+                    <h4 className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">Corporate Headquarters</h4>
                     <a
                       href="https://maps.google.com/?q=3rd+floor,+261,+Sewa+Sadan+Marg,+Frontier+Colony,+Adarsh+Nagar,+Jaipur,+Rajasthan+302004"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[11px] font-semibold text-[#059669] hover:underline inline-flex items-center"
+                      className="text-[11px] font-semibold text-[#059669] dark:text-emerald-400 hover:underline inline-flex items-center"
                     >
                       <span>Directions</span>
                       <ExternalLink className="w-2.5 h-2.5 ml-1" />
                     </a>
                   </div>
-                  <p className="text-xs text-gray-700 font-medium leading-relaxed mt-1">
+                  <p className="text-xs text-gray-700 dark:text-gray-300 font-medium leading-relaxed mt-1">
                     {content.info.address ||
                       '3rd floor, 261, Sewa Sadan Marg, Frontier Colony, Adarsh Nagar, Jaipur, Rajasthan 302004'}
                   </p>
@@ -299,33 +299,33 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
             </div>
 
             {/* Confidentiality & Response Guarantee Pill */}
-            <div className="p-4 rounded-xl bg-emerald-50/70 border border-emerald-100 text-xs text-emerald-900 flex items-center space-x-3">
-              <ShieldCheck className="w-5 h-5 text-[#059669] shrink-0" />
+            <div className="p-4 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/40 border border-emerald-100 dark:border-emerald-500/20 text-xs text-emerald-900 dark:text-emerald-300 flex items-center space-x-3">
+              <ShieldCheck className="w-5 h-5 text-[#059669] dark:text-emerald-400 shrink-0" />
               <p className="leading-snug">
-                <strong className="font-semibold text-emerald-950">Client Privacy Guaranteed:</strong> All submissions are confidential and handled directly by executive partners.
+                <strong className="font-semibold text-emerald-950 dark:text-emerald-200">Client Privacy Guaranteed:</strong> All submissions are confidential and handled directly by executive partners.
               </p>
             </div>
           </div>
 
           {/* Right Column: Interactive Consultation & Inquiry Form */}
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-gray-200/80 shadow-lg relative">
-            <div className="mb-6 border-b border-gray-100 pb-5">
-              <span className="text-[11px] font-bold text-[#059669] uppercase tracking-wider block mb-1">
+          <div className="lg:col-span-7 bg-white dark:bg-[#061A17] p-8 sm:p-10 rounded-3xl border border-gray-200/80 dark:border-white/10 shadow-lg relative">
+            <div className="mb-6 border-b border-gray-100 dark:border-white/10 pb-5">
+              <span className="text-[11px] font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider block mb-1">
                 Direct Submission
               </span>
-              <h3 className="text-2xl font-extrabold text-[#041614] tracking-tight">Send Us a Message</h3>
-              <p className="text-xs text-gray-500 mt-1">
+              <h3 className="text-2xl font-extrabold text-[#041614] dark:text-white tracking-tight">Send Us a Message</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 Fill out the form below and an assigned specialist from the relevant House will connect with you.
               </p>
             </div>
 
             {success ? (
-              <div className="py-12 px-6 text-center space-y-4 bg-emerald-50/50 rounded-2xl border border-emerald-200">
+              <div className="py-12 px-6 text-center space-y-4 bg-emerald-50/50 dark:bg-emerald-950/30 rounded-2xl border border-emerald-200 dark:border-emerald-500/30">
                 <div className="w-16 h-16 rounded-full bg-[#059669] text-white mx-auto flex items-center justify-center shadow-md">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
-                <h4 className="text-2xl font-bold text-[#041614]">Message Dispatched!</h4>
-                <p className="text-sm text-gray-600 max-w-md mx-auto leading-relaxed">
+                <h4 className="text-2xl font-bold text-[#041614] dark:text-white">Message Dispatched!</h4>
+                <p className="text-sm text-gray-600 dark:text-gray-300 max-w-md mx-auto leading-relaxed">
                   Thank you! Your message has been safely received. Our executive desk will reach
                   out to your contact number or email shortly.
                 </p>
@@ -339,7 +339,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 {errorMsg && (
-                  <div className="p-3.5 bg-red-50 border border-red-200 text-red-700 rounded-xl flex items-center space-x-2">
+                  <div className="p-3.5 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-500/30 text-red-700 dark:text-red-300 rounded-xl flex items-center space-x-2">
                     <AlertCircle className="w-4 h-4 shrink-0" />
                     <span>{errorMsg}</span>
                   </div>
@@ -347,7 +347,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] dark:text-gray-200 font-bold uppercase tracking-wider mb-1.5">
                       Full Name *
                     </label>
                     <input
@@ -356,11 +356,11 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       placeholder="e.g. Ramesh Sharma"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#F9F9FB] border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#F9F9FB] dark:bg-[#030F0E] border border-gray-200 dark:border-white/10 rounded-xl text-sm text-[#041614] dark:text-white focus:outline-none focus:border-[#059669] focus:bg-white dark:focus:bg-[#041614] transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] dark:text-gray-200 font-bold uppercase tracking-wider mb-1.5">
                       Phone Number *
                     </label>
                     <input
@@ -369,14 +369,14 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       placeholder="e.g. +91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#F9F9FB] border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#F9F9FB] dark:bg-[#030F0E] border border-gray-200 dark:border-white/10 rounded-xl text-sm text-[#041614] dark:text-white focus:outline-none focus:border-[#059669] focus:bg-white dark:focus:bg-[#041614] transition-all"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] dark:text-gray-200 font-bold uppercase tracking-wider mb-1.5">
                       Email Address *
                     </label>
                     <input
@@ -385,17 +385,17 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                       placeholder="e.g. ramesh@example.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#F9F9FB] border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition-all"
+                      className="w-full px-4 py-3 bg-[#F9F9FB] dark:bg-[#030F0E] border border-gray-200 dark:border-white/10 rounded-xl text-sm text-[#041614] dark:text-white focus:outline-none focus:border-[#059669] focus:bg-white dark:focus:bg-[#041614] transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
+                    <label className="block text-[#041614] dark:text-gray-200 font-bold uppercase tracking-wider mb-1.5">
                       Service / House of Interest
                     </label>
                     <select
                       value={formData.service}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#F9F9FB] border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition-all font-medium text-gray-800"
+                      className="w-full px-4 py-3 bg-[#F9F9FB] dark:bg-[#030F0E] border border-gray-200 dark:border-white/10 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white dark:focus:bg-[#041614] transition-all font-medium text-gray-800 dark:text-white"
                     >
                       <option value="General Inquiry">General Inquiry</option>
                       <option value="GBN Circle">GBN Circle (Global Business Network)</option>
@@ -411,7 +411,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                 </div>
 
                 <div>
-                  <label className="block text-[#041614] font-bold uppercase tracking-wider mb-1.5">
+                  <label className="block text-[#041614] dark:text-gray-200 font-bold uppercase tracking-wider mb-1.5">
                     How Can We Assist You? *
                   </label>
                   <textarea
@@ -420,7 +420,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
                     placeholder="Describe your current requirements, market challenges, or goals..."
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    className="w-full px-4 py-3 bg-[#F9F9FB] border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#059669] focus:bg-white transition-all"
+                    className="w-full px-4 py-3 bg-[#F9F9FB] dark:bg-[#030F0E] border border-gray-200 dark:border-white/10 rounded-xl text-sm text-[#041614] dark:text-white focus:outline-none focus:border-[#059669] focus:bg-white dark:focus:bg-[#041614] transition-all"
                   />
                 </div>
 
@@ -449,16 +449,16 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
 
       {/* Interactive Location Map Section */}
       <section className="max-w-[1140px] mx-auto px-4 pb-16">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-md">
+        <div className="bg-white dark:bg-[#061A17] rounded-3xl p-6 sm:p-8 border border-gray-200/80 dark:border-white/10 shadow-md">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
             <div>
-              <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block">
+              <span className="text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider block">
                 Physical Presence
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-[#041614]">
+              <h3 className="text-xl sm:text-2xl font-bold text-[#041614] dark:text-white">
                 Visit Our Headquarters in Jaipur
               </h3>
-              <p className="text-xs text-gray-500 mt-1">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                 3rd floor, 261, Sewa Sadan Marg, Frontier Colony, Adarsh Nagar, Jaipur, Rajasthan 302004
               </p>
             </div>
@@ -466,7 +466,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
               href="https://maps.google.com/?q=3rd+floor,+261,+Sewa+Sadan+Marg,+Frontier+Colony,+Adarsh+Nagar,+Jaipur,+Rajasthan+302004"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-gray-100 hover:bg-[#059669] text-gray-700 hover:text-white transition-colors text-xs font-semibold shrink-0"
+              className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-gray-100 dark:bg-white/10 hover:bg-[#059669] dark:hover:bg-[#059669] text-gray-700 dark:text-gray-200 hover:text-white dark:hover:text-white transition-colors text-xs font-semibold shrink-0"
             >
               <span>Open in Google Maps</span>
               <ExternalLink className="w-3 h-3" />
@@ -474,7 +474,7 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
           </div>
 
           {/* Embedded Google Map */}
-          <div className="w-full h-80 sm:h-96 rounded-2xl overflow-hidden border border-gray-200 shadow-inner relative">
+          <div className="w-full h-80 sm:h-96 rounded-2xl overflow-hidden border border-gray-200 dark:border-white/10 shadow-inner relative">
             <iframe
               title="Ditya Group Jaipur Corporate Office"
               src="https://maps.google.com/maps?q=3rd%20floor%2C%20261%2C%20Sewa%20Sadan%20Marg%2C%20Frontier%20Colony%2C%20Adarsh%20Nagar%2C%20Jaipur%2C%20Rajasthan%20302004&t=&z=15&ie=UTF8&iwloc=&output=embed"
@@ -492,13 +492,13 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
       {/* Frequently Asked Questions Section */}
       <section className="max-w-[1140px] mx-auto px-4">
         <div className="text-center max-w-xl mx-auto mb-10">
-          <span className="text-xs font-bold text-[#059669] uppercase tracking-wider block mb-1">
+          <span className="text-xs font-bold text-[#059669] dark:text-emerald-400 uppercase tracking-wider block mb-1">
             Got Questions?
           </span>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-[#041614] tracking-tight">
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-[#041614] dark:text-white tracking-tight">
             Frequently Asked Questions
           </h3>
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
             Key details about booking consultations, confidentiality, and meeting our team.
           </p>
         </div>
@@ -509,25 +509,25 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
             return (
               <div
                 key={idx}
-                className="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden transition-all"
+                className="bg-white dark:bg-[#061A17] rounded-2xl border border-gray-200/80 dark:border-white/10 shadow-xs overflow-hidden transition-all"
               >
                 <button
                   type="button"
                   onClick={() => toggleFaq(idx)}
-                  className="w-full p-5 text-left flex items-center justify-between space-x-4 cursor-pointer hover:bg-gray-50/50 transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between space-x-4 cursor-pointer hover:bg-gray-50/50 dark:hover:bg-white/5 transition-colors"
                 >
-                  <span className="text-sm font-bold text-[#041614] flex items-center space-x-2.5">
-                    <HelpCircle className="w-4 h-4 text-[#059669] shrink-0" />
+                  <span className="text-sm font-bold text-[#041614] dark:text-white flex items-center space-x-2.5">
+                    <HelpCircle className="w-4 h-4 text-[#059669] dark:text-emerald-400 shrink-0" />
                     <span>{faq.q}</span>
                   </span>
                   <ChevronDown
                     className={`w-4 h-4 text-gray-400 transition-transform duration-200 shrink-0 ${
-                      isOpen ? 'rotate-180 text-[#059669]' : ''
+                      isOpen ? 'rotate-180 text-[#059669] dark:text-emerald-400' : ''
                     }`}
                   />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs text-gray-600 leading-relaxed border-t border-gray-100 bg-gray-50/30">
+                  <div className="px-5 pb-5 pt-1 text-xs text-gray-600 dark:text-gray-300 leading-relaxed border-t border-gray-100 dark:border-white/10 bg-gray-50/30 dark:bg-black/20">
                     {faq.a}
                   </div>
                 )}

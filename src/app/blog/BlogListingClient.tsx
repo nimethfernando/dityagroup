@@ -107,7 +107,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
           {/* Main Column: Articles List */}
           <div className="lg:col-span-8 space-y-8">
             {/* Category Filter Pills & Search */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-4 border-b border-gray-200">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 pb-4 border-b border-gray-200 dark:border-white/10">
               {/* Category Pills */}
               <div className="flex flex-wrap items-center gap-2">
                 <button
@@ -115,7 +115,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                   className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                     selectedCategory === 'ALL'
                       ? 'bg-[#059669] text-white shadow-md'
-                      : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                      : 'bg-white dark:bg-[#061A17] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-white/10'
                   }`}
                 >
                   All ({initialPosts.length})
@@ -127,7 +127,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                     className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all cursor-pointer ${
                       selectedCategory === cat
                         ? 'bg-[#059669] text-white shadow-md'
-                        : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                        : 'bg-white dark:bg-[#061A17] text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/10 border border-gray-200 dark:border-white/10'
                     }`}
                   >
                     {cat} ({categoriesWithCounts[cat]})
@@ -143,17 +143,17 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                   placeholder="Search articles..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-8 pr-3 py-1.5 text-xs bg-white border border-gray-200 rounded-full focus:outline-none focus:border-[#059669]"
+                  className="w-full pl-8 pr-3 py-1.5 text-xs bg-white dark:bg-[#061A17] text-[#041614] dark:text-white border border-gray-200 dark:border-white/10 rounded-full focus:outline-none focus:border-[#059669]"
                 />
               </div>
             </div>
 
             {/* Articles Grid */}
             {filteredPosts.length === 0 ? (
-              <div className="bg-white rounded-2xl p-12 text-center border border-gray-200 shadow-sm space-y-3">
-                <BookOpen className="w-10 h-10 text-gray-300 mx-auto" />
-                <h3 className="text-base font-bold text-gray-700">No Content Available</h3>
-                <p className="text-xs text-gray-500 max-w-sm mx-auto">
+              <div className="bg-white dark:bg-[#061A17] rounded-2xl p-12 text-center border border-gray-200 dark:border-white/10 shadow-sm space-y-3">
+                <BookOpen className="w-10 h-10 text-gray-300 dark:text-gray-600 mx-auto" />
+                <h3 className="text-base font-bold text-gray-700 dark:text-gray-200">No Content Available</h3>
+                <p className="text-xs text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
                   No articles matched your filter criteria. Try resetting the category or search query.
                 </p>
                 <button
@@ -171,11 +171,11 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                 {filteredPosts.map((post) => (
                   <article
                     key={post.id}
-                    className="bg-white rounded-2xl border border-gray-200/80 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
+                    className="bg-white dark:bg-[#061A17] rounded-2xl border border-gray-200/80 dark:border-white/10 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
                   >
                     <div>
                       {/* Image Thumbnail */}
-                      <div className="relative h-48 w-full overflow-hidden bg-gray-100">
+                      <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5">
                         <Image
                           src={post.image || '/images/hero-banner.jpeg'}
                           alt={post.title}
@@ -194,31 +194,31 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                       <div className="p-6 space-y-3">
                         <div className="flex items-center space-x-3 text-[11px] text-gray-400">
                           <span className="flex items-center space-x-1">
-                            <Calendar className="w-3 h-3 text-[#059669]" />
+                            <Calendar className="w-3 h-3 text-[#059669] dark:text-emerald-400" />
                             <span>{post.date}</span>
                           </span>
                           <span>•</span>
                           <span className="flex items-center space-x-1">
-                            <Clock className="w-3 h-3 text-[#059669]" />
+                            <Clock className="w-3 h-3 text-[#059669] dark:text-emerald-400" />
                             <span>{post.readTime}</span>
                           </span>
                         </div>
 
-                        <h3 className="text-base sm:text-lg font-bold text-[#041614] leading-snug group-hover:text-[#059669] transition-colors line-clamp-2">
+                        <h3 className="text-base sm:text-lg font-bold text-[#041614] dark:text-white leading-snug group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
                           <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                         </h3>
 
-                        <p className="text-xs text-gray-500 leading-relaxed line-clamp-3">
+                        <p className="text-xs text-gray-500 dark:text-gray-300 leading-relaxed line-clamp-3">
                           {post.excerpt}
                         </p>
                       </div>
                     </div>
 
                     {/* Footer */}
-                    <div className="px-6 pb-5 pt-3 border-t border-gray-100 flex items-center justify-between">
+                    <div className="px-6 pb-5 pt-3 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="text-xs font-bold text-[#059669] hover:underline inline-flex items-center space-x-1.5 uppercase tracking-wider"
+                        className="text-xs font-bold text-[#059669] dark:text-emerald-400 hover:underline inline-flex items-center space-x-1.5 uppercase tracking-wider"
                       >
                         <span>Read Article</span>
                         <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -233,10 +233,10 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
           {/* Sidebar Column */}
           <div className="lg:col-span-4 space-y-7">
             {/* 1. Recent Posts Widget */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-4">
-              <div className="flex items-center space-x-2 border-b border-gray-100 pb-3">
-                <Clock className="w-4 h-4 text-[#059669]" />
-                <h3 className="text-sm font-extrabold text-[#041614] tracking-tight uppercase">
+            <div className="bg-white dark:bg-[#061A17] rounded-2xl p-6 border border-gray-200/80 dark:border-white/10 shadow-sm space-y-4">
+              <div className="flex items-center space-x-2 border-b border-gray-100 dark:border-white/10 pb-3">
+                <Clock className="w-4 h-4 text-[#059669] dark:text-emerald-400" />
+                <h3 className="text-sm font-extrabold text-[#041614] dark:text-white tracking-tight uppercase">
                   Recent Posts
                 </h3>
               </div>
@@ -244,9 +244,9 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
               <div className="space-y-4 pt-1">
                 {recentPosts.map((post) => (
                   <div key={post.id} className="group flex items-start space-x-3">
-                    <div className="w-2 h-2 rounded-full bg-[#059669] mt-2 shrink-0 group-hover:scale-125 transition-transform" />
+                    <div className="w-2 h-2 rounded-full bg-[#059669] dark:bg-emerald-400 mt-2 shrink-0 group-hover:scale-125 transition-transform" />
                     <div>
-                      <h4 className="text-xs sm:text-sm font-bold text-[#041614] group-hover:text-[#059669] transition-colors leading-snug line-clamp-2">
+                      <h4 className="text-xs sm:text-sm font-bold text-[#041614] dark:text-white group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors leading-snug line-clamp-2">
                         <Link href={`/blog/${post.slug}`}>{post.title}</Link>
                       </h4>
                       <span className="text-[11px] text-gray-400 mt-1 block">
@@ -327,10 +327,10 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
             </div>
 
             {/* 3. Categories Widget */}
-            <div className="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-4">
-              <div className="flex items-center space-x-2 border-b border-gray-100 pb-3">
-                <Tag className="w-4 h-4 text-[#059669]" />
-                <h3 className="text-sm font-extrabold text-[#041614] tracking-tight uppercase">
+            <div className="bg-white dark:bg-[#061A17] rounded-2xl p-6 border border-gray-200/80 dark:border-white/10 shadow-sm space-y-4">
+              <div className="flex items-center space-x-2 border-b border-gray-100 dark:border-white/10 pb-3">
+                <Tag className="w-4 h-4 text-[#059669] dark:text-emerald-400" />
+                <h3 className="text-sm font-extrabold text-[#041614] dark:text-white tracking-tight uppercase">
                   Categories
                 </h3>
               </div>
@@ -342,12 +342,12 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                     onClick={() => setSelectedCategory(cat)}
                     className={`w-full flex items-center justify-between p-2.5 rounded-xl text-xs font-semibold transition-colors cursor-pointer text-left ${
                       selectedCategory === cat
-                        ? 'bg-emerald-50 text-[#059669] border border-emerald-200'
-                        : 'hover:bg-gray-50 text-gray-700'
+                        ? 'bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/30'
+                        : 'hover:bg-gray-50 dark:hover:bg-white/5 text-gray-700 dark:text-gray-300'
                     }`}
                   >
                     <span>{cat}</span>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-600">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-gray-300">
                       {categoriesWithCounts[cat]}
                     </span>
                   </button>
