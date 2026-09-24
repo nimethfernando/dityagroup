@@ -240,8 +240,8 @@ export const TRANSLATIONS: Translations = {
     ka: 'საინფორმაციო ბიულეტენი',
   },
   'footer.newsletter_placeholder': {
-    en: 'Your Email Address',
-    ka: 'თქვენი ელ. ფოსტა',
+    en: 'Enter your email...',
+    ka: 'შეიყვანეთ ელ.ფოსტა...',
   },
   'footer.privacy_policy': {
     en: 'Privacy Policy',

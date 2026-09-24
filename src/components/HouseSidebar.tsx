@@ -32,7 +32,6 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
         <ul className="space-y-2">
             {services.map((item) => {
               const active = pathname === item.href;
-              const isGBN = item.href === '/global-business-network';
               return (
                 <li key={item.href}>
                   <Link
@@ -40,23 +39,10 @@ export default function HouseSidebar({ onOpenConsultation }: HouseSidebarProps) 
                     className={`flex items-center justify-between px-4 py-3 rounded-asymmetric text-sm font-semibold transition-all ${
                       active
                         ? 'bg-[#059669] text-white shadow-md translate-x-1'
-                        : isGBN
-                        ? 'bg-emerald-50/70 dark:bg-emerald-950/40 text-[#041614] dark:text-emerald-300 hover:bg-[#ECFDF5] dark:hover:bg-emerald-900/40 hover:text-[#059669] border border-emerald-200/80 dark:border-emerald-500/30 font-bold'
                         : 'bg-white dark:bg-[#030F0E] text-[#041614] dark:text-gray-200 hover:bg-[#ECFDF5] dark:hover:bg-white/5 hover:text-[#059669] dark:hover:text-[#10B981] border border-gray-100 dark:border-white/5'
                     }`}
                   >
-                    <span className="flex items-center space-x-2">
-                      <span>{item.name}</span>
-                      {isGBN && (
-                        <span className={`text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded border ${
-                          active
-                            ? 'bg-white/20 text-white border-white/30'
-                            : 'bg-amber-500/15 text-amber-700 border-amber-500/30'
-                        }`}>
-                          Main
-                        </span>
-                      )}
-                    </span>
+                    <span>{item.name}</span>
                     <ChevronRight className={`w-4 h-4 ${active ? 'text-white' : 'text-gray-400'}`} />
                   </Link>
                 </li>

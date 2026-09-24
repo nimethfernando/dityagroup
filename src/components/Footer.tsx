@@ -140,7 +140,7 @@ export default function Footer() {
   };
 
   const houseLinks = [
-    { name: t('house.gbn'), href: '/global-business-network', isGBN: true },
+    { name: t('house.gbn'), href: '/global-business-network' },
     { name: t('house.wealth'), href: '/ditya-wealth-house' },
     { name: t('house.astroverse'), href: '/ditya-astroverse' },
     { name: t('house.math'), href: '/ditya-math-house' },
@@ -345,20 +345,6 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3 text-xs sm:text-sm text-gray-300">
               <li>
-                <Link
-                  href="/global-business-network"
-                  className="hover:text-[#10B981] transition-colors flex items-center group text-white font-semibold"
-                >
-                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mr-2" />
-                  <span className="group-hover:translate-x-1 transition-transform flex items-center">
-                    <span>{t('nav.gbn')}</span>
-                    <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 ml-2">
-                      Main
-                    </span>
-                  </span>
-                </Link>
-              </li>
-              <li>
                 <Link href="/" className="hover:text-[#10B981] transition-colors flex items-center group">
                   <span className="group-hover:translate-x-1 transition-transform">{t('nav.home')}</span>
                 </Link>
@@ -396,24 +382,11 @@ export default function Footer() {
                 <li key={idx}>
                   <Link
                     href={h.href}
-                    className={`hover:text-[#10B981] transition-colors flex items-center group ${
-                      h.isGBN ? 'text-white font-semibold' : ''
-                    }`}
+                    className="hover:text-[#10B981] transition-colors flex items-center group"
                   >
-                    <span
-                      className={`w-1.5 h-1.5 rounded-full mr-2 transition-colors ${
-                        h.isGBN
-                          ? 'bg-amber-400'
-                          : 'bg-[#10B981]/60 group-hover:bg-[#10B981]'
-                      }`}
-                    />
-                    <span className="group-hover:translate-x-1 transition-transform flex items-center">
-                      <span>{h.name}</span>
-                      {h.isGBN && (
-                        <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.2 rounded bg-amber-400/20 text-amber-300 border border-amber-400/30 ml-2">
-                          Main Business
-                        </span>
-                      )}
+                    <span className="w-1.5 h-1.5 rounded-full mr-2 transition-colors bg-[#10B981]/60 group-hover:bg-[#10B981]" />
+                    <span className="group-hover:translate-x-1 transition-transform">
+                      {h.name}
                     </span>
                   </Link>
                 </li>
@@ -436,19 +409,19 @@ export default function Footer() {
             </p>
 
             <form onSubmit={handleNewsletterSubmit} className="pt-2">
-              <div className="flex rounded-2xl bg-white/10 border border-white/15 p-1.5 overflow-hidden backdrop-blur-md focus-within:border-[#10B981] transition-colors">
+              <div className="flex items-center rounded-2xl bg-white/10 border border-white/15 p-1 focus-within:border-[#10B981] transition-colors shadow-sm">
                 <input
                   type="email"
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder={t('footer.newsletter_placeholder')}
                   required
-                  className="w-full px-4 py-2.5 text-sm text-white bg-transparent focus:outline-none placeholder-gray-400"
+                  className="newsletter-input min-w-0 flex-1 px-3 py-2 text-xs sm:text-sm text-white bg-transparent !bg-transparent border-0 !border-0 focus:outline-none placeholder-gray-400"
                 />
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-ditya-orange py-2.5 px-4 text-xs font-bold shrink-0 shadow-md cursor-pointer"
+                  className="btn-ditya-orange py-2 px-3 sm:px-3.5 text-xs font-bold shrink-0 shadow-md cursor-pointer flex items-center space-x-1.5"
                 >
                   <span>{content.newsletter?.buttonText || t('action.send')}</span>
                   <Send className="w-3.5 h-3.5" />

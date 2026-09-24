@@ -149,26 +149,16 @@ export default function ServicesClient({ content, customServices }: ServicesClie
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {allServices.map((item, idx) => {
             const IconComp = item.icon || Layers;
-            const isGBN = item.href === '/global-business-network';
             return (
               <div
                 key={idx}
-                className={`rounded-asymmetric p-8 shadow-sm card-hover flex flex-col justify-between transition-all ${
-                  isGBN
-                    ? 'bg-white dark:bg-[#082420] border-2 border-emerald-500/40 dark:border-emerald-500/60 shadow-md ring-1 ring-emerald-500/10'
-                    : 'bg-[#F9F9F9] dark:bg-[#061A17] border border-gray-200/80 dark:border-white/10'
-                }`}
+                className="rounded-asymmetric p-8 shadow-sm card-hover flex flex-col justify-between transition-all bg-[#F9F9F9] dark:bg-[#061A17] border border-gray-200/80 dark:border-white/10"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <div className="w-14 h-14 rounded-2xl bg-[#059669] text-white flex items-center justify-center shadow-md">
                       <IconComp className="w-7 h-7" />
                     </div>
-                    {isGBN && (
-                      <span className="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
-                        Main Business
-                      </span>
-                    )}
                   </div>
                   <span className="text-xs font-bold text-[#059669] dark:text-[#10B981] uppercase tracking-wider block">
                     {item.subtitle}

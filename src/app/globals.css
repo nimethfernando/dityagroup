@@ -185,13 +185,29 @@ html.dark .text-emerald-950 {
 }
 
 /* Form Inputs, Textareas, Selects */
-html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]),
+html.dark input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not(.newsletter-input),
 html.dark textarea,
 html.dark select,
 html.dark .bg-\[\#F9F9FB\] {
   background-color: #08211D !important;
   color: #FFFFFF !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+html.dark .newsletter-input,
+footer input.newsletter-input {
+  background-color: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.dark .newsletter-input:focus,
+footer input.newsletter-input:focus {
+  background-color: transparent !important;
+  border: none !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
 html.dark input:focus,
