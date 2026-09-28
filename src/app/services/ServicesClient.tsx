@@ -120,9 +120,11 @@ export default function ServicesClient({ content, customServices }: ServicesClie
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#059669] dark:text-[#10B981] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
-            {content.banner?.badge || 'Integrated Solutions'}
-          </span>
+          <div className="mb-3">
+            <span className="text-xs font-bold text-[#059669] dark:text-[#10B981] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
+              {content.banner?.badge || 'Integrated Solutions'}
+            </span>
+          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {content.banner?.title || 'Our Services & Houses'}
           </h1>

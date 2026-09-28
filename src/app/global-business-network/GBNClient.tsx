@@ -126,10 +126,12 @@ export default function GBNClient({ content }: GBNClientProps) {
 
         <div className="max-w-[1140px] mx-auto px-4 sm:px-6 relative z-10">
           {/* Badge */}
-          <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-widest uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-4 shadow-sm">
-            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            <span>{banner.badge || 'Premier International Community'}</span>
-          </span>
+          <div className="mb-4">
+            <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-widest uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/15 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              <span>{banner.badge || 'Premier International Community'}</span>
+            </span>
+          </div>
 
           {/* Heading */}
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">

@@ -136,10 +136,12 @@ export default function ContactUsClient({ content }: ContactUsClientProps) {
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/10 rounded-full blur-3xl pointer-events-none z-0" />
 
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-widest uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
-            <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
-            <span>{content.banner.badge || 'We Are Available 24/7'}</span>
-          </span>
+          <div className="mb-3">
+            <span className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] tracking-widest uppercase bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
+              <span className="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+              <span>{content.banner.badge || 'We Are Available 24/7'}</span>
+            </span>
+          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {content.banner.title || 'Contact Us'}
           </h1>

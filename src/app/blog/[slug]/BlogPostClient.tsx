@@ -66,18 +66,20 @@ export default function BlogPostClient({
 
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/15 rounded-full blur-3xl pointer-events-none z-0" />
 
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-start">
           <Link
             href="/blog"
-            className="inline-flex items-center space-x-2 text-xs text-[#10B981] font-semibold hover:underline mb-6"
+            className="inline-flex items-center space-x-2 text-xs text-[#10B981] hover:text-emerald-300 font-semibold mb-5 transition-colors group"
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span>Back to All Articles</span>
+            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+            <span className="group-hover:underline">Back to All Articles</span>
           </Link>
 
-          <span className="inline-block text-[11px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-3 py-1 rounded-full mb-3 shadow-md">
-            {post.category}
-          </span>
+          <div className="mb-4">
+            <span className="inline-flex items-center text-[11px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-3.5 py-1.5 rounded-full shadow-md">
+              {post.category}
+            </span>
+          </div>
 
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold !text-white leading-tight max-w-4xl tracking-tight drop-shadow-md">
             {post.title}

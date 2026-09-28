@@ -37,9 +37,11 @@ export default async function TermsAndConditionsPage() {
       {/* Banner */}
       <section className="bg-gradient-to-r from-[#020D0C] via-[#041614] to-[#0D2622] text-white py-20 text-center relative overflow-hidden border-b border-white/5">
         <div className="max-w-[1140px] mx-auto px-4 relative z-10">
-          <span className="text-xs font-bold text-[#10B981] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15 mb-3">
-            {banner?.badge || 'User Agreement'}
-          </span>
+          <div className="mb-3">
+            <span className="text-xs font-bold text-[#10B981] tracking-widest uppercase inline-block bg-white/10 px-3.5 py-1 rounded-full border border-white/15">
+              {banner?.badge || 'User Agreement'}
+            </span>
+          </div>
           <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold !text-white mt-1 tracking-tight drop-shadow-md">
             {banner?.title || 'Terms & Conditions'}
           </h1>
