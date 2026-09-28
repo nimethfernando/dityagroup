@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import SafeImage from '@/components/SafeImage';
 import {
   Check,
   TrendingUp,
@@ -956,12 +957,12 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
               >
                 <div>
                   <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5">
-                    <Image
+                    <SafeImage
                       src={b.image || '/images/hero-banner-clean.jpg'}
+                      fallbackSrc="/images/hero-banner-clean.jpg"
                       alt={b.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
-                      unoptimized={Boolean(b.image?.startsWith('data:') || b.image?.startsWith('http'))}
                     />
                     <div className="absolute top-4 left-4 z-10">
                       <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#059669] dark:text-emerald-400 bg-white/95 dark:bg-[#030F0E]/95 backdrop-blur-md uppercase tracking-wider shadow-sm">

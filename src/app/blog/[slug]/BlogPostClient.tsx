@@ -16,6 +16,7 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { useConsultation } from '@/contexts/ConsultationContext';
+import SafeImage from '@/components/SafeImage';
 
 export interface SinglePostData {
   title: string;
@@ -110,13 +111,13 @@ export default function BlogPostClient({
             {/* Featured Cover Image */}
             {post.image && (
               <div className="relative h-64 sm:h-[400px] w-full rounded-3xl overflow-hidden shadow-xl border border-gray-100 dark:border-white/10 bg-gray-100 dark:bg-white/5">
-                <Image
+                <SafeImage
                   src={post.image}
+                  fallbackSrc="/images/hero-banner-clean.jpg"
                   alt={post.title}
                   fill
                   priority
                   className="object-cover object-center"
-                  unoptimized={Boolean(post.image.startsWith('data:') || post.image.startsWith('http'))}
                 />
               </div>
             )}

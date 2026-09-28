@@ -46,6 +46,10 @@ const DEFAULT_CATEGORIES = [
 ];
 
 const BLOG_IMAGE_PRESETS: ImagePreset[] = [
+  { label: '🌐 Global Market Expansion', url: '/images/event-global.jpg' },
+  { label: '🤝 Strategic Networking & Trusts', url: '/images/event-networking.jpg' },
+  { label: '👑 Executive Leadership & Masterminds', url: '/images/event-leadership.jpg' },
+  { label: '🔭 Corporate Vision & Growth', url: '/images/vision-wide.jpg' },
   { label: '🌿 Bay Leaf Ritual', url: '/images/blog-bay-leaf.jpg' },
   { label: '🧂 Crystal Salt Ritual', url: '/images/blog-crystal-salt.jpg' },
   { label: '🫖 Copper Water Remedy', url: '/images/blog-copper-water.jpg' },

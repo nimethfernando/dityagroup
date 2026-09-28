@@ -16,6 +16,7 @@ import {
   BookOpen,
 } from 'lucide-react';
 import { useConsultation } from '@/contexts/ConsultationContext';
+import SafeImage from '@/components/SafeImage';
 
 export interface BlogPostItem {
   id: string;
@@ -176,12 +177,12 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                     <div>
                       {/* Image Thumbnail */}
                       <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5">
-                        <Image
-                          src={post.image || '/images/hero-banner.jpeg'}
+                        <SafeImage
+                          src={post.image || '/images/hero-banner-clean.jpg'}
+                          fallbackSrc="/images/hero-banner-clean.jpg"
                           alt={post.title}
                           fill
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
-                          unoptimized={Boolean(post.image?.startsWith('data:') || post.image?.startsWith('http'))}
                         />
                         <div className="absolute top-3.5 left-3.5 z-10">
                           <span className="text-[10px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-2.5 py-1 rounded-full shadow-md">
