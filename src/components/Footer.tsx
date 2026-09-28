@@ -277,8 +277,8 @@ export default function Footer() {
         {/* MIDDLE: 4 BALANCED COLUMNS */}
         {/* ============================================================ */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-14 border-b border-white/10">
-          {/* Col 1: Brand & Socials (Span 4) */}
-          <div className="lg:col-span-4 space-y-5">
+          {/* Col 1: Brand & Socials (Span 3) */}
+          <div className="lg:col-span-3 space-y-5">
             <div className="relative h-12 sm:h-14 w-52 sm:w-56">
               <Image
                 src={logoDark}
@@ -398,8 +398,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 4: Newsletter (Span 3) */}
-          <div className="lg:col-span-3 space-y-4">
+          {/* Col 4: Newsletter (Span 4) */}
+          <div className="lg:col-span-4 space-y-4">
             <h4 className="text-white font-extrabold text-base border-b-2 border-[#10B981] pb-1.5 inline-block tracking-wide">
               {content.newsletter?.heading || t('footer.newsletter')}
             </h4>
@@ -416,7 +416,7 @@ export default function Footer() {
                   onChange={(e) => setNewsletterEmail(e.target.value)}
                   placeholder={t('footer.newsletter_placeholder')}
                   required
-                  className="newsletter-input min-w-0 flex-1 px-3 py-2 text-xs sm:text-sm text-white bg-transparent !bg-transparent border-0 !border-0 focus:outline-none placeholder-gray-400"
+                  className="newsletter-input min-w-0 flex-1 px-3 py-2 text-xs sm:text-sm text-white bg-transparent !bg-transparent border-0 !border-0 focus:outline-none placeholder-gray-400 placeholder:truncate"
                 />
                 <button
                   type="submit"

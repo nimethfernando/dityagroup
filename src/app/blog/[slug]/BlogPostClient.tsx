@@ -67,17 +67,18 @@ export default function BlogPostClient({
 
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#059669]/15 rounded-full blur-3xl pointer-events-none z-0" />
 
-        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10 flex flex-col items-start">
-          <Link
-            href="/blog"
-            className="inline-flex items-center space-x-2 text-xs text-[#10B981] hover:text-emerald-300 font-semibold mb-5 transition-colors group"
-          >
-            <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            <span className="group-hover:underline">Back to All Articles</span>
-          </Link>
+        <div className="max-w-[1240px] mx-auto px-4 sm:px-6 relative z-10">
+          {/* Top Navigation & Category Badge Bar */}
+          <div className="w-full flex flex-wrap items-center justify-between gap-4 mb-6">
+            <Link
+              href="/blog"
+              className="inline-flex items-center space-x-2 text-xs font-semibold text-emerald-400 hover:text-emerald-300 bg-white/5 hover:bg-white/10 border border-white/10 px-3.5 py-1.5 rounded-full transition-all group shadow-xs shrink-0"
+            >
+              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
+              <span>Back to All Articles</span>
+            </Link>
 
-          <div className="mb-4">
-            <span className="inline-flex items-center text-[11px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-3.5 py-1.5 rounded-full shadow-md">
+            <span className="inline-flex items-center text-[11px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-3.5 py-1.5 rounded-full shadow-md border border-emerald-400/20 shrink-0">
               {post.category}
             </span>
           </div>
