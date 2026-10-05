@@ -461,41 +461,41 @@ export default function GBNClient({ content }: GBNClientProps) {
       {/* ============================================================ */}
       {/* 5. GLOBAL IMPACT STATS DOCK */}
       {/* ============================================================ */}
-      <section className="py-16 max-w-[1140px] mx-auto px-4 sm:px-6">
-        <div className="bg-white dark:bg-[#061A17] rounded-3xl border border-gray-200/80 dark:border-white/10 p-8 sm:p-12 shadow-[0_10px_35px_rgba(1,22,51,0.06)]">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center divide-y sm:divide-y-0 sm:divide-x divide-gray-100 dark:divide-white/10">
-            <div className="pt-4 sm:pt-0 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
-                <Users2 className="w-6 h-6" />
+      <section className="py-12 sm:py-16 max-w-[1140px] mx-auto px-3 sm:px-6">
+        <div className="bg-white dark:bg-[#061A17] rounded-3xl border border-gray-200/80 dark:border-white/10 py-6 px-2 sm:p-12 shadow-[0_10px_35px_rgba(1,22,51,0.06)]">
+          <div className="grid grid-cols-3 gap-1 sm:gap-8 text-center divide-x divide-gray-100 dark:divide-white/10">
+            <div className="flex flex-col items-center px-1.5 sm:px-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-2.5 sm:mb-3 shadow-xs">
+                <Users2 className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
+              <span className="text-xl sm:text-3xl lg:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                 {stats.stat1Number || '500+'}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
+              <span className="text-[11px] sm:text-xs lg:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1 leading-tight sm:leading-normal">
                 {stats.stat1Label || 'Vetted Business Leaders'}
               </span>
             </div>
 
-            <div className="pt-4 sm:pt-0 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
-                <Globe2 className="w-6 h-6" />
+            <div className="flex flex-col items-center px-1.5 sm:px-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-2.5 sm:mb-3 shadow-xs">
+                <Globe2 className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
+              <span className="text-xl sm:text-3xl lg:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                 {stats.stat2Number || '12+'}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
+              <span className="text-[11px] sm:text-xs lg:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1 leading-tight sm:leading-normal">
                 {stats.stat2Label || 'Global Chapters & Hubs'}
               </span>
             </div>
 
-            <div className="pt-4 sm:pt-0 flex flex-col items-center">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
-                <TrendingUp className="w-6 h-6" />
+            <div className="flex flex-col items-center px-1.5 sm:px-4">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-2.5 sm:mb-3 shadow-xs">
+                <TrendingUp className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
-              <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
+              <span className="text-xl sm:text-3xl lg:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                 {stats.stat3Number || '₹150Cr+'}
               </span>
-              <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
+              <span className="text-[11px] sm:text-xs lg:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1 leading-tight sm:leading-normal">
                 {stats.stat3Label || 'Closed Business Collaborations'}
               </span>
             </div>
