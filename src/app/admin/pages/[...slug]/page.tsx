@@ -3468,17 +3468,17 @@ export default function PageEditor({ params }: PageEditorProps) {
                 </div>
               </div>
 
-              {/* Section E: Executive Contact Cards */}
+              {/* Section E: Executive Contact Cards & Top Header Bar Info */}
               <div className="bg-white p-6 sm:p-8 rounded-asymmetric border border-gray-200 shadow-sm space-y-6">
                 <div className="border-b border-gray-100 pb-3">
                   <div className="flex items-center space-x-2">
                     <Phone className="w-5 h-5 text-[#059669]" />
                     <h3 className="text-lg font-bold text-[#041614]">
-                      Contact Cards & Office Addresses
+                      Top Header Bar, Contact Cards & Office Addresses
                     </h3>
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
-                    Manage the phones, emails, and address locations shown in the top contact docks of the footer.
+                    Manage the corporate email and office address displayed in the <strong>Top Header Bar</strong> (at the very top of every page) as well as the phones, emails, and address locations shown in the <strong>Footer Contact Docks</strong>.
                   </p>
                 </div>
 
@@ -3533,7 +3533,7 @@ export default function PageEditor({ params }: PageEditorProps) {
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                      Corporate Email
+                      Corporate Email (Top Header Bar & Footer)
                     </label>
                     <input
                       type="text"
@@ -3544,12 +3544,16 @@ export default function PageEditor({ params }: PageEditorProps) {
                           contactCards: { ...content.contactCards, emailCorporate: e.target.value },
                         })
                       }
+                      placeholder="groupditya@gmail.com"
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
+                    <p className="text-[11px] text-gray-400 mt-1">
+                      Synchronized live with the Top Header Bar email and Footer contact dock.
+                    </p>
                   </div>
                   <div className="sm:col-span-2">
                     <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                      India Office Address
+                      India Office Address (Top Header Bar & Footer)
                     </label>
                     <input
                       type="text"
@@ -3560,8 +3564,12 @@ export default function PageEditor({ params }: PageEditorProps) {
                           contactCards: { ...content.contactCards, officeIndiaAddress: e.target.value },
                         })
                       }
+                      placeholder="3rd floor, 261, Sewa Sadan Marg, Adarsh Nagar, Jaipur, Rajasthan 302004"
                       className="w-full px-3 py-2 text-xs border border-gray-300 rounded-lg"
                     />
+                    <p className="text-[11px] text-gray-400 mt-1">
+                      Synchronized live with the Top Header Bar address and Footer contact dock.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -3585,6 +3593,26 @@ export default function PageEditor({ params }: PageEditorProps) {
                 <p className="text-xs sm:text-sm text-gray-300 mt-1 max-w-2xl">
                   Upload or change your brand logo (for both Light Mode and Dark Mode) and manage the Consultation button (toggle to hide or unhide, customize button label, and configure click action).
                 </p>
+              </div>
+
+              {/* TOP HEADER BAR CONTACT INFO PROMINENT BANNER */}
+              <div className="bg-emerald-50/70 border border-emerald-200/80 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xs">
+                <div className="space-y-1">
+                  <div className="flex items-center space-x-2 text-[#059669] text-xs font-bold uppercase tracking-wider">
+                    <Mail className="w-4 h-4" />
+                    <span>Top Header Bar Contact Info (Email & Address)</span>
+                  </div>
+                  <p className="text-xs text-gray-600 max-w-xl leading-relaxed">
+                    Looking to edit the email (<code>groupditya@gmail.com</code>) and address (<code>Jaipur, Rajasthan</code>) displayed at the very top header bar? They are configured in <strong>Footer & Site Settings</strong> and synchronized live across both the top bar and footer.
+                  </p>
+                </div>
+                <Link
+                  href="/admin/pages/footer"
+                  className="btn-ditya-orange text-xs py-2 px-4 font-bold shrink-0 shadow-sm flex items-center space-x-1.5"
+                >
+                  <span>Edit in Footer & Site Settings</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </Link>
               </div>
 
               {/* SECTION A: LOGO PROVISION */}

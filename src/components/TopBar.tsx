@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, MapPin } from 'lucide-react';
 import { FaYoutube, FaFacebookF, FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -10,6 +10,53 @@ import ThemeToggle from './ThemeToggle';
 
 export default function TopBar() {
   const { t } = useLanguage();
+  const [email, setEmail] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [socials, setSocials] = useState<{
+    youtube?: string;
+    facebook?: string;
+    instagram?: string;
+    x?: string;
+  }>({});
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch('/api/footer')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!isMounted || !data?.success || !data?.data) return;
+        const contactCards = data.data.contactCards;
+        if (contactCards) {
+          if (contactCards.emailCorporate) {
+            setEmail(contactCards.emailCorporate);
+          }
+          if (contactCards.officeIndiaAddress) {
+            setAddress(contactCards.officeIndiaAddress);
+          }
+        }
+        const socialList = data.data.socialLinks;
+        if (Array.isArray(socialList)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const getLink = (id: string) => socialList.find((s: any) => s.id === id && s.enabled !== false)?.href;
+          setSocials({
+            youtube: getLink('youtube'),
+            facebook: getLink('facebook'),
+            instagram: getLink('instagram'),
+            x: getLink('x'),
+          });
+        }
+      })
+      .catch((err) => {
+        console.warn('Could not fetch live topbar contact info:', err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const displayEmail = email || t('topbar.email') || 'groupditya@gmail.com';
+  const displayAddress = address || t('topbar.address') || '3rd floor, 261, Adarsh Nagar, Jaipur, Rajasthan';
 
   return (
     <div className="bg-[#020D0C] border-b border-white/5 text-xs text-gray-300 hidden md:block select-none">
@@ -17,19 +64,19 @@ export default function TopBar() {
         {/* Contact Info Left */}
         <div className="flex items-center space-x-6">
           <a
-            href="mailto:groupditya@gmail.com"
+            href={`mailto:${displayEmail}`}
             className="flex items-center space-x-2 text-gray-300 hover:text-[#10B981] transition-colors font-medium group"
           >
             <span className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#10B981]/20 transition-colors">
               <Mail className="w-3 h-3 text-[#10B981]" />
             </span>
-            <span>{t('topbar.email')}</span>
+            <span>{displayEmail}</span>
           </a>
           <span className="flex items-center space-x-2 text-gray-400">
             <span className="w-5 h-5 rounded-full bg-white/5 flex items-center justify-center">
               <MapPin className="w-3 h-3 text-[#10B981]" />
             </span>
-            <span>{t('topbar.address')}</span>
+            <span>{displayAddress}</span>
           </span>
         </div>
 
@@ -44,7 +91,7 @@ export default function TopBar() {
           {/* Social Icons */}
           <div className="flex items-center space-x-2">
             <a
-              href="https://www.youtube.com/@DityaGroup"
+              href={socials.youtube || 'https://www.youtube.com/@DityaGroup'}
               target="_blank"
               rel="noopener noreferrer"
               className="w-6 h-6 rounded-full bg-white/5 hover:bg-[#059669] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-200"
@@ -53,7 +100,7 @@ export default function TopBar() {
               <FaYoutube className="w-3 h-3" />
             </a>
             <a
-              href="https://www.facebook.com/profile.php?id=61579723378713"
+              href={socials.facebook || 'https://www.facebook.com/profile.php?id=61579723378713'}
               target="_blank"
               rel="noopener noreferrer"
               className="w-6 h-6 rounded-full bg-white/5 hover:bg-[#059669] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-200"
@@ -62,7 +109,7 @@ export default function TopBar() {
               <FaFacebookF className="w-2.5 h-2.5" />
             </a>
             <a
-              href="https://www.instagram.com/dityagroup/"
+              href={socials.instagram || 'https://www.instagram.com/dityagroup/'}
               target="_blank"
               rel="noopener noreferrer"
               className="w-6 h-6 rounded-full bg-white/5 hover:bg-[#059669] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-200"
@@ -71,7 +118,7 @@ export default function TopBar() {
               <FaInstagram className="w-3 h-3" />
             </a>
             <a
-              href="https://x.com/dityadivinecode"
+              href={socials.x || 'https://x.com/dityadivinecode'}
               target="_blank"
               rel="noopener noreferrer"
               className="w-6 h-6 rounded-full bg-white/5 hover:bg-[#059669] text-gray-300 hover:text-white flex items-center justify-center transition-all duration-200"
