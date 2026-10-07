@@ -117,18 +117,28 @@ export default function AdminLoginPage() {
 
   return (
     <div className="min-h-screen bg-[#041614] flex items-center justify-center p-4">
-      <div className="w-full max-w-md bg-white rounded-asymmetric p-8 sm:p-10 shadow-2xl border border-white/10">
+      <div className="w-full max-w-md bg-white dark:bg-[#071F1B] rounded-asymmetric p-8 sm:p-10 shadow-2xl border border-gray-100 dark:border-white/10">
         <div className="text-center mb-8">
-          <div className="relative h-12 w-44 mx-auto mb-4">
+          <div className="relative h-12 sm:h-14 w-48 sm:w-56 mx-auto mb-4">
+            {/* Light Mode Logo (Obsidian dark text on light card) */}
             <Image
               src="/images/logo.png"
               alt="Ditya Group"
               fill
-              className="object-contain"
+              className="object-contain block dark:hidden"
+              priority
+            />
+            {/* Dark Mode Logo (Luminous emerald & metallic white on dark card) */}
+            <Image
+              src="/images/logo-white.png"
+              alt="Ditya Group"
+              fill
+              className="object-contain hidden dark:block"
+              priority
             />
           </div>
-          <h2 className="text-2xl font-bold text-[#041614]">Executive Portal</h2>
-          <p className="text-xs text-gray-500 mt-1">Authorized Administrator Access Only</p>
+          <h2 className="text-2xl font-bold text-[#041614] dark:text-white">Executive Portal</h2>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Authorized Administrator Access Only</p>
         </div>
 
         {errorMsg && (
@@ -148,7 +158,7 @@ export default function AdminLoginPage() {
         {!showForgot ? (
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider mb-1.5">
                 Admin Email
               </label>
               <div className="relative">
@@ -157,7 +167,7 @@ export default function AdminLoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
+                  className="w-full px-4 py-3 pl-10 border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                 />
                 <Mail className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
               </div>
@@ -165,7 +175,7 @@ export default function AdminLoginPage() {
 
             <div>
               <div className="flex justify-between items-center mb-1.5">
-                <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider">
+                <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider">
                   Password
                 </label>
                 <button
@@ -187,7 +197,7 @@ export default function AdminLoginPage() {
                   placeholder="••••••••"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
+                  className="w-full px-4 py-3 pl-10 border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
                 />
                 <Lock className="w-4 h-4 text-gray-400 absolute left-3.5 top-3.5" />
               </div>
@@ -212,18 +222,18 @@ export default function AdminLoginPage() {
             </button>
 
             <div className="pt-1 text-center">
-              <p className="text-[11px] text-gray-400">
-                Standard access: <span className="font-mono text-gray-600">groupditya@gmail.com</span> / <span className="font-mono text-gray-600">ditya@2026</span>
+              <p className="text-[11px] text-gray-400 dark:text-gray-400">
+                Standard access: <span className="font-mono text-gray-600 dark:text-emerald-400">groupditya@gmail.com</span> / <span className="font-mono text-gray-600 dark:text-emerald-400">ditya@2026</span>
               </p>
             </div>
           </form>
         ) : !otpSent ? (
           <form onSubmit={handleRequestOtp} className="space-y-4">
-            <p className="text-xs text-gray-600">
+            <p className="text-xs text-gray-600 dark:text-gray-300">
               Enter your admin email to receive a 6-digit one-time verification code via email.
             </p>
             <div>
-              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider mb-1.5">
                 Admin Email
               </label>
               <input
@@ -231,7 +241,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
               />
             </div>
 
@@ -246,7 +256,7 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setShowForgot(false)}
-                className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-[#041614]"
+                className="px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:text-[#041614] dark:hover:text-white"
               >
                 Cancel
               </button>
@@ -255,7 +265,7 @@ export default function AdminLoginPage() {
         ) : (
           <form onSubmit={handleResetPassword} className="space-y-4">
             <div>
-              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider mb-1.5">
                 Enter 6-Digit OTP
               </label>
               <input
@@ -265,15 +275,15 @@ export default function AdminLoginPage() {
                 placeholder="123456"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
-                className="w-full px-4 py-3 text-center tracking-widest text-lg font-bold border border-gray-300 rounded-asymmetric focus:outline-none focus:border-[#059669]"
+                className="w-full px-4 py-3 text-center tracking-widest text-lg font-bold border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric focus:outline-none focus:border-[#059669]"
               />
-              <p className="text-[11px] text-gray-500 mt-1.5 text-center">
+              <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1.5 text-center">
                 Check inbox or spam folder. Emergency bypass code: <span className="font-mono font-bold text-[#059669]">999888</span>
               </p>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-[#041614] uppercase tracking-wider mb-1.5">
+              <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider mb-1.5">
                 Set New Password
               </label>
               <input
@@ -283,7 +293,7 @@ export default function AdminLoginPage() {
                 placeholder="Min 6 characters"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
               />
             </div>
 
@@ -298,7 +308,7 @@ export default function AdminLoginPage() {
               <button
                 type="button"
                 onClick={() => setOtpSent(false)}
-                className="px-4 py-2 text-xs font-semibold text-gray-600 hover:text-[#041614]"
+                className="px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:text-[#041614] dark:hover:text-white"
               >
                 Back
               </button>
