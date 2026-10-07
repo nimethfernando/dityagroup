@@ -266,31 +266,31 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
       {/* ============================================================ */}
       {/* 3. STATS COUNTER DOCK */}
       {/* ============================================================ */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white dark:bg-[#030F0E] transition-colors duration-200">
         <div className="max-w-[1140px] mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.6 }}
-            className="bg-white rounded-3xl border border-gray-200/80 p-8 sm:p-12 shadow-[0_10px_35px_rgba(1,22,51,0.06)]"
+            className="bg-white dark:bg-[#061A17] rounded-3xl border border-gray-200/80 dark:border-white/10 p-8 sm:p-12 shadow-[0_10px_35px_rgba(1,22,51,0.06)]"
           >
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:divide-x divide-gray-100 dark:divide-white/10">
               {/* Stat 1 */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.05 }}
-                className="flex flex-col items-center pt-4 lg:pt-0"
+                className="flex flex-col items-center pt-4 lg:pt-0 pb-6 lg:pb-0 border-b border-gray-100 dark:border-white/10 lg:border-b-0"
               >
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                   <Users className="w-6 h-6" />
                 </div>
-                <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+                <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                   <AnimatedCounter value={content.stats.stat1Number || '500 +'} />
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+                <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                   {content.stats.stat1Label || 'Happy Clients'}
                 </span>
               </motion.div>
@@ -301,15 +301,15 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.15 }}
-                className="flex flex-col items-center pt-4 lg:pt-0"
+                className="flex flex-col items-center pt-4 lg:pt-0 pb-6 lg:pb-0 border-b border-gray-100 dark:border-white/10 lg:border-b-0"
               >
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                   <FileCheck className="w-6 h-6" />
                 </div>
-                <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+                <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                   <AnimatedCounter value={content.stats.stat2Number || '3,000 +'} />
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+                <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                   {content.stats.stat2Label || 'Projects & Solutions Delivered'}
                 </span>
               </motion.div>
@@ -320,15 +320,15 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.25 }}
-                className="flex flex-col items-center pt-4 lg:pt-0"
+                className="flex flex-col items-center pt-4 lg:pt-0 pb-6 lg:pb-0 border-b border-gray-100 dark:border-white/10 lg:border-b-0"
               >
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                   <Award className="w-6 h-6" />
                 </div>
-                <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+                <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                   <AnimatedCounter value={content.stats.stat3Number || '15'} />
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+                <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                   {content.stats.stat3Label || 'Years Of Experience'}
                 </span>
               </motion.div>
@@ -339,15 +339,15 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.35 }}
-                className="flex flex-col items-center pt-4 lg:pt-0"
+                className="flex flex-col items-center pt-4 lg:pt-0 pb-6 lg:pb-0 border-b border-gray-100 dark:border-white/10 lg:border-b-0"
               >
-                <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center mb-3 shadow-xs">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-500/20 text-[#059669] dark:text-emerald-400 flex items-center justify-center mb-3 shadow-xs">
                   <Users className="w-6 h-6" />
                 </div>
-                <span className="text-3xl sm:text-4xl font-black text-[#041614] tracking-tight">
+                <span className="text-3xl sm:text-4xl font-black text-[#041614] dark:text-white tracking-tight">
                   <AnimatedCounter value={content.stats.stat4Number || '72'} />
                 </span>
-                <span className="text-xs sm:text-sm font-semibold text-gray-500 mt-1">
+                <span className="text-xs sm:text-sm font-semibold text-gray-500 dark:text-gray-300 mt-1">
                   {content.stats.stat4Label || 'Team Members'}
                 </span>
               </motion.div>
