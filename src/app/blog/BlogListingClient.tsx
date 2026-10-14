@@ -176,7 +176,11 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                   >
                     <div>
                       {/* Image Thumbnail */}
-                      <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5">
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        prefetch={true}
+                        className="block relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5 cursor-pointer"
+                      >
                         <SafeImage
                           src={post.image || '/images/hero-banner-clean.jpg'}
                           fallbackSrc="/images/hero-banner-clean.jpg"
@@ -184,12 +188,12 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                           fill
                           className="object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                         />
-                        <div className="absolute top-3.5 left-3.5 z-10">
+                        <div className="absolute top-3.5 left-3.5 z-10 pointer-events-none">
                           <span className="text-[10px] font-extrabold uppercase tracking-wider text-white bg-[#059669] px-2.5 py-1 rounded-full shadow-md">
                             {post.category}
                           </span>
                         </div>
-                      </div>
+                      </Link>
 
                       {/* Content */}
                       <div className="p-6 space-y-3">
@@ -206,7 +210,7 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                         </div>
 
                         <h3 className="text-base sm:text-lg font-bold text-[#041614] dark:text-white leading-snug group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
-                          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                          <Link href={`/blog/${post.slug}`} prefetch={true}>{post.title}</Link>
                         </h3>
 
                         <p className="text-xs text-gray-500 dark:text-gray-300 leading-relaxed line-clamp-3">
@@ -219,10 +223,11 @@ export default function BlogListingClient({ initialPosts }: BlogListingClientPro
                     <div className="px-6 pb-5 pt-3 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
                       <Link
                         href={`/blog/${post.slug}`}
-                        className="text-xs font-bold text-[#059669] dark:text-emerald-400 hover:underline inline-flex items-center space-x-1.5 uppercase tracking-wider"
+                        prefetch={true}
+                        className="inline-flex items-center space-x-1.5 text-xs font-bold text-[#059669] dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 py-1.5 px-3 -ml-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-white/5 active:scale-95 transition-all duration-200 uppercase tracking-wider group/link cursor-pointer"
                       >
                         <span>Read Article</span>
-                        <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                       </Link>
                     </div>
                   </article>

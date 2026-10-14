@@ -175,7 +175,7 @@ export default function BlogPostClient({
                     <div className="w-2 h-2 rounded-full bg-[#059669] mt-2 shrink-0 group-hover:scale-125 transition-transform" />
                     <div>
                       <h4 className="text-xs sm:text-sm font-bold text-[#041614] dark:text-gray-200 group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors leading-snug line-clamp-2">
-                        <Link href={`/blog/${r.slug}`}>{r.title}</Link>
+                        <Link href={`/blog/${r.slug}`} prefetch={true}>{r.title}</Link>
                       </h4>
                       <span className="text-[11px] text-gray-400 mt-1 block">{r.date}</span>
                     </div>

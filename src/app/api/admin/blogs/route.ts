@@ -3,6 +3,7 @@ import { prisma } from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { verifyAdminToken, ADMIN_COOKIE_NAME } from '@/lib/auth';
 import { BLOG_POSTS } from '@/lib/blogData';
+import { invalidateBlogCache } from '@/lib/getBlogs';
 
 async function checkAdminAuth() {
   const cookieStore = await cookies();
@@ -93,6 +94,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    invalidateBlogCache(created.slug);
     return NextResponse.json({ success: true, data: created, message: 'Blog article published successfully!' });
   } catch (error: any) {
     console.error('Error creating blog:', error);
@@ -131,6 +133,7 @@ export async function PUT(req: NextRequest) {
       },
     });
 
+    invalidateBlogCache(updated.slug);
     return NextResponse.json({ success: true, data: updated, message: 'Article updated successfully!' });
   } catch (error: any) {
     console.error('Error updating blog:', error);
@@ -152,10 +155,11 @@ export async function DELETE(req: NextRequest) {
       return NextResponse.json({ success: false, message: 'Blog ID is required' }, { status: 400 });
     }
 
-    await prisma.blog.delete({
+    const deleted = await prisma.blog.delete({
       where: { id },
     });
 
+    invalidateBlogCache(deleted.slug);
     return NextResponse.json({ success: true, message: 'Article deleted successfully' });
   } catch (error) {
     console.error('Error deleting blog:', error);

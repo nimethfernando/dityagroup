@@ -69,7 +69,7 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
         {/* Hero Left Content Overlay */}
         <div className="relative z-10 max-w-[1140px] mx-auto px-4 w-full pt-16 lg:pt-24 pb-12 flex-1 flex items-center">
           <motion.div
-            initial={{ opacity: 0, y: 25 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
             className="max-w-xl space-y-6"
@@ -956,7 +956,11 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                 className="bg-white dark:bg-[#061A17] rounded-3xl border border-gray-200/80 dark:border-white/10 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1"
               >
                 <div>
-                  <div className="relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5">
+                  <Link
+                    href={`/blog/${b.slug}`}
+                    prefetch={true}
+                    className="block relative h-48 w-full overflow-hidden bg-gray-100 dark:bg-white/5 cursor-pointer"
+                  >
                     <SafeImage
                       src={b.image || '/images/hero-banner-clean.jpg'}
                       fallbackSrc="/images/hero-banner-clean.jpg"
@@ -964,15 +968,15 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute top-4 left-4 z-10">
+                    <div className="absolute top-4 left-4 z-10 pointer-events-none">
                       <span className="inline-block px-3 py-1 rounded-full text-[11px] font-bold text-[#059669] dark:text-emerald-400 bg-white/95 dark:bg-[#030F0E]/95 backdrop-blur-md uppercase tracking-wider shadow-sm">
                         {b.category || 'Ditya Astroverse'}
                       </span>
                     </div>
-                  </div>
+                  </Link>
                   <div className="p-7 space-y-3">
                     <h3 className="text-lg font-bold text-[#041614] dark:text-white group-hover:text-[#059669] dark:group-hover:text-emerald-400 transition-colors line-clamp-2">
-                      <Link href={`/blog/${b.slug}`}>
+                      <Link href={`/blog/${b.slug}`} prefetch={true}>
                         {b.title}
                       </Link>
                     </h3>
@@ -981,13 +985,14 @@ export default function HomeClient({ content, latestBlogs }: HomeClientProps) {
                     </p>
                   </div>
                 </div>
-                <div className="px-7 pb-6 pt-2 border-t border-gray-100 dark:border-white/10">
+                <div className="px-7 pb-6 pt-3 border-t border-gray-100 dark:border-white/10 flex items-center justify-between">
                   <Link
                     href={`/blog/${b.slug}`}
-                    className="text-xs font-bold text-[#059669] dark:text-emerald-400 inline-flex items-center space-x-1.5 hover:underline uppercase tracking-wider"
+                    prefetch={true}
+                    className="inline-flex items-center space-x-2 text-xs font-bold text-[#059669] dark:text-emerald-400 hover:text-emerald-700 dark:hover:text-emerald-300 py-1.5 px-3 -ml-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-white/5 active:scale-95 transition-all duration-200 uppercase tracking-wider group/link cursor-pointer"
                   >
                     <span>Read More</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </article>
