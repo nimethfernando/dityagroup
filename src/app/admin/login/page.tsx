@@ -7,7 +7,7 @@ import { Lock, Mail, KeyRound, ArrowRight, AlertCircle, CheckCircle2, Loader2 } 
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('groupditya@gmail.com');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -165,6 +165,7 @@ export default function AdminLoginPage() {
                 <input
                   type="email"
                   required
+                  placeholder="admin@dityagroup.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-3 pl-10 border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
@@ -221,16 +222,15 @@ export default function AdminLoginPage() {
               )}
             </button>
 
-            <div className="pt-1 text-center">
-              <p className="text-[11px] text-gray-400 dark:text-gray-400">
-                Authorized accounts: <span className="font-mono text-gray-600 dark:text-emerald-400">groupditya@gmail.com</span> / <span className="font-mono text-gray-600 dark:text-emerald-400">dityagroup@gmail.com</span> • Master password: <span className="font-mono text-gray-600 dark:text-emerald-400">ditya@2026</span>
-              </p>
+            <div className="pt-2 text-center flex items-center justify-center space-x-1.5 text-[11px] text-gray-400 dark:text-gray-500">
+              <Lock className="w-3.5 h-3.5 text-[#059669]" />
+              <span>256-bit SSL encrypted administrative portal</span>
             </div>
           </form>
         ) : !otpSent ? (
           <form onSubmit={handleRequestOtp} className="space-y-4">
             <p className="text-xs text-gray-600 dark:text-gray-300">
-              Enter your admin email (groupditya@gmail.com or dityagroup@gmail.com) to receive a 6-digit verification code.
+              Enter your registered administrator email to receive a secure 6-digit one-time verification code.
             </p>
             <div>
               <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider mb-1.5">
@@ -239,6 +239,7 @@ export default function AdminLoginPage() {
               <input
                 type="email"
                 required
+                placeholder="admin@dityagroup.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric text-sm focus:outline-none focus:border-[#059669]"
@@ -272,13 +273,13 @@ export default function AdminLoginPage() {
                 type="text"
                 required
                 maxLength={6}
-                placeholder="123456"
+                placeholder="••••••"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 className="w-full px-4 py-3 text-center tracking-widest text-lg font-bold border border-gray-300 dark:border-white/15 dark:bg-[#030F0E] dark:text-white rounded-asymmetric focus:outline-none focus:border-[#059669]"
               />
               <p className="text-[11px] text-gray-500 dark:text-gray-400 mt-1.5 text-center">
-                Check inbox or spam folder. Emergency bypass code: <span className="font-mono font-bold text-[#059669]">999888</span>
+                Please check your email inbox and spam folder for the 6-digit verification code.
               </p>
             </div>
 

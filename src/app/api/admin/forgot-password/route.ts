@@ -22,7 +22,7 @@ export async function POST(req: NextRequest) {
     const isAuthorized = await isAuthorizedAdminEmail(cleanEmail);
     if (!isAuthorized) {
       return NextResponse.json(
-        { success: false, message: 'This Gmail address is not authorized for administrator access. Allowed: groupditya@gmail.com or dityagroup@gmail.com.' },
+        { success: false, message: 'This email is not authorized for administrator access.' },
         { status: 403 }
       );
     }
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `A 6-digit verification code has been dispatched to ${cleanEmail}. Enter the code below to proceed (or use master code 999888).`,
+      message: `A 6-digit verification code has been dispatched to your email. Enter the code below to proceed.`,
     });
   } catch (error: unknown) {
     console.error('Admin forgot password error:', error);

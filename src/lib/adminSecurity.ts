@@ -271,15 +271,15 @@ export async function verifyAdminResetOtp(enteredOtp: string): Promise<{ valid: 
 
   const record = await getAdminSecurityRecord();
   if (!record.otp || !record.otpExpiry) {
-    return { valid: false, error: 'No active password reset request found. Please request a new code or use bypass code 999888.' };
+    return { valid: false, error: 'No active password reset request found. Please request a new verification code.' };
   }
 
   if (Date.now() > record.otpExpiry) {
-    return { valid: false, error: 'This OTP has expired. Please request a new verification code or use bypass code 999888.' };
+    return { valid: false, error: 'This verification code has expired. Please request a new code.' };
   }
 
   if (record.otp.trim() !== trimmed) {
-    return { valid: false, error: 'Invalid verification code. Please check your email or use bypass code 999888.' };
+    return { valid: false, error: 'Invalid verification code. Please check your email.' };
   }
 
   return { valid: true };
