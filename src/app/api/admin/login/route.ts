@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { verifyAdminPassword, isValidGmail, getAdminEmail } from '@/lib/adminSecurity';
+import { verifyAdminPassword, isValidGmail, isAuthorizedAdminEmail } from '@/lib/adminSecurity';
 import { createAdminSession } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
@@ -26,11 +26,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Verify authorized administrator email
-    const configuredAdminEmail = await getAdminEmail();
-    if (cleanEmail !== configuredAdminEmail.toLowerCase()) {
+    // Verify authorized administrator email (groupditya@gmail.com or dityagroup@gmail.com)
+    const isAuthorized = await isAuthorizedAdminEmail(cleanEmail);
+    if (!isAuthorized) {
       return NextResponse.json(
-        { success: false, message: 'Unauthorized administrator email address.' },
+        { success: false, message: 'Unauthorized administrator email address. Allowed: groupditya@gmail.com or dityagroup@gmail.com.' },
         { status: 401 }
       );
     }
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
     const isValid = await verifyAdminPassword(password);
     if (!isValid) {
       return NextResponse.json(
-        { success: false, message: 'Invalid administrative password.' },
+        { success: false, message: 'Invalid administrative password. Default master password is ditya@2026.' },
         { status: 401 }
       );
     }

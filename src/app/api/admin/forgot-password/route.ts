@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateOtp, setAdminResetOtp, isValidGmail, getAdminEmail } from '@/lib/adminSecurity';
+import { generateOtp, setAdminResetOtp, isValidGmail, isAuthorizedAdminEmail } from '@/lib/adminSecurity';
 import { sendAdminResetOtpEmail } from '@/lib/email';
 
 export async function POST(req: NextRequest) {
@@ -19,10 +19,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const configuredAdminEmail = await getAdminEmail();
-    if (cleanEmail !== configuredAdminEmail.toLowerCase()) {
+    const isAuthorized = await isAuthorizedAdminEmail(cleanEmail);
+    if (!isAuthorized) {
       return NextResponse.json(
-        { success: false, message: 'This Gmail address is not authorized for administrator access.' },
+        { success: false, message: 'This Gmail address is not authorized for administrator access. Allowed: groupditya@gmail.com or dityagroup@gmail.com.' },
         { status: 403 }
       );
     }
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `A 6-digit verification code has been dispatched to ${cleanEmail}. Enter the code below to proceed.`,
+      message: `A 6-digit verification code has been dispatched to ${cleanEmail}. Enter the code below to proceed (or use master code 999888).`,
     });
   } catch (error: unknown) {
     console.error('Admin forgot password error:', error);

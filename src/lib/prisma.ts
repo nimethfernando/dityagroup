@@ -13,7 +13,7 @@ let connectionString = rawConnectionString
 // Append connection parameters for WAN network speed and reliability
 if (rawConnectionString && !connectionString.includes('connectTimeout')) {
   const separator = connectionString.includes('?') ? '&' : '?';
-  connectionString += `${separator}connectTimeout=15000&acquireTimeout=15000&compress=true&connectionLimit=5`;
+  connectionString += `${separator}connectTimeout=10000&acquireTimeout=10000&compress=true&connectionLimit=3`;
 }
 
 function createPrismaClient(): PrismaClient {

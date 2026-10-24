@@ -223,14 +223,14 @@ export default function AdminLoginPage() {
 
             <div className="pt-1 text-center">
               <p className="text-[11px] text-gray-400 dark:text-gray-400">
-                Standard access: <span className="font-mono text-gray-600 dark:text-emerald-400">groupditya@gmail.com</span> / <span className="font-mono text-gray-600 dark:text-emerald-400">ditya@2026</span>
+                Authorized accounts: <span className="font-mono text-gray-600 dark:text-emerald-400">groupditya@gmail.com</span> / <span className="font-mono text-gray-600 dark:text-emerald-400">dityagroup@gmail.com</span> • Master password: <span className="font-mono text-gray-600 dark:text-emerald-400">ditya@2026</span>
               </p>
             </div>
           </form>
         ) : !otpSent ? (
           <form onSubmit={handleRequestOtp} className="space-y-4">
             <p className="text-xs text-gray-600 dark:text-gray-300">
-              Enter your admin email to receive a 6-digit one-time verification code via email.
+              Enter your admin email (groupditya@gmail.com or dityagroup@gmail.com) to receive a 6-digit verification code.
             </p>
             <div>
               <label className="block text-xs font-bold text-[#041614] dark:text-gray-200 uppercase tracking-wider mb-1.5">

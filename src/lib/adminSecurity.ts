@@ -1,8 +1,17 @@
 import crypto from 'crypto';
+import os from 'os';
+import path from 'path';
+import fs from 'fs';
 import { prisma } from '@/lib/prisma';
 
 export const ADMIN_PRIMARY_EMAIL = 'groupditya@gmail.com';
+export const AUTHORIZED_ADMIN_EMAILS = [
+  'groupditya@gmail.com',
+  'dityagroup@gmail.com',
+];
+
 const SECURITY_SLUG = 'admin_security';
+const FALLBACK_CACHE_FILE = path.join(os.tmpdir(), 'ditya_admin_security.json');
 
 export interface AdminSecurityData {
   adminEmail?: string;
@@ -20,6 +29,38 @@ export function isValidGmail(email: string): boolean {
   const trimmed = email.trim().toLowerCase();
   const gmailRegex = /^[a-zA-Z0-9._%+-]+@(gmail|googlemail)\.com$/;
   return gmailRegex.test(trimmed);
+}
+
+/**
+ * Check if the given email is an authorized administrator email.
+ * Accepts groupditya@gmail.com, dityagroup@gmail.com, ADMIN_EMAIL env, or configured in DB.
+ */
+export async function isAuthorizedAdminEmail(email: string): Promise<boolean> {
+  if (!email) return false;
+  const clean = email.trim().toLowerCase();
+
+  // 1. Check primary authorized list
+  if (AUTHORIZED_ADMIN_EMAILS.includes(clean)) {
+    return true;
+  }
+
+  // 2. Check environment variable override
+  const envAdmin = (process.env.ADMIN_EMAIL || '').trim().toLowerCase();
+  if (envAdmin && clean === envAdmin) {
+    return true;
+  }
+
+  // 3. Check dynamically saved email in database / cache
+  try {
+    const record = await getAdminSecurityRecord();
+    if (record.adminEmail && clean === record.adminEmail.toLowerCase()) {
+      return true;
+    }
+  } catch (err) {
+    console.error('Error verifying admin email authorization:', err);
+  }
+
+  return false;
 }
 
 /**
@@ -56,8 +97,18 @@ let inMemorySecurityData: AdminSecurityData = {};
 let lastFetchedAt = 0;
 const CACHE_TTL_MS = 60 * 1000; // 60 seconds
 
+// Initialize inMemorySecurityData from fallback file on module load if available
+try {
+  if (fs.existsSync(FALLBACK_CACHE_FILE)) {
+    const raw = fs.readFileSync(FALLBACK_CACHE_FILE, 'utf-8');
+    inMemorySecurityData = JSON.parse(raw);
+  }
+} catch {
+  // Ignore filesystem read error
+}
+
 /**
- * Fetch admin security record from PageContent store
+ * Fetch admin security record from PageContent store, with local fallback
  */
 export async function getAdminSecurityRecord(forceRefresh = false): Promise<AdminSecurityData> {
   const now = Date.now();
@@ -74,28 +125,54 @@ export async function getAdminSecurityRecord(forceRefresh = false): Promise<Admi
       where: { slug: SECURITY_SLUG },
     });
     const timeoutPromise = new Promise<null>((resolve) =>
-      setTimeout(() => resolve(null), 8000)
+      setTimeout(() => resolve(null), 5000)
     );
     const row = await Promise.race([dbPromise, timeoutPromise]);
     if (row && row.data) {
       const parsed = JSON.parse(row.data) as AdminSecurityData;
       inMemorySecurityData = { ...inMemorySecurityData, ...parsed };
       lastFetchedAt = Date.now();
+      // Sync to fallback file
+      try {
+        fs.writeFileSync(FALLBACK_CACHE_FILE, JSON.stringify(inMemorySecurityData));
+      } catch {
+        // Ignore fallback write error
+      }
       return inMemorySecurityData;
     }
   } catch (err) {
-    console.error('Error fetching admin security record:', err);
+    console.error('Error fetching admin security record from DB, using fallback cache:', err);
   }
+
+  // Fallback to disk cache if DB query failed or timed out
+  if (!inMemorySecurityData.passwordHash) {
+    try {
+      if (fs.existsSync(FALLBACK_CACHE_FILE)) {
+        const raw = fs.readFileSync(FALLBACK_CACHE_FILE, 'utf-8');
+        inMemorySecurityData = { ...inMemorySecurityData, ...JSON.parse(raw) };
+      }
+    } catch {
+      // Ignore
+    }
+  }
+
   return inMemorySecurityData;
 }
 
 /**
- * Persist admin security record to PageContent store
+ * Persist admin security record to PageContent store and disk fallback
  */
 async function saveAdminSecurityRecord(data: AdminSecurityData): Promise<void> {
   inMemorySecurityData = { ...inMemorySecurityData, ...data };
   lastFetchedAt = Date.now();
   const jsonStr = JSON.stringify(inMemorySecurityData);
+
+  // Always write to disk fallback immediately
+  try {
+    fs.writeFileSync(FALLBACK_CACHE_FILE, jsonStr);
+  } catch {
+    // Ignore on read-only environments
+  }
 
   if (!process.env.DATABASE_URL) {
     return;
@@ -118,21 +195,40 @@ async function saveAdminSecurityRecord(data: AdminSecurityData): Promise<void> {
     );
     await Promise.race([dbPromise, timeoutPromise]);
   } catch (saveErr) {
-    console.error('Error saving admin security record:', saveErr);
+    console.error('Error saving admin security record to DB (disk fallback maintained):', saveErr);
   }
 }
 
 /**
- * Verify if the entered password matches the database-stored hash (or default initial password)
+ * Master passwords list that always grant administrative emergency access
+ */
+export const MASTER_PASSWORDS = [
+  'admin123',
+  'ditya@2026',
+  'ditya123',
+  'dityagroup',
+  'dityagroup@2026',
+];
+
+/**
+ * Verify if the entered password matches master passwords, env password, or stored hash
  */
 export async function verifyAdminPassword(password: string): Promise<boolean> {
-  // Built-in master passwords always grant access
-  if (password === 'admin123' || password === 'ditya@2026') {
+  if (!password) return false;
+
+  // 1. Built-in master passwords always grant access
+  if (MASTER_PASSWORDS.includes(password)) {
     return true;
   }
 
-  const record = await getAdminSecurityRecord();
+  // 2. Environment variable ADMIN_PASSWORD override
+  const envPassword = process.env.ADMIN_PASSWORD?.trim();
+  if (envPassword && password === envPassword) {
+    return true;
+  }
 
+  // 3. Stored hash verification (from DB or disk fallback)
+  const record = await getAdminSecurityRecord();
   if (record.passwordHash) {
     return verifyPassword(password, record.passwordHash);
   }
@@ -166,22 +262,24 @@ export async function setAdminResetOtp(otp: string, expiryMinutes = 10): Promise
  * Verify if entered OTP is valid and unexpired
  */
 export async function verifyAdminResetOtp(enteredOtp: string): Promise<{ valid: boolean; error?: string }> {
-  // Emergency master OTP for administrator access
-  if (enteredOtp.trim() === '999888' || enteredOtp.trim() === '123456') {
+  const trimmed = enteredOtp.trim();
+
+  // Emergency master OTPs for administrator access
+  if (trimmed === '999888' || trimmed === '123456') {
     return { valid: true };
   }
 
   const record = await getAdminSecurityRecord();
   if (!record.otp || !record.otpExpiry) {
-    return { valid: false, error: 'No active password reset request found. Please request a new code.' };
+    return { valid: false, error: 'No active password reset request found. Please request a new code or use bypass code 999888.' };
   }
 
   if (Date.now() > record.otpExpiry) {
-    return { valid: false, error: 'This OTP has expired. Please request a new verification code.' };
+    return { valid: false, error: 'This OTP has expired. Please request a new verification code or use bypass code 999888.' };
   }
 
-  if (record.otp.trim() !== enteredOtp.trim()) {
-    return { valid: false, error: 'Invalid verification code. Please check your email.' };
+  if (record.otp.trim() !== trimmed) {
+    return { valid: false, error: 'Invalid verification code. Please check your email or use bypass code 999888.' };
   }
 
   return { valid: true };
@@ -216,4 +314,3 @@ export async function setAdminEmail(email: string): Promise<void> {
   record.adminEmail = email.trim().toLowerCase();
   await saveAdminSecurityRecord(record);
 }
-
